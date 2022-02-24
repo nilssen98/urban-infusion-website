@@ -1,14 +1,18 @@
 import {createTheme} from "@mui/material/styles";
 
-declare module '@mui/material/styles' {
-    interface Theme {
-    }
-    // allow configuration using `createTheme`
-    interface ThemeOptions {
-    }
-}
+export const darkTheme = createTheme({
+    palette: {
+        mode: 'dark',
+        primary: {
+            main: '#1B472E',
+        },
+        secondary: {
+            main: '#F5A623',
+        },
+    },
+});
 
-export const theme = createTheme({
+export const lightTheme = createTheme({
     palette: {
         mode: 'light',
         primary: {

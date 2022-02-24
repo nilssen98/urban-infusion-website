@@ -1,29 +1,40 @@
-import {Button, Typography} from "@mui/material";
+import {Container, CssBaseline, FormControlLabel, Switch, ThemeProvider,} from "@mui/material";
 import {useState} from "react";
+import {darkTheme, lightTheme} from "../../theme/theme";
 
 export default function App() {
-    const [count, setCount] = useState<number>(0);
+    const [currentTheme, setCurrentTheme] = useState<string>('light');
+
+    const handleChangeTheme = () => {
+        setCurrentTheme(currentTheme === 'light' ? 'dark' : 'light');
+    }
 
     return (
-        <div
-            style={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-                height: '100vh'
-            }}
-        >
-            <Typography margin={2} variant={'h5'}>
-                Count: {count}
-            </Typography>
-            <Button
-                onClick={() => setCount((count) => count + 1)}
-                variant={'contained'}
-                color={'primary'}
+        <ThemeProvider theme={currentTheme === 'light' ? lightTheme : darkTheme}>
+            <CssBaseline/>
+            <Container
+                sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    height: '100vh',
+                }}
             >
-                Click me!
-            </Button>
-        </div>
+                <FormControlLabel
+                    sx={{
+                        display: 'block',
+                    }}
+                    control={
+                        <Switch
+                            checked={currentTheme !== 'light'}
+                            onChange={handleChangeTheme}
+                            color={"primary"}
+                        />
+                    }
+                    label={currentTheme + ' theme'}
+                />
+            </Container>
+        </ThemeProvider>
     )
 }
