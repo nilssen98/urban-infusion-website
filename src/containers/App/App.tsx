@@ -19,8 +19,8 @@ export default function App() {
             </Typography>
             <Button
                 onClick={() => setCount((count) => count + 1)}
-                variant={'outlined'}
-                color={'secondary'}
+                variant={'contained'}
+                color={'primary'}
             >
                 Click me!
             </Button>
