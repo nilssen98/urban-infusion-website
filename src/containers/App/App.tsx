@@ -1,16 +1,16 @@
 import {Container, CssBaseline, FormControlLabel, Switch, ThemeProvider,} from "@mui/material";
 import {useState} from "react";
-import {darkTheme, lightTheme} from "../../theme/theme";
+import {getTheme} from "../../theme/theme";
 
 export default function App() {
-    const [currentTheme, setCurrentTheme] = useState<string>('light');
+    const [currentTheme, setCurrentTheme] = useState<'dark' | 'light'>('light');
 
     const handleChangeTheme = () => {
         setCurrentTheme(currentTheme === 'light' ? 'dark' : 'light');
     }
 
     return (
-        <ThemeProvider theme={currentTheme === 'light' ? lightTheme : darkTheme}>
+        <ThemeProvider theme={getTheme(currentTheme)}>
             <CssBaseline/>
             <Container
                 sx={{
