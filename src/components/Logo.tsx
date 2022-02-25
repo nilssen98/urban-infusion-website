@@ -1,11 +1,7 @@
 import {Box, Container, Typography} from "@mui/material";
 import CoffeeOutlinedIcon from '@mui/icons-material/CoffeeOutlined';
 
-interface Props {
-    img_url?: string;
-}
-
-export default function Logo(props: Props) {
+export default function Logo() {
     return (
         <>
             <Container
