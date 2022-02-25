@@ -1,20 +1,33 @@
 import {Box, Container, Typography} from "@mui/material";
 import CoffeeOutlinedIcon from '@mui/icons-material/CoffeeOutlined';
 
-export default function Logo() {
+interface Props {
+    clickable?: boolean;
+    onClick?: () => void;
+}
+
+Logo.stateProps = {
+    clickable: false
+}
+
+export default function Logo(props: Props) {
     return (
         <>
             <Container
+                onClick={props.onClick}
                 sx={{
                     display: 'flex',
                     flexDirection: 'row',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    userSelect: 'none'
+                    userSelect: 'none',
+                    cursor: props.clickable ? 'pointer' : undefined,
                 }}
             >
                 <Box
-                    sx={{ textAlign: 'right'}}
+                    sx={{
+                        textAlign: 'right',
+                    }}
                 >
                     <Typography variant={'h4'}>
                         Urban
