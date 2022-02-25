@@ -4,6 +4,9 @@ import MainPage from "../Pages/Landing/Landing";
 import NavigationBar from "../NavigationBar";
 import Footer from "../Footer";
 import Landing from "../Pages/Landing/Landing";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
+import Products from "../Pages/Products/Products";
+import NotFound from "../Pages/NotFound/NotFound";
 
 export default function App() {
     return (
@@ -11,10 +14,14 @@ export default function App() {
             <CssBaseline/>
             <Toolbar/>
             <NavigationBar/>
-            {
-                // Router here to determine which page to display
-                <Landing/>
-            }
+            <BrowserRouter>
+                <Routes>
+                    <Route path={'/'} element={<Landing/>}/>
+                    <Route path={'/products'} element={<Products/>}/>
+                    <Route path={'*'} element={<NotFound/>}/>
+                </Routes>
+            </BrowserRouter>
+            <Divider/>
             <Footer/>
         </ThemeProvider>
     )

@@ -25,27 +25,13 @@ export default function NavigationBar(props: Props) {
                 <AppBar color={'primary'}>
                     <Toolbar>
                         <Grid container>
-                            <Grid
-                                xs={4}
-                                item
-                                container
-                                style={{alignItems: 'center'}}
-                            >
+                            <Grid xs={4} item container style={{alignItems: 'center'}}>
                                 <Typography variant={'body1'}>Products</Typography>
                             </Grid>
-                            <Grid
-                                xs={4}
-                                item
-                                container
-                            >
+                            <Grid xs={4} item container>
                                 <Logo/>
                             </Grid>
-                            <Grid
-                                xs={4}
-                                item
-                                container
-                                style={{alignItems: 'center', justifyContent: 'flex-end'}}
-                            >
+                            <Grid xs={4} item container style={{alignItems: 'center', justifyContent: 'flex-end'}}>
                                 <Skeleton variant={'circular'} width={48} height={48} animation={'wave'} sx={{bgcolor: 'grey.900', cursor: 'pointer'}}/>
                             </Grid>
                         </Grid>
