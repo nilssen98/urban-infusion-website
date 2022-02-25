@@ -1,40 +1,21 @@
-import {Container, CssBaseline, FormControlLabel, Switch, ThemeProvider, Typography,} from "@mui/material";
-import {useState} from "react";
+import {CssBaseline, ThemeProvider, Toolbar} from "@mui/material";
 import {getTheme} from "../../theme/theme";
+import MainPage from "../Pages/Landing/Landing";
+import NavigationBar from "../NavigationBar";
+import Footer from "../Footer";
+import Landing from "../Pages/Landing/Landing";
 
 export default function App() {
-    const [currentTheme, setCurrentTheme] = useState<'dark' | 'light'>('light');
-
-    const handleChangeTheme = () => {
-        setCurrentTheme(currentTheme === 'light' ? 'dark' : 'light');
-    }
-
     return (
-        <ThemeProvider theme={getTheme(currentTheme)}>
+        <ThemeProvider theme={getTheme('light')}>
             <CssBaseline/>
-            <Container
-                sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    height: '100vh',
-                }}
-            >
-                <FormControlLabel
-                    sx={{
-                        display: 'block',
-                    }}
-                    control={
-                        <Switch
-                            checked={currentTheme !== 'light'}
-                            onChange={handleChangeTheme}
-                            color={"primary"}
-                        />
-                    }
-                    label={currentTheme + ' theme'}
-                />
-            </Container>
+            <Toolbar/>
+            <NavigationBar/>
+            {
+                // Router here to determine which page to display
+                <Landing/>
+            }
+            <Footer/>
         </ThemeProvider>
     )
 }
