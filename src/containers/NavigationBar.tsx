@@ -2,21 +2,12 @@ import {AppBar, Grid, Skeleton, Slide, Toolbar, Typography, useScrollTrigger} fr
 import Logo from "../components/Logo";
 import {ReactElement, ReactNode} from "react";
 import {useNavigate} from "react-router-dom";
+import {ThemeSwitch} from "../components/ThemeSwitch";
 
 interface Props {
     children?: ReactElement;
-}
-
-function HideOnScroll(props: Props) {
-    const trigger = useScrollTrigger({
-        target: window,
-    });
-
-    return (
-        <Slide appear={false} direction="down" in={!trigger}>
-            {props.children || <></>}
-        </Slide>
-    );
+    theme: 'light' | 'dark';
+    changeTheme: () => void;
 }
 
 export default function NavigationBar(props: Props) {
@@ -37,8 +28,17 @@ export default function NavigationBar(props: Props) {
                                 <Logo clickable onClick={() => navigate('/')}/>
                             </Grid>
                             <Grid xs={4} item container style={{alignItems: 'center', justifyContent: 'flex-end'}}>
-                                <Skeleton variant={'circular'} width={48} height={48} animation={'wave'}
-                                          sx={{bgcolor: 'grey.900', cursor: 'pointer'}}/>
+                                <ThemeSwitch
+                                    checked={props.theme === 'dark'}
+                                    onChange={() => props.changeTheme()}
+                                />
+                                <Skeleton
+                                    variant={'circular'}
+                                    width={48}
+                                    height={48}
+                                    animation={'wave'}
+                                    sx={{bgcolor: 'grey.900', cursor: 'pointer', marginLeft: '1rem'}}
+                                />
                             </Grid>
                         </Grid>
                     </Toolbar>
@@ -70,4 +70,16 @@ function NavigationLink(props: NavigationLinkProps) {
             </Typography>
         </>
     )
+}
+
+function HideOnScroll(props: Props) {
+    const trigger = useScrollTrigger({
+        target: window,
+    });
+
+    return (
+        <Slide appear={false} direction="down" in={!trigger}>
+            {props.children || <></>}
+        </Slide>
+    );
 }
