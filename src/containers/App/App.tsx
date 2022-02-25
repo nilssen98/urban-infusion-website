@@ -6,21 +6,18 @@ import Footer from "../Footer";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Products from "../Pages/Products/Products";
 import NotFound from "../Pages/NotFound/NotFound";
-import {useState} from "react";
+import {RootState} from "../../state/store";
+import {useSelector} from "react-redux";
 
 export default function App() {
-    const [theme, setTheme] = useState<'light' | 'dark'>('light');
-
-    const handleChangeTheme = () => {
-        setTheme((theme) => theme === 'light' ? 'dark' : 'light');
-    }
+    const theme = useSelector((store: RootState) => store.userPreferences.theme);
 
     return (
         <ThemeProvider theme={getTheme(theme)}>
             <CssBaseline/>
             <BrowserRouter>
                 <Toolbar/>
-                <NavigationBar changeTheme={handleChangeTheme} theme={theme}/>
+                <NavigationBar/>
                 <Routes>
                     <Route path={'/'} element={<Landing/>}/>
                     <Route path={'/products'} element={<Products/>}/>
