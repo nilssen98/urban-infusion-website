@@ -1,4 +1,4 @@
-import {Container, CssBaseline, FormControlLabel, Switch, ThemeProvider,} from "@mui/material";
+import {Container, CssBaseline, FormControlLabel, Switch, ThemeProvider, Typography,} from "@mui/material";
 import {useState} from "react";
 import {getTheme} from "../../theme/theme";
 
