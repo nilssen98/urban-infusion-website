@@ -15,7 +15,6 @@ export default function App() {
                 // Router here to determine which page to display
                 <Landing/>
             }
-            <Divider />
             <Footer/>
         </ThemeProvider>
     )

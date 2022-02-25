@@ -9,7 +9,6 @@ export default function Footer() {
                 container
                 sx={{
                     height: 300,
-                    background: 'rgb(255, 255, 255, 0.5)',
                     alignItems: 'center',
                     justifyContent: 'center',
                     flexDirection: 'column',
