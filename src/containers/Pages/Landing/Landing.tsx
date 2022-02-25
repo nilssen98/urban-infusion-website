@@ -1,31 +1,34 @@
-import {Grid, Typography} from "@mui/material";
+import {Box, Container, Divider, Grid, Typography} from "@mui/material";
 import Section from "../../../components/Section";
 
 export default function Landing() {
     return (
         <>
-            <Grid container>
+            <Box>
                 <Section height={300}>
-                    <Grid container sx={{justifyContent: 'center', height: '100%'}}>
+                    <Container sx={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%'}}>
                         <Typography paddingTop={6} variant={'h4'}>Section</Typography>
-                    </Grid>
+                    </Container>
                 </Section>
-                <Section height={300} bgColor={'#88D8AB'}>
-                    <Grid container sx={{justifyContent: 'center', height: '100%'}}>
-                        <Typography paddingTop={6} variant={'h4'}>Section</Typography>
-                    </Grid>
-                </Section>
+                <Divider/>
                 <Section height={300}>
-                    <Grid container sx={{justifyContent: 'center', height: '100%'}}>
+                    <Container sx={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%'}}>
                         <Typography paddingTop={6} variant={'h4'}>Section</Typography>
-                    </Grid>
+                    </Container>
                 </Section>
-                <Section height={300} bgColor={'#88D8AB'}>
-                    <Grid container sx={{justifyContent: 'center', height: '100%'}}>
+                <Divider/>
+                <Section height={300}>
+                    <Container sx={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%'}}>
                         <Typography paddingTop={6} variant={'h4'}>Section</Typography>
-                    </Grid>
+                    </Container>
                 </Section>
-            </Grid>
+                <Divider/>
+                <Section height={300}>
+                    <Container sx={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%'}}>
+                        <Typography paddingTop={6} variant={'h4'}>Section</Typography>
+                    </Container>
+                </Section>
+            </Box>
         </>
     )
 }
