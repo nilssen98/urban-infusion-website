@@ -19,15 +19,15 @@ export default function NavigationBar(props: Props) {
                 <AppBar color={'primary'}>
                     <Toolbar>
                         <Grid container>
-                            <Grid xs={4} item container style={{alignItems: 'center'}}>
+                            <Grid xs={2} item container>
+                                <Logo clickable onClick={() => navigate('/')}/>
+                            </Grid>
+                            <Grid xs={5} item container style={{alignItems: 'center'}}>
                                 <NavigationLink onClick={() => navigate('/products')}>
                                     Products
                                 </NavigationLink>
                             </Grid>
-                            <Grid xs={4} item container>
-                                <Logo clickable onClick={() => navigate('/')}/>
-                            </Grid>
-                            <Grid xs={4} item container style={{alignItems: 'center', justifyContent: 'flex-end'}}>
+                            <Grid xs={5} item container style={{alignItems: 'center', justifyContent: 'flex-end'}}>
                                 <ThemeSwitch
                                     checked={props.theme === 'dark'}
                                     onChange={() => props.changeTheme()}
