@@ -1,4 +1,4 @@
-import {Divider, Grid, Typography} from "@mui/material";
+import {Grid, Typography} from "@mui/material";
 import Section from "../../../components/Section";
 
 export default function Landing() {
@@ -6,30 +6,25 @@ export default function Landing() {
         <>
             <Grid container>
                 <Section height={300}>
-                    <Typography variant={'h4'}>Section</Typography>
+                    <Grid container sx={{justifyContent: 'center', height: '100%'}}>
+                        <Typography paddingTop={6} variant={'h4'}>Section</Typography>
+                    </Grid>
                 </Section>
-                <Divider/>
-                <Grid container
-                      sx={{
-                          height: 300,
-                          background: 'rgb(255, 255, 255, 0.5)',
-                          alignItems: 'center',
-                          justifyContent: 'center'
-                      }}
-                >
-                    <Typography variant={'h4'}>Section</Typography>
-                </Grid>
-                <Divider/>
-                <Grid container
-                      sx={{
-                          height: 300,
-                          alignItems: 'center',
-                          justifyContent: 'center'
-                      }}
-                >
-                    <Typography variant={'h4'}>Section</Typography>
-                </Grid>
-                <Divider/>
+                <Section height={300} bgColor={'#88D8AB'}>
+                    <Grid container sx={{justifyContent: 'center', height: '100%'}}>
+                        <Typography paddingTop={6} variant={'h4'}>Section</Typography>
+                    </Grid>
+                </Section>
+                <Section height={300}>
+                    <Grid container sx={{justifyContent: 'center', height: '100%'}}>
+                        <Typography paddingTop={6} variant={'h4'}>Section</Typography>
+                    </Grid>
+                </Section>
+                <Section height={300} bgColor={'#88D8AB'}>
+                    <Grid container sx={{justifyContent: 'center', height: '100%'}}>
+                        <Typography paddingTop={6} variant={'h4'}>Section</Typography>
+                    </Grid>
+                </Section>
             </Grid>
         </>
     )

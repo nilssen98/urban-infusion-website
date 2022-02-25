@@ -5,6 +5,7 @@ interface Props {
     children?: ReactNode;
     height?: number;
     bgColor?: string;
+    sx?: any;
 }
 
 export default function Section(props: Props) {
@@ -13,6 +14,7 @@ export default function Section(props: Props) {
             <Grid
                 container
                 sx={{
+                    ...props.sx,
                     height: props.height || undefined,
                     backgroundColor: props.bgColor || undefined,
                     justifyContent: 'center',

@@ -1,4 +1,4 @@
-import {CssBaseline, ThemeProvider, Toolbar} from "@mui/material";
+import {CssBaseline, Divider, ThemeProvider, Toolbar} from "@mui/material";
 import {getTheme} from "../../theme/theme";
 import MainPage from "../Pages/Landing/Landing";
 import NavigationBar from "../NavigationBar";
@@ -15,6 +15,7 @@ export default function App() {
                 // Router here to determine which page to display
                 <Landing/>
             }
+            <Divider />
             <Footer/>
         </ThemeProvider>
     )
