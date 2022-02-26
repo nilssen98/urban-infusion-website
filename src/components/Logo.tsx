@@ -4,6 +4,7 @@ import CoffeeOutlinedIcon from '@mui/icons-material/CoffeeOutlined';
 interface Props {
     clickable?: boolean;
     onClick?: () => void;
+    sx?: any;
 }
 
 Logo.stateProps = {
@@ -13,9 +14,10 @@ Logo.stateProps = {
 export default function Logo(props: Props) {
     return (
         <>
-            <Container
+            <Box
                 onClick={props.onClick}
                 sx={{
+                    ...props.sx,
                     display: 'flex',
                     flexDirection: 'row',
                     alignItems: 'center',
@@ -43,7 +45,7 @@ export default function Logo(props: Props) {
                     }}
                     component={CoffeeOutlinedIcon}
                 />
-            </Container>
+            </Box>
         </>
     )
 }
