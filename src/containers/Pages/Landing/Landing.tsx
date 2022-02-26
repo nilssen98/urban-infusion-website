@@ -8,22 +8,22 @@ export default function Landing() {
             <Box>
                 <HeroSection/>
                 <Divider/>
-                <Section height={300}
+                <Section height={600}
                          sx={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%'}}>
                     <Typography paddingTop={6} variant={'h4'}>Section</Typography>
                 </Section>
                 <Divider/>
-                <Section height={300}
+                <Section height={600}
                          sx={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%'}}>
                     <Typography paddingTop={6} variant={'h4'}>Section</Typography>
                 </Section>
                 <Divider/>
-                <Section height={300}
+                <Section height={600}
                          sx={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%'}}>
                     <Typography paddingTop={6} variant={'h4'}>Section</Typography>
                 </Section>
                 <Divider/>
-                <Section height={300}
+                <Section height={600}
                          sx={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%'}}>
                     <Typography paddingTop={6} variant={'h4'}>Section</Typography>
                 </Section>
