@@ -33,10 +33,10 @@ export default function HeroSection() {
                 </Typography>
                 <Button
                     variant={"contained"}
-                    endIcon={<ExitToAppIcon/>}
+                    size={'large'}
                     onClick={() => navigate('/products')}
                 >
-                    Check out our products
+                    Get started
                 </Button>
             </Section>
         </>
