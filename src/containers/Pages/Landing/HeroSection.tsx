@@ -1,4 +1,4 @@
-import {Box, Button, Typography} from "@mui/material";
+import {Button, Typography} from "@mui/material";
 import {useNavigate} from "react-router-dom";
 import Section from "../../../components/Wrappers/Section";
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
@@ -14,34 +14,31 @@ export default function HeroSection() {
             <Section
                 height={700}
                 backgroundUrl={imageURL}
+                sx={{
+                    display: 'flex',
+                    height: '100%',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                }}
             >
-                <Box
+                <Typography
+                    variant={'h2'}
+                    component={'h1'}
                     sx={{
-                        display: 'flex',
-                        height: '100%',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        justifyContent: 'center'
-                    }}
+                        color: 'white',
+                        textAlign: 'center',
+                        pb: 16
+                    }}>
+                    Find your herbal friend
+                </Typography>
+                <Button
+                    variant={"contained"}
+                    endIcon={<ExitToAppIcon/>}
+                    onClick={() => navigate('/products')}
                 >
-                    <Typography
-                        variant={'h2'}
-                        component={'h1'}
-                        sx={{
-                            color: 'white',
-                            textAlign: 'center',
-                            pb: 16
-                        }}>
-                        Find your herbal friend
-                    </Typography>
-                    <Button
-                        variant={"contained"}
-                        endIcon={<ExitToAppIcon/>}
-                        onClick={() => navigate('/products')}
-                    >
-                        Check out our products
-                    </Button>
-                </Box>
+                    Check out our products
+                </Button>
             </Section>
         </>
     );
