@@ -11,7 +11,7 @@ export default function HeroSection() {
         <>
             <Container
                 sx={{
-                    height: '40vw',
+                    height: '700px',
                     minWidth: '100%',
                     display: 'flex',
                     flexDirection: 'column',
@@ -22,19 +22,17 @@ export default function HeroSection() {
                     backgroundSize: 'cover',
                 }}>
                 <Typography
+                    variant={'h1'}
                     sx={{
-                        top: 0,
-                        left: 0,
                         color: 'white',
-                        fontWeight: 'bold',
-                        fontSize: 54,
+                        textAlign: 'center'
                     }}>
                     Find your herbal friend
                 </Typography>
                 <Button
                     variant="contained"
-                    onClick={() => navigate('/products')
-                    }>
+                    onClick={() => navigate('/products')}
+                >
                     Check out our products
                 </Button>
             </Container>
