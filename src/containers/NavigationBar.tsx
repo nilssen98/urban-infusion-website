@@ -65,6 +65,7 @@ function NavigationLink(props: NavigationLinkProps) {
                 onClick={props.onClick}
                 variant={'body1'}
                 sx={{
+                    display: 'inline',
                     cursor: 'pointer',
                     '&:hover': {
                         textDecoration: 'underline'
