@@ -1,4 +1,4 @@
-import {AppBar, Grid, Skeleton, Slide, Toolbar, Typography, useScrollTrigger} from "@mui/material";
+import {AppBar, Box, Skeleton, Slide, Toolbar, Typography, useScrollTrigger} from "@mui/material";
 import Logo from "../components/Logo";
 import {ReactElement, ReactNode} from "react";
 import {useNavigate} from "react-router-dom";
@@ -25,29 +25,27 @@ export default function NavigationBar(props: Props) {
             <HideOnScroll {...props}>
                 <AppBar color={'primary'}>
                     <Toolbar>
-                        <Grid container>
-                            <Grid xs={2} item container>
-                                <Logo clickable onClick={() => navigate('/')}/>
-                            </Grid>
-                            <Grid xs={5} item container style={{alignItems: 'center'}}>
-                                <NavigationLink onClick={() => navigate('/products')}>
-                                    Products
-                                </NavigationLink>
-                            </Grid>
-                            <Grid xs={5} item container style={{alignItems: 'center', justifyContent: 'flex-end'}}>
-                                <ThemeSwitch
-                                    checked={theme === 'dark'}
-                                    onChange={handleChangeTheme}
-                                />
-                                <Skeleton
-                                    variant={'circular'}
-                                    width={48}
-                                    height={48}
-                                    animation={'wave'}
-                                    sx={{bgcolor: 'grey.900', cursor: 'pointer', marginLeft: '1rem'}}
-                                />
-                            </Grid>
-                        </Grid>
+                        <Box>
+                            <Logo clickable onClick={() => navigate('/')}/>
+                        </Box>
+                        <Box sx={{flex: 1, px: 4}}>
+                            <NavigationLink onClick={() => navigate('/products')}>
+                                Products
+                            </NavigationLink>
+                        </Box>
+                        <Box sx={{display: 'flex', alignItems: 'center'}}>
+                            <ThemeSwitch
+                                checked={theme === 'dark'}
+                                onChange={handleChangeTheme}
+                            />
+                            <Skeleton
+                                variant={'circular'}
+                                width={48}
+                                height={48}
+                                animation={'wave'}
+                                sx={{bgcolor: 'grey.900', cursor: 'pointer', marginLeft: '1rem'}}
+                            />
+                        </Box>
                     </Toolbar>
                 </AppBar>
             </HideOnScroll>
