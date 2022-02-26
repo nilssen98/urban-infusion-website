@@ -6,6 +6,7 @@ import {ThemeSwitch} from "../components/ThemeSwitch";
 import {useSelector} from "react-redux";
 import {RootState, store} from "../state/store";
 import {userPreferencesSlice} from "../state/slices/userPreferences";
+import Section from "../components/Wrappers/Section";
 
 interface Props {
     children?: ReactElement;
@@ -23,29 +24,57 @@ export default function NavigationBar(props: Props) {
     return (
         <>
             <HideOnScroll {...props}>
-                <AppBar color={'inherit'}>
+                <AppBar
+                    color={'inherit'}
+                >
                     <Toolbar>
-                        <Box>
-                            <Logo clickable onClick={() => navigate('/')}/>
-                        </Box>
-                        <Box sx={{flex: 1, px: 4}}>
-                            <NavigationLink onClick={() => navigate('/products')}>
-                                Products
-                            </NavigationLink>
-                        </Box>
-                        <Box sx={{display: 'flex', alignItems: 'center'}}>
-                            <ThemeSwitch
-                                checked={theme === 'dark'}
-                                onChange={handleChangeTheme}
-                            />
-                            <Skeleton
-                                variant={'circular'}
-                                width={48}
-                                height={48}
-                                animation={'wave'}
-                                sx={{bgcolor: 'grey.900', cursor: 'pointer', marginLeft: '1rem'}}
-                            />
-                        </Box>
+                        <Section
+                            sx={{
+                                alignItems: 'center',
+                            }}
+                        >
+                            <Box
+                                sx={{
+                                    flex: 1,
+                                    display: 'flex',
+                                    justifyContent: 'left',
+                                }}
+                            >
+                                <Logo clickable onClick={() => navigate('/')}/>
+                            </Box>
+                            <Box
+                                sx={{
+                                    display: 'flex',
+                                    flex: 3,
+                                    px: 4,
+                                    justifyContent: 'right',
+                                }}
+                            >
+                                <NavigationLink onClick={() => navigate('/products')}>
+                                    Products
+                                </NavigationLink>
+                            </Box>
+                            <Box
+                                sx={{
+                                    display: 'flex',
+                                    justifyContent: 'right',
+                                    alignItems: 'center',
+                                    flex: 1,
+                                }}
+                            >
+                                <ThemeSwitch
+                                    checked={theme === 'dark'}
+                                    onChange={handleChangeTheme}
+                                />
+                                <Skeleton
+                                    variant={'circular'}
+                                    width={48}
+                                    height={48}
+                                    animation={'wave'}
+                                    sx={{bgcolor: 'grey.900', cursor: 'pointer', marginLeft: '1rem'}}
+                                />
+                            </Box>
+                        </Section>
                     </Toolbar>
                 </AppBar>
             </HideOnScroll>
