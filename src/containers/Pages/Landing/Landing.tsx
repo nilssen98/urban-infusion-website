@@ -1,5 +1,5 @@
 import {Box, Container, Divider, Grid, Typography} from "@mui/material";
-import Section from "../../../components/Section";
+import Section from "../../../components/Wrappers/Section";
 import HeroSection from "./HeroSection";
 
 export default function Landing() {
