@@ -16,7 +16,6 @@ export default function HeroSection() {
                 backgroundUrl={imageURL}
                 sx={{
                     display: 'flex',
-                    height: '100%',
                     flexDirection: 'column',
                     alignItems: 'center',
                     justifyContent: 'center'
