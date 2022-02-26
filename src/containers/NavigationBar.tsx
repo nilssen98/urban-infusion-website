@@ -31,6 +31,7 @@ export default function NavigationBar(props: Props) {
                         <Section
                             sx={{
                                 alignItems: 'center',
+                                flexWrap: 'nowrap',
                             }}
                         >
                             <Box

@@ -1,12 +1,14 @@
 import {Grid} from "@mui/material";
 import {ReactNode} from "react";
+import {SxProps} from "@mui/system";
+import {Theme} from "@mui/material/styles";
 
 interface Props {
     children?: ReactNode;
     height?: number;
     bgColor?: string;
     backgroundUrl?: string;
-    sx?: any;
+    sx?: SxProps<Theme>;
 }
 
 export default function Section(props: Props) {
