@@ -23,7 +23,7 @@ export default function NavigationBar(props: Props) {
     return (
         <>
             <HideOnScroll {...props}>
-                <AppBar color={'primary'}>
+                <AppBar color={'inherit'}>
                     <Toolbar>
                         <Box>
                             <Logo clickable onClick={() => navigate('/')}/>
