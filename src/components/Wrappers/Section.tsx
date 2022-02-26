@@ -23,7 +23,7 @@ export default function Section(props: Props) {
                     backgroundSize: 'cover',
                 }}
             >
-                <Grid item sx={{width: '60%', height: '100%', ...props.sx}}>
+                <Grid item container sx={{width: '60%', height: '100%', ...props.sx}}>
                     {props.children}
                 </Grid>
             </Grid>
