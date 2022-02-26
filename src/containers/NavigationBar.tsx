@@ -64,8 +64,8 @@ export default function NavigationBar(props: Props) {
                                 }}
                             >
                                 <ThemeSwitch
-                                    checked={theme === 'dark'}
-                                    onChange={handleChangeTheme}
+                                    mode={theme}
+                                    onClick={handleChangeTheme}
                                 />
                                 <Skeleton
                                     variant={'circular'}
