@@ -1,5 +1,6 @@
-import {Button, Container, Typography} from "@mui/material";
+import {Button, Typography} from "@mui/material";
 import {useNavigate} from "react-router-dom";
+import Section from "../../../components/Wrappers/Section";
 
 export default function HeroSection() {
 
@@ -9,17 +10,15 @@ export default function HeroSection() {
 
     return (
         <>
-            <Container
+            <Section
+                height={700}
+                backgroundImageURL={imageURL}
                 sx={{
-                    height: '700px',
                     minWidth: '100%',
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    backgroundImage: `url(${imageURL})`,
-                    backgroundRepeat: 'no-repeat',
-                    backgroundSize: 'cover',
                 }}>
                 <Typography
                     variant={'h1'}
@@ -35,7 +34,7 @@ export default function HeroSection() {
                 >
                     Check out our products
                 </Button>
-            </Container>
+            </Section>
         </>
     );
 }
