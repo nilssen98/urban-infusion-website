@@ -60,20 +60,26 @@ export default function TeaFeatures() {
                             reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
                             pariatur.
                         </Typography>
-                        <Box
-                            border={1}
-                            justifyContent={'flex-end'}
+                        <Section
+                        sx={{
+                            marginTop: 10,
+                            border: 1,
+                            justifyContent: 'flex-end'
+                        }}
                         >
                             <Button
                                 variant={'outlined'}
                                 size={'medium'}
                                 onClick={() => useNavigate()('/products')}
+                                sx={{
+                                    marginRight: 10
+                                }}
                             >
                                 <strong>
                                     Products
                                 </strong>
                             </Button>
-                        </Box>
+                        </Section>
 
                     </Grid>
                 </Grid>
