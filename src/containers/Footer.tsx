@@ -1,14 +1,14 @@
 import {Grid, Typography} from "@mui/material";
 import Logo from "../components/Logo";
+import Section from "../components/Wrappers/Section";
 
 
 export default function Footer() {
     return (
         <>
-            <Grid
-                container
+            <Section
+                height={300}
                 sx={{
-                    height: 300,
                     alignItems: 'center',
                     justifyContent: 'center',
                     flexDirection: 'column',
@@ -19,7 +19,7 @@ export default function Footer() {
                 <Typography variant={"body2"} sx={{fontWeight: 'fontWeightBold'}}>
                     Copyright © {new Date().getFullYear()} Urban Infusion
                 </Typography>
-            </Grid>
+            </Section>
         </>
     )
 }

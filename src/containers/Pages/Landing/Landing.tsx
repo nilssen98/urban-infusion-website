@@ -1,7 +1,7 @@
 import {Box, Divider, Typography} from "@mui/material";
 import Section from "../../../components/Wrappers/Section";
 import HeroSection from "./HeroSection";
-import TeaFeatures from "./TeaFeatures";
+import FeaturesSection from "./FeaturesSection";
 
 export default function Landing() {
     return (
@@ -9,7 +9,7 @@ export default function Landing() {
             <Box>
                 <HeroSection/>
                 <Divider/>
-                <TeaFeatures/>
+                <FeaturesSection/>
                 <Divider/>
                 <Section height={600}
                          sx={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%'}}>
