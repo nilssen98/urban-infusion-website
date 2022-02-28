@@ -25,12 +25,7 @@ export default function NavigationBar(props: Props) {
         <>
             <HideOnScroll {...props}>
                 <AppBar
-                    color={'transparent'}
-                    sx={{
-                        backdropFilter: 'blur(10px)',
-                        color: 'inherit',
-                        fillOpacity: '0.7'
-                    }}
+                    color={'inherit'}
                 >
                     <Toolbar>
                         <Section

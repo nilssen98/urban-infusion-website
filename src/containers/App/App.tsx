@@ -16,6 +16,7 @@ export default function App() {
         <ThemeProvider theme={getTheme(theme)}>
             <CssBaseline/>
             <BrowserRouter>
+                <Toolbar/>
                 <NavigationBar/>
                 <Routes>
                     <Route path={'/'} element={<Landing/>}/>

@@ -41,8 +41,7 @@ export default function Logo(props: Props) {
                 <Box
                     sx={{
                         width: '2.2em',
-                        height: '2.2em',
-                        fillOpacity: '1'
+                        height: '2.2em'
                     }}
                     component={CoffeeOutlinedIcon}
                 />
