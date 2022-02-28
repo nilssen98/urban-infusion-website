@@ -84,10 +84,10 @@ export default function FeaturesSection() {
         <>
             <Section sx={{py: 16}}>
                 <Box>
-                    <Feature onClick={() => navigate('/products')} image_url={imageURL}/>
-                    <Feature flipped onClick={() => navigate('/products')} image_url={imageURL}/>
-                    <Feature onClick={() => navigate('/products')} image_url={imageURL}/>
-                    <Feature flipped onClick={() => navigate('/products')} image_url={imageURL}/>
+                    <Feature onClick={() => navigate('/products')} image_url={imageURL + "&" + Math.random()}/>
+                    <Feature flipped onClick={() => navigate('/products')} image_url={imageURL + "&" + Math.random()}/>
+                    <Feature onClick={() => navigate('/products')} image_url={imageURL + "&" + Math.random()}/>
+                    <Feature flipped onClick={() => navigate('/products')} image_url={imageURL + "&" + Math.random()}/>
                 </Box>
             </Section>
         </>
