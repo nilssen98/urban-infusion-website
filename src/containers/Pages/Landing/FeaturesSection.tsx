@@ -36,14 +36,31 @@ function Feature(props: FeatureProps) {
                 <Grid
                     md={6}
                     item
+
                 >
                     <Typography
                         variant={'h4'}
                         component={'h3'}
+                        sx={theme => ({
+                            display: 'flex',
+                            [theme.breakpoints.down('md')]: {
+                                justifyContent: 'center'
+                            }
+                        })}
                     >
                         Benefits of green tea
                     </Typography>
-                    <Typography sx={{py: 8}}>
+                    <Typography
+                                sx={theme => ({
+                                    display: 'flex',
+                                    [theme.breakpoints.down('md')]: {
+                                        width: "80%",
+                                        //TODO: Why wont this center
+                                        justifyContent: 'center',
+                                        border: 1
+                                    }
+                                })}
+                    >
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                         sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                         Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
@@ -53,10 +70,11 @@ function Feature(props: FeatureProps) {
                     </Typography>
                     <Box
                         sx={theme => ({
+
                             display: 'flex',
                             justifyContent: props.flipped ? 'flex-start' : 'flex-end',
                             [theme.breakpoints.down('md')]: {
-                                justifyContent: 'flex-start'
+                                justifyContent: 'center'
                             }
                         })}
                     >
