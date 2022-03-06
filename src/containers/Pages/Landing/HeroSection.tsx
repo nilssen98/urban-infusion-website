@@ -1,7 +1,6 @@
 import {Button, Typography} from "@mui/material";
 import {useNavigate} from "react-router-dom";
 import Section from "../../../components/Wrappers/Section";
-import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 
 export default function HeroSection() {
 
@@ -17,8 +16,9 @@ export default function HeroSection() {
                 sx={{
                     display: 'flex',
                     flexDirection: 'column',
-                    alignItems: 'center',
-                    justifyContent: 'center'
+                    alignItems: 'start',
+                    justifyContent: 'center',
+                    width: '90%',
                 }}
             >
                 <Typography
@@ -26,7 +26,7 @@ export default function HeroSection() {
                     component={'h1'}
                     sx={{
                         color: 'white',
-                        textAlign: 'center',
+                        textAlign: 'left',
                         pb: 16
                     }}>
                     Find your herbal friend
