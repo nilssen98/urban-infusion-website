@@ -12,7 +12,7 @@ export default function HeroSection() {
                 height={700}
                 backgroundUrl={imageURL}
             >
-                <Grid
+                <Box
                     sx={theme => ({
                         display: 'flex',
                         flexDirection: 'column',
@@ -71,7 +71,7 @@ export default function HeroSection() {
                             Get started
                         </Button>
                     </Box>
-                </Grid>
+                </Box>
             </Section>
         </>
     );
