@@ -18,18 +18,22 @@ export default function HeroSection() {
                         flexDirection: 'column',
                         justifyContent: 'center',
                         alignItems: 'start',
-                        marginLeft: '2rem',
                         width: '100%',
                         [theme.breakpoints.down('md')]: {
                             alignItems: 'center',
-                            margin: '0',
                         }
                     })}
                 >
                     <Box
-                        sx={{
-                            maxWidth: 350,
-                        }}
+                        sx={theme => ({
+                            display: 'flex',
+                            flexDirection: 'column',
+                            maxWidth: 500,
+                            alignItems: 'flex-start',
+                            [theme.breakpoints.down('md')]: {
+                                alignItems: 'center',
+                            }
+                        })}
                     >
                         <Typography
                             variant={'h2'}
@@ -71,4 +75,4 @@ export default function HeroSection() {
             </Section>
         </>
     );
-}
+};
