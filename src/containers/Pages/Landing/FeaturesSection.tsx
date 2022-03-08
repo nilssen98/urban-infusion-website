@@ -20,6 +20,7 @@ function Feature(props: FeatureProps) {
                     flexDirection: props.flipped ? 'row-reverse' : 'row',
                     alignItems: 'center',
                     justifyContent: 'center',
+
                 }}
             >
                 <Grid
@@ -53,6 +54,8 @@ function Feature(props: FeatureProps) {
                     </Typography>
                     <Box
                          sx={theme => ({
+                             //Margin Y axis
+                             my: "15px",
                              display: 'flex',
                              [theme.breakpoints.down('md')]: {
                                  justifyContent: 'center'
