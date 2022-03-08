@@ -13,6 +13,7 @@ function Feature(props: FeatureProps) {
         <>
             <Grid
                 container
+
                 spacing={8}
                 py={16}
                 sx={{
@@ -50,14 +51,19 @@ function Feature(props: FeatureProps) {
                     >
                         Benefits of green tea
                     </Typography>
+                    <Box
+                         sx={theme => ({
+                             display: 'flex',
+                             [theme.breakpoints.down('md')]: {
+                                 justifyContent: 'center'
+                             }
+                         })}
+                    >
                     <Typography
+
                                 sx={theme => ({
-                                    display: 'flex',
                                     [theme.breakpoints.down('md')]: {
-                                        width: "80%",
-                                        //TODO: Why wont this center
-                                        justifyContent: 'center',
-                                        border: 1
+                                        maxWidth: "80%",
                                     }
                                 })}
                     >
@@ -68,9 +74,9 @@ function Feature(props: FeatureProps) {
                         reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
                         pariatur.
                     </Typography>
+                    </Box>
                     <Box
                         sx={theme => ({
-
                             display: 'flex',
                             justifyContent: props.flipped ? 'flex-start' : 'flex-end',
                             [theme.breakpoints.down('md')]: {
