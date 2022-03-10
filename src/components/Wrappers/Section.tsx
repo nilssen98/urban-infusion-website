@@ -31,7 +31,7 @@ export default function Section(props: Props) {
                     sx={{
                         maxWidth: 'lg',
                         height: '100%',
-                        px: 4,
+                        px: 8,
                         ...props.sx
                     }}
                 >
