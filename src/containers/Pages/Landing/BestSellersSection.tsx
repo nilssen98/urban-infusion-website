@@ -1,7 +1,9 @@
 import Section from "../../../components/Wrappers/Section";
-import {Box, Grid, Skeleton, Typography} from "@mui/material";
+import {Box, Button, Grid, Skeleton, Typography} from "@mui/material";
+import {useNavigate} from "react-router-dom";
 
 export default function BestSellersSection() {
+    const navigate = useNavigate();
 
     return (
         <>
@@ -16,7 +18,7 @@ export default function BestSellersSection() {
                     })}
                 >
                     <Typography
-                        variant={'h3'}
+                        variant={'h4'}
                         component={'h2'}
                         sx={theme => ({
                             textAlign: 'center',
@@ -33,6 +35,7 @@ export default function BestSellersSection() {
                             justifyContent: 'center',
                             alignItems: 'center',
                             width: '100%',
+                            paddingBottom: 16
                         })}
                     >
                         {
@@ -49,6 +52,13 @@ export default function BestSellersSection() {
                             })
                         }
                     </Grid>
+                    <Button
+                        variant={"outlined"}
+                        size={'medium'}
+                        onClick={() => navigate('/products')}
+                    >
+                        Shop all
+                    </Button>
                 </Box>
             </Section>
         </>
