@@ -1,6 +1,7 @@
 import Section from "../../../components/Wrappers/Section";
 import {Box, Button, Grid, Skeleton, Typography} from "@mui/material";
 import {useNavigate} from "react-router-dom";
+import {range} from 'lodash-es';
 
 export default function BestSellersSection() {
     const navigate = useNavigate();
@@ -39,7 +40,7 @@ export default function BestSellersSection() {
                         })}
                     >
                         {
-                            [0, 1, 2, 3].map((index: number) => {
+                            range(4).map((index: number) => {
                                 return (
                                     <Skeleton
                                         key={index}
