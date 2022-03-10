@@ -27,10 +27,10 @@ function Feature(props: FeatureProps) {
                     md={6}
                     item
                 >
-                    <Box>
+                    <Box width={"100%"}>
                         <img
                             src={props.image_url}
-                            style={{width: '100%', height: '100%', minWidth: 1}}
+                            style={{width: '100%', minWidth: 1}}
                             alt="Placeholder Image"
                         />
                     </Box>
@@ -54,8 +54,7 @@ function Feature(props: FeatureProps) {
                     </Typography>
                     <Box
                          sx={theme => ({
-                             //Margin Y axis
-                             my: "15px",
+                             my: 4,
                              display: 'flex',
                              [theme.breakpoints.down('md')]: {
                                  justifyContent: 'center'
@@ -66,7 +65,7 @@ function Feature(props: FeatureProps) {
 
                                 sx={theme => ({
                                     [theme.breakpoints.down('md')]: {
-                                        maxWidth: "80%",
+                                        textAlign: "center"
                                     }
                                 })}
                     >
