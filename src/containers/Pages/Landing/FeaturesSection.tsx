@@ -13,61 +13,48 @@ function Feature(props: FeatureProps) {
         <>
             <Grid
                 container
-
                 spacing={8}
                 py={16}
                 sx={{
                     flexDirection: props.flipped ? 'row-reverse' : 'row',
                     alignItems: 'center',
                     justifyContent: 'center',
-
                 }}
             >
                 <Grid
                     md={6}
                     item
+                    container
                 >
-                    <Box width={"100%"}>
-                        <img
-                            src={props.image_url}
-                            style={{width: '100%', minWidth: 1}}
-                            alt="Placeholder Image"
-                        />
-                    </Box>
+                    <img
+                        src={props.image_url}
+                        style={{width: '100%', minWidth: 1}}
+                        alt="Placeholder Image"
+                    />
                 </Grid>
                 <Grid
                     md={6}
                     item
-
+                    container
+                    sx={theme => ({
+                        [theme.breakpoints.down('md')]: {
+                            justifyContent: 'center'
+                        }
+                    })}
                 >
                     <Typography
                         variant={'h4'}
                         component={'h3'}
-                        sx={theme => ({
-                            display: 'flex',
-                            [theme.breakpoints.down('md')]: {
-                                justifyContent: 'center'
-                            }
-                        })}
                     >
                         Benefits of green tea
                     </Typography>
-                    <Box
-                         sx={theme => ({
-                             my: 4,
-                             display: 'flex',
-                             [theme.breakpoints.down('md')]: {
-                                 justifyContent: 'center'
-                             }
-                         })}
-                    >
                     <Typography
-
-                                sx={theme => ({
-                                    [theme.breakpoints.down('md')]: {
-                                        textAlign: "center"
-                                    }
-                                })}
+                        my={8}
+                        sx={theme => ({
+                            [theme.breakpoints.down('md')]: {
+                                textAlign: "center"
+                            }
+                        })}
                     >
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                         sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -76,14 +63,10 @@ function Feature(props: FeatureProps) {
                         reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
                         pariatur.
                     </Typography>
-                    </Box>
                     <Box
                         sx={theme => ({
                             display: 'flex',
                             justifyContent: props.flipped ? 'flex-start' : 'flex-end',
-                            [theme.breakpoints.down('md')]: {
-                                justifyContent: 'center'
-                            }
                         })}
                     >
                         <Button
