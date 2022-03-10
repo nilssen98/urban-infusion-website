@@ -28,8 +28,9 @@ export default function NavigationBar(props: Props) {
                     color={'inherit'}
                 >
                     <Toolbar>
-                        <Section
+                        <Box
                             sx={{
+                                display: 'flex',
                                 alignItems: 'center',
                                 flexWrap: 'nowrap',
                             }}
@@ -67,15 +68,15 @@ export default function NavigationBar(props: Props) {
                                     mode={theme}
                                     onClick={handleChangeTheme}
                                 />
-                                <Skeleton
+                                {/*<Skeleton
                                     variant={'circular'}
                                     width={48}
                                     height={48}
                                     animation={'wave'}
                                     sx={{bgcolor: 'grey.900', cursor: 'pointer', marginLeft: '1rem'}}
-                                />
+                                />*/}
                             </Box>
-                        </Section>
+                        </Box>
                     </Toolbar>
                 </AppBar>
             </HideOnScroll>

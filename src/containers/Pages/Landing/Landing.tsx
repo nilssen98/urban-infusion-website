@@ -14,19 +14,19 @@ export default function Landing() {
                 <Divider/>
                 <BestSellersSection/>
                 <Divider/>
-                <Section height={600}
+                <Section
                          sx={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%'}}>
-                    <Typography paddingTop={6} variant={'h4'}>Section</Typography>
+                    <Typography variant={'h4'}>Section</Typography>
                 </Section>
                 <Divider/>
-                <Section height={600}
+                <Section
                          sx={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%'}}>
-                    <Typography paddingTop={6} variant={'h4'}>Section</Typography>
+                    <Typography variant={'h4'}>Section</Typography>
                 </Section>
                 <Divider/>
-                <Section height={600}
+                <Section
                          sx={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%'}}>
-                    <Typography paddingTop={6} variant={'h4'}>Section</Typography>
+                    <Typography variant={'h4'}>Section</Typography>
                 </Section>
             </Box>
         </>

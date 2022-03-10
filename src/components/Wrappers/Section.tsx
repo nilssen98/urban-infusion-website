@@ -32,6 +32,7 @@ export default function Section(props: Props) {
                         maxWidth: 'lg',
                         height: '100%',
                         px: 8,
+                        my: 32,
                         ...props.sx
                     }}
                 >
