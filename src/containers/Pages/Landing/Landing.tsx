@@ -2,7 +2,7 @@ import {Box, Divider, Typography} from "@mui/material";
 import Section from "../../../components/Wrappers/Section";
 import HeroSection from "./HeroSection";
 import FeaturesSection from "./FeaturesSection";
-import BestSellersSection from "./BestSellersSection";
+import FeaturedProductsSection from "./FeaturedProductsSection";
 
 export default function Landing() {
     return (
@@ -12,7 +12,7 @@ export default function Landing() {
                 <Divider/>
                 <FeaturesSection/>
                 <Divider/>
-                <BestSellersSection/>
+                <FeaturedProductsSection/>
                 <Divider/>
                 <Section
                          sx={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%'}}>
