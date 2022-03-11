@@ -3,25 +3,21 @@ import {useNavigate} from "react-router-dom";
 import Section from "../../../components/Wrappers/Section";
 
 export default function HeroSection() {
-    const imageURL: string = 'https://picsum.photos/1600/900/?blur';
+    const imageURL = 'https://i.imgur.com/PHyNjTQ.jpg';
     const navigate = useNavigate();
 
     return (
         <>
-            <Section
-                backgroundUrl={imageURL}
-            >
+            <Section backgroundUrl={imageURL}>
                 <Box
-                    sx={theme => ({
+                    sx={{
+                        py: 24,
                         display: 'flex',
                         flexDirection: 'column',
                         justifyContent: 'center',
-                        alignItems: 'start',
+                        alignItems: {md: 'start', xs: 'center'},
                         width: '100%',
-                        [theme.breakpoints.down('md')]: {
-                            alignItems: 'center',
-                        }
-                    })}
+                    }}
                 >
                     <Box
                         sx={theme => ({
