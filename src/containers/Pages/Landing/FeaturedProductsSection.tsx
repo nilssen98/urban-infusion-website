@@ -59,8 +59,8 @@ export default function FeaturedProductsSection() {
                         }
                     </Grid>
                     <Button
-                        variant={"outlined"}
-                        size={'medium'}
+                        variant={"contained"}
+                        size={'large'}
                         onClick={() => navigate('/products')}
                     >
                         Shop all
