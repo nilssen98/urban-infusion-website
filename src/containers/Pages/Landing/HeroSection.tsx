@@ -1,6 +1,7 @@
 import {Box, Button, Grid, Typography} from "@mui/material";
 import {useNavigate} from "react-router-dom";
 import Section from "../../../components/Wrappers/Section";
+import StyledButton from "../../../components/StyledButton";
 
 export default function HeroSection() {
     const imageURL = 'https://i.imgur.com/PHyNjTQ.jpg';
@@ -50,7 +51,7 @@ export default function HeroSection() {
                             sx={theme => ({
                                 color: 'white',
                                 textAlign: 'left',
-                                paddingBottom: 8,
+                                paddingBottom: 16,
                                 [theme.breakpoints.down('md')]: {
                                     textAlign: 'center',
                                 }
@@ -58,13 +59,11 @@ export default function HeroSection() {
                         >
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                         </Typography>
-                        <Button
-                            variant={"contained"}
-                            size={'large'}
+                        <StyledButton
                             onClick={() => navigate('/products')}
                         >
                             Get started
-                        </Button>
+                        </StyledButton>
                     </Box>
                 </Box>
             </Section>
