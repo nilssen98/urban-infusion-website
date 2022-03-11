@@ -1,10 +1,14 @@
-import {Box, Button, Grid, Typography} from "@mui/material";
+import {Box, Typography} from "@mui/material";
 import {useNavigate} from "react-router-dom";
 import Section from "../../../components/Wrappers/Section";
 import StyledButton from "../../../components/StyledButton";
 
 export default function HeroSection() {
-    const imageURL = 'https://i.imgur.com/PHyNjTQ.jpg';
+    //const imageURL = 'https://i.imgur.com/PHyNjTQ.jpg'; // Original
+    //const imageURL = 'https://i.imgur.com/vviNIXW.jpg'; // Dark1
+    //const imageURL = 'https://i.imgur.com/QZNYFC7.jpg'; // Dark2
+    //const imageURL = 'https://i.imgur.com/pwGUzIn.jpg'; // Dark3
+    const imageURL = 'https://i.imgur.com/QXqQueZ.jpg'; // Dark4
     const navigate = useNavigate();
 
     return (
