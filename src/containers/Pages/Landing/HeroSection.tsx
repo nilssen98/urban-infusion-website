@@ -9,7 +9,6 @@ export default function HeroSection() {
     return (
         <>
             <Section
-                height={700}
                 backgroundUrl={imageURL}
             >
                 <Box
