@@ -50,7 +50,7 @@ export default function NavigationBar(props: Props) {
         <>
             <HideOnScroll {...props}>
                 <AppBar color={'inherit'}>
-                    <Toolbar sx={{px: 8}}>
+                    <Toolbar sx={{px: {md: 16, sx: 8}}}>
                         <Box
                             sx={{
                                 display: 'flex',
