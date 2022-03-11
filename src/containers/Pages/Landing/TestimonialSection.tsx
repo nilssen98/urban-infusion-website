@@ -1,4 +1,4 @@
-import {Box, Card, CardActionArea, Grid, Typography} from "@mui/material";
+import {Avatar, Box, Card, CardActionArea, Grid, Typography} from "@mui/material";
 import Section from "../../../components/Wrappers/Section";
 
 
@@ -26,27 +26,38 @@ export default function TestimonialSection(){
                         " Infusion have the best Sencha tea – my favorite."}/>
                     <Testimonial image_url={""} name={"Purple Floyd"} comment={"I love the great selection Urban Infusion have! I try a new tea every day and I still have" +
                         "many teas to try out! Recommend!"}/>
-                    <Testimonial image_url={""} name={"James Jagger"} comment={"Man, their teas are dope! P.S. You can also smoke them, just don't tell anyone I told you" +
+                        <Testimonial image_url={""} name={"James Jagger"} comment={"Man, their teas are dope! P.S. You can also smoke them, just don't tell anyone I told you" +
                         "that "}/>
+
                 </Box>
             </Section>
         </>
     )
 }
 
-
+//
 function Testimonial(props: TestimonialProps){
     return (
         <>
 
-            <Card>
+            <Card
+            sx={{
+                maxWidth: '30%',
+                justifyContent: 'center',
+                alignItems: 'center',
+                border: '4'
+            }}>
                 <CardActionArea>
+                    <Avatar></Avatar>
                     <Typography
                         variant={'h5'}
                         component={'h5'}
                         textAlign={'center'}
                     >
                         {props.name}
+                    </Typography>
+                    <Typography>
+                        {props.comment}
                     </Typography>
                 </CardActionArea>
             </Card>
