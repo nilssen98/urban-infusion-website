@@ -65,6 +65,11 @@ function Feature(props: FeatureProps) {
                     <Typography
                         variant={'h4'}
                         component={'h3'}
+                        sx={theme => ({
+                            [theme.breakpoints.down('md')]: {
+                                textAlign: "center"
+                            }
+                        })}
                     >
                         Benefits of green tea
                     </Typography>
