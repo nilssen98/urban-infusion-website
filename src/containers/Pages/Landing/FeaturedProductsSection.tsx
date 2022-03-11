@@ -3,7 +3,7 @@ import {Box, Button, Grid, Skeleton, Typography} from "@mui/material";
 import {useNavigate} from "react-router-dom";
 import {range} from 'lodash-es';
 
-export default function BestSellersSection() {
+export default function FeaturedProductsSection() {
     const navigate = useNavigate();
 
     return (
@@ -26,7 +26,7 @@ export default function BestSellersSection() {
                             marginBottom: 12
                         }}
                     >
-                        Best sellers
+                        Featured products
                     </Typography>
                     <Grid
                         container
