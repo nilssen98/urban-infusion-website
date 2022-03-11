@@ -6,6 +6,7 @@ interface FeatureProps {
     flipped?: boolean;
     image_url: string;
     onClick: () => void;
+
 }
 
 export default function FeaturesSection() {
