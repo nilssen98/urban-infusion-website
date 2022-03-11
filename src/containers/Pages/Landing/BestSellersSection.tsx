@@ -1,5 +1,5 @@
 import Section from "../../../components/Wrappers/Section";
-import {Box, Button, Skeleton, Stack, Typography} from "@mui/material";
+import {Box, Button, Grid, Skeleton, Typography} from "@mui/material";
 import {useNavigate} from "react-router-dom";
 import {range} from 'lodash-es';
 
@@ -23,41 +23,41 @@ export default function BestSellersSection() {
                         component={'h2'}
                         sx={{
                             textAlign: 'center',
-                            paddingBottom: 12
+                            marginBottom: 12
                         }}
                     >
                         Best sellers
                     </Typography>
-                    <Stack
-                        gap={5}
+                    <Grid
+                        container
                         sx={{
-                            display: 'flex',
-                            flexDirection: 'row',
-                            alignItems: 'center',
-                            flexWrap: 'nowrap',
-                            width: '100%',
-                            paddingBottom: 16,
-                            overflowX: 'scroll',
-                            overflowY: 'hidden',
+                            justifyContent: 'space-between',
+                            marginBottom: 16,
                         }}
                     >
                         {
-                            range(4).map((index: number) => {
-                                return (
+                            range(4).map((index) => (
+                                <Grid
+                                    key={index}
+                                    item
+                                    container
+                                    sm={3}
+                                    xs={6}
+                                    p={4}
+                                    sx={{
+                                        justifyContent: 'center'
+                                    }}
+                                >
                                     <Skeleton
-                                        key={index}
-                                        variant="rectangular"
-                                        width={400}
-                                        height={420}
-                                        sx={{
-                                            flexShrink: 0
-                                        }}
+                                        variant={"rectangular"}
+                                        height={225}
+                                        width={200}
                                     >
                                     </Skeleton>
-                                );
-                            })
+                                </Grid>
+                            ))
                         }
-                    </Stack>
+                    </Grid>
                     <Button
                         variant={"outlined"}
                         size={'medium'}
