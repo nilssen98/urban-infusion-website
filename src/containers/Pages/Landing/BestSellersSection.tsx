@@ -1,5 +1,5 @@
 import Section from "../../../components/Wrappers/Section";
-import {Box, Button, Grid, Skeleton, Typography} from "@mui/material";
+import {Box, Button, Skeleton, Stack, Typography} from "@mui/material";
 import {useNavigate} from "react-router-dom";
 import {range} from 'lodash-es';
 
@@ -10,34 +10,36 @@ export default function BestSellersSection() {
         <>
             <Section>
                 <Box
-                    sx={theme => ({
+                    sx={{
                         display: 'flex',
                         flexDirection: 'column',
                         justifyContent: 'center',
                         alignItems: 'center',
                         width: '100%'
-                    })}
+                    }}
                 >
                     <Typography
                         variant={'h4'}
                         component={'h2'}
-                        sx={theme => ({
+                        sx={{
                             textAlign: 'center',
                             paddingBottom: 12
-                        })}
+                        }}
                     >
                         Best sellers
                     </Typography>
-                    <Grid
-                        container
+                    <Stack
                         gap={5}
-                        sx={theme => ({
+                        sx={{
+                            display: 'flex',
                             flexDirection: 'row',
-                            justifyContent: 'center',
                             alignItems: 'center',
+                            flexWrap: 'nowrap',
                             width: '100%',
-                            paddingBottom: 16
-                        })}
+                            paddingBottom: 16,
+                            overflowX: 'scroll',
+                            overflowY: 'hidden',
+                        }}
                     >
                         {
                             range(4).map((index: number) => {
@@ -47,12 +49,15 @@ export default function BestSellersSection() {
                                         variant="rectangular"
                                         width={400}
                                         height={420}
+                                        sx={{
+                                            flexShrink: 0
+                                        }}
                                     >
                                     </Skeleton>
                                 );
                             })
                         }
-                    </Grid>
+                    </Stack>
                     <Button
                         variant={"outlined"}
                         size={'medium'}
