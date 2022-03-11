@@ -28,36 +28,30 @@ export default function FeaturedProductsSection() {
                     >
                         Featured products
                     </Typography>
-                    <Grid
-                        container
+                    <Box
                         sx={{
-                            justifyContent: 'space-between',
+                            display: 'flex',
+                            width: '100%',
+                            flexWrap: 'wrap',
+                            justifyContent: 'space-around',
                             marginBottom: 16,
                         }}
                     >
                         {
-                            range(4).map((index) => (
-                                <Grid
-                                    key={index}
-                                    item
-                                    container
-                                    sm={3}
-                                    xs={6}
-                                    p={4}
+                            range(4).map((i) => (
+                                <Skeleton
+                                    key={i}
                                     sx={{
-                                        justifyContent: 'center'
+                                        mb: 4,
                                     }}
+                                    variant={"rectangular"}
+                                    width={250}
+                                    height={300}
                                 >
-                                    <Skeleton
-                                        variant={"rectangular"}
-                                        height={225}
-                                        width={200}
-                                    >
-                                    </Skeleton>
-                                </Grid>
+                                </Skeleton>
                             ))
                         }
-                    </Grid>
+                    </Box>
                     <Button
                         variant={"contained"}
                         size={'large'}
