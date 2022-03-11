@@ -10,24 +10,10 @@ export default function Landing() {
             <Box>
                 <HeroSection/>
                 <Divider/>
-                <FeaturesSection/>
-                <Divider/>
                 <FeaturedProductsSection/>
                 <Divider/>
-                <Section
-                         sx={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%'}}>
-                    <Typography variant={'h4'}>Section</Typography>
-                </Section>
+                <FeaturesSection/>
                 <Divider/>
-                <Section
-                         sx={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%'}}>
-                    <Typography variant={'h4'}>Section</Typography>
-                </Section>
-                <Divider/>
-                <Section
-                         sx={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%'}}>
-                    <Typography variant={'h4'}>Section</Typography>
-                </Section>
             </Box>
         </>
     )
