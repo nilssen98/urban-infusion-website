@@ -11,7 +11,7 @@ export default function HeroSection() {
             <Section backgroundUrl={imageURL}>
                 <Box
                     sx={{
-                        py: 24,
+                        py: 16,
                         display: 'flex',
                         flexDirection: 'column',
                         justifyContent: 'center',
