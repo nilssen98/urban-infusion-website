@@ -8,13 +8,33 @@ interface FeatureProps {
     onClick: () => void;
 }
 
+export default function FeaturesSection() {
+    const imageURL: string = 'https://picsum.photos/570/350?grayscale';
+
+    const navigate = useNavigate();
+
+    return (
+        <>
+            <Section>
+                <Box>
+                    <Feature onClick={() => navigate('/products')} image_url={imageURL + "&" + Math.random()}/>
+                    <Feature flipped onClick={() => navigate('/products')} image_url={imageURL + "&" + Math.random()}/>
+                    <Feature onClick={() => navigate('/products')} image_url={imageURL + "&" + Math.random()}/>
+                    <Feature flipped onClick={() => navigate('/products')} image_url={imageURL + "&" + Math.random()}/>
+                </Box>
+            </Section>
+        </>
+    )
+}
+
+
 function Feature(props: FeatureProps) {
     return (
         <>
             <Grid
                 container
                 spacing={8}
-                py={16}
+                pb={24}
                 sx={{
                     flexDirection: props.flipped ? 'row-reverse' : 'row',
                     alignItems: 'center',
@@ -84,21 +104,3 @@ function Feature(props: FeatureProps) {
 }
 
 
-export default function FeaturesSection() {
-    const imageURL: string = 'https://picsum.photos/570/350?grayscale';
-
-    const navigate = useNavigate();
-
-    return (
-        <>
-            <Section sx={{py: 16}}>
-                <Box>
-                    <Feature onClick={() => navigate('/products')} image_url={imageURL + "&" + Math.random()}/>
-                    <Feature flipped onClick={() => navigate('/products')} image_url={imageURL + "&" + Math.random()}/>
-                    <Feature onClick={() => navigate('/products')} image_url={imageURL + "&" + Math.random()}/>
-                    <Feature flipped onClick={() => navigate('/products')} image_url={imageURL + "&" + Math.random()}/>
-                </Box>
-            </Section>
-        </>
-    )
-}
