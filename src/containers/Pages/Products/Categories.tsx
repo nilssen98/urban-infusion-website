@@ -70,7 +70,7 @@ function Category(props: CategoryProps) {
                             <ListItemButton
                                 key={subcategory}
                                 sx={{paddingLeft: 8}}
-                                onClick={() => navigate(subcategory.replace(" ", "-"))}
+                                onClick={() => navigate('/products/' + subcategory.replace(" ", "-"))}
                             >
                                 <ListItemText sx={{textTransform: 'capitalize'}}>{subcategory}</ListItemText>
                             </ListItemButton>

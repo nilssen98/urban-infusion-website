@@ -27,9 +27,8 @@ export default function App() {
                 <NavigationBar/>
                 <Routes>
                     <Route path={'/'} element={<Landing/>}/>
-                    <Route path={'/products'} element={<Products/>}>
-                        <Route path={'/products/:id'} element={<ProductsList/>}/>
-                    </Route>
+                    <Route path={'/products'} element={<Products/>}/>
+                    <Route path={'/products/:id'} element={<Products/>}/>
                     <Route path={'*'} element={<NotFound/>}/>
                 </Routes>
                 <Divider/>
