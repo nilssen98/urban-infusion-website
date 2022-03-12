@@ -8,7 +8,8 @@ export default function HeroSection() {
     //const imageURL = 'https://i.imgur.com/vviNIXW.jpg'; // Dark1
     //const imageURL = 'https://i.imgur.com/QZNYFC7.jpg'; // Dark2
     //const imageURL = 'https://i.imgur.com/pwGUzIn.jpg'; // Dark3
-    const imageURL = 'https://i.imgur.com/QXqQueZ.jpg'; // Dark4
+    //const imageURL = 'https://i.imgur.com/QXqQueZ.jpg'; // Dark4
+    const imageURL = 'https://i.imgur.com/Q57AWAs.jpg'; // Dark5
     const navigate = useNavigate();
 
     return (
