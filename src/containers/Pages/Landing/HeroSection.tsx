@@ -21,46 +21,37 @@ export default function HeroSection() {
                         display: 'flex',
                         flexDirection: 'column',
                         justifyContent: 'center',
-                        alignItems: {md: 'start', xs: 'center'},
+                        alignItems: {xs: 'center', md: 'start'},
                         width: '100%',
                     }}
                 >
                     <Box
-                        sx={theme => ({
+                        sx={{
                             display: 'flex',
                             flexDirection: 'column',
                             maxWidth: 500,
-                            alignItems: 'flex-start',
-                            [theme.breakpoints.down('md')]: {
-                                alignItems: 'center',
-                            }
-                        })}
+                            alignItems: {xs: 'center', md: 'flex-start'},
+                        }}
                     >
                         <Typography
                             variant={'h2'}
                             component={'h1'}
-                            sx={theme => ({
+                            sx={{
                                 color: 'white',
-                                textAlign: 'left',
                                 paddingBottom: 8,
-                                [theme.breakpoints.down('md')]: {
-                                    textAlign: 'center',
-                                }
-                            })}
+                                textAlign: {xs: 'center', md: 'left'},
+                            }}
                         >
                             Find your herbal friend
                         </Typography>
                         <Typography
                             variant={'h5'}
                             component={'h4'}
-                            sx={theme => ({
+                            sx={{
                                 color: 'white',
-                                textAlign: 'left',
                                 paddingBottom: 16,
-                                [theme.breakpoints.down('md')]: {
-                                    textAlign: 'center',
-                                }
-                            })}
+                                textAlign: {xs: 'center', md: 'left'},
+                            }}
                         >
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                         </Typography>
