@@ -3,6 +3,7 @@ import {useEffect, useState} from "react";
 import {getProducts} from "../../../api/urbaninfusion/public/products";
 import {ProductDto} from "../../../api/urbaninfusion/dto/product-dto";
 import Categories from "./Categories";
+import {ProductsList} from "./ProductsList";
 
 export default function Products() {
     const [products, setProducts] = useState<ProductDto[]>([]);
@@ -21,20 +22,7 @@ export default function Products() {
                 width: '100%'
             }}>
                 <Categories/>
-                {
-                    /*
-                    products.map(product => (
-                        <Card key={product.id}>
-                            <CardContent>
-                                <Typography>{product.price}$</Typography>
-                                <Typography>{product.title}</Typography>
-                                <Typography>{product.description}</Typography>
-                                <Typography>{product.weigh}</Typography>
-                            </CardContent>
-                        </Card>
-                    ))
-                     */
-                }
+                <ProductsList/>
             </Box>
         </>
     )

@@ -12,6 +12,9 @@ import {useEffect} from "react";
 import {getProducts} from "../../api/urbaninfusion/public/products";
 import axios from "axios";
 import {getPath} from "../../api/urbaninfusion/urbaninfusion";
+import {Router} from "react-router-dom";
+import {ProductsList} from "../Pages/Products/ProductsList";
+import Categories from "../Pages/Products/Categories";
 
 export default function App() {
     const theme = useSelector((store: RootState) => store.userPreferences.theme);
@@ -24,7 +27,9 @@ export default function App() {
                 <NavigationBar/>
                 <Routes>
                     <Route path={'/'} element={<Landing/>}/>
-                    <Route path={'/products'} element={<Products/>}/>
+                    <Route path={'/products'} element={<Products/>}>
+                        <Route path={'/products/:id'} element={<ProductsList/>}/>
+                    </Route>
                     <Route path={'*'} element={<NotFound/>}/>
                 </Routes>
                 <Divider/>

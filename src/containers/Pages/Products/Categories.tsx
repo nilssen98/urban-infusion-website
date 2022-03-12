@@ -2,6 +2,7 @@ import {Box, Collapse, Divider, List, ListItemButton, ListItemIcon, ListItemText
 import {useState} from "react";
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
+import {useNavigate} from "react-router-dom";
 
 const categories = {
     'teas': [
@@ -53,6 +54,9 @@ interface CategoryProps {
 
 function Category(props: CategoryProps) {
     const [open, setOpen] = useState<boolean>(true);
+
+    const navigate = useNavigate();
+
     return (
         <Box pb={4}>
             <ListItemButton onClick={() => setOpen(!open)}>
@@ -63,7 +67,11 @@ function Category(props: CategoryProps) {
                 <List disablePadding dense>
                     {
                         props.subcategories.map(subcategory => (
-                            <ListItemButton key={subcategory} sx={{paddingLeft: 8}}>
+                            <ListItemButton
+                                key={subcategory}
+                                sx={{paddingLeft: 8}}
+                                onClick={() => navigate(subcategory.replace(" ", "-"))}
+                            >
                                 <ListItemText sx={{textTransform: 'capitalize'}}>{subcategory}</ListItemText>
                             </ListItemButton>
                         ))
