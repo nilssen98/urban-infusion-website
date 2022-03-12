@@ -1,4 +1,7 @@
-import {Box, Divider, List, ListItemButton, ListSubheader} from "@mui/material";
+import {Box, Collapse, Divider, List, ListItemButton, ListItemIcon, ListItemText, ListSubheader} from "@mui/material";
+import {useState} from "react";
+import ExpandLess from '@mui/icons-material/ExpandLess';
+import ExpandMore from '@mui/icons-material/ExpandMore';
 
 const categories = {
     'teas': [
@@ -20,22 +23,53 @@ export default function Categories() {
                     minHeight: '75vh',
                 }}
             >
-                <List sx={{width: 150}}>
+                <List
+                    dense
+                    sx={{
+                        width: 200
+                    }}
+                    subheader={
+                        <ListSubheader>
+                            Products
+                        </ListSubheader>
+                    }
+                >
                     {
                         Object.entries(categories).map(([category, subcategories]) => (
-                            <>
-                                <ListSubheader>{category}</ListSubheader>
-                                {
-                                    subcategories.map(subcategory => (
-                                        <ListItemButton>{subcategory}</ListItemButton>
-                                    ))
-                                }
-                            </>
+                            <Category key={category} category={category} subcategories={subcategories}/>
                         ))
                     }
                 </List>
                 <Divider orientation={'vertical'}/>
             </Box>
         </>
+    )
+}
+
+interface CategoryProps {
+    category: string;
+    subcategories: string[];
+}
+
+function Category(props: CategoryProps) {
+    const [open, setOpen] = useState<boolean>(true);
+    return (
+        <Box pb={4}>
+            <ListItemButton onClick={() => setOpen(!open)}>
+                <ListItemText sx={{textTransform: 'capitalize'}} primary={props.category}/>
+                {open ? <ExpandLess/> : <ExpandMore/>}
+            </ListItemButton>
+            <Collapse in={open}>
+                <List disablePadding dense>
+                    {
+                        props.subcategories.map(subcategory => (
+                            <ListItemButton key={subcategory} sx={{paddingLeft: 8}}>
+                                <ListItemText sx={{textTransform: 'capitalize'}}>{subcategory}</ListItemText>
+                            </ListItemButton>
+                        ))
+                    }
+                </List>
+            </Collapse>
+        </Box>
     )
 }
