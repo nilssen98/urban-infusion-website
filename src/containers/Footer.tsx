@@ -7,7 +7,6 @@ export default function Footer() {
     return (
         <>
             <Section
-                height={300}
                 sx={{
                     alignItems: 'center',
                     justifyContent: 'center',
