@@ -8,6 +8,10 @@ import Products from "../Pages/Products/Products";
 import NotFound from "../Pages/NotFound/NotFound";
 import {RootState} from "../../state/store";
 import {useSelector} from "react-redux";
+import {useEffect} from "react";
+import {getProducts} from "../../api/urbaninfusion/public/products";
+import axios from "axios";
+import {getPath} from "../../api/urbaninfusion/urbaninfusion";
 
 export default function App() {
     const theme = useSelector((store: RootState) => store.userPreferences.theme);
