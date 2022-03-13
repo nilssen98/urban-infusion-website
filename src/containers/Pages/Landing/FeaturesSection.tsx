@@ -2,14 +2,6 @@ import {Box, Button, Grid, Typography} from "@mui/material";
 import {useNavigate} from "react-router-dom";
 import Section from "../../../components/Wrappers/Section";
 
-interface FeatureProps {
-    flipped?: boolean;
-    header: string;
-    body: string;
-    image_url: string;
-    onClick: () => void;
-}
-
 export default function FeaturesSection() {
     const imageURL: string = 'https://picsum.photos/570/350?grayscale';
     const headerPlaceholder: string = 'Benefits of green tea';
@@ -58,6 +50,13 @@ export default function FeaturesSection() {
     );
 }
 
+interface FeatureProps {
+    flipped?: boolean;
+    header?: string;
+    body?: string;
+    image_url?: string;
+    onClick: () => void;
+}
 
 function Feature(props: FeatureProps) {
     return (
