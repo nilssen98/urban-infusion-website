@@ -6,26 +6,38 @@ interface FeatureProps {
     flipped?: boolean;
     image_url: string;
     onClick: () => void;
-
 }
 
 export default function FeaturesSection() {
     const imageURL: string = 'https://picsum.photos/570/350?grayscale';
-
     const navigate = useNavigate();
 
     return (
         <>
             <Section>
                 <Box>
-                    <Feature onClick={() => navigate('/products')} image_url={imageURL + "&" + Math.random()}/>
-                    <Feature flipped onClick={() => navigate('/products')} image_url={imageURL + "&" + Math.random()}/>
-                    <Feature onClick={() => navigate('/products')} image_url={imageURL + "&" + Math.random()}/>
-                    <Feature flipped onClick={() => navigate('/products')} image_url={imageURL + "&" + Math.random()}/>
+                    <Feature
+                        onClick={() => navigate('/products')}
+                        image_url={imageURL + "&" + Math.random()}
+                    />
+                    <Feature
+                        flipped
+                        onClick={() => navigate('/products')}
+                        image_url={imageURL + "&" + Math.random()}
+                    />
+                    <Feature
+                        onClick={() => navigate('/products')}
+                        image_url={imageURL + "&" + Math.random()}
+                    />
+                    <Feature
+                        flipped
+                        onClick={() => navigate('/products')}
+                        image_url={imageURL + "&" + Math.random()}
+                    />
                 </Box>
             </Section>
         </>
-    )
+    );
 }
 
 
@@ -90,10 +102,10 @@ function Feature(props: FeatureProps) {
                         pariatur.
                     </Typography>
                     <Box
-                        sx={theme => ({
+                        sx={{
                             display: 'flex',
                             justifyContent: props.flipped ? 'flex-start' : 'flex-end',
-                        })}
+                        }}
                     >
                         <Button
                             variant={'contained'}
@@ -106,7 +118,7 @@ function Feature(props: FeatureProps) {
                 </Grid>
             </Grid>
         </>
-    )
+    );
 }
 
 
