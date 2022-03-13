@@ -4,12 +4,22 @@ import Section from "../../../components/Wrappers/Section";
 
 interface FeatureProps {
     flipped?: boolean;
+    header: string;
+    body: string;
     image_url: string;
     onClick: () => void;
 }
 
 export default function FeaturesSection() {
     const imageURL: string = 'https://picsum.photos/570/350?grayscale';
+    const headerPlaceholder: string = 'Benefits of green tea';
+    const bodyPlaceholder: string =
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit,'
+        + 'sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+        + 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris'
+        + 'nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in'
+        + 'reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla'
+        + 'pariatur.';
     const navigate = useNavigate();
 
     return (
@@ -17,22 +27,30 @@ export default function FeaturesSection() {
             <Section>
                 <Box>
                     <Feature
-                        onClick={() => navigate('/products')}
+                        header={headerPlaceholder}
+                        body={bodyPlaceholder}
                         image_url={imageURL + "&" + Math.random()}
+                        onClick={() => navigate('/products')}
                     />
                     <Feature
                         flipped
-                        onClick={() => navigate('/products')}
+                        header={headerPlaceholder}
+                        body={bodyPlaceholder}
                         image_url={imageURL + "&" + Math.random()}
+                        onClick={() => navigate('/products')}
                     />
                     <Feature
-                        onClick={() => navigate('/products')}
+                        header={headerPlaceholder}
+                        body={bodyPlaceholder}
                         image_url={imageURL + "&" + Math.random()}
+                        onClick={() => navigate('/products')}
                     />
                     <Feature
                         flipped
-                        onClick={() => navigate('/products')}
+                        header={headerPlaceholder}
+                        body={bodyPlaceholder}
                         image_url={imageURL + "&" + Math.random()}
+                        onClick={() => navigate('/products')}
                     />
                 </Box>
             </Section>
@@ -84,7 +102,9 @@ function Feature(props: FeatureProps) {
                             }
                         })}
                     >
-                        Benefits of green tea
+                        {
+                            props.header
+                        }
                     </Typography>
                     <Typography
                         my={8}
@@ -94,12 +114,9 @@ function Feature(props: FeatureProps) {
                             }
                         })}
                     >
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                        nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-                        reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                        pariatur.
+                        {
+                            props.body
+                        }
                     </Typography>
                     <Box
                         sx={{
