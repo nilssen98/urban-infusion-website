@@ -55,7 +55,7 @@ interface FeatureProps {
     header?: string;
     body?: string;
     image_url?: string;
-    onClick: () => void;
+    onClick?: () => void;
 }
 
 function Feature(props: FeatureProps) {
