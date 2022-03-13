@@ -1,4 +1,4 @@
-import {Avatar, Box, Card, CardActionArea, Grid, Typography} from "@mui/material";
+import {Avatar, Box, Card, CardActionArea, CardContent, Grid, Typography} from "@mui/material";
 import Section from "../../../components/Wrappers/Section";
 
 
@@ -14,12 +14,18 @@ export default function TestimonialSection(){
         <>
             <Section>
                 <Box
-                sx={{
+                sx={theme => ({
                     display: 'flex',
                     md: '4',
                     xs: '12',
-                    justifyContent: 'center'
-                }}
+                    justifyContent: 'center',
+                    flexDirection: 'row',
+                    [theme.breakpoints.down('md')]: {
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        pb: 20
+                    }
+                })}
                 >
 
                     <Testimonial image_url={""} name={"John Cliff"} comment={"Tea is the necessary component for my busy days at the office. It helps me focus. Urban" +
@@ -41,14 +47,24 @@ function Testimonial(props: TestimonialProps){
         <>
 
             <Card
-            sx={{
-                maxWidth: '30%',
-                justifyContent: 'center',
-                alignItems: 'center',
-                border: '4'
-            }}>
-                <CardActionArea>
-                    <Avatar></Avatar>
+                sx={theme => ({
+                    maxWidth: '30%',
+                    margin: 4,
+                    [theme.breakpoints.down('md')]: {
+                        maxWidth:'80%',
+                        mb: 20
+                    }
+                })}
+           >
+                <CardContent>
+                    <Grid
+                        container
+                        direction={'column'}
+                        alignItems={'center'}
+                        justifyContent={'center'}
+                        >
+                        <Avatar></Avatar>
+                    </Grid>
                     <Typography
                         variant={'h5'}
                         component={'h5'}
@@ -56,10 +72,10 @@ function Testimonial(props: TestimonialProps){
                     >
                         {props.name}
                     </Typography>
-                    <Typography>
+                    <Typography textAlign={'center'}>
                         {props.comment}
                     </Typography>
-                </CardActionArea>
+                </CardContent>
             </Card>
         </>
     )
