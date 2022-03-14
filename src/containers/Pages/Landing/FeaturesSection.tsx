@@ -155,7 +155,7 @@ function Feature(props: FeatureProps) {
                         sx={{
                             display: 'flex',
                             flex: 1,
-                            justifyContent: props.flipped ? 'flex-start' : 'flex-end',
+                            justifyContent: {xs: 'center', md: `${props.flipped ? 'flex-start' : 'flex-end'}`}
                         }}
                     >
                         <Button
