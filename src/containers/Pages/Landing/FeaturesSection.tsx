@@ -118,27 +118,23 @@ function Feature(props: FeatureProps) {
                     <img
                         src={props.image_url}
                         style={{width: '100%', minWidth: 1}}
-                        alt='Placeholder Image'
+                        alt={''}
                     />
                 </Grid>
                 <Grid
                     md={6}
                     item
                     container
-                    sx={theme => ({
-                        [theme.breakpoints.down('md')]: {
-                            justifyContent: 'center'
-                        }
-                    })}
+                    sx={{
+                        justifyContent: {xs: 'center', md: 'flex-start'}
+                    }}
                 >
                     <Typography
                         variant={'h4'}
                         component={'h3'}
-                        sx={theme => ({
-                            [theme.breakpoints.down('md')]: {
-                                textAlign: 'center'
-                            }
-                        })}
+                        sx={{
+                            textAlign: {xs: 'center', md: 'left'}
+                        }}
                     >
                         {
                             props.header
@@ -146,12 +142,10 @@ function Feature(props: FeatureProps) {
                     </Typography>
                     <Typography
                         my={8}
-                        sx={theme => ({
+                        sx={{
                             whiteSpace: 'pre-line',
-                            [theme.breakpoints.down('md')]: {
-                                textAlign: 'center'
-                            }
-                        })}
+                            textAlign: {xs: 'center', md: 'left'}
+                        }}
                     >
                         {
                             props.body
@@ -160,6 +154,7 @@ function Feature(props: FeatureProps) {
                     <Box
                         sx={{
                             display: 'flex',
+                            flex: 1,
                             justifyContent: props.flipped ? 'flex-start' : 'flex-end',
                         }}
                     >
@@ -176,5 +171,3 @@ function Feature(props: FeatureProps) {
         </>
     );
 }
-
-
