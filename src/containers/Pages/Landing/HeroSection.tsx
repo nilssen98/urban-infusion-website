@@ -2,7 +2,7 @@ import {Box, Typography} from "@mui/material";
 import {useNavigate} from "react-router-dom";
 import Section from "../../../components/Wrappers/Section";
 import StyledButton from "../../../components/StyledButton";
-import BackgroundImage from "src/assets/images/hero-section.jpg"
+import BackgroundImage from "../../../assets/images/hero-section.jpg";
 
 export default function HeroSection() {
     const navigate = useNavigate();

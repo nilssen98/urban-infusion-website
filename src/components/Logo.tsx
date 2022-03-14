@@ -1,4 +1,4 @@
-import {Box, Container, Typography} from "@mui/material";
+import {Box, Typography} from "@mui/material";
 import CoffeeOutlinedIcon from '@mui/icons-material/CoffeeOutlined';
 
 interface Props {
