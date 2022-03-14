@@ -1,4 +1,4 @@
-import {CommentDto} from "./comment-dto";
+import {CommentDto} from './comment-dto';
 
 export interface ProductDto {
     id: number;
@@ -8,5 +8,5 @@ export interface ProductDto {
     title: string;
     description: string;
     weigh: string;
-    comments: CommentDto[]
+    comments: CommentDto[];
 }

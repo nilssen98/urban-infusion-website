@@ -1,6 +1,6 @@
-import {Box, Button, Grid, Typography} from "@mui/material";
-import {useNavigate} from "react-router-dom";
-import Section from "../../../components/Wrappers/Section";
+import {Box, Button, Grid, Typography} from '@mui/material';
+import {useNavigate} from 'react-router-dom';
+import Section from '../../../components/Wrappers/Section';
 
 export default function FeaturesSection() {
     const imageURL: string = 'https://picsum.photos/570/350?grayscale';
@@ -36,7 +36,7 @@ export default function FeaturesSection() {
                             + 'atherosclerosis, and help maintain a healthy blood pressure. \n '
                             + 'Black tea is the most consumed tea across the world; in the US, '
                             + '86% of the tea enjoyed throughout 2017 was black tea.'}
-                        image_url={imageURL + "&" + Math.random()}
+                        image_url={imageURL + '&' + Math.random()}
                         onClick={() => navigate('/products')}
                     />
                     <Feature
@@ -50,7 +50,7 @@ export default function FeaturesSection() {
                             + 'Green tea is an exceptionally popular choice amongst both everyday and more '
                             + 'enthusiastic tea drinkers in the United States, likely due to numerous media '
                             + 'outlets touting its health benefits.'}
-                        image_url={imageURL + "&" + Math.random()}
+                        image_url={imageURL + '&' + Math.random()}
                         onClick={() => navigate('/products')}
                     />
                     <Feature
@@ -64,7 +64,7 @@ export default function FeaturesSection() {
                             + 'White tea is the least processed of all '
                             + 'teas, most white teas are simply picked and withered. Therefore, white tea '
                             + 'contains elevated levels of antioxidants that are present in fresh tea leaves.'}
-                        image_url={imageURL + "&" + Math.random()}
+                        image_url={imageURL + '&' + Math.random()}
                         onClick={() => navigate('/products')}
                     />
                     <Feature
@@ -80,7 +80,7 @@ export default function FeaturesSection() {
                             + 'Darks teas are closer to green teas in that they are processed like green teas '
                             + 'initially. Then, they go through a bacterial fermentation process and are aged for '
                             + 'many years to come.'}
-                        image_url={imageURL + "&" + Math.random()}
+                        image_url={imageURL + '&' + Math.random()}
                         onClick={() => navigate('/products')}
                     />
                 </Box>
@@ -118,7 +118,7 @@ function Feature(props: FeatureProps) {
                     <img
                         src={props.image_url}
                         style={{width: '100%', minWidth: 1}}
-                        alt="Placeholder Image"
+                        alt='Placeholder Image'
                     />
                 </Grid>
                 <Grid
@@ -136,7 +136,7 @@ function Feature(props: FeatureProps) {
                         component={'h3'}
                         sx={theme => ({
                             [theme.breakpoints.down('md')]: {
-                                textAlign: "center"
+                                textAlign: 'center'
                             }
                         })}
                     >
@@ -149,7 +149,7 @@ function Feature(props: FeatureProps) {
                         sx={theme => ({
                             whiteSpace: 'pre-line',
                             [theme.breakpoints.down('md')]: {
-                                textAlign: "center"
+                                textAlign: 'center'
                             }
                         })}
                     >

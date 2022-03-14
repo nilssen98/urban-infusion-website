@@ -1,5 +1,5 @@
-import {Avatar, Box, Card, CardActionArea, CardContent, Grid, Typography} from "@mui/material";
-import Section from "../../../components/Wrappers/Section";
+import {Avatar, Box, Card, CardActionArea, CardContent, Grid, Typography} from '@mui/material';
+import Section from '../../../components/Wrappers/Section';
 
 
 interface TestimonialProps {
@@ -8,7 +8,7 @@ interface TestimonialProps {
     comment: string;
 }
 
-export default function TestimonialSection(){
+export default function TestimonialSection() {
 
     return (
         <>
@@ -28,21 +28,21 @@ export default function TestimonialSection(){
                 })}
                 >
 
-                    <Testimonial image_url={""} name={"John Cliff"} comment={"Tea is the necessary component for my busy days at the office. It helps me focus. Urban" +
-                        " Infusion have the best Sencha tea – my favorite."}/>
-                    <Testimonial image_url={""} name={"Purple Floyd"} comment={"I love the great selection Urban Infusion have! I try a new tea every day and I still have" +
-                        "many teas to try out! Recommend!"}/>
-                        <Testimonial image_url={""} name={"James Jagger"} comment={"Man, their teas are dope! P.S. You can also smoke them, just don't tell anyone I told you" +
-                        "that "}/>
+                    <Testimonial image_url={''} name={'John Cliff'} comment={'Tea is the necessary component for my busy days at the office. It helps me focus. Urban' +
+                        ' Infusion have the best Sencha tea – my favorite.'}/>
+                    <Testimonial image_url={''} name={'Purple Floyd'} comment={'I love the great selection Urban Infusion have! I try a new tea every day and I still have' +
+                        'many teas to try out! Recommend!'}/>
+                        <Testimonial image_url={''} name={'James Jagger'} comment={'Man, their teas are dope! P.S. You can also smoke them, just don\'t tell anyone I told you' +
+                        'that '}/>
 
                 </Box>
             </Section>
         </>
-    )
+    );
 }
 
 //
-function Testimonial(props: TestimonialProps){
+function Testimonial(props: TestimonialProps) {
     return (
         <>
 
@@ -51,7 +51,7 @@ function Testimonial(props: TestimonialProps){
                     maxWidth: '30%',
                     margin: 4,
                     [theme.breakpoints.down('md')]: {
-                        maxWidth:'80%',
+                        maxWidth: '80%',
                         mb: 20
                     }
                 })}
@@ -78,5 +78,5 @@ function Testimonial(props: TestimonialProps){
                 </CardContent>
             </Card>
         </>
-    )
+    );
 }

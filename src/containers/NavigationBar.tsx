@@ -9,17 +9,17 @@ import {
     Toolbar,
     Typography,
     useScrollTrigger
-} from "@mui/material";
-import Logo from "../components/Logo";
-import {ReactElement, ReactNode, useState} from "react";
-import {useNavigate} from "react-router-dom";
-import {ThemeSwitch} from "../components/ThemeSwitch";
-import {useSelector} from "react-redux";
-import {RootState, store} from "../state/store";
-import {userPreferencesSlice} from "../state/slices/userPreferences";
+} from '@mui/material';
+import Logo from '../components/Logo';
+import {ReactElement, ReactNode, useState} from 'react';
+import {useNavigate} from 'react-router-dom';
+import {ThemeSwitch} from '../components/ThemeSwitch';
+import {useSelector} from 'react-redux';
+import {RootState, store} from '../state/store';
+import {userPreferencesSlice} from '../state/slices/userPreferences';
 import MenuIcon from '@mui/icons-material/Menu';
-import {SxProps} from "@mui/system";
-import {Theme} from "@mui/material/styles";
+import {SxProps} from '@mui/system';
+import {Theme} from '@mui/material/styles';
 
 interface Props {
     children?: ReactElement;
@@ -44,7 +44,7 @@ export default function NavigationBar(props: Props) {
 
     const handleChangeTheme = () => {
         store.dispatch(userPreferencesSlice.actions.toggleTheme());
-    }
+    };
 
     return (
         <>
@@ -62,7 +62,7 @@ export default function NavigationBar(props: Props) {
                             <Box sx={{flex: 1, display: {sm: 'flex', xs: 'none'}}}>
                                 <Logo clickable onClick={() => navigate('/')}/>
                             </Box>
-                            <Box sx={{flex: 1, display: {sm: 'none', xs: 'flex'},}}>
+                            <Box sx={{flex: 1, display: {sm: 'none', xs: 'flex'}, }}>
                                 <IconButton
                                     onClick={handleOpenNavMenu}
                                 >
@@ -124,7 +124,7 @@ export default function NavigationBar(props: Props) {
                                     pages.map(page => (
                                         <MenuItem key={page} onClick={() => {
                                             navigate(page.toLowerCase());
-                                            handleCloseNavMenu()
+                                            handleCloseNavMenu();
                                         }}>
                                             <Typography>{page}</Typography>
                                         </MenuItem>
@@ -136,7 +136,7 @@ export default function NavigationBar(props: Props) {
                 </AppBar>
             </HideOnScroll>
         </>
-    )
+    );
 }
 
 interface NavigationLinkProps {
@@ -163,7 +163,7 @@ function NavigationLink(props: NavigationLinkProps) {
                 {props.children}
             </Typography>
         </>
-    )
+    );
 }
 
 function HideOnScroll(props: Props) {
@@ -172,7 +172,7 @@ function HideOnScroll(props: Props) {
     });
 
     return (
-        <Slide appear={false} direction="down" in={!trigger}>
+        <Slide appear={false} direction='down' in={!trigger}>
             {props.children || <></>}
         </Slide>
     );

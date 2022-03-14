@@ -1,7 +1,7 @@
-import {useParams} from "react-router-dom";
-import {Typography} from "@mui/material";
+import {useParams} from 'react-router-dom';
+import {Typography} from '@mui/material';
 
-type Props = {
+interface Props {
     id?: string;
 }
 
@@ -10,5 +10,5 @@ export function ProductsList(props: Props) {
         <>
             <Typography>{props.id}</Typography>
         </>
-    )
+    );
 }

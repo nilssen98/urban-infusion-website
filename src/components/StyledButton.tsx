@@ -1,7 +1,7 @@
-import {ButtonHTMLAttributes, ReactNode} from "react";
-import {Button, styled} from "@mui/material";
-import {ExtendButtonBase} from "@mui/material/ButtonBase";
-import {ButtonProps, ButtonTypeMap} from "@mui/material/Button/Button";
+import {ButtonHTMLAttributes, ReactNode} from 'react';
+import {Button, styled} from '@mui/material';
+import {ExtendButtonBase} from '@mui/material/ButtonBase';
+import {ButtonProps, ButtonTypeMap} from '@mui/material/Button/Button';
 
 const CustomButton = styled(Button)({
     color: 'white',
@@ -33,5 +33,5 @@ export default function StyledButton(props: Props) {
                 {props.children}
             </CustomButton>
         </>
-    )
+    );
 }

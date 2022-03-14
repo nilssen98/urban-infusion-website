@@ -1,19 +1,19 @@
-import {Box, Collapse, Divider, List, ListItemButton, ListItemIcon, ListItemText, ListSubheader} from "@mui/material";
-import {useState} from "react";
+import {Box, Collapse, Divider, List, ListItemButton, ListItemIcon, ListItemText, ListSubheader} from '@mui/material';
+import {useState} from 'react';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
-import {useNavigate} from "react-router-dom";
+import {useNavigate} from 'react-router-dom';
 
 const categories = {
-    'teas': [
+    teas: [
         'black tea',
         'green tea',
         'white tea'
     ],
-    'accessories': [
+    accessories: [
         'cups'
     ]
-}
+};
 
 export default function Categories() {
     return (
@@ -44,7 +44,7 @@ export default function Categories() {
                 <Divider orientation={'vertical'}/>
             </Box>
         </>
-    )
+    );
 }
 
 interface CategoryProps {
@@ -70,7 +70,7 @@ function Category(props: CategoryProps) {
                             <ListItemButton
                                 key={subcategory}
                                 sx={{paddingLeft: 8}}
-                                onClick={() => navigate('/products/' + subcategory.replace(" ", "-"))}
+                                onClick={() => navigate('/products/' + subcategory.replace(' ', '-'))}
                             >
                                 <ListItemText sx={{textTransform: 'capitalize'}}>{subcategory}</ListItemText>
                             </ListItemButton>
@@ -79,5 +79,5 @@ function Category(props: CategoryProps) {
                 </List>
             </Collapse>
         </Box>
-    )
+    );
 }

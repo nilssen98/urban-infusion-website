@@ -1,6 +1,6 @@
-import Section from "../../../components/Wrappers/Section";
-import {Box, Button, Grid, Skeleton, Typography} from "@mui/material";
-import {useNavigate} from "react-router-dom";
+import Section from '../../../components/Wrappers/Section';
+import {Box, Button, Grid, Skeleton, Typography} from '@mui/material';
+import {useNavigate} from 'react-router-dom';
 import {range} from 'lodash-es';
 
 export default function FeaturedProductsSection() {
@@ -44,7 +44,7 @@ export default function FeaturedProductsSection() {
                                     sx={{
                                         mb: 4,
                                     }}
-                                    variant={"rectangular"}
+                                    variant={'rectangular'}
                                     width={250}
                                     height={300}
                                 >
@@ -53,7 +53,7 @@ export default function FeaturedProductsSection() {
                         }
                     </Box>
                     <Button
-                        variant={"contained"}
+                        variant={'contained'}
                         size={'large'}
                         onClick={() => navigate('/products')}
                     >
