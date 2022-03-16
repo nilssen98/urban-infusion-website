@@ -1,4 +1,4 @@
-import {Box, Button, Chip, Grid, Typography, useTheme} from '@mui/material';
+import {Avatar, Box, Button, Chip, Grid, Typography, useTheme} from '@mui/material';
 import {useNavigate} from 'react-router-dom';
 import Section from '../../../components/Wrappers/Section';
 import {useState} from "react";
@@ -127,6 +127,7 @@ function Feature(props: FeatureProps) {
                             Object.keys(props.description).map((key, i) => (
                                 <Chip
                                     key={i}
+                                    avatar={<Avatar sx={{bgcolor: 'transparent'}}>{i + 1}</Avatar>}
                                     label={key}
                                     variant={'outlined'}
                                     onClick={() => setCurrentItem(key)}
@@ -134,7 +135,7 @@ function Feature(props: FeatureProps) {
                                         mr: 2,
                                         alignSelf: {md: 'start', xs: 'center'},
                                         textTransform: 'capitalize',
-                                        borderWidth: currentItem === key ? 2 : 1,
+                                        borderWidth: 1,
                                         borderColor: currentItem === key ? theme.palette.primary.main : null
                                     }}
                                 />
