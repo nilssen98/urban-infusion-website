@@ -1,6 +1,6 @@
 import {Button, Card, CardActionArea, CardActions, CardContent, CardMedia, Typography} from '@mui/material';
 
-interface ProductCardProps {
+interface Props {
     title?: string;
     price?: string;
     image_url?: string;
@@ -8,9 +8,9 @@ interface ProductCardProps {
 
 ProductCard.defaultProps = {
     title: '',
-}
+};
 
-export default function ProductCard(props: ProductCardProps) {
+export default function ProductCard(props: Props) {
 
     return (
         <>
