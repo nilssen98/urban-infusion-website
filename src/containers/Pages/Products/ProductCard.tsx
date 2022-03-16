@@ -2,7 +2,7 @@ import {Button, Card, CardActionArea, CardActions, CardContent, CardMedia, Typog
 
 interface Props {
     title?: string;
-    price?: string;
+    price?: number;
     image_url?: string;
 }
 
@@ -43,7 +43,7 @@ export default function ProductCard(props: Props) {
                             paddingBottom={1}
                         >
                             {
-                                props.price
+                                `$${props.price}`
                             }
                         </Typography>
                     </CardContent>

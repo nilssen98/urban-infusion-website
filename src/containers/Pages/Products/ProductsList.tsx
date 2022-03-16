@@ -13,14 +13,15 @@ export function ProductsList(props: Props) {
             <Typography>{props.id}</Typography>
             <ProductCard
                 title={'Title'}
-                price={'$9.99'}
+                price={9.99}
                 image_url={'https://i.imgur.com/ZG4W7Le.jpg'}
             />
             {
                 props.products.map(product =>
                     <ProductCard
+                        key={product.id}
                         title={product.title}
-                        price={`$${product.price}`}
+                        price={product.price}
                         image_url={'https://i.imgur.com/ZG4W7Le.jpg'}
                     />
                 )
