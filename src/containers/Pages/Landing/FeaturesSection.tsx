@@ -1,4 +1,4 @@
-import {Avatar, Box, Button, Chip, Grid, Typography, useTheme} from '@mui/material';
+import {Avatar, Box, Button, Chip, Fade, Grid, Typography, useTheme} from '@mui/material';
 import {useNavigate} from 'react-router-dom';
 import Section from '../../../components/Wrappers/Section';
 import {useState} from "react";
@@ -114,15 +114,16 @@ function Feature(props: FeatureProps) {
                         flexDirection: 'column',
                     }}
                 >
-                    <Typography
-                        pb={4}
-                        variant={'h4'}
-                        component={'h3'}
-                        sx={{textAlign: {xs: 'center', md: 'left'}}}
-                    >
-                        {props.header}
-                    </Typography>
+
                     <Box sx={{mb: 4, alignSelf: {md: 'start', xs: 'center'}}}>
+                        <Typography
+                            pb={4}
+                            variant={'h4'}
+                            component={'h3'}
+                            sx={{textAlign: {xs: 'center', md: 'left'}}}
+                        >
+                            {props.header}
+                        </Typography>
                         {
                             Object.keys(props.description).map((key, i) => (
                                 <Chip
@@ -142,14 +143,21 @@ function Feature(props: FeatureProps) {
                             ))
                         }
                     </Box>
-                    <Typography
-                        sx={{
-                            whiteSpace: 'pre-line',
-                            textAlign: {xs: 'center', md: 'left'}
-                        }}
-                    >
-                        {props.description[currentItem]}
-                    </Typography>
+                    {
+                        Object.entries(props.description).map(([key, value]) => (
+                            <Fade in={key === currentItem} timeout={500}>
+                                <Typography
+                                    sx={{
+                                        display: key === currentItem ? 'block' : 'none',
+                                        whiteSpace: 'pre-line',
+                                        textAlign: {xs: 'center', md: 'left'}
+                                    }}
+                                >
+                                    {value}
+                                </Typography>
+                            </Fade>
+                        ))
+                    }
                     <Box
                         sx={{
                             pt: 4,
