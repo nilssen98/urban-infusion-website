@@ -8,7 +8,7 @@ interface ProductCardProps {
 
 ProductCard.defaultProps = {
     title: '',
-}
+};
 
 export default function ProductCard(props: ProductCardProps) {
 
