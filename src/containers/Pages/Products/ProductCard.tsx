@@ -31,6 +31,9 @@ export default function ProductCard(props: Props) {
                             gutterBottom
                             variant='h5'
                             textAlign={'center'}
+                            sx={{
+                                userSelect: 'text',
+                            }}
                         >
                             {
                                 props.title
@@ -41,6 +44,9 @@ export default function ProductCard(props: Props) {
                             textAlign={'center'}
                             color='primary'
                             paddingBottom={1}
+                            sx={{
+                                userSelect: 'text',
+                            }}
                         >
                             {
                                 `$${props.price}`
