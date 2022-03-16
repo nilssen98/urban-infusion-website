@@ -6,6 +6,10 @@ interface ProductCardProps {
     image_url?: string;
 }
 
+ProductCard.defaultProps = {
+    title: '',
+}
+
 export default function ProductCard(props: ProductCardProps) {
 
     return (
