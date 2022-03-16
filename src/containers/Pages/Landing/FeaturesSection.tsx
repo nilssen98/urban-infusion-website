@@ -109,7 +109,8 @@ function Feature(props: FeatureProps) {
                     item
                     container
                     sx={{
-                        justifyContent: {xs: 'center', md: 'flex-start'},
+                        minHeight: 300,
+                        justifyContent: 'space-between',
                         flexDirection: 'column',
                     }}
                 >
