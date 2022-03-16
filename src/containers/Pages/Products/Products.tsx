@@ -2,9 +2,21 @@ import {Box} from '@mui/material';
 import {useEffect, useState} from 'react';
 import {getProducts} from '../../../api/urbaninfusion/public/products';
 import {ProductDto} from '../../../api/urbaninfusion/dto/product-dto';
-import Categories from './Categories';
 import {ProductsList} from './ProductsList';
 import {useParams} from 'react-router-dom';
+import SideNavigation from '../../../components/SideNavigation';
+
+const categories = {
+    teas: [
+        'black tea',
+        'green tea',
+        'white tea'
+    ],
+    accessories: [
+        'cups'
+    ],
+    'gift cards': []
+};
 
 export default function Products() {
     const [products, setProducts] = useState<ProductDto[]>([]);
@@ -23,7 +35,7 @@ export default function Products() {
                 display: 'flex',
                 width: '100%'
             }}>
-                <Categories/>
+                <SideNavigation items={categories} header={'Products'} path={'products'}/>
                 <ProductsList id={id}/>
             </Box>
         </>
