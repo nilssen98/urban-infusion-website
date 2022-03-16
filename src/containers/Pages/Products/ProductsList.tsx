@@ -1,8 +1,10 @@
 import {Typography} from '@mui/material';
 import ProductCard from './ProductCard';
+import {ProductDto} from "../../../api/urbaninfusion/dto/product-dto";
 
 interface Props {
     id?: string;
+    products: ProductDto[];
 }
 
 export function ProductsList(props: Props) {

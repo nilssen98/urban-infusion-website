@@ -40,7 +40,7 @@ export default function Products() {
                     header={'Products'}
                     path={'products'}
                 />
-                <ProductsList id={id}/>
+                <ProductsList products={products} id={id}/>
             </Box>
         </>
     );
