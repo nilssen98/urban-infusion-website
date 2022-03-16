@@ -109,7 +109,7 @@ function Feature(props: FeatureProps) {
                     item
                     container
                     sx={{
-                        minHeight: 300,
+                        minHeight: {md: 300, xs: 250},
                         justifyContent: 'space-between',
                         flexDirection: 'column',
                     }}
@@ -131,9 +131,10 @@ function Feature(props: FeatureProps) {
                                     variant={'outlined'}
                                     onClick={() => setCurrentItem(key)}
                                     sx={{
-                                        mr: 1,
+                                        mr: 2,
                                         alignSelf: {md: 'start', xs: 'center'},
                                         textTransform: 'capitalize',
+                                        borderWidth: currentItem === key ? 2 : 1,
                                         borderColor: currentItem === key ? theme.palette.primary.main : null
                                     }}
                                 />
