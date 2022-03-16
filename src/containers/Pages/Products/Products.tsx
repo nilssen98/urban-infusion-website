@@ -35,7 +35,11 @@ export default function Products() {
                 display: 'flex',
                 width: '100%'
             }}>
-                <SideNavigation items={categories} header={'Products'} path={'products'}/>
+                <SideNavigation
+                    items={categories}
+                    header={'Products'}
+                    path={'products'}
+                />
                 <ProductsList id={id}/>
             </Box>
         </>
