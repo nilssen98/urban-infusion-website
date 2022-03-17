@@ -1,8 +1,8 @@
-import {Box, Collapse, Divider, List, ListItemButton, ListItemText, ListSubheader} from "@mui/material";
-import {useState} from "react";
-import {useNavigate} from "react-router-dom";
-import ExpandLess from "@mui/icons-material/ExpandLess";
-import ExpandMore from "@mui/icons-material/ExpandMore";
+import {Box, Collapse, Divider, List, ListItemButton, ListItemText, ListSubheader} from '@mui/material';
+import {useState} from 'react';
+import {useNavigate} from 'react-router-dom';
+import ExpandLess from '@mui/icons-material/ExpandLess';
+import ExpandMore from '@mui/icons-material/ExpandMore';
 
 interface Props {
     items: Record<string, string[]>;
@@ -42,7 +42,7 @@ export default function SideNavigation(props: Props) {
                 <Divider orientation={'vertical'}/>
             </Box>
         </>
-    )
+    );
 }
 
 interface CategoryProps {

@@ -4,7 +4,6 @@ import {
     IconButton,
     Menu,
     MenuItem,
-    Skeleton,
     Slide,
     Toolbar,
     Typography,
@@ -20,6 +19,7 @@ import {userPreferencesSlice} from '../state/slices/userPreferences';
 import MenuIcon from '@mui/icons-material/Menu';
 import {SxProps} from '@mui/system';
 import {Theme} from '@mui/material/styles';
+import ShoppingCart from '../components/ShoppingCart/ShoppingCart';
 
 interface Props {
     children?: ReactElement;
@@ -28,7 +28,7 @@ interface Props {
 const pages = ['Products', 'About'];
 
 export default function NavigationBar(props: Props) {
-    const theme = useSelector((store: RootState) => store.userPreferences.theme);
+    const theme = store.getState().userPreferences.theme;
 
     const [anchorElNav, setAnchorElNav] = useState(null);
 
@@ -105,6 +105,7 @@ export default function NavigationBar(props: Props) {
                                     mode={theme}
                                     onClick={handleChangeTheme}
                                 />
+                                <ShoppingCart/>
                             </Box>
                             <Menu
                                 anchorEl={anchorElNav}
