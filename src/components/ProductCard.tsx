@@ -15,42 +15,34 @@ export default function ProductCard(props: Props) {
     return (
         <>
             <Card
-                sx={{
-                    width: 250,
-                    height: 400,
-                }}
+                sx={{width: 250, height: 400}}
             >
                 <CardActionArea>
                     <CardMedia
-                        component='img'
+                        component={'img'}
                         height={250}
                         image={props.image_url}
                     />
                     <CardContent>
                         <Typography
                             gutterBottom
-                            variant='h5'
+                            variant={'h5'}
                             textAlign={'center'}
                             sx={{
                                 userSelect: 'text',
                             }}
                         >
-                            {
-                                props.title
-                            }
+                            {props.title}
                         </Typography>
                         <Typography
                             variant={'body1'}
                             textAlign={'center'}
-                            color='primary'
                             paddingBottom={1}
                             sx={{
                                 userSelect: 'text',
                             }}
                         >
-                            {
-                                `$${props.price}`
-                            }
+                            ${props.price}
                         </Typography>
                     </CardContent>
                 </CardActionArea>
@@ -62,8 +54,8 @@ export default function ProductCard(props: Props) {
                     }}
                 >
                     <Button
-                        variant='outlined'
-                        size='small'
+                        variant={'contained'}
+                        size={'small'}
                     >
                         Add to cart
                     </Button>

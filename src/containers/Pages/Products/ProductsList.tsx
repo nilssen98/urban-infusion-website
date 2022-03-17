@@ -10,7 +10,6 @@ interface Props {
 export function ProductsList(props: Props) {
     return (
         <>
-            <Typography>{props.id}</Typography>
             <ProductCard
                 title={'Title'}
                 price={9.99}
