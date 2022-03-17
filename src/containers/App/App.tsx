@@ -9,6 +9,7 @@ import NotFound from '../Pages/NotFound/NotFound';
 import {persistor, RootState, store} from '../../state/store';
 import {Provider, useSelector} from 'react-redux';
 import {PersistGate} from 'redux-persist/integration/react';
+import Account from "../Pages/Account/Account";
 
 export default function App() {
     const theme = useSelector((s: RootState) => s.userPreferences.theme);
@@ -26,6 +27,7 @@ export default function App() {
                             <Route path={'/products'} element={<Products/>}/>
                             <Route path={'/products/:id'} element={<Products/>}/>
                             <Route path={'*'} element={<NotFound/>}/>
+                            <Route path={'/account'} element={<Account/>}/>
                         </Routes>
                         <Divider/>
                         <Footer/>
