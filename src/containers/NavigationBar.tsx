@@ -1,5 +1,5 @@
 import {
-    AppBar,
+    AppBar, Avatar,
     Box,
     IconButton,
     Menu,
@@ -106,6 +106,13 @@ export default function NavigationBar(props: Props) {
                                     onClick={handleChangeTheme}
                                 />
                                 <ShoppingCart/>
+                                <IconButton
+                                    onClick={() => navigate('/account/')}
+                                    size={'small'}
+                                    sx={{ ml: 2 }}
+                                >
+                                    <Avatar sx={{ width: 32, height: 32 }}>A</Avatar>
+                                </IconButton>
                             </Box>
                             <Menu
                                 anchorEl={anchorElNav}
