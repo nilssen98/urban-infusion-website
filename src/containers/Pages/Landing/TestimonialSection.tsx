@@ -78,6 +78,7 @@ function Testimonial(props: TestimonialProps) {
                     }}>
                     <Avatar
                         src={props.image_url}
+                        alt={'Picture of reviewer'}
                         sx={{
                             width: 72,
                             height: 72
