@@ -1,5 +1,5 @@
 import Section from '../../../components/Wrappers/Section';
-import {Box, Button, Container, Grid, Skeleton, Typography} from '@mui/material';
+import {Box, Button, Grid, Skeleton, Typography} from '@mui/material';
 import {useNavigate} from 'react-router-dom';
 import {range} from 'lodash-es';
 
@@ -9,7 +9,7 @@ export default function FeaturedProductsSection() {
     return (
         <>
             <Section>
-                <Container
+                <Box
                     sx={{
                         display: 'flex',
                         flexDirection: 'column',
@@ -59,7 +59,7 @@ export default function FeaturedProductsSection() {
                     >
                         Shop all
                     </Button>
-                </Container>
+                </Box>
             </Section>
         </>
     );
