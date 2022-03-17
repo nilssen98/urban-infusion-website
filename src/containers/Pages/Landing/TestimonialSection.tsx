@@ -28,11 +28,11 @@ export default function TestimonialSection() {
                 })}
                 >
 
-                    <Testimonial image_url={''} name={'John Cliff'} comment={'Tea is the necessary component for my busy days at the office. It helps me focus. Urban' +
+                    <Testimonial image_url={'https://mui.com/static/images/avatar/2.jpg'} name={'John Cliff'} comment={'Tea is the necessary component for my busy days at the office. It helps me focus. Urban' +
                         ' Infusion have the best Sencha tea – my favorite.'}/>
-                    <Testimonial image_url={''} name={'Purple Floyd'} comment={'I love the great selection Urban Infusion have! I try a new tea every day and I still have' +
+                    <Testimonial image_url={'https://mui.com/static/images/avatar/1.jpg'} name={'Purple Floyd'} comment={'I love the great selection Urban Infusion have! I try a new tea every day and I still have' +
                         'many teas to try out! Recommend!'}/>
-                        <Testimonial image_url={''} name={'James Jagger'} comment={'Man, their teas are dope! P.S. You can also smoke them, just don\'t tell anyone I told you' +
+                        <Testimonial image_url={'https://mui.com/static/images/avatar/5.jpg'} name={'James Jagger'} comment={'Man, their teas are dope! P.S. You can also smoke them, just don\'t tell anyone I told you' +
                         'that '}/>
 
                 </Box>
@@ -63,7 +63,9 @@ function Testimonial(props: TestimonialProps) {
                         alignItems={'center'}
                         justifyContent={'center'}
                         >
-                        <Avatar></Avatar>
+                        <Avatar
+                            src={props.image_url}
+                        />
                     </Grid>
                     <Typography
                         variant={'h5'}
