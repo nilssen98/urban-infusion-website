@@ -1,4 +1,4 @@
-import {Avatar, Box, Card, CardContent, Container, Grid, Typography} from '@mui/material';
+import {Avatar, Box, Card, CardContent, Container, Typography} from '@mui/material';
 import Section from '../../../components/Wrappers/Section';
 
 
@@ -15,17 +15,18 @@ export default function TestimonialSection() {
                 <Container>
                     <Typography
                         variant={'h4'}
-                        component={'h2'}
+                        component={'h4'}
                         sx={{
                             textAlign: 'center',
-                            marginBottom: 12
+                            my: 12
                         }}
                     >
-                        Featured products
+                        What our customers think about us
                     </Typography>
                 </Container>
                 <Box
                     sx={theme => ({
+                        width: '100%',
                         display: 'flex',
                         justifyContent: 'center',
                         flexDirection: 'row',
@@ -59,11 +60,12 @@ function Testimonial(props: TestimonialProps) {
 
             <Card
                 sx={theme => ({
-                    width: '30%',
-                    margin: 4,
+                    margin: 8,
+                    alignItems: 'center',
+                    width: 250,
                     [theme.breakpoints.down('md')]: {
-                        width: '50%',
-                        marginBottom: 32
+                        width: 300,
+                        marginBottom: 24
                     }
                 })}
             >
@@ -73,11 +75,7 @@ function Testimonial(props: TestimonialProps) {
                         alignItems: 'center',
                         justifyContent: 'center',
                         flexDirection: 'column',
-
-
                     }}>
-
-
                     <Avatar
                         src={props.image_url}
                         sx={{
@@ -89,7 +87,8 @@ function Testimonial(props: TestimonialProps) {
                         variant={'h5'}
                         component={'h5'}
                         textAlign={'center'}
-                        py={2}
+                        pt={2}
+                        pb={4}
                     >
                         {props.name}
                     </Typography>
