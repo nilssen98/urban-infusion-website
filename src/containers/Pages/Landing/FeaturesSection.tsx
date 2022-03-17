@@ -130,14 +130,12 @@ function Feature(props: FeatureProps) {
                                     key={i}
                                     avatar={<Avatar sx={{bgcolor: 'transparent'}}>{i + 1}</Avatar>}
                                     label={key}
-                                    variant={'outlined'}
+                                    variant={currentItem === key ? 'filled' : 'outlined'}
                                     onClick={() => setCurrentItem(key)}
                                     sx={{
                                         mr: 2,
                                         alignSelf: {md: 'start', xs: 'center'},
                                         textTransform: 'capitalize',
-                                        borderWidth: 1,
-                                        borderColor: currentItem === key ? theme.palette.primary.main : null
                                     }}
                                 />
                             ))
