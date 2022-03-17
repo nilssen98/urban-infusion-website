@@ -145,7 +145,7 @@ function Feature(props: FeatureProps) {
                     </Box>
                     {
                         Object.entries(props.description).map(([key, value]) => (
-                            <Fade in={key === currentItem} timeout={500}>
+                            <Fade key={key} in={key === currentItem} timeout={500}>
                                 <Typography
                                     sx={{
                                         display: key === currentItem ? 'block' : 'none',
