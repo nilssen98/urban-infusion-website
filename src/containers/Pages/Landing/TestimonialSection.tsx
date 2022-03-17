@@ -1,4 +1,4 @@
-import {Avatar, Box, Card, CardActionArea, CardContent, Grid, Typography} from '@mui/material';
+import {Avatar, Box, Card, CardContent, Grid, Typography} from '@mui/material';
 import Section from '../../../components/Wrappers/Section';
 
 
@@ -9,31 +9,27 @@ interface TestimonialProps {
 }
 
 export default function TestimonialSection() {
-
     return (
         <>
             <Section>
                 <Box
                 sx={theme => ({
                     display: 'flex',
-                    md: '4',
-                    xs: '12',
                     justifyContent: 'center',
                     flexDirection: 'row',
                     [theme.breakpoints.down('md')]: {
                         flexDirection: 'column',
-                        alignItems: 'center',
-                        pb: 20
+                        alignItems: 'center'
                     }
                 })}
                 >
 
-                    <Testimonial image_url={'https://mui.com/static/images/avatar/2.jpg'} name={'John Cliff'} comment={'Tea is the necessary component for my busy days at the office. It helps me focus. Urban' +
+                    <Testimonial image_url={'https://i.imgur.com/uMzbKya.jpg'} name={'John Cliff'} comment={'Tea is the necessary component for my busy days at the office. It helps me focus. Urban' +
                         ' Infusion have the best Sencha tea – my favorite.'}/>
-                    <Testimonial image_url={'https://mui.com/static/images/avatar/1.jpg'} name={'Purple Floyd'} comment={'I love the great selection Urban Infusion have! I try a new tea every day and I still have' +
+                    <Testimonial image_url={'https://i.imgur.com/Y4nQhCY.jpg'} name={'Purple Floyd'} comment={'I love the great selection Urban Infusion have! I try a new tea every day and I still have' +
                         'many teas to try out! Recommend!'}/>
-                        <Testimonial image_url={'https://mui.com/static/images/avatar/5.jpg'} name={'James Jagger'} comment={'Man, their teas are dope! P.S. You can also smoke them, just don\'t tell anyone I told you' +
-                        'that '}/>
+                        <Testimonial image_url={'https://i.imgur.com/nHPps1g.jpg'} name={'James Jagger'} comment={'Man, their teas are dope! P.S. You can also smoke them, just don\'t tell anyone I told you' +
+                        ' that '}/>
 
                 </Box>
             </Section>
@@ -48,34 +44,45 @@ function Testimonial(props: TestimonialProps) {
 
             <Card
                 sx={theme => ({
-                    maxWidth: '30%',
+                    width: '30%',
                     margin: 4,
                     [theme.breakpoints.down('md')]: {
-                        maxWidth: '80%',
-                        mb: 20
+                        width: '50%',
+                        margin: 16
                     }
                 })}
            >
-                <CardContent>
-                    <Grid
-                        container
-                        direction={'column'}
-                        alignItems={'center'}
-                        justifyContent={'center'}
-                        >
+                <CardContent
+                    sx={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        flexDirection: 'column',
+
+
+                    }}>
+
+
                         <Avatar
                             src={props.image_url}
+                            sx={{
+                                width: 72,
+                                height: 72
+                            }}
                         />
-                    </Grid>
                     <Typography
                         variant={'h5'}
                         component={'h5'}
                         textAlign={'center'}
+                        py={2}
                     >
                         {props.name}
                     </Typography>
-                    <Typography textAlign={'center'}>
-                        {props.comment}
+                    <Typography textAlign={'center'}
+                    sx={{
+                        fontStyle: 'italic',
+                    }}>
+                        <q>{props.comment}</q>
                     </Typography>
                 </CardContent>
             </Card>
