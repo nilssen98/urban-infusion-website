@@ -3,13 +3,29 @@ import {Box, Divider, Grid, Typography} from "@mui/material";
 import PersonalInformation from ".//PersonalInformation";
 import OrderHistory from ".//OrderHistory";
 import SideNavigation from '../../../components/SideNavigation';
+import {ReactNode, useState} from 'react';
+import {useParams} from "react-router-dom";
 
 const navigation = {
     profile: [],
     orders: []
 };
 
+
+function displayPage(id: string): ReactNode {
+    switch (id) {
+        case 'orders': {
+            return (<OrderHistory/>);
+        }
+        default: {
+            return (<PersonalInformation/>);
+        }
+    }
+}
+
 export default function Account() {
+    const {id} = useParams();
+
     return (
         <>
             <Box sx={{
@@ -21,10 +37,7 @@ export default function Account() {
                     header={'Account'}
                     path={'account'}
                 />
-                <PersonalInformation/>
-                <Divider/>
-                <OrderHistory/>
-                <Divider/>
+                {displayPage(id || '')}
             </Box>
         </>
     );

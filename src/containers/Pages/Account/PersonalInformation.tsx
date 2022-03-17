@@ -1,4 +1,4 @@
-import {Box, Divider} from "@mui/material";
+import {Box, Divider, Typography} from "@mui/material";
 import OrderHistory from "./OrderHistory";
 
 
@@ -6,8 +6,7 @@ export default function PersonalInformation() {
     return (
         <>
             <Box>
-                <OrderHistory/>
-                <Divider/>
+                <Typography>Personal</Typography>
             </Box>
         </>
     );
