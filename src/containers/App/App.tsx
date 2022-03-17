@@ -26,8 +26,8 @@ export default function App() {
                             <Route path={'/'} element={<Landing/>}/>
                             <Route path={'/products'} element={<Products/>}/>
                             <Route path={'/products/:id'} element={<Products/>}/>
-                            <Route path={'*'} element={<NotFound/>}/>
                             <Route path={'/account'} element={<Account/>}/>
+                            <Route path={'*'} element={<NotFound/>}/>
                         </Routes>
                         <Divider/>
                         <Footer/>
