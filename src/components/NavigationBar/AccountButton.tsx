@@ -13,9 +13,8 @@ export default function AccountButton() {
                         width: theme.mixins.toolbar.minHeight,
                         height: theme.mixins.toolbar.minHeight,
                     }}
-                    size={'small'}
                 >
-                    <Avatar>A</Avatar>
+                    <Avatar sx={{width: 32, height: 32}}>A</Avatar>
                 </IconButton>
             </Tooltip>
         </>
