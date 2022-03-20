@@ -1,7 +1,7 @@
-import {Avatar, Box, Button, Chip, Fade, Grid, Typography, useTheme} from '@mui/material';
+import {Avatar, Box, Button, Chip, Fade, Grid, Typography} from '@mui/material';
 import {useNavigate} from 'react-router-dom';
 import Section from '../../../components/Wrappers/Section';
-import {useState} from "react";
+import {useState} from 'react';
 
 export default function FeaturesSection() {
     const imageURL: string = 'https://picsum.photos/570/350?grayscale';
@@ -77,13 +77,11 @@ interface FeatureProps {
     header?: string;
     image_url?: string;
     onClick?: () => void;
-    description: Record<string, string>
+    description: Record<string, string>;
 }
 
 function Feature(props: FeatureProps) {
     const [currentItem, setCurrentItem] = useState<string>(Object.keys(props.description)[0]);
-
-    const theme = useTheme();
 
     return (
         <>
