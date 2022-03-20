@@ -1,6 +1,5 @@
 import {
     AppBar,
-    Avatar,
     Box,
     IconButton,
     Menu,
@@ -19,8 +18,8 @@ import {userPreferencesSlice} from '../state/slices/userPreferences';
 import MenuIcon from '@mui/icons-material/Menu';
 import {SxProps} from '@mui/system';
 import {Theme} from '@mui/material/styles';
-import CartButton from "../components/NavigationBar/CartButton";
-import AccountButton from "../components/NavigationBar/AccountButton";
+import CartButton from '../components/NavigationBar/CartButton';
+import AccountButton from '../components/NavigationBar/AccountButton';
 
 interface Props {
     children?: ReactElement;

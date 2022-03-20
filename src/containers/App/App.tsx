@@ -1,4 +1,4 @@
-import {CssBaseline, Divider, ThemeProvider, Toolbar} from '@mui/material';
+import {CssBaseline, Divider, ThemeProvider} from '@mui/material';
 import {getTheme} from '../../theme/theme';
 import Landing from '../Pages/Landing/Landing';
 import NavigationBar from '../NavigationBar';
@@ -9,8 +9,9 @@ import NotFound from '../Pages/NotFound/NotFound';
 import {persistor, RootState, store} from '../../state/store';
 import {Provider, useSelector} from 'react-redux';
 import {PersistGate} from 'redux-persist/integration/react';
-import Account from "../Pages/Account/Account";
-import Cart from "../Pages/Cart/Cart";
+import Account from '../Pages/Account/Account';
+import Cart from '../Pages/Cart/Cart';
+import About from '../Pages/About/About';
 
 export default function App() {
     const theme = useSelector((s: RootState) => s.userPreferences.theme);
@@ -29,6 +30,7 @@ export default function App() {
                             <Route path={'/account'} element={<Account/>}/>
                             <Route path={'/account/:id'} element={<Account/>}/>
                             <Route path={'/cart'} element={<Cart/>}/>
+                            <Route path={'/about'} element={<About/>}/>
                             <Route path={'*'} element={<NotFound/>}/>
                         </Routes>
                         <Divider/>
