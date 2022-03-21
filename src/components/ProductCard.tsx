@@ -22,6 +22,7 @@ export default function ProductCard(props: Props) {
                         component={'img'}
                         height={200}
                         image={props.image_url}
+                        draggable={false}
                         sx={{
                             objectFit: 'contain',
                         }}
