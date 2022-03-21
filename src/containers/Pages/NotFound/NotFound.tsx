@@ -1,4 +1,5 @@
-import {Box, Typography} from '@mui/material';
+import {Box, Link, Typography} from '@mui/material';
+import {Link as ReactLink} from 'react-router-dom';
 import Section from '../../../components/Wrappers/Section';
 
 export default function NotFound() {
@@ -30,7 +31,7 @@ export default function NotFound() {
                         The page you are looking for does not exist
                     </Typography>
                     <Typography variant={'body1'} component={'h4'}>
-                        Please return to the home page
+                        Please return to the <Link component={ReactLink} to={'/'} underline={'always'}>home page</Link>
                     </Typography>
                 </Box>
             </Section>
