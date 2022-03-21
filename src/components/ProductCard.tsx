@@ -15,18 +15,25 @@ export default function ProductCard(props: Props) {
     return (
         <>
             <Card
-                sx={{width: 250, height: 400}}
+                sx={{width: 200, height: 320}}
             >
                 <CardActionArea>
                     <CardMedia
                         component={'img'}
-                        height={250}
+                        height={200}
                         image={props.image_url}
+                        sx={{
+                            objectFit: 'contain',
+                        }}
                     />
-                    <CardContent>
+                    <CardContent
+                        sx={{
+                            padding: 0,
+                        }}
+                    >
                         <Typography
-                            gutterBottom
                             variant={'h5'}
+                            paddingBottom={1.5}
                             textAlign={'center'}
                             sx={{
                                 userSelect: 'text',
@@ -35,9 +42,8 @@ export default function ProductCard(props: Props) {
                             {props.title}
                         </Typography>
                         <Typography
-                            variant={'body1'}
+                            variant={'h6'}
                             textAlign={'center'}
-                            paddingBottom={1}
                             sx={{
                                 userSelect: 'text',
                             }}
