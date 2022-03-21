@@ -1,4 +1,3 @@
-import {Typography} from '@mui/material';
 import ProductCard from '../../../components/ProductCard';
 import {ProductDto} from '../../../api/urbaninfusion/dto/product-dto';
 

@@ -1,7 +1,8 @@
 import Section from '../../../components/Wrappers/Section';
-import {Box, Button, Grid, Skeleton, Typography} from '@mui/material';
+import {Box, Button, Typography} from '@mui/material';
 import {useNavigate} from 'react-router-dom';
 import {range} from 'lodash-es';
+import ProductCard from '../../../components/ProductCard';
 
 export default function FeaturedProductsSection() {
     const navigate = useNavigate();
@@ -15,7 +16,7 @@ export default function FeaturedProductsSection() {
                         flexDirection: 'column',
                         justifyContent: 'center',
                         alignItems: 'center',
-                        width: '100%'
+                        width: '100%',
                     }}
                 >
                     <Typography
@@ -23,7 +24,7 @@ export default function FeaturedProductsSection() {
                         component={'h4'}
                         sx={{
                             textAlign: 'center',
-                            marginBottom: 12
+                            marginBottom: 12,
                         }}
                     >
                         Featured products
@@ -39,16 +40,12 @@ export default function FeaturedProductsSection() {
                     >
                         {
                             range(4).map((i) => (
-                                <Skeleton
+                                <ProductCard
                                     key={i}
-                                    sx={{
-                                        mb: 4,
-                                    }}
-                                    variant={'rectangular'}
-                                    width={250}
-                                    height={300}
-                                >
-                                </Skeleton>
+                                    title={'Title'}
+                                    price={9.99}
+                                    image_url={'https://i.imgur.com/ZG4W7Le.jpg'}
+                                />
                             ))
                         }
                     </Box>
