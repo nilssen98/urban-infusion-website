@@ -5,7 +5,7 @@ import {Theme} from '@mui/material/styles';
 
 interface Props {
     children?: ReactNode;
-    height?: number;
+    height?: any;
     bgColor?: string;
     backgroundUrl?: string;
     sx?: SxProps<Theme>;

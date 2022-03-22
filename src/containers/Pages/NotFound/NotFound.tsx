@@ -1,14 +1,15 @@
-import {Box, Link, Typography} from '@mui/material';
+import {Box, Link, Typography, useTheme} from '@mui/material';
 import {Link as ReactLink} from 'react-router-dom';
 import Section from '../../../components/Wrappers/Section';
 
 export default function NotFound() {
+    const theme = useTheme();
     return (
         <>
             <Section
-                height={600}
+                height={`calc(100vh - ${theme.mixins.toolbar.minHeight}px)`}
                 sx={{
-                    margin: 0
+                    margin: 0,
                 }}
             >
                 <Box
