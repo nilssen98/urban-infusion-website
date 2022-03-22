@@ -1,5 +1,4 @@
-import {Box, Divider, Typography} from "@mui/material";
-import OrderHistory from "./OrderHistory";
+import {Box, Typography} from "@mui/material";
 
 
 export default function PersonalInformation() {
