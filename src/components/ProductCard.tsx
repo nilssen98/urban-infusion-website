@@ -1,4 +1,5 @@
-import {Button, Card, CardActionArea, CardActions, CardContent, CardMedia, Typography} from '@mui/material';
+import {Button, Card, CardActionArea, CardActions, CardContent, Skeleton, Typography} from '@mui/material';
+import {useState} from 'react';
 
 interface Props {
     title?: string;
@@ -11,6 +12,7 @@ ProductCard.defaultProps = {
 };
 
 export default function ProductCard(props: Props) {
+    const [loaded, setLoaded] = useState<boolean>(false);
 
     return (
         <>
@@ -18,15 +20,32 @@ export default function ProductCard(props: Props) {
                 sx={{width: 200, height: 320}}
             >
                 <CardActionArea>
-                    <CardMedia
-                        component={'img'}
-                        height={200}
-                        image={props.image_url}
-                        draggable={false}
-                        sx={{
-                            objectFit: 'contain',
-                        }}
-                    />
+                    {
+                        loaded ? (
+                            <img
+                                height={200}
+                                src={props.image_url}
+                                draggable={false}
+                                alt={'Product image'}
+                                onLoad={() => setLoaded(true)}
+                                style={{
+                                    objectFit: 'contain'
+                                }}
+                            />
+                        ) : (
+                            <>
+                                <Skeleton variant='rectangular' animation={'wave'} height={200}/>
+                                <img
+                                    src={props.image_url}
+                                    alt={'Product image'}
+                                    onLoad={() => setLoaded(true)}
+                                    style={{
+                                        display: 'none',
+                                    }}
+                                />
+                            </>
+                        )
+                    }
                     <CardContent
                         sx={{
                             padding: 0,
