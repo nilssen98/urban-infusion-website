@@ -1,5 +1,5 @@
 import Section from '../../../components/Wrappers/Section';
-import {Box, Button, Typography} from '@mui/material';
+import {Box, Button, Grid, Typography} from '@mui/material';
 import {useNavigate} from 'react-router-dom';
 import {range} from 'lodash-es';
 import ProductCard from '../../../components/ProductCard';
@@ -29,26 +29,37 @@ export default function FeaturedProductsSection() {
                     >
                         Featured products
                     </Typography>
-                    <Box
+                    <Grid
+                        container
                         sx={{
-                            display: 'flex',
-                            width: '100%',
-                            flexWrap: 'wrap',
                             justifyContent: 'space-around',
+                            width: '100%',
                             marginBottom: 16,
+                            rowGap: 12,
                         }}
                     >
                         {
                             range(4).map((i) => (
-                                <ProductCard
+                                <Grid
+                                    container
                                     key={i}
-                                    title={'Title'}
-                                    price={9.99}
-                                    image_url={'https://i.imgur.com/ZG4W7Le.jpg'}
-                                />
+                                    item
+                                    xs={12} sm={6} lg={3}
+                                    sx={{
+                                        justifyContent: 'center',
+                                        alignItems: 'center',
+                                    }}
+                                >
+                                    <ProductCard
+                                        key={i}
+                                        title={'Title'}
+                                        price={9.99}
+                                        image_url={'https://i.imgur.com/ZG4W7Le.jpg'}
+                                    />
+                                </Grid>
                             ))
                         }
-                    </Box>
+                    </Grid>
                     <Button
                         variant={'contained'}
                         size={'large'}
