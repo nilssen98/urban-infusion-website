@@ -11,6 +11,9 @@ export default function HeroSection() {
         <>
             <Section
                 backgroundUrl={BackgroundImage}
+                // backgroundUrlMobile={'https://i.imgur.com/cGWuYIr.jpg'} // mobile 1
+                // backgroundUrlMobile={'https://i.imgur.com/tUtZZfJ.jpg'} // mobile 2
+                backgroundUrlMobile={'https://i.imgur.com/fBLkybq.jpg'} // mobile 3
             >
                 <Box
                     sx={{

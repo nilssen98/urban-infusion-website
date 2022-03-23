@@ -8,6 +8,7 @@ interface Props {
     height?: any;
     bgColor?: string;
     backgroundUrl?: string;
+    backgroundUrlMobile?: string;
     sx?: SxProps<Theme>;
 }
 
@@ -20,7 +21,10 @@ export default function Section(props: Props) {
                     height: props.height || undefined,
                     backgroundColor: props.bgColor || undefined,
                     justifyContent: 'center',
-                    backgroundImage: `url(${props.backgroundUrl || undefined})`,
+                    backgroundImage: {
+                        xs: `url(${props.backgroundUrlMobile || undefined})`,
+                        md: `url(${props.backgroundUrl || undefined})`,
+                    },
                     backgroundRepeat: 'no-repeat',
                     backgroundSize: 'cover',
                 }}
