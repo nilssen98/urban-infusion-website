@@ -1,3 +1,3 @@
 export function getPath() {
-    return `http://localhost:8080`;
+    return `http://10.212.26.22:8080`;
 }
