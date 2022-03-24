@@ -1,8 +1,8 @@
-import Section from '../../../components/Wrappers/Section';
+import Section from '../../Wrappers/Section';
 import {Box, Button, Grid, Typography} from '@mui/material';
 import {useNavigate} from 'react-router-dom';
 import {range} from 'lodash-es';
-import ProductCard from '../../../components/ProductCard';
+import ProductCard from '../../ProductCard';
 
 export default function FeaturedProductsSection() {
     const navigate = useNavigate();

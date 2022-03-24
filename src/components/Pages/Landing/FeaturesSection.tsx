@@ -1,6 +1,6 @@
 import {Avatar, Box, Button, Chip, Fade, Grid, Typography} from '@mui/material';
 import {useNavigate} from 'react-router-dom';
-import Section from '../../../components/Wrappers/Section';
+import Section from '../../Wrappers/Section';
 import {useState} from 'react';
 
 export default function FeaturesSection() {

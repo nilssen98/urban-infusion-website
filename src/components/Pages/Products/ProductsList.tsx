@@ -1,4 +1,4 @@
-import ProductCard from '../../../components/ProductCard';
+import ProductCard from '../../ProductCard';
 import {ProductDto} from '../../../api/urbaninfusion/dto/product-dto';
 
 interface Props {

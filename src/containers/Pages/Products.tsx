@@ -1,10 +1,10 @@
 import {Box} from '@mui/material';
 import {useEffect, useState} from 'react';
-import {getProducts} from '../../../api/urbaninfusion/public/products';
-import {ProductDto} from '../../../api/urbaninfusion/dto/product-dto';
-import {ProductsList} from './ProductsList';
+import {getProducts} from '../../api/urbaninfusion/public/products';
+import {ProductDto} from '../../api/urbaninfusion/dto/product-dto';
+import {ProductsList} from '../../components/Pages/Products/ProductsList';
 import {useParams} from 'react-router-dom';
-import SideNavigation from '../../../components/SideNavigation';
+import SideNavigation from '../../components/SideNavigation';
 
 const categories = {
     teas: [

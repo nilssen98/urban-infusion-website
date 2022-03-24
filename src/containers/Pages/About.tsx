@@ -1,5 +1,5 @@
 import {Box, Typography} from '@mui/material';
-import Section from '../../../components/Wrappers/Section';
+import Section from '../../components/Wrappers/Section';
 
 
 export default function About() {

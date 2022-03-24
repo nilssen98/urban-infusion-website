@@ -1,6 +1,6 @@
 import {Box, Link, Typography, useTheme} from '@mui/material';
 import {Link as ReactLink} from 'react-router-dom';
-import Section from '../../../components/Wrappers/Section';
+import Section from '../../components/Wrappers/Section';
 
 export default function NotFound() {
     const theme = useTheme();

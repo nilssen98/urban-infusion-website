@@ -7,7 +7,7 @@ import {
     Slide,
     Toolbar,
     Typography,
-    useScrollTrigger
+    useScrollTrigger, useTheme
 } from '@mui/material';
 import Logo from '../components/Logo';
 import {ReactElement, ReactNode, useState} from 'react';
@@ -28,7 +28,8 @@ interface Props {
 const pages = ['Products', 'About'];
 
 export default function NavigationBar(props: Props) {
-    const theme = store.getState().userPreferences.theme;
+    const themeColor = store.getState().userPreferences.theme;
+    const theme = useTheme();
 
     const [anchorElNav, setAnchorElNav] = useState(null);
 
@@ -50,12 +51,12 @@ export default function NavigationBar(props: Props) {
         <>
             <HideOnScroll {...props}>
                 <AppBar color={'inherit'} position={'sticky'}>
-                    <Toolbar sx={{px: {md: 16, sx: 8}}}>
+                    <Toolbar sx={{justifyContent: 'center'}}>
                         <Box
                             sx={{
+                                width: theme.breakpoints.values.lg,
                                 display: 'flex',
                                 flexWrap: 'nowrap',
-                                width: '100%',
                                 alignItems: 'center'
                             }}
                         >
@@ -100,7 +101,7 @@ export default function NavigationBar(props: Props) {
                                 }}
                             >
                                 <ThemeSwitch
-                                    mode={theme}
+                                    mode={themeColor}
                                     onClick={handleChangeTheme}
                                 />
                                 <CartButton itemsCount={5}/>

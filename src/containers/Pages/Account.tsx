@@ -1,10 +1,10 @@
-import Section from "../../../components/Wrappers/Section";
-import {Box, Divider, Grid, Typography} from "@mui/material";
-import PersonalInformation from ".//PersonalInformation";
-import OrderHistory from ".//OrderHistory";
-import SideNavigation from '../../../components/SideNavigation';
+import Section from '../../components/Wrappers/Section';
+import {Box, Divider, Grid, Typography} from '@mui/material';
+import SideNavigation from '../../components/SideNavigation';
 import {ReactNode, useState} from 'react';
-import {useParams} from "react-router-dom";
+import {useParams} from 'react-router-dom';
+import PersonalInformation from '../../components/Pages/Account/PersonalInformation';
+import OrderHistory from '../../components/Pages/Account/OrderHistory';
 
 const navigation = {
     profile: [],

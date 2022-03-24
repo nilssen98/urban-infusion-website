@@ -1,4 +1,4 @@
-import Section from "../../../components/Wrappers/Section";
+import Section from '../../components/Wrappers/Section';
 
 export default function Cart() {
     return (
@@ -7,5 +7,5 @@ export default function Cart() {
                 Shopping cart
             </Section>
         </>
-    )
+    );
 }
