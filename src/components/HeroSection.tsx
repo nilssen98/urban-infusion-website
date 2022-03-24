@@ -2,6 +2,7 @@ import {Box, Typography} from '@mui/material';
 import {useNavigate} from 'react-router-dom';
 import Section from './Wrappers/Section';
 import StyledButton from './StyledButton';
+import BackgroundImage from '../assets/images/hero-section.jpg';
 
 interface Props {
     title?: string;
@@ -9,6 +10,13 @@ interface Props {
     backgroundUrl?: string;
     backgroundUrlMobile?: string;
 }
+
+HeroSection.defaultProps = {
+    backgroundUrl: BackgroundImage,
+    // backgroundUrlMobile: 'https://i.imgur.com/cGWuYIr.jpg' // mobile 1
+    // backgroundUrlMobile: 'https://i.imgur.com/tUtZZfJ.jpg' // mobile 2
+    backgroundUrlMobile: 'https://i.imgur.com/fBLkybq.jpg' // mobile 3
+};
 
 export default function HeroSection(props: Props) {
     const navigate = useNavigate();
