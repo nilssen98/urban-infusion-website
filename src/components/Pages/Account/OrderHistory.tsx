@@ -25,53 +25,17 @@ interface OrderProps {
     date?: Date;
 }
 
+
+
+const rows: OrderProps[] = [
+    {status: 3, orderNumber: 21981, totalPrice: 100, date: new Date("2022-01-01")},
+    {status: 0, orderNumber: 45678, totalPrice: 200, date: new Date("2022-03-24")}
+]
+
 export default function OrderHistory() {
     return (
         <>
-            <TableContainer sx={{}}>
-                <Table>
-                    <TableHead>
-                        <TableRow>
-                            <TableCell>Ordered</TableCell>
-                            <TableCell>Status</TableCell>
-                            <TableCell>Order&nbsp;number</TableCell>
-                            <TableCell>Total&nbsp;price</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
 
-                    </TableBody>
-                </Table>
-            </TableContainer>
         </>
     );
 }
-
-
-/*
-<Grid
-    container
-    sx={{
-        pt: 5,
-        width: 'md',
-        justifyContent: 'center',
-
-        border: '1px solid red'
-
-    }}
->
-    <Typography
-        component={'h1'}
-        variant={'h3'}
-    >
-        Order history
-    </Typography>
-    <Box
-        sx={{
-            display: 'flex',
-            flexDirection: 'column'
-        }}
-    >
-
-    </Box>
-</Grid>*/
