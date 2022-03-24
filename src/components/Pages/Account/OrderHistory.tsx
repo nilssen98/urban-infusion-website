@@ -9,7 +9,7 @@ import {
     TableHead,
     TableRow,
     TableBody
-} from "@mui/material";
+} from '@mui/material';
 
 enum Status {
     IDLE,
@@ -28,9 +28,9 @@ interface OrderProps {
 
 
 const rows: OrderProps[] = [
-    {status: 3, orderNumber: 21981, totalPrice: 100, date: new Date("2022-01-01")},
-    {status: 0, orderNumber: 45678, totalPrice: 200, date: new Date("2022-03-24")}
-]
+    {status: 3, orderNumber: 21981, totalPrice: 100, date: new Date('2022-01-01')},
+    {status: 0, orderNumber: 45678, totalPrice: 200, date: new Date('2022-03-24')}
+];
 
 export default function OrderHistory() {
     return (
