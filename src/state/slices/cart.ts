@@ -1,6 +1,5 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {ProductDto} from '../../api/urbaninfusion/dto/product-dto';
-import {CommentDto} from '../../api/urbaninfusion/dto/comment-dto';
 
 export interface Cart {
     items: ProductDto[];
