@@ -1,31 +1,12 @@
-import {Box, Typography} from '@mui/material';
-import Section from '../../components/Wrappers/Section';
-
+import HeroSection from '../../components/HeroSection';
 
 export default function About() {
     return (
         <>
-            <Section
-                height={500}
-                sx={{
-                    margin: 0
-                }}
-            >
-                <Box
-                    display={'flex'}
-                    sx={{
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        width: '100%',
-                    }}
-                >
-                    <Typography
-                        variant={'h3'}
-                    >
-                        About page
-                    </Typography>
-                </Box>
-            </Section>
+            <HeroSection
+                title={'About us'}
+                description={'We value the ancient traditions which are brought to modern times through nature.'}
+            />
         </>
     );
 }
