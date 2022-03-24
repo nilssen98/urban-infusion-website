@@ -12,7 +12,6 @@ export default function Landing() {
                     title={'Find your herbal friend'}
                     description={'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'}
                 />
-                <Divider/>
                 <FeaturedProductsSection/>
                 <Divider/>
                 <FeaturesSection/>
