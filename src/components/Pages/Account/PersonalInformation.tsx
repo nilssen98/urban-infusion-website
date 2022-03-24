@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-import {Box, Grid, Stack, Typography, useTheme} from "@mui/material";
-=======
-import {Box, Typography} from '@mui/material';
->>>>>>> 56baf5cdf1d63451b506de8468310a7926cfab41
+import {Box, Stack, Typography, useTheme} from "@mui/material";
 
 
 export default function PersonalInformation() {
