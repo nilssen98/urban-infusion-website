@@ -1,17 +1,13 @@
 import Section from '../../components/Wrappers/Section';
 import {store} from '../../state/store';
-import CartItem from '../../components/Pages/Cart/CartItem';
+import CartItemList from '../../components/Pages/Cart/CartItemList';
 
 export default function Cart() {
     const cartItems = store.getState().cart.items;
     return (
         <>
             <Section>
-                {
-                    cartItems.map(item =>
-                        <CartItem item={item}/>
-                    )
-                }
+                <CartItemList items={cartItems}/>
             </Section>
         </>
     );
