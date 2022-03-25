@@ -8,6 +8,8 @@ interface Props {
 }
 
 export default function CartItemList(props: Props) {
+
+
     return (
         <>
             <Stack direction={'column'} width={'100%'}>

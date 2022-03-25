@@ -1,56 +1,38 @@
-import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {createDraftSafeSelector, createEntityAdapter, createSlice, EntityState, PayloadAction} from '@reduxjs/toolkit';
 import {ProductDto} from '../../api/urbaninfusion/dto/product-dto';
 
+export type CartItem = ProductDto;
+
 export interface Cart {
-    items: ProductDto[];
+    items: EntityState<CartItem>;
 }
 
+const cartAdapter = createEntityAdapter<CartItem>({
+    selectId: (item) => item.id,
+    sortComparer: (a, b) => a.title.toLowerCase().localeCompare(b.title.toLowerCase()),
+});
+
+const selectState = (state: Cart) => state;
+
+export const selectCartItems = createDraftSafeSelector(
+    selectState,
+    state => cartAdapter.getSelectors().selectAll(state.items)
+);
+
 const initialState: Cart = {
-    items: [
-        {
-            id: 0,
-            price: 10,
-            discount: 0.5,
-            image: Object,
-            title: 'Some crazy item',
-            description: 'This item is crazy',
-            weight: '50kg',
-            comments: [],
-        },
-        {
-            id: 1,
-            price: 20,
-            discount: 0.0,
-            image: Object,
-            title: 'Very nice item',
-            description: 'This item is very nice',
-            weight: '65kg',
-            comments: [],
-        }
-    ],
+    items: cartAdapter.getInitialState()
 };
 
 export const cartSlice = createSlice({
     name: 'cart',
-    initialState,
+    initialState: initialState,
     reducers: {
-        addOne: (state, action: PayloadAction<ProductDto>) => {
-            state.items.push(action.payload);
+        reset: () => initialState,
+        set: (state, action: PayloadAction<CartItem[]>) => {
+            cartAdapter.setAll(state.items, action);
         },
-        remove: (state, action: PayloadAction<ProductDto>) => {
-            const index = state.items.indexOf(action.payload);
-            if (index > -1) {
-                state.items.slice(index, 1);
-            }
+        add: (state, action: PayloadAction<CartItem>) => {
+            cartAdapter.addOne(state.items, action);
         },
-        removeById: (state, action: PayloadAction<number>) => {
-            const found = state.items.filter(e => e.id === action.payload);
-            found.forEach(item => {
-                const index = state.items.indexOf(item);
-                if (index > -1) {
-                    state.items.slice(index, 1);
-                }
-            });
-        }
     }
 });
