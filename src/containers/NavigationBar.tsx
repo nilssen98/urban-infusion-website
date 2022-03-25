@@ -187,7 +187,7 @@ interface StateProps {
 
 function mapStateToProps(state: RootState): StateProps {
     return {
-        cartCount: selectCartItems(state.cart).map(item => item).length
+        cartCount: selectCartItems(state.cart).length
     };
 }
 
