@@ -1,7 +1,13 @@
 import {Box, Stack, Typography, useTheme} from "@mui/material";
+import {ReactNode} from "react";
+
+interface CardProps {
+    header: string;
+    children?: any;
+}
 
 
-export default function PersonalInformation() {
+function AccountCard(props: CardProps) {
     const theme = useTheme();
     return (
         <>
@@ -16,7 +22,7 @@ export default function PersonalInformation() {
                 <Box
                     sx={{
                         border: '1px solid blue',
-                        backgroundColor: theme.palette.secondary.light,
+                        backgroundColor: '',
                         flex: {md: 1}
                     }}>
                     <Typography
@@ -27,22 +33,26 @@ export default function PersonalInformation() {
                             width: '100%',
                             textAlign: 'center'
                         }}
-                    >Personal Information</Typography>
+                    >{props.header}</Typography>
                 </Box>
                 <Box
                     sx={{
                         border: '1px solid yellow',
                         flex: {md: '2'},
+                        py: 10,
+                        px: 5,
                     }}
                 >
-                    <Typography
-                        align={'center'}
-                        sx={{
-                            width: '100%'
-                        }}
-                    >Hi</Typography>
+
                 </Box>
             </Stack>
         </>
     );
 }
+
+
+export default function ProfilePage(){
+    return (<AccountCard header={'Shipping Information'}/>);
+
+}
+
