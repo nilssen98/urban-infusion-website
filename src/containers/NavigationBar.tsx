@@ -7,7 +7,8 @@ import {
     Slide,
     Toolbar,
     Typography,
-    useScrollTrigger, useTheme
+    useScrollTrigger,
+    useTheme
 } from '@mui/material';
 import Logo from '../components/Logo';
 import {ReactElement, ReactNode, useState} from 'react';
@@ -20,18 +21,32 @@ import {SxProps} from '@mui/system';
 import {Theme} from '@mui/material/styles';
 import CartButton from '../components/NavigationBar/CartButton';
 import AccountButton from '../components/NavigationBar/AccountButton';
-import {connect} from 'react-redux';
+import {connect, useSelector} from 'react-redux';
 import {selectCartItems} from '../state/slices/cart';
 
-type Props = StateProps & {
+const mapStateToProps = (state: RootState) => {
+    return {
+        cartItemCount: selectCartItems(state.cart).length,
+        themeColor: state.userPreferences.theme
+    };
+}
+
+const mapDispatchToProps = {
+    toggleTheme: userPreferencesSlice.actions.toggleTheme
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NavigationBar)
+
+type Props = ReturnType<typeof mapStateToProps> & typeof mapDispatchToProps & {
     children?: ReactElement;
 }
 
-const pages = ['Products', 'About'];
-
 function NavigationBar(props: Props) {
-    const themeColor = store.getState().userPreferences.theme;
     const theme = useTheme();
+
+    const pages = ['Products', 'About'];
+
+    const cartItemCount = useSelector(state => selectCartItems(state.cart).length);
 
     const [anchorElNav, setAnchorElNav] = useState(null);
 
@@ -46,7 +61,7 @@ function NavigationBar(props: Props) {
     const navigate = useNavigate();
 
     const handleChangeTheme = () => {
-        store.dispatch(userPreferencesSlice.actions.toggleTheme());
+        props.toggleTheme();
     };
 
     return (
@@ -103,10 +118,10 @@ function NavigationBar(props: Props) {
                                 }}
                             >
                                 <ThemeSwitch
-                                    mode={themeColor}
+                                    mode={props.themeColor}
                                     onClick={handleChangeTheme}
                                 />
-                                <CartButton itemsCount={props.cartCount}/>
+                                <CartButton itemsCount={cartItemCount}/>
                                 <AccountButton/>
                             </Box>
                             <Menu
@@ -180,15 +195,3 @@ function HideOnScroll(props: Props) {
         </Slide>
     );
 }
-
-interface StateProps {
-    cartCount: number;
-}
-
-function mapStateToProps(state: RootState): StateProps {
-    return {
-        cartCount: selectCartItems(state.cart).length
-    };
-}
-
-export default connect(mapStateToProps)(NavigationBar);
