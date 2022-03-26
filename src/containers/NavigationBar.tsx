@@ -42,13 +42,12 @@ type Props = ReturnType<typeof mapStateToProps> & typeof mapDispatchToProps & {
 }
 
 function NavigationBar(props: Props) {
+    const [anchorElNav, setAnchorElNav] = useState(null);
+
     const theme = useTheme();
+    const navigate = useNavigate();
 
     const pages = ['Products', 'About'];
-
-    const cartItemCount = useSelector(state => selectCartItems(state.cart).length);
-
-    const [anchorElNav, setAnchorElNav] = useState(null);
 
     const handleOpenNavMenu = (event: any) => {
         setAnchorElNav(event.currentTarget);
@@ -57,8 +56,6 @@ function NavigationBar(props: Props) {
     const handleCloseNavMenu = () => {
         setAnchorElNav(null);
     };
-
-    const navigate = useNavigate();
 
     const handleChangeTheme = () => {
         props.toggleTheme();
@@ -121,7 +118,7 @@ function NavigationBar(props: Props) {
                                     mode={props.themeColor}
                                     onClick={handleChangeTheme}
                                 />
-                                <CartButton itemsCount={cartItemCount}/>
+                                <CartButton itemsCount={props.cartItemCount}/>
                                 <AccountButton/>
                             </Box>
                             <Menu
