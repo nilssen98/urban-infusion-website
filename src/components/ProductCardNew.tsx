@@ -24,6 +24,7 @@ export default function ProductCardNew(props: Props) {
                     height: 320,
                     width: 200,
                     boxShadow: 1,
+                    position: 'relative',
                     transition: 'transform 0.2s ease-in-out',
                     '&:hover': {transform: 'scale3d(1.025, 1.025, 1)', boxShadow: 3},
                 }}
@@ -77,6 +78,11 @@ export default function ProductCardNew(props: Props) {
                                     <Button
                                         variant={'contained'}
                                         size={'small'}
+                                        sx={{
+                                            position: 'absolute',
+                                            top: 265,
+                                            left: 45,
+                                        }}
                                     >
                                         Add to cart
                                     </Button>
