@@ -28,7 +28,7 @@ export default function NotFound() {
                     <Typography variant={'h3'} component={'h2'} paddingBottom={1}>
                         Oops! That Page Can’t Be Found
                     </Typography>
-                    <Typography variant={'h6'} component={'h3'} paddingBottom={4}>
+                    <Typography variant={'h6'} component={'h3'} paddingBottom={6}>
                         The page you are looking for does not exist
                     </Typography>
                     <Typography variant={'body1'} component={'h4'}>
