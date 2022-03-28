@@ -1,6 +1,6 @@
 import ProductCard from '../../ProductCard';
 import {ProductDto} from '../../../api/urbaninfusion/dto/product-dto';
-import {Box, Grid} from '@mui/material';
+import {Box} from '@mui/material';
 import {range} from 'lodash-es';
 
 interface Props {
@@ -10,43 +10,8 @@ interface Props {
 
 export function ProductsList(props: Props) {
 
-    function gridWrapper(element: JSX.Element): JSX.Element {
-        return (
-            <>
-                <Grid
-                    container
-                    item
-                    xs={12} sm={6} lg={1}
-                    sx={{
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                    }}
-                >
-                    {element}
-                </Grid>
-            </>
-        );
-    }
-
     return (
         <>
-            {
-                /*
-            <Grid
-                container
-                paddingTop={8}
-                paddingBottom={8}
-                sx={{
-                    justifyContent: 'space-evenly',
-                    alignItems: 'center',
-                    width: '100%',
-                    rowGap: 12,
-                    columnGap: 12,
-                }}
-            >
-            </Grid>
-                */
-            }
             <Box
                 paddingTop={8}
                 paddingBottom={8}
