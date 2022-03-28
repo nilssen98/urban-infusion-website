@@ -1,4 +1,5 @@
 import {Box, Button, CardActionArea, Grow, Typography} from '@mui/material';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import {useState} from 'react';
 
 interface Props {
@@ -78,10 +79,11 @@ export default function ProductCardNew(props: Props) {
                                     <Button
                                         variant={'contained'}
                                         size={'small'}
+                                        startIcon={<AddShoppingCartIcon/>}
                                         sx={{
                                             position: 'absolute',
                                             top: 265,
-                                            left: 45,
+                                            left: 33,
                                         }}
                                     >
                                         Add to cart

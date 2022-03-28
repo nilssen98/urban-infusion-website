@@ -1,4 +1,5 @@
 import {Button, Card, CardActionArea, CardActions, CardContent, CardMedia, Typography} from '@mui/material';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
 interface Props {
     title?: string;
@@ -63,6 +64,7 @@ export default function ProductCard(props: Props) {
                     <Button
                         variant={'contained'}
                         size={'small'}
+                        startIcon={<AddShoppingCartIcon/>}
                     >
                         Add to cart
                     </Button>
