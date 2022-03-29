@@ -1,7 +1,8 @@
 import ProductCard from '../../ProductCard';
 import {ProductDto} from '../../../api/urbaninfusion/dto/product-dto';
-import {Box} from '@mui/material';
+import {Box, Stack, useTheme} from '@mui/material';
 import {range} from 'lodash-es';
+import ProductCardNew from '../../ProductCardNew';
 
 interface Props {
     id?: string;
@@ -9,22 +10,21 @@ interface Props {
 }
 
 export function ProductsList(props: Props) {
+    const theme = useTheme();
 
     return (
         <>
             <Box
-                paddingTop={8}
-                paddingBottom={8}
+                padding={4}
                 sx={{
-                    display: 'flex',
-                    justifyContent: 'space-evenly',
-                    alignItems: 'center',
-                    flexWrap: 'wrap',
-                    width: '100%',
-                    rowGap: 12,
-                    columnGap: 12,
+                    overflowY: 'auto',
+                    height: `calc(100vh - ${theme.mixins.toolbar.minHeight}px)`,
                 }}
             >
+                <Stack
+                    flexWrap={'wrap'}
+                    direction={'row'}
+                >
                 {
                     range(3).map(item =>
                         <ProductCard
@@ -32,12 +32,16 @@ export function ProductsList(props: Props) {
                             title={'Title'}
                             price={9.99}
                             image_url={'https://i.imgur.com/ZG4W7Le.jpg'}
+                            sx={{
+                                marginRight: 4,
+                                marginBottom: 4
+                            }}
                         />
                     )
                 }
                 {
                     props.products.map(product =>
-                        <ProductCard
+                        <ProductCardNew
                             key={product.id}
                             title={product.title}
                             price={product.price}
@@ -45,6 +49,7 @@ export function ProductsList(props: Props) {
                         />
                     )
                 }
+                </Stack>
             </Box>
         </>
     );
