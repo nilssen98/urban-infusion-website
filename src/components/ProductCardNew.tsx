@@ -1,11 +1,14 @@
 import {Box, Button, CardActionArea, Grow, Typography} from '@mui/material';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import {useState} from 'react';
+import {SxProps} from '@mui/system';
+import {Theme} from '@mui/material/styles';
 
 interface Props {
     title?: string;
     price?: number;
     image_url?: string;
+    sx?: SxProps<Theme>;
 }
 
 ProductCardNew.defaultProps = {
@@ -28,6 +31,7 @@ export default function ProductCardNew(props: Props) {
                     position: 'relative',
                     transition: 'transform 0.2s ease-in-out',
                     '&:hover': {transform: 'scale3d(1.025, 1.025, 1)', boxShadow: 3},
+                    ...props.sx
                 }}
             >
                 <Box

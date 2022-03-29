@@ -1,10 +1,13 @@
 import {Button, Card, CardActionArea, CardActions, CardContent, CardMedia, Typography} from '@mui/material';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import {SxProps} from '@mui/system';
+import {Theme} from '@mui/material/styles';
 
 interface Props {
     title?: string;
     price?: number;
     image_url?: string;
+    sx?: SxProps<Theme>;
 }
 
 ProductCard.defaultProps = {
@@ -16,7 +19,7 @@ export default function ProductCard(props: Props) {
     return (
         <>
             <Card
-                sx={{width: 200, height: 320}}
+                sx={{width: 200, height: 320, ...props.sx}}
             >
                 <CardActionArea>
                     <CardMedia
