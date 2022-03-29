@@ -73,13 +73,15 @@ export default function ProductCardNew(props: Props) {
                             textAlign={'center'}
                             sx={{
                                 userSelect: 'text',
+                                color: onCardHover ? 'transparent' : 'default',
+                                transition: 'all 0.2s ease'
                             }}
                         >
                             ${props.price}
                         </Typography>
                         {
                             onCardHover ? (
-                                <Grow in={onCardHover}>
+                                <Grow in={onCardHover} timeout={200}>
                                     <Button
                                         variant={'contained'}
                                         size={'small'}
