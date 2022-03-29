@@ -1,4 +1,4 @@
-import {Box, Button, CardActionArea, Grow, Typography} from '@mui/material';
+import {Box, Button, CardActionArea, Grow, Typography, useTheme} from '@mui/material';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import {useState} from 'react';
 import {SxProps} from '@mui/system';
@@ -17,6 +17,7 @@ ProductCardNew.defaultProps = {
 
 export default function ProductCardNew(props: Props) {
     const [onCardHover, setOnCardHover] = useState<boolean>(false);
+    const theme = useTheme();
 
     return (
         <>
@@ -28,6 +29,8 @@ export default function ProductCardNew(props: Props) {
                     height: 320,
                     width: 200,
                     boxShadow: 1,
+                    borderRadius: `${theme.shape.borderRadius}px`,
+                    overflow: 'hidden',
                     position: 'relative',
                     transition: 'transform 0.2s ease-in-out',
                     '&:hover': {transform: 'scale3d(1.025, 1.025, 1)', boxShadow: 3},
