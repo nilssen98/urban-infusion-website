@@ -28,7 +28,7 @@ export default function ProductCardNew(props: Props) {
                 component={'div'}
                 onMouseEnter={() => setOnCardHover(!onCardHover)}
                 onMouseLeave={() => setOnCardHover(!onCardHover)}
-                onClick={() => navigate(`${props.id}`)}
+                onClick={() => navigate(`/product/${props.id}`)}
                 sx={{
                     height: 320,
                     width: 200,
