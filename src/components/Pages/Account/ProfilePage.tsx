@@ -1,5 +1,4 @@
-import {Box, Stack, Typography, useTheme} from "@mui/material";
-import {ReactNode} from "react";
+import {Box, Stack, TextField, Typography, useTheme} from "@mui/material";
 import {UserDto} from "../../../api/urbaninfusion/dto/user-dto";
 
 interface CardProps {
@@ -7,8 +6,17 @@ interface CardProps {
     children?: any;
 }
 
+const userData: UserDto = {id: 666, admin: false, email: 'something@something.com', password: 'secret'}
+
+
 function AccountCard(props: CardProps) {
     const theme = useTheme();
+    /*
+    const handleSave = (data: UserDto) => {
+        await saveUserData(data);
+    }
+
+     */
     return (
         <>
             <Stack
@@ -37,7 +45,7 @@ function AccountCard(props: CardProps) {
                 </Box>
                 <Box
                     sx={{
-                        border: '1px solid yellow',
+                        border: '1px solid orange',
                         flex: {md: '2'},
                         py: 10,
                         px: 5,
@@ -54,18 +62,70 @@ interface ShippingInformationProps {
     data: UserDto;
 }
 
-function ShippingInformationFields(props: PersonalInformationProps){
-
+//City, zipcode, address
+//TODO: Change fields when userDto is updated
+function ShippingInformationFields(props: PersonalInformationProps) {
+    return (
+        <>
+            <Box
+                component='form'
+                sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    '& .MuiTextField-root': {m: 2, width: '25ch'}
+                }}
+            >
+                <TextField
+                    required
+                    id='outlined-required'
+                    label='City'
+                    defaultValue={props.data.id}
+                />
+                <TextField
+                    required
+                    id='outlined-required'
+                    label='Zip-code'
+                    defaultValue={props.data.id}
+                />
+                <TextField
+                    required
+                    id='outlined-required'
+                    label='Address'
+                    defaultValue={props.data.id}
+                />
+            </Box>
+        </>
+    );
 }
 
 interface PersonalInformationProps {
     data: UserDto;
 }
 
-function PersonalInformationFields(props: PersonalInformationProps){
+//Email, phone number and 'password'
+//TODO: Change fields when userDto is updated
+function PersonalInformationFields(props: PersonalInformationProps) {
     return (
         <>
-
+            <Box
+                component='form'
+                sx={{
+                    '& .MuiTextField-root': {m: 1, width: '25ch'}
+                }}
+            >
+                <TextField
+                    required
+                    id='outlined-required'
+                    label='E-mail'
+                    defaultValue={''}
+                />
+                <TextField
+                    required
+                    id='outlined-required'
+                    label='E-mail address'
+                    defaultValue={props.data.id}
+                />
+            </Box>
         </>
     );
 }
@@ -75,7 +135,9 @@ export default function ProfilePage() {
         <>
             <AccountCard
                 header={'Shipping Information'}
-            />
+            >
+                <ShippingInformationFields data={userData}/>
+            </AccountCard>
         </>
     );
 }
