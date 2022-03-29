@@ -7,6 +7,7 @@ interface Props {
     title?: string;
     price?: number;
     image_url?: string;
+    onClick?: () => void;
     sx?: SxProps<Theme>;
 }
 
@@ -21,7 +22,7 @@ export default function ProductCard(props: Props) {
             <Card
                 sx={{width: 200, height: 320, ...props.sx}}
             >
-                <CardActionArea>
+                <CardActionArea onClick={props.onClick}>
                     <CardMedia
                         component={'img'}
                         height={200}

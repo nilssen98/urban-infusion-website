@@ -3,6 +3,7 @@ import {ProductDto} from '../../../api/urbaninfusion/dto/product-dto';
 import {Box, Stack, useTheme} from '@mui/material';
 import {range} from 'lodash-es';
 import ProductCardNew from '../../ProductCardNew';
+import {useNavigate} from 'react-router-dom';
 
 interface Props {
     id?: string;
@@ -11,6 +12,7 @@ interface Props {
 
 export function ProductsList(props: Props) {
     const theme = useTheme();
+    const navigate = useNavigate();
 
     return (
         <>
@@ -47,6 +49,11 @@ export function ProductsList(props: Props) {
                             title={product.title}
                             price={product.price}
                             image_url={'https://i.imgur.com/ZG4W7Le.jpg'}
+                            onClick={() => navigate(`/product/${product.id}`)}
+                            sx={{
+                                marginRight: 4,
+                                marginBottom: 4
+                            }}
                         />
                     )
                 }
