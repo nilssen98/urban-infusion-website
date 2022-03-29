@@ -3,8 +3,10 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import {useState} from 'react';
 import {SxProps} from '@mui/system';
 import {Theme} from '@mui/material/styles';
+import {useNavigate} from 'react-router-dom';
 
 interface Props {
+    id?: number;
     title?: string;
     price?: number;
     image_url?: string;
@@ -18,6 +20,7 @@ ProductCardNew.defaultProps = {
 export default function ProductCardNew(props: Props) {
     const [onCardHover, setOnCardHover] = useState<boolean>(false);
     const theme = useTheme();
+    const navigate = useNavigate();
 
     return (
         <>
@@ -25,6 +28,7 @@ export default function ProductCardNew(props: Props) {
                 component={'div'}
                 onMouseEnter={() => setOnCardHover(!onCardHover)}
                 onMouseLeave={() => setOnCardHover(!onCardHover)}
+                onClick={() => navigate(`${props.id}`)}
                 sx={{
                     height: 320,
                     width: 200,

@@ -43,6 +43,7 @@ export function ProductsList(props: Props) {
                     props.products.map(product =>
                         <ProductCardNew
                             key={product.id}
+                            id={product.id}
                             title={product.title}
                             price={product.price}
                             image_url={'https://i.imgur.com/ZG4W7Le.jpg'}
