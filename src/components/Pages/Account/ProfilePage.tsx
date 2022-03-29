@@ -1,11 +1,11 @@
 import {Box, Stack, Typography, useTheme} from "@mui/material";
 import {ReactNode} from "react";
+import {UserDto} from "../../../api/urbaninfusion/dto/user-dto";
 
 interface CardProps {
     header: string;
     children?: any;
 }
-
 
 function AccountCard(props: CardProps) {
     const theme = useTheme();
@@ -43,16 +43,40 @@ function AccountCard(props: CardProps) {
                         px: 5,
                     }}
                 >
-
+                    {props.children}
                 </Box>
             </Stack>
         </>
     );
 }
 
+interface ShippingInformationProps {
+    data: UserDto;
+}
 
-export default function ProfilePage(){
-    return (<AccountCard header={'Shipping Information'}/>);
+function ShippingInformationFields(props: PersonalInformationProps){
 
+}
+
+interface PersonalInformationProps {
+    data: UserDto;
+}
+
+function PersonalInformationFields(props: PersonalInformationProps){
+    return (
+        <>
+
+        </>
+    );
+}
+
+export default function ProfilePage() {
+    return (
+        <>
+            <AccountCard
+                header={'Shipping Information'}
+            />
+        </>
+    );
 }
 
