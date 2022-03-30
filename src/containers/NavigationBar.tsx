@@ -1,6 +1,6 @@
 import {
     AppBar,
-    Box,
+    Box, Divider,
     IconButton,
     Menu,
     MenuItem,
@@ -23,6 +23,7 @@ import CartButton from '../components/NavigationBar/CartButton';
 import AccountButton from '../components/NavigationBar/AccountButton';
 import {connect, useSelector} from 'react-redux';
 import {selectCartItems} from '../state/slices/cart';
+import {hexToRgb} from '../utils/utils';
 
 const mapStateToProps = (state: RootState) => {
     return {
@@ -64,8 +65,15 @@ function NavigationBar(props: Props) {
     return (
         <>
             <HideOnScroll {...props}>
-                <AppBar color={'inherit'} position={'sticky'}>
-                    <Toolbar sx={{justifyContent: 'center'}}>
+                <AppBar
+                    color={'inherit'}
+                    position={'sticky'}
+                    sx={{
+                        boxShadow: 0,
+                        background: `rgba(${hexToRgb(theme.palette.background.default)?.join(',')}, 0.8)`,
+                    }}
+                >
+                    <Toolbar sx={{justifyContent: 'center'}} disableGutters>
                         <Box
                             sx={{
                                 width: theme.breakpoints.values.lg,
@@ -148,6 +156,7 @@ function NavigationBar(props: Props) {
                             </Menu>
                         </Box>
                     </Toolbar>
+                    <Divider/>
                 </AppBar>
             </HideOnScroll>
         </>
