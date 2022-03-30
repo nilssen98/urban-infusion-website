@@ -2,6 +2,7 @@ import {Avatar, Box, Button, Chip, Fade, Grid, Typography} from '@mui/material';
 import {useNavigate} from 'react-router-dom';
 import Section from '../../Wrappers/Section';
 import {useState} from 'react';
+import {useInView} from 'react-intersection-observer';
 
 export default function FeaturesSection() {
     const imageURL: string = 'https://picsum.photos/570/350?grayscale';
@@ -71,95 +72,102 @@ interface FeatureProps {
 function Feature(props: FeatureProps) {
     const [currentItem, setCurrentItem] = useState<string>(Object.keys(props.description)[0]);
 
+    const [didAnimate, setDidAnimate] = useState<boolean>(false);
+
+    const {ref, inView} = useInView();
+
     return (
         <>
-            <Grid
-                container
-                spacing={8}
-                pb={24}
-                sx={{
-                    flexDirection: props.flipped ? 'row-reverse' : 'row',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                }}
-            >
-                <Grid md={6} item container>
-                    <img
-                        src={props.image_url}
-                        style={{width: '100%', minWidth: 1}}
-                        alt={''}
-                    />
-                </Grid>
+            <Fade in={inView || didAnimate} addEndListener={() => setDidAnimate(true)} timeout={1000}>
                 <Grid
-                    md={6}
-                    item
+                    ref={ref}
                     container
+                    spacing={8}
+                    pb={24}
                     sx={{
-                        minHeight: {md: 300, xs: 250},
-                        justifyContent: 'space-between',
-                        flexDirection: 'column',
+                        flexDirection: props.flipped ? 'row-reverse' : 'row',
+                        alignItems: 'center',
+                        justifyContent: 'center',
                     }}
                 >
-
-                    <Box sx={{mb: 4, alignSelf: {md: 'start', xs: 'center'}}}>
-                        <Typography
-                            pb={4}
-                            variant={'h4'}
-                            component={'h3'}
-                            sx={{textAlign: {xs: 'center', md: 'left'}}}
-                        >
-                            {props.header}
-                        </Typography>
-                        {
-                            Object.keys(props.description).map((key, i) => (
-                                <Chip
-                                    key={i}
-                                    avatar={<Avatar sx={{bgcolor: 'transparent'}}>{i + 1}</Avatar>}
-                                    label={key}
-                                    variant={currentItem === key ? 'filled' : 'outlined'}
-                                    onClick={() => setCurrentItem(key)}
-                                    sx={{
-                                        mr: 2,
-                                        alignSelf: {md: 'start', xs: 'center'},
-                                        textTransform: 'capitalize',
-                                    }}
-                                />
-                            ))
-                        }
-                    </Box>
-                    {
-                        Object.entries(props.description).map(([key, value]) => (
-                            <Fade key={key} in={key === currentItem} timeout={500}>
-                                <Typography
-                                    sx={{
-                                        display: key === currentItem ? 'block' : 'none',
-                                        whiteSpace: 'pre-line',
-                                        textAlign: {xs: 'center', md: 'left'}
-                                    }}
-                                >
-                                    {value}
-                                </Typography>
-                            </Fade>
-                        ))
-                    }
-                    <Box
+                    <Grid md={6} item container>
+                        <img
+                            src={props.image_url}
+                            style={{width: '100%', minWidth: 1}}
+                            alt={''}
+                        />
+                    </Grid>
+                    <Grid
+                        md={6}
+                        item
+                        container
                         sx={{
-                            pt: 4,
-                            display: 'flex',
-                            width: '100%',
-                            justifyContent: {xs: 'center', md: `${props.flipped ? 'flex-start' : 'flex-end'}`}
+                            minHeight: {md: 300, xs: 250},
+                            justifyContent: 'space-between',
+                            flexDirection: 'column',
                         }}
                     >
-                        <Button
-                            variant={'contained'}
-                            size={'large'}
-                            onClick={props.onClick}
+
+                        <Box sx={{mb: 4, alignSelf: {md: 'start', xs: 'center'}}}>
+                            <Typography
+                                pb={4}
+                                variant={'h4'}
+                                component={'h3'}
+                                sx={{textAlign: {xs: 'center', md: 'left'}}}
+                            >
+                                {props.header}
+                            </Typography>
+                            {
+                                Object.keys(props.description).map((key, i) => (
+                                    <Chip
+                                        key={i}
+                                        avatar={<Avatar sx={{bgcolor: 'transparent'}}>{i + 1}</Avatar>}
+                                        label={key}
+                                        variant={currentItem === key ? 'filled' : 'outlined'}
+                                        onClick={() => setCurrentItem(key)}
+                                        sx={{
+                                            mr: 2,
+                                            alignSelf: {md: 'start', xs: 'center'},
+                                            textTransform: 'capitalize',
+                                        }}
+                                    />
+                                ))
+                            }
+                        </Box>
+                        {
+                            Object.entries(props.description).map(([key, value]) => (
+                                <Fade key={key} in={key === currentItem} timeout={500}>
+                                    <Typography
+                                        sx={{
+                                            display: key === currentItem ? 'block' : 'none',
+                                            whiteSpace: 'pre-line',
+                                            textAlign: {xs: 'center', md: 'left'}
+                                        }}
+                                    >
+                                        {value}
+                                    </Typography>
+                                </Fade>
+                            ))
+                        }
+                        <Box
+                            sx={{
+                                pt: 4,
+                                display: 'flex',
+                                width: '100%',
+                                justifyContent: {xs: 'center', md: `${props.flipped ? 'flex-start' : 'flex-end'}`}
+                            }}
                         >
-                            shop now
-                        </Button>
-                    </Box>
+                            <Button
+                                variant={'contained'}
+                                size={'large'}
+                                onClick={props.onClick}
+                            >
+                                shop now
+                            </Button>
+                        </Box>
+                    </Grid>
                 </Grid>
-            </Grid>
+            </Fade>
         </>
     );
 }
