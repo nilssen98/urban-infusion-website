@@ -12,18 +12,6 @@ export default function FeaturesSection() {
         <>
             <Section>
                 <Box>
-                    {/*
-                    <Feature
-                        flipped
-                        header={'Heaviest drinkers'}
-                        body={'China, Sri Lanka, and Kenya export the most tea worldwide, shipping out about '
-                            + '1 million metric tons of it among the three countries. Thanks in large part to it’s '
-                            + 'enormous population, China consumes the most of any country in total. '
-                            + 'However, per capita, the United Kingdom, Ireland and Turkey take the top '
-                            + 'three spots. Over 3 billion teacups are consumed worldwide each year.'}
-                        image_url={'https://i.imgur.com/CV3NL2Z.jpg'}
-                        onClick={() => navigate('/products')}
-                    />*/}
                     <Feature
                         header={'Black tea'}
                         description={{
