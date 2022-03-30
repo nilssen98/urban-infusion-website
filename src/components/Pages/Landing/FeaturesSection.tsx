@@ -1,4 +1,4 @@
-import {Avatar, Box, Button, Chip, Fade, Grid, Typography} from '@mui/material';
+import {Avatar, Box, Button, Chip, Fade, Grid, Grow, Slide, Typography} from '@mui/material';
 import {useNavigate} from 'react-router-dom';
 import Section from '../../Wrappers/Section';
 import {useState} from 'react';
@@ -78,12 +78,16 @@ function Feature(props: FeatureProps) {
 
     return (
         <>
-            <Fade in={inView || didAnimate} addEndListener={() => setDidAnimate(true)} timeout={1000}>
+            <Fade
+                in={inView || didAnimate}
+                addEndListener={() => setDidAnimate(true)}
+                timeout={1500}
+            >
                 <Grid
                     ref={ref}
                     container
                     spacing={8}
-                    pb={24}
+                    pb={48}
                     sx={{
                         flexDirection: props.flipped ? 'row-reverse' : 'row',
                         alignItems: 'center',
