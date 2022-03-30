@@ -8,7 +8,7 @@ export default function InstagramSection() {
     return (
         <>
             <Section
-                height={300}
+                height={250}
                 sx={{margin: 0}}
             >
                 <Box
@@ -37,7 +37,7 @@ export default function InstagramSection() {
                             Follow us on Instagram
                         </Typography>
                     </Box>
-                    <Typography variant={'h3'}>
+                    <Typography sx={{ typography: { xs: 'h4', md: 'h3' } }} >
                         <Link
                             target={'_blank'}
                             href={instagramLink}

@@ -12,6 +12,7 @@ import {PersistGate} from 'redux-persist/integration/react';
 import Account from '../Pages/Account';
 import Cart from '../Pages/CartPage';
 import About from '../Pages/About';
+import Product from '../../components/Pages/Product/Product';
 
 export default function App() {
     const theme = useSelector((s: RootState) => s.userPreferences.theme);
@@ -27,6 +28,7 @@ export default function App() {
                             <Route path={'/'} element={<Landing/>}/>
                             <Route path={'/products'} element={<Products/>}/>
                             <Route path={'/products/:id'} element={<Products/>}/>
+                            <Route path={'/product/:id'} element={<Product/>}/>
                             <Route path={'/account'} element={<Account/>}/>
                             <Route path={'/account/:id'} element={<Account/>}/>
                             <Route path={'/cart'} element={<Cart/>}/>
