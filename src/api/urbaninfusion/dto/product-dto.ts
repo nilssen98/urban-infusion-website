@@ -9,4 +9,5 @@ export interface ProductDto {
     description: string;
     weight: string;
     comments: CommentDto[];
+    category: string;
 }
