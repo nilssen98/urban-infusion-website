@@ -7,5 +7,5 @@ export async function getProducts(): Promise<ProductDto[]> {
 }
 
 export async function getProductById(id: string): Promise<ProductDto> {
-    return (await axios.get<ProductDto>(`${baseUrl}/products`, {params: {id}})).data;
+    return (await axios.get<ProductDto>(`${baseUrl}/products/${id}`)).data;
 }
