@@ -1,9 +1,8 @@
 import {useParams} from 'react-router-dom';
-import {useQuery} from "react-query";
-import {getProductById} from "../../api/urbaninfusion/public/products";
-import {useEffect} from "react";
-import Section from "../../components/Wrappers/Section";
-import {Stack, Typography} from "@mui/material";
+import {useQuery} from 'react-query';
+import {getProductById} from '../../api/urbaninfusion/public/products';
+import Section from '../../components/Wrappers/Section';
+import {Stack, Typography} from '@mui/material';
 
 export default function Product() {
     const {id} = useParams();
@@ -11,7 +10,7 @@ export default function Product() {
     const {isLoading, data} = useQuery(
         'product',
         () => getProductById(id || '')
-    )
+    );
 
     return (
         <>
