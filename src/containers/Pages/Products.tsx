@@ -22,7 +22,7 @@ const categories = {
 export default function Products() {
     const {id} = useParams();
 
-    const {data: products} = useQuery(
+    const {isLoading, data: products} = useQuery(
         'products',
         () => getProducts()
     )
