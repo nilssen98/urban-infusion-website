@@ -6,6 +6,6 @@ export async function getProducts(): Promise<ProductDto[]> {
     return (await axios.get<ProductDto[]>(`${baseUrl}/products`)).data;
 }
 
-export async function getProductById(id: number): Promise<ProductDto> {
+export async function getProductById(id: string): Promise<ProductDto> {
     return (await axios.get<ProductDto>(`${baseUrl}/products`, {params: {id}})).data;
 }

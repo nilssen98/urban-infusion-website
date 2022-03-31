@@ -1,12 +1,27 @@
 import {useParams} from 'react-router-dom';
+import {useQuery} from "react-query";
+import {getProductById} from "../../api/urbaninfusion/public/products";
+import {useEffect} from "react";
+import Section from "../../components/Wrappers/Section";
 
 export default function Product() {
-    const params = useParams();
+    const {id} = useParams();
+
+    const {isLoading, data} = useQuery(
+        'product',
+        () => getProductById(id || '')
+    )
+
+    useEffect(() => {
+        console.log(data)
+    }, [data])
 
     return (
         <>
-            <h1>This is the product page!</h1>
-            <h2>Product ID = {params.id}</h2>
+            <Section>
+                <h1>This is the product page!</h1>
+                <h2>Product ID = {id}</h2>
+            </Section>
         </>
     );
 }
