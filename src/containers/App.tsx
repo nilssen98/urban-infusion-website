@@ -12,7 +12,7 @@ import {PersistGate} from 'redux-persist/integration/react';
 import Account from './Pages/Account';
 import Cart from './Pages/CartPage';
 import About from './Pages/About';
-import Product from '../components/Pages/Product/Product';
+import Product from './Pages/Product';
 import {QueryClient, QueryClientProvider} from "react-query";
 
 const queryClient = new QueryClient();
