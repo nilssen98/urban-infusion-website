@@ -5,6 +5,7 @@ import {ProductDto} from '../../api/urbaninfusion/dto/product-dto';
 import {ProductsList} from '../../components/Pages/Products/ProductsList';
 import {useParams} from 'react-router-dom';
 import SideNavigation from '../../components/SideNavigation';
+import {useQuery} from "react-query";
 
 const categories = {
     teas: [
@@ -19,15 +20,12 @@ const categories = {
 };
 
 export default function Products() {
-    const [products, setProducts] = useState<ProductDto[]>([]);
     const {id} = useParams();
 
-    useEffect(() => {
-        void (async () => {
-            const data = await getProducts();
-            setProducts(data);
-        })();
-    }, []);
+    const {data: products} = useQuery(
+        'products',
+        () => getProducts()
+    )
 
     return (
         <>
@@ -40,7 +38,9 @@ export default function Products() {
                     header={'Products'}
                     path={'products'}
                 />
-                <ProductsList products={products} id={id}/>
+                {
+                    products && <ProductsList products={products} id={id}/>
+                }
             </Box>
         </>
     );
