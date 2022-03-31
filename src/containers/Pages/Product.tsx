@@ -3,6 +3,7 @@ import {useQuery} from "react-query";
 import {getProductById} from "../../api/urbaninfusion/public/products";
 import {useEffect} from "react";
 import Section from "../../components/Wrappers/Section";
+import {Stack} from "@mui/material";
 
 export default function Product() {
     const {id} = useParams();
@@ -19,8 +20,10 @@ export default function Product() {
     return (
         <>
             <Section>
-                <h1>This is the product page!</h1>
-                <h2>Product ID = {id}</h2>
+                <Stack direction={'column'}>
+                    <h1>This is the product page!</h1>
+                    <h2>Product ID = {id}</h2>
+                </Stack>
             </Section>
         </>
     );
