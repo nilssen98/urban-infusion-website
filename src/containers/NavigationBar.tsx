@@ -14,14 +14,14 @@ import Logo from '../components/Logo';
 import {ReactElement, ReactNode, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {ThemeSwitch} from '../components/NavigationBar/ThemeSwitch';
-import {RootState, store} from '../state/store';
+import {RootState} from '../state/store';
 import {userPreferencesSlice} from '../state/slices/userPreferences';
 import MenuIcon from '@mui/icons-material/Menu';
 import {SxProps} from '@mui/system';
 import {Theme} from '@mui/material/styles';
 import CartButton from '../components/NavigationBar/CartButton';
 import AccountButton from '../components/NavigationBar/AccountButton';
-import {connect, useSelector} from 'react-redux';
+import {connect} from 'react-redux';
 import {selectCartItems} from '../state/slices/cart';
 import {hexToRgb} from '../utils/utils';
 
@@ -30,17 +30,17 @@ const mapStateToProps = (state: RootState) => {
         cartItemCount: selectCartItems(state.cart).length,
         themeColor: state.userPreferences.theme
     };
-}
+};
 
 const mapDispatchToProps = {
     toggleTheme: userPreferencesSlice.actions.toggleTheme
-}
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(NavigationBar)
+export default connect(mapStateToProps, mapDispatchToProps)(NavigationBar);
 
 type Props = ReturnType<typeof mapStateToProps> & typeof mapDispatchToProps & {
     children?: ReactElement;
-}
+};
 
 function NavigationBar(props: Props) {
     const [anchorElNav, setAnchorElNav] = useState(null);
@@ -85,7 +85,7 @@ function NavigationBar(props: Props) {
                             <Box sx={{flex: 1, display: {sm: 'flex', xs: 'none'}}}>
                                 <Logo clickable onClick={() => navigate('/')}/>
                             </Box>
-                            <Box sx={{flex: 1, display: {sm: 'none', xs: 'flex'},}}>
+                            <Box sx={{flex: 1, display: {sm: 'none', xs: 'flex'}}}>
                                 <IconButton
                                     onClick={handleOpenNavMenu}
                                 >
@@ -196,7 +196,7 @@ function HideOnScroll(props: Props) {
     });
 
     return (
-        <Slide appear={false} direction="down" in={!trigger}>
+        <Slide appear={false} direction='down' in={!trigger}>
             {props.children || <></>}
         </Slide>
     );
