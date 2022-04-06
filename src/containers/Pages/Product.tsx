@@ -14,20 +14,22 @@ export default function Product() {
 
     return (
         <>
-            <Section>
-                {
-                    data && <Stack direction={'column'} spacing={4}>
-                        <Typography variant={'h3'}>This is the product page!</Typography>
-                        <Typography variant={'h5'}>id: {data.id}</Typography>
-                        <Typography variant={'h5'}>title: {data.title}</Typography>
-                        <Typography variant={'h5'}>description: {data.description}</Typography>
-                        <Typography variant={'h5'}>category: {data.category}</Typography>
-                        <Typography variant={'h5'}>price: {data.price}</Typography>
-                        <Typography variant={'h5'}>discount: {data.discount}</Typography>
-                        <Typography variant={'h5'}>weight: {data.weight}</Typography>
-                    </Stack>
-                }
-            </Section>
+            <Page isLoading={isLoading}>
+                <Section>
+                    {
+                        data && <Stack direction={'column'} spacing={4}>
+                            <Typography variant={'h3'}>This is the product page!</Typography>
+                            <Typography variant={'h5'}>id: {data.id}</Typography>
+                            <Typography variant={'h5'}>title: {data.title}</Typography>
+                            <Typography variant={'h5'}>description: {data.description}</Typography>
+                            <Typography variant={'h5'}>category: {data.category}</Typography>
+                            <Typography variant={'h5'}>price: {data.price}</Typography>
+                            <Typography variant={'h5'}>discount: {data.discount}</Typography>
+                            <Typography variant={'h5'}>weight: {data.weight}</Typography>
+                        </Stack>
+                    }
+                </Section>
+            </Page>
         </>
     );
 }
