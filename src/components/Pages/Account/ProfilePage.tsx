@@ -64,7 +64,7 @@ interface ShippingInformationProps {
 
 //City, zipcode, address
 //TODO: Change fields when userDto is updated
-function ShippingInformationFields(props: PersonalInformationProps) {
+function ShippingInformationFields(props: ShippingInformationProps) {
     return (
         <>
             <Box
@@ -72,24 +72,25 @@ function ShippingInformationFields(props: PersonalInformationProps) {
                 sx={{
                     display: 'flex',
                     flexDirection: 'column',
-                    '& .MuiTextField-root': {m: 2, width: '25ch'}
+                    '& .MuiTextField-root': {m: 1, minWidth: '25ch'},
+                    alignItems: {xs: 'center', md: 'start'}
                 }}
             >
                 <TextField
                     required
-                    id='outlined-required'
+                    id='city'
                     label='City'
                     defaultValue={props.data.id}
                 />
                 <TextField
                     required
-                    id='outlined-required'
+                    id='zip'
                     label='Zip-code'
                     defaultValue={props.data.id}
                 />
                 <TextField
                     required
-                    id='outlined-required'
+                    id='address'
                     label='Address'
                     defaultValue={props.data.id}
                 />
@@ -110,19 +111,27 @@ function PersonalInformationFields(props: PersonalInformationProps) {
             <Box
                 component='form'
                 sx={{
-                    '& .MuiTextField-root': {m: 1, width: '25ch'}
+                    display: 'flex',
+                    flexDirection: 'column',
+                    '& .MuiTextField-root': {m: 1, minWidth: '25ch'},
+                    alignItems: {xs: 'center', md: 'start'}
                 }}
             >
                 <TextField
                     required
-                    id='outlined-required'
-                    label='E-mail'
-                    defaultValue={''}
+                    id='name'
+                    label='Name'
+                    defaultValue={props.data.id}
                 />
                 <TextField
                     required
-                    id='outlined-required'
-                    label='E-mail address'
+                    label='email'
+                    defaultValue={props.data.id}
+                />
+                <TextField
+                    required
+                    id='phone'
+                    label='Phone number'
                     defaultValue={props.data.id}
                 />
             </Box>
@@ -133,11 +142,22 @@ function PersonalInformationFields(props: PersonalInformationProps) {
 export default function ProfilePage() {
     return (
         <>
-            <AccountCard
-                header={'Shipping Information'}
-            >
-                <ShippingInformationFields data={userData}/>
-            </AccountCard>
+            <Box
+            sx={{
+                width: '100%',
+                display: 'flex',
+                flexDirection: 'column'
+            }}>
+                <AccountCard
+                    header={'Shipping Information'}
+                >
+                    <ShippingInformationFields data={userData}/>
+                </AccountCard>
+
+                <AccountCard header={'Personal Information'}>
+                    <PersonalInformationFields data={userData}/>
+                </AccountCard>
+            </Box>
         </>
     );
 }
