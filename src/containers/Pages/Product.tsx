@@ -58,13 +58,13 @@ export default function Product(props: Props) {
                                         }}
                                     >
                                         <Typography
-                                            variant={'h1'}
+                                            variant={'h2'}
                                             marginBottom={4}
                                         >
                                             {data.title}
                                         </Typography>
                                         <Typography
-                                            variant={'h3'}
+                                            variant={'h4'}
                                             marginBottom={8}
                                         >
                                             {`${data.price}$ / ${data.weight}`}
@@ -73,13 +73,13 @@ export default function Product(props: Props) {
                                             direction={'row'}
                                         >
                                             <Typography
-                                                variant={'h5'}
+                                                variant={'h6'}
                                                 marginBottom={4}
                                             >
                                                 Quantity:
                                             </Typography>
                                             <Typography
-                                                variant={'h5'}
+                                                variant={'h6'}
                                                 color={'red'}
                                             >
                                                 Quantity selector goes here
@@ -98,6 +98,19 @@ export default function Product(props: Props) {
                                 <Stack>
                                     <Typography variant={'h3'} marginBottom={2}>Description</Typography>
                                     <Typography variant={'h5'}>{data.description}</Typography>
+                                </Stack>
+                                <Stack>
+                                    <Typography variant={'h3'} marginBottom={2}>Comments</Typography>
+                                    <Button variant={'contained'} sx={{width: '15%'}}>Add comment</Button>
+                                    <Box>
+                                        {
+                                            data.comments.map(comment => (
+                                                <Box height={'150px'} width={'100%'} sx={{border: '1px solid grey'}}>
+                                                    <Typography>{comment.text}</Typography>
+                                                </Box>
+                                            ))
+                                        }
+                                    </Box>
                                 </Stack>
                             </Stack>
                         )
