@@ -1,12 +1,12 @@
-import {Box, Stack, TextField, Typography, useTheme} from "@mui/material";
-import {UserDto} from "../../../api/urbaninfusion/dto/user-dto";
+import {Box, Stack, TextField, Typography, useTheme} from '@mui/material';
+import {UserDto} from '../../../api/urbaninfusion/dto/user-dto';
 
 interface CardProps {
     header: string;
     children?: any;
 }
 
-const userData: UserDto = {id: 666, admin: false, email: 'something@something.com', password: 'secret'}
+const userData: UserDto = {id: 666, admin: false, email: 'something@something.com', password: 'secret'};
 
 
 function AccountCard(props: CardProps) {
@@ -62,8 +62,8 @@ interface ShippingInformationProps {
     data: UserDto;
 }
 
-//City, zipcode, address
-//TODO: Change fields when userDto is updated
+// City, zipcode, address
+// TODO: Change fields when userDto is updated
 function ShippingInformationFields(props: ShippingInformationProps) {
     return (
         <>
@@ -103,8 +103,8 @@ interface PersonalInformationProps {
     data: UserDto;
 }
 
-//Email, phone number and 'password'
-//TODO: Change fields when userDto is updated
+// Email, phone number and 'password'
+// TODO: Change fields when userDto is updated
 function PersonalInformationFields(props: PersonalInformationProps) {
     return (
         <>

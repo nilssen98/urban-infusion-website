@@ -43,10 +43,10 @@ export default function Products() {
                             <ProductsList products={products} id={id}/>
                         ) : (
                             <Stack
-                                width={'100%'}
                                 direction={'column'}
                                 justifyContent={'center'}
                                 alignItems={'center'}
+                                width={'100%'}
                             >
                                 <Typography variant={'h5'} component={'h1'}>No products to show!</Typography>
                             </Stack>

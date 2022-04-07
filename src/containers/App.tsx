@@ -13,7 +13,7 @@ import Account from './Pages/Account';
 import Cart from './Pages/CartPage';
 import About from './Pages/About';
 import Product from './Pages/Product';
-import {QueryClient, QueryClientProvider} from "react-query";
+import {QueryClient, QueryClientProvider} from 'react-query';
 
 const queryClient = new QueryClient();
 
