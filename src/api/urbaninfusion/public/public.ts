@@ -1,1 +1,1 @@
-export const baseUrl = `http://10.212.26.22:8080`;
+export const baseUrl = `https://appdevgr07.strazdins.lv:8443`;
