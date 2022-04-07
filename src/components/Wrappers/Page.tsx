@@ -9,15 +9,15 @@ interface Props {
 export default function Page(props: Props) {
     return (
         <>
-            <Stack alignItems={'center'} justifyContent={'center'}>
-                {
-                    props.isLoading
-                        ? (
+            {
+                props.isLoading
+                    ? (
+                        <Stack alignItems={'center'} justifyContent={'center'} height={'100vh'}>
                             <CircularProgress size={64}/>
-                        )
-                        : props.children
-                }
-            </Stack>
+                        </Stack>
+                    )
+                    : props.children
+            }
         </>
     );
 }
