@@ -1,7 +1,5 @@
-import {Box} from '@mui/material';
-import {useEffect, useState} from 'react';
+import {Box, Stack, Typography} from '@mui/material';
 import {getProducts} from '../../api/urbaninfusion/public/products';
-import {ProductDto} from '../../api/urbaninfusion/dto/product-dto';
 import {ProductsList} from '../../components/Pages/Products/ProductsList';
 import {useParams} from 'react-router-dom';
 import SideNavigation from '../../components/SideNavigation';
@@ -41,7 +39,18 @@ export default function Products() {
                         path={'products'}
                     />
                     {
-                        products && <ProductsList products={products} id={id}/>
+                        products ? (
+                            <ProductsList products={products} id={id}/>
+                        ) : (
+                            <Stack
+                                width={'100%'}
+                                direction={'column'}
+                                justifyContent={'center'}
+                                alignItems={'center'}
+                            >
+                                <Typography variant={'h5'} component={'h1'}>No products to show!</Typography>
+                            </Stack>
+                        )
                     }
                 </Box>
             </Page>
