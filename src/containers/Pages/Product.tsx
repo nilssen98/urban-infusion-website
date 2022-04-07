@@ -35,7 +35,9 @@ export default function Product(props: Props) {
                                         border: '1px solid red',
                                     }}
                                 >
-                                    <Box
+                                    <Stack
+                                        justifyContent={'center'}
+                                        alignItems={'center'}
                                         height={400}
                                         sx={{
                                             objectFit: 'contain',
@@ -47,7 +49,7 @@ export default function Product(props: Props) {
                                             draggable={false}
                                             style={{objectFit: 'contain', height: 'inherit'}}
                                         />
-                                    </Box>
+                                    </Stack>
                                     <Stack
                                         direction={'column'}
                                         justifyContent={'center'}
@@ -101,7 +103,7 @@ export default function Product(props: Props) {
                                 </Stack>
                                 <Stack>
                                     <Typography variant={'h3'} marginBottom={2}>Comments</Typography>
-                                    <Button variant={'contained'} sx={{width: '15%'}}>Add comment</Button>
+                                    <Button variant={'contained'} sx={{width: '150px'}}>Add comment</Button>
                                     <Box>
                                         {
                                             data.comments.map(comment => (
