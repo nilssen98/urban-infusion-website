@@ -6,7 +6,7 @@ interface CardProps {
     children?: any;
 }
 
-const userData: UserDto = {id: 666, admin: false, email: 'something@something.com', password: 'secret'};
+const userData: UserDto = {id: 666, username: 'TestUser', admin: false, email: 'something@something.com', password: 'secret'};
 
 
 function AccountCard(props: CardProps) {
