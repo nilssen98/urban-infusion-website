@@ -5,6 +5,7 @@ import Section from '../../components/Wrappers/Section';
 import {Box, Button, Stack, Typography} from '@mui/material';
 import Page from '../../components/Wrappers/Page';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import Comment from '../../components/Pages/ProductPage/Comment';
 
 interface Props {
     image_url?: string;
@@ -107,9 +108,12 @@ export default function Product(props: Props) {
                                     <Box>
                                         {
                                             data.comments.map(comment => (
-                                                <Box height={'150px'} width={'100%'} sx={{border: '1px solid grey'}}>
-                                                    <Typography>{comment.text}</Typography>
-                                                </Box>
+                                                <Comment
+                                                    username={comment.user.username}
+                                                    text={comment.text}
+                                                    lastUpdated={comment.lastUpdated}
+                                                    created={comment.created}
+                                                />
                                             ))
                                         }
                                     </Box>
