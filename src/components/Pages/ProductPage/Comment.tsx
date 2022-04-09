@@ -1,4 +1,5 @@
 import {Avatar, Button, Stack, Tooltip, Typography} from '@mui/material';
+import {formatDate} from '../../../utils/utils';
 
 interface Props {
     id?: number;
@@ -23,14 +24,14 @@ export default function Comment(props: Props) {
                     </Tooltip>
                     <Stack direction={'column'}>
                         <Typography variant={'body1'}>
-                            {`${props.username} on ${props.created}`}
+                            {`${props.username} on ${formatDate(props.created as string)}`}
                         </Typography>
                         <Typography variant={'body2'}>
-                            {`Last updated: ${props.lastUpdated ? props.lastUpdated : 'Never'}`}
+                            {`Last updated: ${props.lastUpdated ? formatDate(props.lastUpdated) : 'Never'}`}
                         </Typography>
                     </Stack>
                 </Stack>
-                <Typography variant={'body2'} ml={2} mr={2} mb={1} flexGrow={2} sx={{fontStyle: 'italic'}}>
+                <Typography variant={'body2'} ml={3} mr={3} mb={1} flexGrow={2} sx={{fontStyle: 'italic'}}>
                     {`'${props.text}'`}
                 </Typography>
                 <Stack direction={'row'} justifyContent={'flex-end'} alignItems={'center'}>
