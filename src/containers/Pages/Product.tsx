@@ -61,13 +61,13 @@ export default function Product(props: Props) {
                                         }}
                                     >
                                         <Typography
-                                            variant={'h2'}
+                                            variant={'h3'}
                                             marginBottom={4}
                                         >
                                             {data.title}
                                         </Typography>
                                         <Typography
-                                            variant={'h4'}
+                                            variant={'h5'}
                                             marginBottom={8}
                                         >
                                             {`${data.price}$ / ${data.weight}`}
@@ -99,11 +99,11 @@ export default function Product(props: Props) {
                                     </Stack>
                                 </Stack>
                                 <Stack>
-                                    <Typography variant={'h3'} marginBottom={2}>Description</Typography>
-                                    <Typography variant={'h5'}>{data.description}</Typography>
+                                    <Typography variant={'h4'} marginBottom={2}>Description</Typography>
+                                    <Typography variant={'h6'}>{data.description}</Typography>
                                 </Stack>
                                 <Stack>
-                                    <Typography variant={'h3'} marginBottom={2}>Comments</Typography>
+                                    <Typography variant={'h4'} marginBottom={2}>Comments</Typography>
                                     <Button variant={'contained'} sx={{width: '150px'}}>Add comment</Button>
                                     <Box>
                                         {
