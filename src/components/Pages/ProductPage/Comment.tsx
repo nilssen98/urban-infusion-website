@@ -15,20 +15,23 @@ export default function Comment(props: Props) {
     }
 
     return (
-      <>
-          <Stack direction={'column'} minHeight={200} width={'100%'} gap={10} sx={{border: '1px solid grey'}}>
-              <Stack direction={'row'} justifyContent={'flex-start'} alignItems={'center'} gap={2}>
-                  <Avatar>{firstLetterOfUsername(props.username)}</Avatar>
-                  <Typography variant={'body1'}>{`By ${props.username}`}</Typography>
-                  <Typography variant={'body2'}>{props.created}</Typography>
-                  <Typography variant={'body2'}>{`Last updated: ${props.lastUpdated ? props.lastUpdated : 'Never'}`}</Typography>
-              </Stack>
-              <Divider/>
-              <Typography>{`Username: ${props.username}`}</Typography>
-              <Typography>{`Text: ${props.text}`}</Typography>
-              <Typography>{`Last updated: ${props.lastUpdated}`}</Typography>
-              <Typography>{`Created: ${props.created}`}</Typography>
-          </Stack>
-      </>
+        <>
+            <Stack direction={'column'} minHeight={200} width={'100%'} gap={10} sx={{border: '1px solid grey'}}>
+                <Stack direction={'row'} justifyContent={'flex-start'} alignItems={'center'} gap={2}>
+                    <Avatar>{firstLetterOfUsername(props.username)}</Avatar>
+                    <Stack direction={'column'}>
+                        <Typography variant={'body1'}>
+                            {`${props.username} on ${props.created}`}
+                        </Typography>
+                        <Typography variant={'body2'}>
+                            {`Last updated: ${props.lastUpdated ? props.lastUpdated : 'Never'}`}
+                        </Typography>
+                    </Stack>
+                </Stack>
+                <Typography variant={'body2'} sx={{fontStyle: 'italic'}}>
+                    {`'${props.text}'`}
+                </Typography>
+            </Stack>
+        </>
     );
 }
