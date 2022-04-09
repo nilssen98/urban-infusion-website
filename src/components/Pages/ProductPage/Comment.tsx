@@ -1,5 +1,5 @@
 import {Avatar, Button, Stack, Tooltip, Typography} from '@mui/material';
-import {formatDate} from '../../../utils/utils';
+import {formatDate} from '../../../utils/dateParser';
 
 interface Props {
     id?: number;
