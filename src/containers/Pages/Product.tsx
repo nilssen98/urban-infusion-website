@@ -109,6 +109,8 @@ export default function Product(props: Props) {
                                         {
                                             data.comments.map(comment => (
                                                 <Comment
+                                                    key={comment.id}
+                                                    id={comment.id}
                                                     username={comment.user.username}
                                                     text={comment.text}
                                                     lastUpdated={comment.lastUpdated}
