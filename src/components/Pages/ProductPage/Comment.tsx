@@ -1,4 +1,4 @@
-import {Avatar, Divider, Stack, Typography} from '@mui/material';
+import {Avatar, Button, Stack, Tooltip, Typography} from '@mui/material';
 
 interface Props {
     id?: number;
@@ -16,9 +16,11 @@ export default function Comment(props: Props) {
 
     return (
         <>
-            <Stack direction={'column'} minHeight={200} width={'100%'} gap={10} sx={{border: '1px solid grey'}}>
-                <Stack direction={'row'} justifyContent={'flex-start'} alignItems={'center'} gap={2}>
-                    <Avatar>{firstLetterOfUsername(props.username)}</Avatar>
+            <Stack direction={'column'} minHeight={200} width={'100%'} gap={3} sx={{border: '1px solid grey'}}>
+                <Stack direction={'row'} justifyContent={'flex-start'} alignItems={'center'} gap={2} margin={3}>
+                    <Tooltip title={props.username as string}>
+                        <Avatar>{firstLetterOfUsername(props.username)}</Avatar>
+                    </Tooltip>
                     <Stack direction={'column'}>
                         <Typography variant={'body1'}>
                             {`${props.username} on ${props.created}`}
@@ -28,9 +30,12 @@ export default function Comment(props: Props) {
                         </Typography>
                     </Stack>
                 </Stack>
-                <Typography variant={'body2'} sx={{fontStyle: 'italic'}}>
+                <Typography variant={'body2'} ml={2} mr={2} mb={1} flexGrow={2} sx={{fontStyle: 'italic'}}>
                     {`'${props.text}'`}
                 </Typography>
+                <Stack direction={'row'} justifyContent={'flex-end'} alignItems={'center'}>
+                    <Button variant={'outlined'}>Edit comment</Button>
+                </Stack>
             </Stack>
         </>
     );
