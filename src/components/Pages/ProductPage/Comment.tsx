@@ -1,4 +1,4 @@
-import {Stack, Typography} from '@mui/material';
+import {Avatar, Divider, Stack, Typography} from '@mui/material';
 
 interface Props {
     id?: number;
@@ -12,7 +12,13 @@ export default function Comment(props: Props) {
     return (
       <>
           <Stack direction={'column'} minHeight={200} width={'100%'} gap={10} sx={{border: '1px solid grey'}}>
-              <Typography>This is a single comment!</Typography>
+              <Stack direction={'row'} justifyContent={'flex-start'} alignItems={'center'} gap={2}>
+                  <Avatar>A</Avatar>
+                  <Typography variant={'body1'}>{`By ${props.username}`}</Typography>
+                  <Typography variant={'body2'}>{props.created}</Typography>
+                  <Typography variant={'body2'}>{`Last updated: ${props.lastUpdated ? props.lastUpdated : 'Never'}`}</Typography>
+              </Stack>
+              <Divider/>
               <Typography>{`Username: ${props.username}`}</Typography>
               <Typography>{`Text: ${props.text}`}</Typography>
               <Typography>{`Last updated: ${props.lastUpdated}`}</Typography>
