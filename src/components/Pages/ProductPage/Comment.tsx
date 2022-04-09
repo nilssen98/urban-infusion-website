@@ -9,11 +9,16 @@ interface Props {
 }
 
 export default function Comment(props: Props) {
+
+    function firstLetterOfUsername(username: string | undefined): string {
+        return username ? username.charAt(0).toUpperCase() : '';
+    }
+
     return (
       <>
           <Stack direction={'column'} minHeight={200} width={'100%'} gap={10} sx={{border: '1px solid grey'}}>
               <Stack direction={'row'} justifyContent={'flex-start'} alignItems={'center'} gap={2}>
-                  <Avatar>A</Avatar>
+                  <Avatar>{firstLetterOfUsername(props.username)}</Avatar>
                   <Typography variant={'body1'}>{`By ${props.username}`}</Typography>
                   <Typography variant={'body2'}>{props.created}</Typography>
                   <Typography variant={'body2'}>{`Last updated: ${props.lastUpdated ? props.lastUpdated : 'Never'}`}</Typography>
