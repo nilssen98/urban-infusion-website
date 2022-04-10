@@ -1,4 +1,4 @@
-import {Box, Stack, Typography} from '@mui/material';
+import {Box, Stack, Typography, useTheme} from '@mui/material';
 import {getProducts} from '../../api/urbaninfusion/public/products';
 import {ProductsList} from '../../components/Pages/Products/ProductsList';
 import {useParams} from 'react-router-dom';
@@ -10,6 +10,7 @@ import {getCategories} from '../../api/urbaninfusion/public/categories';
 
 export default function Products() {
     const {id} = useParams();
+    const theme = useTheme();
 
     const {isLoading, data: products} = useQuery(
         'products',
@@ -46,6 +47,7 @@ export default function Products() {
                                 justifyContent={'center'}
                                 alignItems={'center'}
                                 width={'100%'}
+                                height={`calc(100vh - ${theme.mixins.toolbar.minHeight}px)`}
                             >
                                 <Typography variant={'h5'} component={'h1'}>No products to show!</Typography>
                             </Stack>
