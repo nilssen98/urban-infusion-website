@@ -7,17 +7,6 @@ import Page from '../../components/Wrappers/Page';
 import {useQuery} from 'react-query';
 import {getCategories} from '../../api/urbaninfusion/public/categories';
 
-const categoriesOld = {
-    teas: [
-        'black tea',
-        'green tea',
-        'white tea'
-    ],
-    accessories: [
-        'cups'
-    ],
-    'gift cards': []
-};
 
 export default function Products() {
     const {id} = useParams();
@@ -32,16 +21,6 @@ export default function Products() {
         () => getCategories()
     );
 
-
-    function mapCategories(categoriesArr: string[]): Record<string, string[]> {
-        console.log(categoriesArr);
-        return categoriesArr.reduce((acc: Record<string, string[]>, category) => {
-            acc[category] = [];
-            return acc;
-        }, {});
-    }
-
-
     return (
         <>
             <Page isLoading={isLoading || isLoadingCategories}>
@@ -52,8 +31,7 @@ export default function Products() {
                     {
                         categories && (
                             <SideNavigation
-                                // items={categoriesOld}
-                                items={mapCategories(categories.categories)}
+                                items={categories}
                                 header={'Products'}
                                 path={'products'}
                             />

@@ -5,11 +5,10 @@ import {useParams} from 'react-router-dom';
 import OrderHistory from '../../components/Pages/Account/OrderHistory';
 import ProfilePage from '../../components/Pages/Account/ProfilePage';
 
-const navigation = {
-    profile: [],
-    orders: []
-};
-
+const navigation = [
+    "profile",
+    "orders",
+]
 
 function displayPage(id: string): ReactNode {
     switch (id) {

@@ -1,3 +1,1 @@
-export interface CategoriesDto {
-    categories: string[];
-}
+export type CategoriesDto = string[]
