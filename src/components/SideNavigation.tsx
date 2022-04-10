@@ -5,7 +5,7 @@ import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 
 interface Props {
-    items: Record<string, string[]>;
+    items?: Record<string, string[]>;
     header?: string;
     path: string;
 }
@@ -29,6 +29,7 @@ export default function SideNavigation(props: Props) {
                     }
                 >
                     {
+                        props.items &&
                         Object.entries(props.items).map(([category, subcategories]) => (
                             <Category
                                 key={category}
