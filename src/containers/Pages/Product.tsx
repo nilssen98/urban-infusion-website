@@ -104,19 +104,30 @@ export default function Product(props: Props) {
                                 </Stack>
                                 <Stack>
                                     <Typography variant={'h4'} marginBottom={2}>Comments</Typography>
-                                    <Button variant={'contained'} sx={{width: '150px'}}>Add comment</Button>
+                                    <Button variant={'contained'} sx={{width: '160px'}}>Add a comment</Button>
                                     <Box>
                                         {
-                                            data.comments.map(comment => (
-                                                <Comment
-                                                    key={comment.id}
-                                                    id={comment.id}
-                                                    username={comment.user.username}
-                                                    text={comment.text}
-                                                    lastUpdated={comment.lastUpdated}
-                                                    created={comment.created}
-                                                />
-                                            ))
+                                            data.comments && data.comments.length !== 0 ? (
+                                                data.comments.map(comment => (
+                                                    <Comment
+                                                        key={comment.id}
+                                                        id={comment.id}
+                                                        username={comment.user.username}
+                                                        text={comment.text}
+                                                        lastUpdated={comment.lastUpdated}
+                                                        created={comment.created}
+                                                    />
+                                                ))
+                                            ) : (
+                                                <Stack
+                                                    direction={'row'}
+                                                    justifyContent={'flex-start'}
+                                                    alignItems={'center'}
+                                                    height={150}
+                                                >
+                                                    <Typography>No comments yet</Typography>
+                                                </Stack>
+                                            )
                                         }
                                     </Box>
                                 </Stack>
