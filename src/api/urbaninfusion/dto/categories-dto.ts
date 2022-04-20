@@ -1,6 +1,6 @@
 export enum Category {
-    TEA = "tea",
-    ACCESSORIES = "accessories"
+    TEA = "TEA",
+    ACCESSORIES = "ACCESSORIES"
 }
 
 export type CategoriesDto = Category[];
