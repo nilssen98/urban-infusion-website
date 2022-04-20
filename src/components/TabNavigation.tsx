@@ -1,5 +1,4 @@
-import {Tab, Tabs, TabsProps, Typography} from '@mui/material';
-import {ReactElement} from 'react';
+import {Tab, Tabs, TabsProps} from '@mui/material';
 
 interface Props {
     tabsProps?: TabsProps;
