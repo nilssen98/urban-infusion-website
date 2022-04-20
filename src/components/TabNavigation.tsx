@@ -1,13 +1,13 @@
 import {Tab, Tabs, TabsProps} from "@mui/material";
 import {ReactElement} from "react";
 
-interface TabProps {
+export interface TabProps {
     name: string,
     icon?: ReactElement,
 }
 
 interface Props {
-    tabsProps: TabsProps,
+    tabsProps?: TabsProps,
     tabs?: TabProps[],
     currentTab: number,
     onChange: () => void;
