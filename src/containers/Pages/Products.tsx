@@ -45,15 +45,11 @@ export default function Products() {
         <>
             <Page isLoading={isLoading || isLoadingCategories}>
                 <Box>
-                    {
-                        categories && (
-                            <TabNavigation
-                                tabs={filteredCategories()}
-                                currentTab={currentTab}
-                                onChange={(newValue) => setCurrentTab(newValue)}
-                            />
-                        )
-                    }
+                    <TabNavigation
+                        tabs={filteredCategories()}
+                        currentTab={currentTab}
+                        onChange={(newValue) => setCurrentTab(newValue)}
+                    />
                     <Divider/>
                     {
                         products ? (
