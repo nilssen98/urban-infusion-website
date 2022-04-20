@@ -36,13 +36,13 @@ const mapDispatchToProps = {
     toggleTheme: userPreferencesSlice.actions.toggleTheme
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(NavigationBar);
+export default connect(mapStateToProps, mapDispatchToProps)(AppBarNavigation);
 
 type Props = ReturnType<typeof mapStateToProps> & typeof mapDispatchToProps & {
     children?: ReactElement;
 };
 
-function NavigationBar(props: Props) {
+function AppBarNavigation(props: Props) {
     const [anchorElNav, setAnchorElNav] = useState(null);
 
     const theme = useTheme();
