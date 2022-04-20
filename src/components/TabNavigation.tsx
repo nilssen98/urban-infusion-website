@@ -10,7 +10,7 @@ interface Props {
     tabsProps?: TabsProps,
     tabs?: TabProps[],
     currentTab: number,
-    onChange: () => void;
+    onChange: (newValue: any) => void;
 }
 
 export default function TabNavigation(props: Props) {
@@ -19,11 +19,12 @@ export default function TabNavigation(props: Props) {
             <Tabs
                 {...props.tabsProps}
                 value={props.currentTab}
-                onChange={props.onChange}
+                onChange={(event, newValue) => props.onChange(newValue)}
             >
                 {
-                    props.tabs?.map(tab => (
+                    props.tabs?.map((tab, index) => (
                         <Tab
+                            key={tab.name + index}
                             label={tab.name}
                             icon={tab.icon}
                         />
