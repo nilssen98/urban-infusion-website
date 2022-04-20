@@ -1,15 +1,15 @@
-import {Tab, Tabs, TabsProps} from "@mui/material";
-import {ReactElement} from "react";
+import {Tab, Tabs, TabsProps, Typography} from '@mui/material';
+import {ReactElement} from 'react';
 
 export interface TabProps {
-    name: string,
-    icon?: ReactElement,
+    name: string;
+    icon?: ReactElement;
 }
 
 interface Props {
-    tabsProps?: TabsProps,
-    tabs?: TabProps[],
-    currentTab: number,
+    tabsProps?: TabsProps;
+    tabs?: TabProps[];
+    currentTab: number;
     onChange: (newValue: any) => void;
 }
 
@@ -33,5 +33,5 @@ export default function TabNavigation(props: Props) {
                 }
             </Tabs>
         </>
-    )
+    );
 }
