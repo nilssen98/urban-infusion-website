@@ -26,6 +26,7 @@ export default function TabNavigation(props: Props) {
                         <Tab
                             key={tab.name + index}
                             label={tab.name}
+                            iconPosition={'start'}
                             icon={tab.icon}
                         />
                     ))
