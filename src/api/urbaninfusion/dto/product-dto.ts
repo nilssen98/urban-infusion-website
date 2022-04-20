@@ -1,5 +1,5 @@
 import {CommentDto} from './comment-dto';
-import {Category} from "./categories-dto";
+import {Category} from './categories-dto';
 
 export interface ProductDto {
     id: number;

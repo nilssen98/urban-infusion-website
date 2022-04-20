@@ -1,4 +1,4 @@
-import {Avatar, Button, Stack, Tooltip, Typography} from '@mui/material';
+import {Avatar, Button, Divider, Stack, Tooltip, Typography} from '@mui/material';
 import {formatDate} from '../../../utils/dateParser';
 
 interface Props {
@@ -18,7 +18,7 @@ export default function Comment(props: Props) {
     return (
         <>
             <Stack direction={'column'} minHeight={200} width={'100%'} gap={3} sx={{border: '1px solid grey'}}>
-                <Stack direction={'row'} justifyContent={'flex-start'} alignItems={'center'} gap={2} margin={3}>
+                <Stack direction={'row'} justifyContent={'flex-start'} alignItems={'center'} gap={2} margin={3} marginBottom={1}>
                     <Tooltip title={props.username as string}>
                         <Avatar>{firstLetterOfUsername(props.username)}</Avatar>
                     </Tooltip>
@@ -31,6 +31,7 @@ export default function Comment(props: Props) {
                         </Typography>
                     </Stack>
                 </Stack>
+                <Divider variant={'middle'}/>
                 <Typography variant={'body2'} ml={3} mr={3} mb={1} flexGrow={2} sx={{fontStyle: 'italic'}}>
                     {`'${props.text}'`}
                 </Typography>
