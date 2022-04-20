@@ -25,46 +25,52 @@ function AccountCard(props: CardProps) {
      */
     return (
         <>
-            <Stack
-                direction={'column'}
-                sx={{
-                    padding: 10,
-                    maxWidth: 'lg',
-                    border: '1px solid red',
-                    alignItems: 'center',
-                }}
-            >
-                <Box
+            <Box sx={{
+                width: '100%',
+                alignItems: 'center',
+                border: '1px solid blue'
+            }}>
+                <Stack
+                    direction={'column'}
                     sx={{
-                        flex: {md: 1}
-                    }}>
-                    <Typography
-                        variant={'h4'}
-                        sx={{
-                            py: 10,
-                            px: 5,
-                            width: '100%',
-                            textAlign: 'center',
-                            backgroundColor: 'oldlace',
-                        }}
-                    >{props.header}</Typography>
-                </Box>
-                <Box
-                    sx={{
-                        backgroundColor: '',
-                        flex: {md: '2'},
-                        py: 10,
-                        px: 5,
+                        padding: 10,
+                        maxWidth: 'lg',
+                        border: '1px solid red',
+                        alignItems: 'center',
                     }}
                 >
                     <Box
                         sx={{
-                            maxWidth: 250
+                            flex: {md: 1}
                         }}>
-                        {props.children}
+                        <Typography
+                            variant={'h4'}
+                            sx={{
+                                py: 10,
+                                px: 5,
+                                width: '100%',
+                                textAlign: 'center',
+                                backgroundColor: 'oldlace',
+                            }}
+                        >{props.header}</Typography>
                     </Box>
-                </Box>
-            </Stack>
+                    <Box
+                        sx={{
+                            backgroundColor: '',
+                            flex: {md: '2'},
+                            py: 10,
+                            px: 5,
+                        }}
+                    >
+                        <Box
+                            sx={{
+                                maxWidth: 250
+                            }}>
+                            {props.children}
+                        </Box>
+                    </Box>
+                </Stack>
+            </Box>
         </>
     );
 }
