@@ -2,11 +2,12 @@ import {useParams} from 'react-router-dom';
 import {useQuery} from 'react-query';
 import {getProductById} from '../../api/urbaninfusion/public/products';
 import Section from '../../components/Wrappers/Section';
-import {Button, Stack, Typography} from '@mui/material';
+import {Button, Stack, Typography, useTheme} from '@mui/material';
 import Page from '../../components/Wrappers/Page';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import PictureBox from '../../components/PictureBox';
 import Comments from '../../components/Pages/ProductPage/Comments';
+import {hexToRgb} from '../../utils/utils';
 
 interface Props {
     image_url?: string;
@@ -18,6 +19,7 @@ Product.defaultProps = {
 
 export default function Product(props: Props) {
     const {id} = useParams();
+    const theme = useTheme();
 
     const {isLoading, data} = useQuery(
         'product',
@@ -59,10 +61,12 @@ export default function Product(props: Props) {
                                             {data.title}
                                         </Typography>
                                         <Typography
-                                            variant={'h5'}
+                                            variant={'h4'}
                                             marginBottom={4}
+                                            color={theme.palette.mode === 'light'
+                                                ? `rgb(${hexToRgb(theme.palette.primary.main)})` : ''}
                                         >
-                                            {`${data.price}$ / ${data.weight}`}
+                                            {`$${data.price}`}
                                         </Typography>
                                         <Button
                                             variant={'contained'}
