@@ -10,9 +10,11 @@ import {ReactElement, useState} from 'react';
 import TabNavigation, {TabProps} from '../../components/TabNavigation';
 import FreeBreakfastOutlinedIcon from '@mui/icons-material/FreeBreakfastOutlined';
 import CategoryOutlinedIcon from '@mui/icons-material/CategoryOutlined';
+import {ProductDto} from '../../api/urbaninfusion/dto/product-dto';
 
 export default function Products() {
-    const {isLoading, data: products} = useQuery(
+    const {isLoading, data: products}:
+        { isLoading: boolean, data?: ProductDto[] } = useQuery(
         'products',
         () => getProducts()
     );
