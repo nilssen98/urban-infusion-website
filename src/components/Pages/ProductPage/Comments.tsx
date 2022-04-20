@@ -1,6 +1,6 @@
 import {CommentDto} from '../../../api/urbaninfusion/dto/comment-dto';
 import Comment from './Comment';
-import {Box, Stack, Typography} from '@mui/material';
+import {Stack, Typography} from '@mui/material';
 
 interface Props {
     comments?: CommentDto[];
@@ -9,7 +9,10 @@ interface Props {
 export default function Comments(props: Props) {
     return (
         <>
-            <Box>
+            <Stack
+                direction={'column'}
+                gap={2}
+            >
                 {
                     props.comments && props.comments.length !== 0 ? (
                         props.comments.map(comment => (
@@ -33,7 +36,7 @@ export default function Comments(props: Props) {
                         </Stack>
                     )
                 }
-            </Box>
+            </Stack>
         </>
     );
 }

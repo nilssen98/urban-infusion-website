@@ -17,7 +17,7 @@ export default function Comment(props: Props) {
 
     return (
         <>
-            <Stack direction={'column'} minHeight={200} width={'100%'} gap={3} sx={{border: '1px solid grey'}}>
+            <Stack direction={'column'} minHeight={200} width={'100%'} gap={3}>
                 <Stack direction={'row'} justifyContent={'flex-start'} alignItems={'center'} gap={2} margin={3} marginBottom={1}>
                     <Tooltip title={props.username as string}>
                         <Avatar>{firstLetterOfUsername(props.username)}</Avatar>
