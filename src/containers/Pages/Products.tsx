@@ -5,14 +5,16 @@ import {useParams} from 'react-router-dom';
 import Page from '../../components/Wrappers/Page';
 import {useQuery} from 'react-query';
 import {getCategories} from '../../api/urbaninfusion/public/categories';
-import {Category} from "../../api/urbaninfusion/dto/categories-dto";
-import {ReactElement, useState} from "react";
-import TabNavigation, {TabProps} from "../../components/TabNavigation";
+import {Category} from '../../api/urbaninfusion/dto/categories-dto';
+import {ReactElement, useState} from 'react';
+import TabNavigation, {TabProps} from '../../components/TabNavigation';
 import FreeBreakfastOutlinedIcon from '@mui/icons-material/FreeBreakfastOutlined';
 import CategoryOutlinedIcon from '@mui/icons-material/CategoryOutlined';
+import {ProductDto} from '../../api/urbaninfusion/dto/product-dto';
 
 export default function Products() {
-    const {isLoading, data: products} = useQuery(
+    const {isLoading, data: products}:
+        { isLoading: boolean, data?: ProductDto[] } = useQuery(
         'products',
         () => getProducts()
     );
@@ -21,16 +23,15 @@ export default function Products() {
         { isLoading: boolean, data?: TabProps[] } = useQuery(
         'categories',
         async () => {
-            const categories = await getCategories()
-            return categories.reduce(
+            const temp_categories = await getCategories();
+            return temp_categories.reduce(
                 (acc: TabProps[], curr: Category) => {
-                    console.log(curr as Category === Category.TEA);
                     acc.push({
                         name: curr,
                         icon: getIconForCategory(curr as Category)
-                    })
+                    });
                     return acc;
-                }, [])
+                }, []);
         }
     );
 
@@ -42,13 +43,17 @@ export default function Products() {
     const getIconForCategory = (category: Category): ReactElement => {
         switch (category) {
             case Category.TEA:
-                return <FreeBreakfastOutlinedIcon/>
+                return <FreeBreakfastOutlinedIcon/>;
             case Category.ACCESSORIES:
-                return <CategoryOutlinedIcon/>
+                return <CategoryOutlinedIcon/>;
             default:
-                return <></>
+                return <></>;
         }
-    }
+    };
+
+    const filteredProducts = () => categories
+        ? products?.filter(product => product.category === categories[tab].name)
+        : products;
 
     return (
         <>
@@ -65,7 +70,7 @@ export default function Products() {
                     }
                     {
                         products ? (
-                            <ProductsList products={products} id={id}/>
+                            <ProductsList products={filteredProducts()} id={id}/>
                         ) : (
                             <Stack
                                 direction={'column'}
