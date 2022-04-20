@@ -3,6 +3,7 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import {useState} from 'react';
 import {SxProps} from '@mui/system';
 import {Theme} from '@mui/material/styles';
+import PictureBox from './PictureBox';
 
 interface Props {
     id?: number;
@@ -50,19 +51,7 @@ export default function ProductCardNew(props: Props) {
                         alignItems: 'center',
                     }}
                 >
-                    <Box
-                        height={200}
-                        sx={{
-                            objectFit: 'contain',
-                        }}
-                    >
-                        <img
-                            src={props.image_url}
-                            alt={'Product image'}
-                            style={{objectFit: 'contain', height: 'inherit'}}
-                            draggable={false}
-                        />
-                    </Box>
+                    <PictureBox height={200} image={props.image_url} alt={'Product image'}/>
                     <Box paddingBottom={6}>
                         <Typography
                             variant={'h4'}

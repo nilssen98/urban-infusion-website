@@ -6,6 +6,7 @@ import {Box, Button, Stack, Typography} from '@mui/material';
 import Page from '../../components/Wrappers/Page';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import Comment from '../../components/Pages/ProductPage/Comment';
+import PictureBox from '../../components/PictureBox';
 
 interface Props {
     image_url?: string;
@@ -39,17 +40,8 @@ export default function Product(props: Props) {
                                     <Stack
                                         justifyContent={'center'}
                                         alignItems={'center'}
-                                        height={400}
-                                        sx={{
-                                            objectFit: 'contain',
-                                        }}
                                     >
-                                        <img
-                                            src={props.image_url}
-                                            alt={'Product image'}
-                                            draggable={false}
-                                            style={{objectFit: 'contain', height: 'inherit'}}
-                                        />
+                                        <PictureBox height={400} image={props.image_url}/>
                                     </Stack>
                                     <Stack
                                         direction={'column'}
