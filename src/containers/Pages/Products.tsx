@@ -44,29 +44,33 @@ export default function Products() {
     return (
         <>
             <Page isLoading={isLoading || isLoadingCategories}>
-                <Box>
-                    <TabNavigation
-                        tabs={filteredCategories()}
-                        currentTab={currentTab}
-                        onChange={(newValue) => setCurrentTab(newValue)}
-                    />
-                    <Divider/>
-                    {
-                        products ? (
-                            <ProductsList products={filteredProducts()} id={id}/>
-                        ) : (
-                            <Stack
-                                direction={'column'}
-                                justifyContent={'center'}
-                                alignItems={'center'}
-                                width={'100%'}
-                                height={`calc(100vh - ${theme.mixins.toolbar.minHeight}px)`}
-                            >
-                                <Typography variant={'h5'} component={'h1'}>No products to show!</Typography>
-                            </Stack>
-                        )
-                    }
-                </Box>
+                <Stack direction={'column'} alignItems={'center'}>
+                    <Box width={'100%'} maxWidth={theme.breakpoints.values.lg}>
+                        <TabNavigation
+                            tabs={filteredCategories()}
+                            currentTab={currentTab}
+                            onChange={(newValue) => setCurrentTab(newValue)}
+                        />
+                    </Box>
+                    <Divider flexItem/>
+                    <Box width={'100%'} maxWidth={theme.breakpoints.values.lg}>
+                        {
+                            products ? (
+                                <ProductsList products={filteredProducts()} id={id}/>
+                            ) : (
+                                <Stack
+                                    direction={'column'}
+                                    justifyContent={'center'}
+                                    alignItems={'center'}
+                                    width={'100%'}
+                                    height={`calc(100vh - ${theme.mixins.toolbar.minHeight}px)`}
+                                >
+                                    <Typography variant={'h5'} component={'h1'}>No products to show!</Typography>
+                                </Stack>
+                            )
+                        }
+                    </Box>
+                </Stack>
             </Page>
         </>
     );
