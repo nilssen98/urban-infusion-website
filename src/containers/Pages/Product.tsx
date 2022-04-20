@@ -84,7 +84,6 @@ export default function Product(props: Props) {
                                 </Stack>
                                 <Stack>
                                     <Typography variant={'h4'} marginBottom={2}>Comments</Typography>
-                                    <Button variant={'contained'} sx={{width: '160px'}}>Add a comment</Button>
                                     <Comments comments={data.comments}/>
                                 </Stack>
                             </Stack>
