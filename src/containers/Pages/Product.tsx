@@ -54,37 +54,21 @@ export default function Product(props: Props) {
                                     >
                                         <Typography
                                             variant={'h3'}
-                                            marginBottom={4}
+                                            marginBottom={14}
                                         >
                                             {data.title}
                                         </Typography>
                                         <Typography
                                             variant={'h5'}
-                                            marginBottom={8}
+                                            marginBottom={4}
                                         >
                                             {`${data.price}$ / ${data.weight}`}
                                         </Typography>
-                                        <Stack
-                                            direction={'row'}
-                                        >
-                                            <Typography
-                                                variant={'h6'}
-                                                marginBottom={4}
-                                            >
-                                                Quantity:
-                                            </Typography>
-                                            <Typography
-                                                variant={'h6'}
-                                                color={'red'}
-                                            >
-                                                Quantity selector goes here
-                                            </Typography>
-                                        </Stack>
                                         <Button
                                             variant={'contained'}
                                             size={'large'}
                                             startIcon={<AddShoppingCartIcon/>}
-                                            sx={{width: '80%'}}
+                                            sx={{width: '80%', maxWidth: '350px'}}
                                         >
                                             Add to cart
                                         </Button>
