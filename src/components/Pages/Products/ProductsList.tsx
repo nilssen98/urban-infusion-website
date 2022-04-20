@@ -14,6 +14,19 @@ export function ProductsList(props: Props) {
     const theme = useTheme();
     const navigate = useNavigate();
 
+    const tempData = range(3).map(item =>
+        <ProductCard
+            key={item}
+            title={'Title'}
+            price={9.99}
+            image_url={'https://i.imgur.com/ZG4W7Le.jpg'}
+            sx={{
+                marginRight: 4,
+                marginBottom: 4
+            }}
+        />
+    )
+
     return (
         <>
             <Box
@@ -27,36 +40,22 @@ export function ProductsList(props: Props) {
                     flexWrap={'wrap'}
                     direction={'row'}
                 >
-                {
-                    range(3).map(item =>
-                        <ProductCard
-                            key={item}
-                            title={'Title'}
-                            price={9.99}
-                            image_url={'https://i.imgur.com/ZG4W7Le.jpg'}
-                            sx={{
-                                marginRight: 4,
-                                marginBottom: 4
-                            }}
-                        />
-                    )
-                }
-                {
-                    props.products.map(product =>
-                        <ProductCardNew
-                            key={product.id}
-                            id={product.id}
-                            title={product.title}
-                            price={product.price}
-                            image_url={'https://i.imgur.com/ZG4W7Le.jpg'}
-                            onClick={() => navigate(`/product/${product.id}`)}
-                            sx={{
-                                marginRight: 4,
-                                marginBottom: 4
-                            }}
-                        />
-                    )
-                }
+                    {
+                        props.products.map(product =>
+                            <ProductCardNew
+                                key={product.id}
+                                id={product.id}
+                                title={product.title}
+                                price={product.price}
+                                image_url={'https://i.imgur.com/ZG4W7Le.jpg'}
+                                onClick={() => navigate(`/product/${product.id}`)}
+                                sx={{
+                                    marginRight: 4,
+                                    marginBottom: 4
+                                }}
+                            />
+                        )
+                    }
                 </Stack>
             </Box>
         </>
