@@ -1,1 +1,6 @@
-export type CategoriesDto = string[];
+export enum Category {
+    TEA = "TEA",
+    ACCESSORIES = "ACCESSORIES"
+}
+
+export type CategoriesDto = Category[];

@@ -13,14 +13,14 @@ import {
 import Logo from '../components/Logo';
 import {ReactElement, ReactNode, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
-import {ThemeSwitch} from '../components/NavigationBar/ThemeSwitch';
+import {ThemeSwitch} from '../components/AppBarNavigation/ThemeSwitch';
 import {RootState} from '../state/store';
 import {userPreferencesSlice} from '../state/slices/userPreferences';
 import MenuIcon from '@mui/icons-material/Menu';
 import {SxProps} from '@mui/system';
 import {Theme} from '@mui/material/styles';
-import CartButton from '../components/NavigationBar/CartButton';
-import AccountButton from '../components/NavigationBar/AccountButton';
+import CartButton from '../components/AppBarNavigation/CartButton';
+import AccountButton from '../components/AppBarNavigation/AccountButton';
 import {connect} from 'react-redux';
 import {selectCartItems} from '../state/slices/cart';
 import {hexToRgb} from '../utils/utils';
