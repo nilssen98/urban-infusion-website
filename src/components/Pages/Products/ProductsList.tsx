@@ -7,7 +7,7 @@ import {useNavigate} from 'react-router-dom';
 
 interface Props {
     id?: string;
-    products: ProductDto[];
+    products?: ProductDto[];
 }
 
 export function ProductsList(props: Props) {
@@ -25,7 +25,7 @@ export function ProductsList(props: Props) {
                 marginBottom: 4
             }}
         />
-    )
+    );
 
     return (
         <>
@@ -41,7 +41,7 @@ export function ProductsList(props: Props) {
                     direction={'row'}
                 >
                     {
-                        props.products.map(product =>
+                        props.products?.map(product =>
                             <ProductCardNew
                                 key={product.id}
                                 id={product.id}
