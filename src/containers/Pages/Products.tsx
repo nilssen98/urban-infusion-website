@@ -7,7 +7,7 @@ import {useQuery} from 'react-query';
 import {getCategories} from '../../api/urbaninfusion/public/categories';
 import {Category} from '../../api/urbaninfusion/dto/categories-dto';
 import {useState} from 'react';
-import TabNavigation, {TabProps} from '../../components/TabNavigation';
+import TabNavigation from '../../components/TabNavigation';
 import {ProductDto} from '../../api/urbaninfusion/dto/product-dto';
 
 export default function Products() {
@@ -23,21 +23,21 @@ export default function Products() {
         () => getCategories()
     );
 
-    const [tab, setTab] = useState<number>(0);
+    const [currentTab, setCurrentTab] = useState<number>(0);
 
     const {id} = useParams();
     const theme = useTheme();
 
-    const filteredCategories = () => {
-        return categories?.reduce((acc: TabProps[], curr: Category) => {
-            acc.push({name: curr});
+    const filteredCategories = (): Array<Category | string> => {
+        return categories?.reduce((acc: Array<Category | string>, curr: Category) => {
+            acc.push(curr);
             return acc;
-        }, [{name: 'all'}]);
+        }, ['all']) || [];
     };
 
-    const filteredProducts = () => {
-        return categories && Object.values(categories).includes(categories[tab])
-            ? products?.filter(product => product.category === categories[tab])
+    const filteredProducts = (): ProductDto[] | undefined => {
+        return Object.values(Category).includes(filteredCategories()[currentTab] as Category)
+            ? products?.filter(product => product.category === filteredCategories()[currentTab])
             : products;
     };
 
@@ -49,8 +49,8 @@ export default function Products() {
                         categories && (
                             <TabNavigation
                                 tabs={filteredCategories()}
-                                currentTab={tab}
-                                onChange={(newValue) => setTab(newValue)}
+                                currentTab={currentTab}
+                                onChange={(newValue) => setCurrentTab(newValue)}
                             />
                         )
                     }
