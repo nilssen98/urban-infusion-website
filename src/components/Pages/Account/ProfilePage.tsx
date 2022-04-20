@@ -1,4 +1,4 @@
-import {Box, Stack, TextField, Typography, useTheme} from '@mui/material';
+import {Box, Button, Stack, TextField, Typography, useTheme} from '@mui/material';
 import {UserDto} from '../../../api/urbaninfusion/dto/user-dto';
 
 interface CardProps {
@@ -6,7 +6,13 @@ interface CardProps {
     children?: any;
 }
 
-const userData: UserDto = {id: 666, username: 'TestUser', admin: false, email: 'something@something.com', password: 'secret'};
+const userData: UserDto = {
+    id: 666,
+    username: 'TestUser',
+    admin: false,
+    email: 'something@something.com',
+    password: 'secret'
+};
 
 
 function AccountCard(props: CardProps) {
@@ -20,17 +26,16 @@ function AccountCard(props: CardProps) {
     return (
         <>
             <Stack
-                direction={{xs: 'column', md: 'row'}}
+                direction={'column'}
                 sx={{
                     padding: 10,
-                    width: '100%',
-                    border: '1px solid red'
+                    maxWidth: 'lg',
+                    border: '1px solid red',
+                    alignItems: 'center',
                 }}
             >
                 <Box
                     sx={{
-                        border: '1px solid blue',
-                        backgroundColor: '',
                         flex: {md: 1}
                     }}>
                     <Typography
@@ -39,19 +44,25 @@ function AccountCard(props: CardProps) {
                             py: 10,
                             px: 5,
                             width: '100%',
-                            textAlign: 'center'
+                            textAlign: 'center',
+                            backgroundColor: 'oldlace',
                         }}
                     >{props.header}</Typography>
                 </Box>
                 <Box
                     sx={{
-                        border: '1px solid orange',
+                        backgroundColor: '',
                         flex: {md: '2'},
                         py: 10,
                         px: 5,
                     }}
                 >
-                    {props.children}
+                    <Box
+                        sx={{
+                            maxWidth: 250
+                        }}>
+                        {props.children}
+                    </Box>
                 </Box>
             </Stack>
         </>
@@ -94,10 +105,28 @@ function ShippingInformationFields(props: ShippingInformationProps) {
                     label='Address'
                     defaultValue={props.data.id}
                 />
+                <Box
+                    sx={{
+                        pt: 4,
+                        display: 'flex',
+                        width: '100%',
+                        justifyContent:'center'
+                    }}
+                >
+                    <Button
+                        variant={'contained'}
+                        size={'medium'}
+                        color={'secondary'}
+                    >
+                        save
+                    </Button>
+                </Box>
+
             </Box>
         </>
     );
 }
+
 
 interface PersonalInformationProps {
     data: UserDto;
@@ -134,6 +163,22 @@ function PersonalInformationFields(props: PersonalInformationProps) {
                     label='Phone number'
                     defaultValue={props.data.id}
                 />
+                <Box
+                    sx={{
+                        pt: 4,
+                        display: 'flex',
+                        width: '100%',
+                        justifyContent: 'center',
+                    }}
+                >
+                    <Button
+                        variant={'contained'}
+                        size={'medium'}
+                        color={'secondary'}
+                    >
+                        save
+                    </Button>
+                </Box>
             </Box>
         </>
     );
@@ -143,20 +188,21 @@ export default function ProfilePage() {
     return (
         <>
             <Box
-            sx={{
-                width: '100%',
-                display: 'flex',
-                flexDirection: 'column'
-            }}>
-                <AccountCard
-                    header={'Shipping Information'}
-                >
-                    <ShippingInformationFields data={userData}/>
-                </AccountCard>
+                sx={{
+                    width: '100%',
+                    display: 'flex',
+                    flexDirection: 'column'
+                }}>
 
                 <AccountCard header={'Personal Information'}>
                     <PersonalInformationFields data={userData}/>
                 </AccountCard>
+
+                <AccountCard
+                    header={'Shipping Information'}>
+                    <ShippingInformationFields data={userData}/>
+                </AccountCard>
+
             </Box>
         </>
     );
