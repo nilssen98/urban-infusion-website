@@ -2,12 +2,14 @@ import {useParams} from 'react-router-dom';
 import {useQuery} from 'react-query';
 import {getProductById} from '../../api/urbaninfusion/public/products';
 import Section from '../../components/Wrappers/Section';
-import {Button, Stack, Typography, useTheme} from '@mui/material';
+import {Button, Collapse, Stack, Typography, useTheme} from '@mui/material';
 import Page from '../../components/Wrappers/Page';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import PictureBox from '../../components/PictureBox';
 import Comments from '../../components/Pages/ProductPage/Comments';
 import {hexToRgb} from '../../utils/utils';
+import {useState} from 'react';
+import CommentForm from '../../components/Pages/ProductPage/CommentForm';
 
 interface Props {
     image_url?: string;
@@ -20,6 +22,8 @@ Product.defaultProps = {
 export default function Product(props: Props) {
     const {id} = useParams();
     const theme = useTheme();
+
+    const [showForm, setShowForm] = useState<boolean>(false);
 
     const {isLoading, data} = useQuery(
         'product',
@@ -85,7 +89,16 @@ export default function Product(props: Props) {
                                 <Stack>
                                     <Typography variant={'h4'} marginBottom={2}>Comments</Typography>
                                     <Comments comments={data.comments}/>
-                                    <Button variant={'contained'} sx={{width: '180px'}}>Write a comment</Button>
+                                    <Button
+                                        variant={'contained'}
+                                        sx={{width: '180px'}}
+                                        onClick={() => setShowForm(!showForm)}
+                                    >
+                                        Write a comment
+                                    </Button>
+                                    <Collapse orientation={'vertical'} in={showForm}>
+                                        <CommentForm/>
+                                    </Collapse>
                                 </Stack>
                             </Stack>
                         )
