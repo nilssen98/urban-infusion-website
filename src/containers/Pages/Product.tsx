@@ -2,11 +2,11 @@ import {useParams} from 'react-router-dom';
 import {useQuery} from 'react-query';
 import {getProductById} from '../../api/urbaninfusion/public/products';
 import Section from '../../components/Wrappers/Section';
-import {Box, Button, Stack, Typography} from '@mui/material';
+import {Button, Stack, Typography} from '@mui/material';
 import Page from '../../components/Wrappers/Page';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import Comment from '../../components/Pages/ProductPage/Comment';
 import PictureBox from '../../components/PictureBox';
+import Comments from '../../components/Pages/ProductPage/Comments';
 
 interface Props {
     image_url?: string;
@@ -81,31 +81,7 @@ export default function Product(props: Props) {
                                 <Stack>
                                     <Typography variant={'h4'} marginBottom={2}>Comments</Typography>
                                     <Button variant={'contained'} sx={{width: '160px'}}>Add a comment</Button>
-                                    <Box>
-                                        {
-                                            data.comments && data.comments.length !== 0 ? (
-                                                data.comments.map(comment => (
-                                                    <Comment
-                                                        key={comment.id}
-                                                        id={comment.id}
-                                                        username={comment.user.username}
-                                                        text={comment.text}
-                                                        lastUpdated={comment.lastUpdated}
-                                                        created={comment.created}
-                                                    />
-                                                ))
-                                            ) : (
-                                                <Stack
-                                                    direction={'row'}
-                                                    justifyContent={'flex-start'}
-                                                    alignItems={'center'}
-                                                    height={150}
-                                                >
-                                                    <Typography>No comments yet</Typography>
-                                                </Stack>
-                                            )
-                                        }
-                                    </Box>
+                                    <Comments comments={data.comments}/>
                                 </Stack>
                             </Stack>
                         )
