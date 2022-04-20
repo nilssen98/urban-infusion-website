@@ -24,7 +24,6 @@ export default function Products() {
             const categories = await getCategories()
             return categories.reduce(
                 (acc: TabProps[], curr: Category) => {
-                    console.log(curr as Category === Category.TEA);
                     acc.push({
                         name: curr,
                         icon: getIconForCategory(curr as Category)
