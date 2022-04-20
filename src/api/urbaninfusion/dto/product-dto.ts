@@ -4,7 +4,7 @@ export interface ProductDto {
     id: number;
     price: number;
     discount: number;
-    image: Object;
+    image: string;
     title: string;
     description: string;
     weight: string;

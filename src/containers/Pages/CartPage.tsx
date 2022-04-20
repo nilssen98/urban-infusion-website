@@ -1,7 +1,7 @@
 import Section from '../../components/Wrappers/Section';
 import {RootState, store} from '../../state/store';
 import CartItemList from '../../components/Pages/CartPage/CartItemList';
-import {Cart, CartItem, cartSlice, selectCartItems} from '../../state/slices/cart';
+import {CartItem, cartSlice, selectCartItems} from '../../state/slices/cart';
 import {connect} from 'react-redux';
 import {useEffect} from 'react';
 
@@ -10,7 +10,7 @@ const dummyData: CartItem[] = [
         id: 0,
         price: 10,
         discount: 0.5,
-        image: Object,
+        image: 'https://i.imgur.com/ZG4W7Le.jpg',
         title: 'Some crazy item',
         description: 'This item is crazy',
         weight: '50kg',
@@ -21,7 +21,7 @@ const dummyData: CartItem[] = [
         id: 1,
         price: 20,
         discount: 0.0,
-        image: Object,
+        image: 'https://i.imgur.com/ZG4W7Le.jpg',
         title: 'Very nice item',
         description: 'This item is very nice',
         weight: '65kg',

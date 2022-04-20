@@ -1,1 +1,1 @@
-export type CategoriesDto = string[]
+export type CategoriesDto = string[];
