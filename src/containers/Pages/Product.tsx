@@ -10,6 +10,7 @@ import Comments from '../../components/Pages/ProductPage/Comments';
 import {hexToRgb} from '../../utils/utils';
 import {useState} from 'react';
 import CommentForm from '../../components/Pages/ProductPage/CommentForm';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 interface Props {
     image_url?: string;
@@ -91,7 +92,8 @@ export default function Product(props: Props) {
                                     <Comments comments={data.comments}/>
                                     <Button
                                         variant={'contained'}
-                                        sx={{width: '180px'}}
+                                        sx={{width: '200px'}}
+                                        endIcon={<ExpandMoreIcon/>}
                                         onClick={() => setShowForm(!showForm)}
                                     >
                                         Write a comment
