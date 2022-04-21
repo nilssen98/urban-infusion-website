@@ -26,8 +26,8 @@ export default function ProductCardNew(props: Props) {
         <>
             <CardActionArea
                 component={'div'}
-                onMouseEnter={() => setOnCardHover(!onCardHover)}
-                onMouseLeave={() => setOnCardHover(!onCardHover)}
+                onMouseEnter={() => setOnCardHover(true)}
+                onMouseLeave={() => setOnCardHover(false)}
                 onClick={props.onClick}
                 sx={{
                     height: 320,
