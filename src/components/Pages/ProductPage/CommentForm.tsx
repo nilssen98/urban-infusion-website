@@ -6,7 +6,7 @@ export default function CommentForm() {
             <Stack
                 direction={'column'}
                 justifyContent={'center'}
-                alignItems={{xs: 'center', md: 'flex-start'}}
+                alignItems={{xs: 'center', sm: 'flex-start'}}
                 width={'100%'}
             >
                 <Stack
@@ -20,7 +20,7 @@ export default function CommentForm() {
                 >
                     <Typography
                         variant={'h6'}
-                        alignSelf={{xs: 'center', md: 'flex-start'}}
+                        alignSelf={{xs: 'center', sm: 'flex-start'}}
                     >
                         Write a comment
                     </Typography>
