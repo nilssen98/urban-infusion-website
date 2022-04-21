@@ -26,6 +26,8 @@ export default function Product(props: Props) {
 
     const [showForm, setShowForm] = useState<boolean>(false);
 
+    const iconRotation = showForm ? 'rotate(180deg)' : 'rotate(0)';
+
     const {isLoading, data} = useQuery(
         'product',
         () => getProductById(id || '')
@@ -93,7 +95,10 @@ export default function Product(props: Props) {
                                     <Button
                                         variant={'contained'}
                                         sx={{width: '200px'}}
-                                        endIcon={<ExpandMoreIcon/>}
+                                        endIcon={
+                                            <ExpandMoreIcon
+                                                sx={{transform: `${iconRotation}`, transition: 'all 0.2s ease-in-out'}}
+                                            />}
                                         onClick={() => setShowForm(!showForm)}
                                     >
                                         Write a comment
