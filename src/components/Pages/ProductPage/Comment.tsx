@@ -15,17 +15,21 @@ export default function Comment(props: Props) {
         return username ? username.charAt(0).toUpperCase() : '';
     }
 
-    function stringToColor(string: string): string {
+    function stringToColor(string: string | undefined): string {
+        if (!string) {
+            return 'default';
+        }
+
         let hash = 3;
 
         /* eslint-disable no-bitwise */
-        for (let i = 0; i < string.length; i += 1) {
+        for (let i = 0; i < string.length; i++) {
             hash = string.charCodeAt(i) + ((hash << 5) - hash);
         }
 
         let color = '#';
 
-        for (let i = 0; i < 3; i += 1) {
+        for (let i = 0; i < 3; i++) {
             const value = (hash >> (i * 8)) & 0xff;
             color += `00${value.toString(16)}`.slice(-2);
         }
@@ -40,7 +44,7 @@ export default function Comment(props: Props) {
                 <Stack direction={'row'} justifyContent={'flex-start'} alignItems={'center'} gap={2} margin={3} marginBottom={1}>
                     <Tooltip title={props.username as string}>
                         <Avatar
-                            sx={{bgcolor: (props.username ? stringToColor(props.username) : 'default')}}
+                            sx={{bgcolor: `${stringToColor(props.username)}`}}
                         >
                             {firstLetterOfUsername(props.username)}
                         </Avatar>
