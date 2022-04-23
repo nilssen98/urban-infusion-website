@@ -14,26 +14,24 @@ export default function Comments(props: Props) {
                 gap={2}
             >
                 {
-                    props.comments && props.comments.length !== 0 && (
+                    props.comments && props.comments.length !== 0 ? (
                         <>
                             <Typography variant={'body1'}>
                                 {`${props.comments.length} comment${props.comments.length !== 1 ? 's' : ''}`}
                             </Typography>
+                            {
+                                props.comments.map(comment => (
+                                    <Comment
+                                        key={comment.id}
+                                        id={comment.id}
+                                        username={comment.user.username}
+                                        text={comment.text}
+                                        lastUpdated={comment.lastUpdated}
+                                        created={comment.created}
+                                    />
+                                ))
+                            }
                         </>
-                    )
-                }
-                {
-                    props.comments && props.comments.length !== 0 ? (
-                        props.comments.map(comment => (
-                            <Comment
-                                key={comment.id}
-                                id={comment.id}
-                                username={comment.user.username}
-                                text={comment.text}
-                                lastUpdated={comment.lastUpdated}
-                                created={comment.created}
-                            />
-                        ))
                     ) : (
                         <Stack
                             direction={'row'}
