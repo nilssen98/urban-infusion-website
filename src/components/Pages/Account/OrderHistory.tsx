@@ -35,7 +35,7 @@ const rows: OrderProps[] = [
 export default function OrderHistory() {
     return (
         <>
-
+            <h1> Hi</h1>
         </>
     );
 }
