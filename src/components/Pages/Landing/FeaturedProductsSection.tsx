@@ -1,12 +1,39 @@
 import Section from '../../Wrappers/Section';
 import {Box, Button, Grid, Typography} from '@mui/material';
 import {useNavigate} from 'react-router-dom';
-import {range} from 'lodash-es';
-import ProductCard from '../../ProductCard';
 import ProductCardNew from '../../ProductCardNew';
+import {getProducts} from '../../../api/urbaninfusion/public/products';
+import {ProductDto} from '../../../api/urbaninfusion/dto/product-dto';
+import {useQuery} from 'react-query';
 
 export default function FeaturedProductsSection() {
+
+    const productsToShow = 4;
+
     const navigate = useNavigate();
+    const {isLoading, data: products}:
+        { isLoading: boolean, data?: ProductDto[] } = useQuery(
+        'products',
+        () => getProducts()
+    );
+
+    function getRandomProductIndexes(numberOfProducts: number, productsSize: number): Array<number> {
+        if (numberOfProducts > productsSize) {
+            return new Array(productsSize).fill(0);
+        }
+        const nums = new Set<number>();
+        while (nums.size !== numberOfProducts) {
+            nums.add(randomInteger(0, productsSize - 1));
+        }
+        return Array.of(...nums);
+    }
+
+    /**
+     * Random int between min and max, inclusive.
+     */
+    function randomInteger(min: number, max: number): number {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
 
     return (
         <>
@@ -40,46 +67,30 @@ export default function FeaturedProductsSection() {
                         }}
                     >
                         {
-                            range(2).map((i) => (
-                                <Grid
-                                    container
-                                    key={i}
-                                    item
-                                    xs={12} sm={6} lg={3}
-                                    sx={{
-                                        justifyContent: 'center',
-                                        alignItems: 'center',
-                                    }}
-                                >
-                                    <ProductCard
-                                        key={i}
-                                        title={'Title'}
-                                        price={9.99}
-                                        image_url={'https://i.imgur.com/ZG4W7Le.jpg'}
-                                    />
-                                </Grid>
-                            ))
-                        }
-                        {
-                            range(2).map((i) => (
-                                <Grid
-                                    container
-                                    key={i}
-                                    item
-                                    xs={12} sm={6} lg={3}
-                                    sx={{
-                                        justifyContent: 'center',
-                                        alignItems: 'center',
-                                    }}
-                                >
-                                    <ProductCardNew
-                                        key={i}
-                                        title={'Title'}
-                                        price={9.99}
-                                        image_url={'https://i.imgur.com/ZG4W7Le.jpg'}
-                                    />
-                                </Grid>
-                            ))
+                            products && (getRandomProductIndexes(productsToShow, products.length)
+                                .map(index => products[index])
+                                .map(product => (
+                                    <Grid
+                                        container
+                                        key={product.id}
+                                        item
+                                        xs={12} sm={6} lg={3}
+                                        sx={{
+                                            justifyContent: 'center',
+                                            alignItems: 'center',
+                                        }}
+                                    >
+                                        <ProductCardNew
+                                            key={product.id}
+                                            id={product.id}
+                                            title={product.title}
+                                            price={product.price}
+                                            image_url={'https://i.imgur.com/ZG4W7Le.jpg'}
+                                            onClick={() => navigate(`/product/${product.id}`)}
+                                        />
+                                    </Grid>
+                                ))
+                            )
                         }
                     </Grid>
                     <Button
