@@ -81,6 +81,10 @@ export default function ProductCardNew(props: Props) {
                                         variant={'contained'}
                                         size={'small'}
                                         startIcon={<AddShoppingCartIcon/>}
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            console.log('Add to cart clicked!');
+                                        }}
                                         sx={{
                                             position: 'absolute',
                                             top: 265,
