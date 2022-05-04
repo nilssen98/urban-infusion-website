@@ -9,13 +9,12 @@ export function stringToColor(string: string | undefined): string {
     }
 
     let hash = 3;
+    let color = '#';
 
     /* eslint-disable no-bitwise */
     for (let i = 0; i < string.length; i++) {
         hash = string.charCodeAt(i) + ((hash << 5) - hash);
     }
-
-    let color = '#';
 
     for (let i = 0; i < 3; i++) {
         const value = (hash >> (i * 8)) & 0xff;
