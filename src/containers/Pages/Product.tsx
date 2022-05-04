@@ -40,15 +40,18 @@ export default function Product(props: Props) {
                             <Stack width={'100%'} gap={15}>
                                 <Stack
                                     direction={{xs: 'column', md: 'row'}}
-                                    sx={{
-                                        border: '1px solid red',
-                                    }}
                                 >
                                     <Stack
                                         justifyContent={'center'}
                                         alignItems={'center'}
                                     >
-                                        <PictureBox height={400} image={props.image_url}/>
+                                        <PictureBox
+                                            height={400}
+                                            image={props.image_url}
+                                            sx={{
+                                                paddingLeft: {xs: 0, md: 6, lg: 28}
+                                            }}
+                                        />
                                     </Stack>
                                     <Stack
                                         direction={'column'}
@@ -56,7 +59,6 @@ export default function Product(props: Props) {
                                         alignItems={'center'}
                                         sx={{
                                             flexGrow: '1',
-                                            border: '1px solid blue',
                                         }}
                                     >
                                         <Typography
