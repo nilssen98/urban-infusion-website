@@ -34,7 +34,9 @@ export default function Product(props: Props) {
     return (
         <>
             <Page isLoading={isLoading}>
-                <Section>
+                <Section
+                    sx={{marginTop: 16}}
+                >
                     {
                         data && (
                             <Stack width={'100%'} gap={15}>
