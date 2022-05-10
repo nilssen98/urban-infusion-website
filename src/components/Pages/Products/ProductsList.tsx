@@ -4,6 +4,7 @@ import {Box, Stack, useTheme} from '@mui/material';
 import {range} from 'lodash-es';
 import ProductCardNew from '../../ProductCardNew';
 import {useNavigate} from 'react-router-dom';
+import {getProductImageURL} from '../../../utils/productImageUtils';
 
 interface Props {
     id?: string;
@@ -47,7 +48,9 @@ export function ProductsList(props: Props) {
                                 id={product.id}
                                 title={product.title}
                                 price={product.price}
-                                image_url={'https://i.imgur.com/ZG4W7Le.jpg'}
+                                image_url={product.imageId
+                                    ? getProductImageURL(product.imageId)
+                                    : 'https://i.imgur.com/ZG4W7Le.jpg'}
                                 onClick={() => navigate(`/product/${product.id}`)}
                                 sx={{
                                     marginRight: 4,
