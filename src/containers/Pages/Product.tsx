@@ -11,6 +11,7 @@ import {hexToRgb} from '../../utils/utils';
 import {useState} from 'react';
 import CommentForm from '../../components/Pages/ProductPage/CommentForm';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import {getProductImageURL} from '../../utils/productImageUtils';
 
 interface Props {
     image_url?: string;
@@ -49,7 +50,7 @@ export default function Product(props: Props) {
                                     >
                                         <PictureBox
                                             height={400}
-                                            image={props.image_url}
+                                            image={data.imageId ? getProductImageURL(data.imageId) : props.image_url}
                                             sx={{
                                                 paddingLeft: {xs: 0, md: 6, lg: 28}
                                             }}
