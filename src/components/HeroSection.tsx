@@ -3,6 +3,7 @@ import {useNavigate} from 'react-router-dom';
 import Section from './Wrappers/Section';
 import StyledButton from './StyledButton';
 import BackgroundImage from '../assets/images/hero-section.jpg';
+import BackgroundImageMobile from '../assets/images/hero-section-mobile.jpg';
 
 interface Props {
     title?: string;
@@ -13,9 +14,7 @@ interface Props {
 
 HeroSection.defaultProps = {
     backgroundUrl: BackgroundImage,
-    // backgroundUrlMobile: 'https://i.imgur.com/cGWuYIr.jpg' // mobile 1
-    // backgroundUrlMobile: 'https://i.imgur.com/tUtZZfJ.jpg' // mobile 2
-    backgroundUrlMobile: 'https://i.imgur.com/fBLkybq.jpg' // mobile 3
+    backgroundUrlMobile: BackgroundImageMobile
 };
 
 export default function HeroSection(props: Props) {
