@@ -5,7 +5,7 @@ export interface ProductDto {
     id: number;
     price: number;
     discount: number;
-    imageId: number;
+    imageId: number | null;
     title: string;
     description: string;
     weight: string;

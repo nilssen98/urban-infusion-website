@@ -5,7 +5,7 @@ import ProductCardNew from '../../ProductCardNew';
 import {getProducts} from '../../../api/urbaninfusion/public/products';
 import {ProductDto} from '../../../api/urbaninfusion/dto/product-dto';
 import {useQuery} from 'react-query';
-import {getProductImageURL} from '../../../utils/productImageUtils';
+import {defaultProductImageURL, getProductImageURL} from '../../../utils/productImageUtils';
 
 export default function FeaturedProductsSection() {
 
@@ -88,7 +88,7 @@ export default function FeaturedProductsSection() {
                                             price={product.price}
                                             image_url={product.imageId
                                                 ? getProductImageURL(product.imageId)
-                                                : 'https://i.imgur.com/ZG4W7Le.jpg'}
+                                                : defaultProductImageURL}
                                             onClick={() => navigate(`/product/${product.id}`)}
                                         />
                                     </Grid>

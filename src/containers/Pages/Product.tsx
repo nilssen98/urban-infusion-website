@@ -11,14 +11,14 @@ import {hexToRgb} from '../../utils/utils';
 import {useState} from 'react';
 import CommentForm from '../../components/Pages/ProductPage/CommentForm';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import {getProductImageURL} from '../../utils/productImageUtils';
+import {defaultProductImageURL, getProductImageURL} from '../../utils/productImageUtils';
 
 interface Props {
     image_url?: string;
 }
 
 Product.defaultProps = {
-    image_url: 'https://i.imgur.com/ZG4W7Le.jpg',
+    image_url: defaultProductImageURL,
 };
 
 export default function Product(props: Props) {

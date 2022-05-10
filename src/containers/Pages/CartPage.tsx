@@ -4,29 +4,30 @@ import CartItemList from '../../components/Pages/CartPage/CartItemList';
 import {CartItem, cartSlice, selectCartItems} from '../../state/slices/cart';
 import {connect} from 'react-redux';
 import {useEffect} from 'react';
+import {Category} from '../../api/urbaninfusion/dto/categories-dto';
 
 const dummyData: CartItem[] = [
     {
         id: 0,
         price: 10,
         discount: 0.5,
-        image: 'https://i.imgur.com/ZG4W7Le.jpg',
+        imageId: null,
         title: 'Some crazy item',
         description: 'This item is crazy',
         weight: '50kg',
         comments: [],
-        category: 'Tea'
+        category: Category.TEA
     },
     {
         id: 1,
         price: 20,
         discount: 0.0,
-        image: 'https://i.imgur.com/ZG4W7Le.jpg',
+        imageId: null,
         title: 'Very nice item',
         description: 'This item is very nice',
         weight: '65kg',
         comments: [],
-        category: 'Tea'
+        category: Category.TEA
     }
 ];
 
