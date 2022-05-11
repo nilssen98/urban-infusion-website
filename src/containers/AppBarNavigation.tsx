@@ -71,7 +71,7 @@ function AppBarNavigation(props: Props) {
                     sx={{
                         boxShadow: 0,
                         background: `rgba(${hexToRgb(theme.palette.background.default)?.join(',')}, 0.8)`,
-                        backdropFilter: 'blur(7px)',
+                        backdropFilter: 'saturate(1.8) blur(20px)',
                     }}
                 >
                     <Toolbar sx={{justifyContent: 'center'}} disableGutters>
