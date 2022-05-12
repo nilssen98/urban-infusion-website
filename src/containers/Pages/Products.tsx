@@ -2,22 +2,16 @@ import {Box, Divider, Stack, Typography, useTheme} from '@mui/material';
 import {ProductsList} from '../../components/Pages/Products/ProductsList';
 import {useParams} from 'react-router-dom';
 import Page from '../../components/Wrappers/Page';
-import {useQuery} from 'react-query';
-import {getCategories} from '../../api/urbaninfusion/public/categories';
 import {Category} from '../../api/urbaninfusion/dto/categories-dto';
 import {useState} from 'react';
 import TabNavigation from '../../components/TabNavigation';
 import {ProductDto} from '../../api/urbaninfusion/dto/product-dto';
 import useProducts from '../../hooks/products/useProducts';
+import useCategories from '../../hooks/categories/useCategories';
 
 export default function Products() {
     const {isLoading, data: products} = useProducts();
-
-    const {isLoading: isLoadingCategories, data: categories}:
-        { isLoading: boolean, data?: Category[] } = useQuery(
-        'categories',
-        () => getCategories()
-    );
+    const {isLoading: isLoadingCategories, data: categories} = useCategories();
 
     const [currentTab, setCurrentTab] = useState<number>(0);
 
