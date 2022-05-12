@@ -33,7 +33,7 @@ const dummyData: CartItem[] = [
 
 type Props = StateProps;
 
-function CartPage(props: Props) {
+function Cart(props: Props) {
     useEffect(() => {
         if (props.cart.length < 1) {
             store.dispatch(cartSlice.actions.set(dummyData));
@@ -59,4 +59,4 @@ function mapStateToProps(state: RootState): StateProps {
     };
 }
 
-export default connect(mapStateToProps)(CartPage);
+export default connect(mapStateToProps)(Cart);

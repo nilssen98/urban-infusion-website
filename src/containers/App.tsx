@@ -10,7 +10,7 @@ import {persistor, RootState, store} from '../state/store';
 import {Provider, useSelector} from 'react-redux';
 import {PersistGate} from 'redux-persist/integration/react';
 import Account from './Pages/Account';
-import Cart from './Pages/CartPage';
+import Cart from './Pages/Cart';
 import About from './Pages/About';
 import Product from './Pages/Product';
 import {QueryClient, QueryClientProvider} from 'react-query';
