@@ -52,7 +52,7 @@ function Testimonial(props: TestimonialProps) {
                         height: 72
                     }}
                 />
-                <Typography variant={'h5'} textAlign={'center'}>
+                <Typography fontFamily={'nantes'} variant={'h4'} textAlign={'center'}>
                     <q>{props.comment}</q>
                 </Typography>
                 <Typography>

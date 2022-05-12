@@ -1,8 +1,9 @@
 import {ReactNode, useState} from 'react';
-import {Button, IconButton, Stack} from '@mui/material';
+import {IconButton, Stack} from '@mui/material';
 import SwipeableViews from 'react-swipeable-views';
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import { autoPlay } from 'react-swipeable-views-utils';
 
 interface Props {
     items: ReactNode[];
@@ -24,17 +25,22 @@ export default function Carousel(props: Props) {
         }
     };
 
+    const handleChangeIndex = (index: number) => {
+        setCurrent(index);
+    };
+
     return (
         <>
             <Stack
                 width={'100%'}
                 direction={'row'}
+                alignItems={'center'}
                 height={props.height || undefined}
             >
                 <IconButton onClick={handleLeft} disabled={current === 0}>
-                    <ArrowBackIosIcon/>
+                    <ArrowBackIosNewIcon/>
                 </IconButton>
-                <SwipeableViews index={current}>
+                <SwipeableViews index={current} onChangeIndex={handleChangeIndex}>
                     {props.items.map((item, index) => (
                         <Stack key={index}>{item}</Stack>
                     ))}
