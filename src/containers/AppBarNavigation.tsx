@@ -1,6 +1,7 @@
 import {
     AppBar,
-    Box, Divider,
+    Box,
+    Divider,
     IconButton,
     Menu,
     MenuItem,
@@ -64,102 +65,100 @@ function AppBarNavigation(props: Props) {
 
     return (
         <>
-            <HideOnScroll {...props}>
-                <AppBar
-                    color={'inherit'}
-                    position={'sticky'}
-                    sx={{
-                        boxShadow: 0,
-                        background: `rgba(${hexToRgb(theme.palette.background.default)?.join(',')}, 0.8)`,
-                        backdropFilter: 'saturate(1.8) blur(20px)',
-                    }}
-                >
-                    <Toolbar sx={{justifyContent: 'center'}} disableGutters>
+            <AppBar
+                color={'inherit'}
+                position={'sticky'}
+                sx={{
+                    boxShadow: 0,
+                    background: `rgba(${hexToRgb(theme.palette.background.default)?.join(',')}, 0.8)`,
+                    backdropFilter: 'saturate(1.8) blur(20px)',
+                }}
+            >
+                <Toolbar sx={{justifyContent: 'center'}} disableGutters>
+                    <Box
+                        sx={{
+                            width: theme.breakpoints.values.lg,
+                            display: 'flex',
+                            flexWrap: 'nowrap',
+                            alignItems: 'center'
+                        }}
+                    >
+                        <Box sx={{flex: 1, display: {sm: 'flex', xs: 'none'}}}>
+                            <Logo clickable onClick={() => navigate('/')}/>
+                        </Box>
+                        <Box sx={{flex: 1, display: {sm: 'none', xs: 'flex'}}}>
+                            <IconButton
+                                onClick={handleOpenNavMenu}
+                            >
+                                <MenuIcon/>
+                            </IconButton>
+                        </Box>
+                        <Box sx={{flex: 1, display: {sm: 'none', xs: 'flex'}}}>
+                            <Logo clickable onClick={() => navigate('/')}/>
+                        </Box>
                         <Box
                             sx={{
-                                width: theme.breakpoints.values.lg,
-                                display: 'flex',
-                                flexWrap: 'nowrap',
-                                alignItems: 'center'
+                                flex: 1,
+                                display: {sm: 'flex', xs: 'none'},
+                                px: 4,
+                                justifyContent: 'right',
                             }}
                         >
-                            <Box sx={{flex: 1, display: {sm: 'flex', xs: 'none'}}}>
-                                <Logo clickable onClick={() => navigate('/')}/>
-                            </Box>
-                            <Box sx={{flex: 1, display: {sm: 'none', xs: 'flex'}}}>
-                                <IconButton
-                                    onClick={handleOpenNavMenu}
-                                >
-                                    <MenuIcon/>
-                                </IconButton>
-                            </Box>
-                            <Box sx={{flex: 1, display: {sm: 'none', xs: 'flex'}}}>
-                                <Logo clickable onClick={() => navigate('/')}/>
-                            </Box>
-                            <Box
-                                sx={{
-                                    flex: 1,
-                                    display: {sm: 'flex', xs: 'none'},
-                                    px: 4,
-                                    justifyContent: 'right',
-                                }}
-                            >
-                                {
-                                    pages.map(page => (
-                                        <NavigationLink
-                                            sx={{pr: 8}}
-                                            key={page}
-                                            onClick={() => navigate(page.toLowerCase())}
-                                        >
-                                            {page}
-                                        </NavigationLink>
-                                    ))
-                                }
-                            </Box>
-                            <Box
-                                sx={{
-                                    flex: 1,
-                                    display: 'flex',
-                                    justifyContent: 'right',
-                                }}
-                            >
-                                <ThemeSwitch
-                                    mode={props.themeColor}
-                                    onClick={handleChangeTheme}
-                                />
-                                <CartButton itemsCount={props.cartItemCount}/>
-                                <AccountButton/>
-                            </Box>
-                            <Menu
-                                anchorEl={anchorElNav}
-                                open={Boolean(anchorElNav)}
-                                onClose={handleCloseNavMenu}
-                                keepMounted
-                                anchorOrigin={{
-                                    vertical: 'bottom',
-                                    horizontal: 'left',
-                                }}
-                                transformOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'left',
-                                }}
-                            >
-                                {
-                                    pages.map(page => (
-                                        <MenuItem key={page} onClick={() => {
-                                            navigate(page.toLowerCase());
-                                            handleCloseNavMenu();
-                                        }}>
-                                            <Typography>{page}</Typography>
-                                        </MenuItem>
-                                    ))
-                                }
-                            </Menu>
+                            {
+                                pages.map(page => (
+                                    <NavigationLink
+                                        sx={{pr: 8}}
+                                        key={page}
+                                        onClick={() => navigate(page.toLowerCase())}
+                                    >
+                                        {page}
+                                    </NavigationLink>
+                                ))
+                            }
                         </Box>
-                    </Toolbar>
-                    <Divider/>
-                </AppBar>
-            </HideOnScroll>
+                        <Box
+                            sx={{
+                                flex: 1,
+                                display: 'flex',
+                                justifyContent: 'right',
+                            }}
+                        >
+                            <ThemeSwitch
+                                mode={props.themeColor}
+                                onClick={handleChangeTheme}
+                            />
+                            <CartButton itemsCount={props.cartItemCount}/>
+                            <AccountButton/>
+                        </Box>
+                        <Menu
+                            anchorEl={anchorElNav}
+                            open={Boolean(anchorElNav)}
+                            onClose={handleCloseNavMenu}
+                            keepMounted
+                            anchorOrigin={{
+                                vertical: 'bottom',
+                                horizontal: 'left',
+                            }}
+                            transformOrigin={{
+                                vertical: 'top',
+                                horizontal: 'left',
+                            }}
+                        >
+                            {
+                                pages.map(page => (
+                                    <MenuItem key={page} onClick={() => {
+                                        navigate(page.toLowerCase());
+                                        handleCloseNavMenu();
+                                    }}>
+                                        <Typography>{page}</Typography>
+                                    </MenuItem>
+                                ))
+                            }
+                        </Menu>
+                    </Box>
+                </Toolbar>
+                <Divider/>
+            </AppBar>
         </>
     );
 }
@@ -188,17 +187,5 @@ function NavigationLink(props: NavigationLinkProps) {
                 {props.children}
             </Typography>
         </>
-    );
-}
-
-function HideOnScroll(props: Props) {
-    const trigger = useScrollTrigger({
-        target: window,
-    });
-
-    return (
-        <Slide appear={false} direction='down' in={!trigger}>
-            {props.children || <></>}
-        </Slide>
     );
 }
