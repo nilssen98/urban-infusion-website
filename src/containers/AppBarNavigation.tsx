@@ -1,20 +1,7 @@
-import {
-    AppBar,
-    Box,
-    Divider,
-    IconButton,
-    Menu,
-    MenuItem,
-    Slide,
-    Toolbar,
-    Typography,
-    useScrollTrigger,
-    useTheme
-} from '@mui/material';
+import {AppBar, Box, Divider, IconButton, Menu, MenuItem, Toolbar, Typography, useTheme} from '@mui/material';
 import Logo from '../components/Logo';
 import {ReactElement, ReactNode, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
-import {ThemeSwitch} from '../components/AppBarNavigation/ThemeSwitch';
 import {RootState} from '../state/store';
 import {userPreferencesSlice} from '../state/slices/userPreferences';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -24,7 +11,6 @@ import CartButton from '../components/AppBarNavigation/CartButton';
 import AccountButton from '../components/AppBarNavigation/AccountButton';
 import {connect} from 'react-redux';
 import {selectCartItems} from '../state/slices/cart';
-import {hexToRgb} from '../utils/utils';
 
 const mapStateToProps = (state: RootState) => {
     return {
@@ -70,8 +56,8 @@ function AppBarNavigation(props: Props) {
                 position={'sticky'}
                 sx={{
                     boxShadow: 0,
-                    background: `rgba(${hexToRgb(theme.palette.background.default)?.join(',')}, 0.8)`,
-                    backdropFilter: 'saturate(1.8) blur(20px)',
+                    // background: `rgba(${hexToRgb(theme.palette.background.default)?.join(',')}, 0.8)`,
+                    // backdropFilter: 'saturate(1.8) blur(20px)',
                 }}
             >
                 <Toolbar sx={{justifyContent: 'center'}} disableGutters>
@@ -123,10 +109,15 @@ function AppBarNavigation(props: Props) {
                                 justifyContent: 'right',
                             }}
                         >
-                            <ThemeSwitch
-                                mode={props.themeColor}
-                                onClick={handleChangeTheme}
-                            />
+
+                            {
+                                /*
+                                <ThemeSwitch
+                                    mode={props.themeColor}
+                                    onClick={handleChangeTheme}
+                                />
+                                 */
+                            }
                             <CartButton itemsCount={props.cartItemCount}/>
                             <AccountButton/>
                         </Box>
