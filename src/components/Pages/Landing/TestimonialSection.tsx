@@ -34,7 +34,7 @@ export default function TestimonialSection() {
     return (
         <>
             <Section sx={{my: 32}} bgColor={theme.palette.primary.light}>
-                <Carousel items={items}/>
+                <Carousel items={items} infinite/>
             </Section>
         </>
     );

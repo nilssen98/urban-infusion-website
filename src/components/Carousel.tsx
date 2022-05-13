@@ -3,11 +3,11 @@ import {IconButton, Stack} from '@mui/material';
 import SwipeableViews from 'react-swipeable-views';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import { autoPlay } from 'react-swipeable-views-utils';
 
 interface Props {
     items: ReactNode[];
     height?: number | string;
+    infinite?: boolean;
 }
 
 export default function Carousel(props: Props) {
@@ -16,12 +16,16 @@ export default function Carousel(props: Props) {
     const handleLeft = () => {
         if (current > 0) {
             setCurrent(current - 1);
+        } else if (props.infinite) {
+            setCurrent(props.items.length - 1);
         }
     };
 
     const handleRight = () => {
         if (current < props.items.length - 1) {
             setCurrent(current + 1);
+        } else if (props.infinite) {
+            setCurrent(0);
         }
     };
 
@@ -37,7 +41,10 @@ export default function Carousel(props: Props) {
                 alignItems={'center'}
                 height={props.height || undefined}
             >
-                <IconButton onClick={handleLeft} disabled={current === 0}>
+                <IconButton
+                    onClick={handleLeft}
+                    disabled={props.infinite ? false : current === 0}
+                >
                     <ArrowBackIosNewIcon/>
                 </IconButton>
                 <SwipeableViews index={current} onChangeIndex={handleChangeIndex}>
@@ -45,7 +52,10 @@ export default function Carousel(props: Props) {
                         <Stack key={index}>{item}</Stack>
                     ))}
                 </SwipeableViews>
-                <IconButton onClick={handleRight} disabled={current === props.items.length - 1}>
+                <IconButton
+                    onClick={handleRight}
+                    disabled={props.infinite ? false : current === props.items.length - 1}
+                >
                     <ArrowForwardIosIcon/>
                 </IconButton>
             </Stack>
