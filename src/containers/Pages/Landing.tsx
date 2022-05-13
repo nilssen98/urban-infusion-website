@@ -13,11 +13,8 @@ export default function Landing() {
                     description={'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'}
                 />
                 <FeaturedProductsSection/>
-                <Divider/>
                 <FeaturesSection/>
-                <Divider/>
                 <TestimonialSection/>
-                <Divider/>
             </Box>
         </>
     );
