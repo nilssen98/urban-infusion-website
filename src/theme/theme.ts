@@ -6,11 +6,12 @@ export const getTheme = (theme: 'light' | 'dark') => {
         palette: {
             mode: theme,
             primary: {
-                main: '#1B472E',
+                main: '#122e1e',
+                light: '#e3f4eb',
+                dark: '#1b472e',
             },
             secondary: {
                 main: '#F5A623',
-
             },
         },
     });
