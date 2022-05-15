@@ -40,8 +40,8 @@ function Login(props: Props) {
 
     const handleLogin = async () => {
         await login({
-            username: username,
-            password: password,
+            username,
+            password,
         })
             .then(e => {
                 props.setJwtToken(e);
@@ -103,7 +103,7 @@ function Login(props: Props) {
                                 />
                             </Stack>
                             <Button
-                                onClick={() => handleLogin()}
+                                onClick={handleLogin}
                                 variant={'contained'}
                                 sx={{width: '100%'}}
                             >
