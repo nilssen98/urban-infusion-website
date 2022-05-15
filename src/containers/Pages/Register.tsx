@@ -1,7 +1,10 @@
-import {Button, Paper, Stack, TextField, Typography, useTheme} from '@mui/material';
+import {Button, InputAdornment, Paper, Stack, TextField, Typography, useTheme} from '@mui/material';
 import Page from '../../components/Wrappers/Page';
 import {NavLink} from 'react-router-dom';
 import Background from '../../assets/images/teashop-background.jpg';
+import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
+import PasswordOutlinedIcon from '@mui/icons-material/PasswordOutlined';
 
 export default function Register() {
     const theme = useTheme();
@@ -25,15 +28,36 @@ export default function Register() {
                                 <TextField
                                     required
                                     label={'Email'}
+                                    InputProps={{
+                                        endAdornment: (
+                                            <InputAdornment position={'start'}>
+                                                <EmailOutlinedIcon/>
+                                            </InputAdornment>
+                                        )
+                                    }}
                                 />
                                 <TextField
                                     required
                                     label={'Username'}
+                                    InputProps={{
+                                        endAdornment: (
+                                            <InputAdornment position={'start'}>
+                                                <AccountCircleOutlinedIcon/>
+                                            </InputAdornment>
+                                        )
+                                    }}
                                 />
                                 <TextField
                                     required
                                     label={'Password'}
                                     type={'password'}
+                                    InputProps={{
+                                        endAdornment: (
+                                            <InputAdornment position={'start'}>
+                                                <PasswordOutlinedIcon/>
+                                            </InputAdornment>
+                                        )
+                                    }}
                                 />
                             </Stack>
                             <Button
