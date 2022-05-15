@@ -1,22 +1,20 @@
 import Section from '../../Wrappers/Section';
-import {Box, Button, Grid, Typography} from '@mui/material';
+import {Box, Button, Grid, Typography, useTheme} from '@mui/material';
 import {useNavigate} from 'react-router-dom';
 import ProductCardNew from '../../ProductCardNew';
 import {getProducts} from '../../../api/urbaninfusion/public/products';
 import {ProductDto} from '../../../api/urbaninfusion/dto/product-dto';
 import {useQuery} from 'react-query';
 import {defaultProductImageURL, getProductImageURL} from '../../../utils/productImageUtils';
+import useProducts from '../../../hooks/products/useProducts';
 
 export default function FeaturedProductsSection() {
+    const theme = useTheme();
 
     const productsToShow = 4;
 
     const navigate = useNavigate();
-    const {isLoading, data: products}:
-        { isLoading: boolean, data?: ProductDto[] } = useQuery(
-        'products',
-        () => getProducts()
-    );
+    const {data: products} = useProducts();
 
     function getRandomProductIndexes(numberOfProducts: number, productsSize: number): Array<number> {
         if (numberOfProducts > productsSize) {
@@ -38,7 +36,7 @@ export default function FeaturedProductsSection() {
 
     return (
         <>
-            <Section>
+            <Section bgColor={theme.palette.primary.light}>
                 <Box
                     sx={{
                         display: 'flex',
