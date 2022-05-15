@@ -3,6 +3,7 @@ import HeroSection from '../../components/HeroSection';
 import FeaturesSection from '../../components/Pages/Landing/FeaturesSection';
 import FeaturedProductsSection from '../../components/Pages/Landing/FeaturedProductsSection';
 import TestimonialSection from '../../components/Pages/Landing/TestimonialSection';
+import Footer from '../Footer';
 
 export default function Landing() {
     return (
@@ -15,6 +16,8 @@ export default function Landing() {
                 <FeaturedProductsSection/>
                 <FeaturesSection/>
                 <TestimonialSection/>
+                <Divider/>
+                <Footer/>
             </Box>
         </>
     );
