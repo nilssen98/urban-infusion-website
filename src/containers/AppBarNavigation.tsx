@@ -23,6 +23,7 @@ import CartButton from '../components/AppBarNavigation/CartButton';
 import AccountButton from '../components/AppBarNavigation/AccountButton';
 import {connect} from 'react-redux';
 import {selectCartItems} from '../state/slices/cart';
+import UnstyledLink from '../components/UnstyledLink';
 
 const mapStateToProps = (state: RootState) => {
     return {
@@ -137,9 +138,11 @@ function AppBarNavigation(props: Props) {
                             {
                                 props.isAuthenticated
                                     ? <AccountButton/>
-                                    : <Button variant={'contained'}>
-                                        Login
-                                    </Button>
+                                    : (<UnstyledLink to={'/login'}>
+                                        <Button variant={'contained'}>
+                                            Login
+                                        </Button>
+                                    </UnstyledLink>)
                             }
                         </Stack>
                         <Menu
