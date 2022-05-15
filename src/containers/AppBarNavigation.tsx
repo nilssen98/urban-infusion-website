@@ -1,9 +1,21 @@
-import {AppBar, Box, Divider, IconButton, Menu, MenuItem, Toolbar, Typography, useTheme} from '@mui/material';
+import {
+    AppBar,
+    Box,
+    Button,
+    Divider,
+    IconButton,
+    Menu,
+    MenuItem,
+    Stack,
+    Toolbar,
+    Typography,
+    useTheme
+} from '@mui/material';
 import Logo from '../components/Logo';
 import {ReactElement, ReactNode, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {RootState} from '../state/store';
-import {userPreferencesSlice} from '../state/slices/userPreferences';
+import {userSlice} from '../state/slices/user';
 import MenuIcon from '@mui/icons-material/Menu';
 import {SxProps} from '@mui/system';
 import {Theme} from '@mui/material/styles';
@@ -15,12 +27,14 @@ import {selectCartItems} from '../state/slices/cart';
 const mapStateToProps = (state: RootState) => {
     return {
         cartItemCount: selectCartItems(state.cart).length,
-        themeColor: state.userPreferences.theme
+        themeColor: state.user.theme,
+        isAuthenticated: state.user.jwt !== undefined,
     };
 };
 
 const mapDispatchToProps = {
-    toggleTheme: userPreferencesSlice.actions.toggleTheme
+    toggleTheme: userSlice.actions.toggleTheme,
+    setJwtToken: userSlice.actions.setJwtToken,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AppBarNavigation);
@@ -61,13 +75,11 @@ function AppBarNavigation(props: Props) {
                 }}
             >
                 <Toolbar sx={{justifyContent: 'center'}} disableGutters>
-                    <Box
-                        sx={{
-                            width: theme.breakpoints.values.lg,
-                            display: 'flex',
-                            flexWrap: 'nowrap',
-                            alignItems: 'center'
-                        }}
+                    <Stack
+                        direction={'row'}
+                        alignItems={'center'}
+                        width={theme.breakpoints.values.lg}
+                        px={{md: 8, xs: 2}}
                     >
                         <Box sx={{flex: 1, display: {sm: 'flex', xs: 'none'}}}>
                             <Logo clickable onClick={() => navigate('/')}/>
@@ -102,7 +114,10 @@ function AppBarNavigation(props: Props) {
                                 ))
                             }
                         </Box>
-                        <Box
+                        <Stack
+                            direction={'row'}
+                            spacing={2}
+                            alignItems={'center'}
                             sx={{
                                 flex: 1,
                                 display: 'flex',
@@ -119,8 +134,14 @@ function AppBarNavigation(props: Props) {
                                  */
                             }
                             <CartButton itemsCount={props.cartItemCount}/>
-                            <AccountButton/>
-                        </Box>
+                            {
+                                props.isAuthenticated
+                                    ? <AccountButton/>
+                                    : <Button variant={'contained'}>
+                                        Login
+                                    </Button>
+                            }
+                        </Stack>
                         <Menu
                             anchorEl={anchorElNav}
                             open={Boolean(anchorElNav)}
@@ -146,7 +167,7 @@ function AppBarNavigation(props: Props) {
                                 ))
                             }
                         </Menu>
-                    </Box>
+                    </Stack>
                 </Toolbar>
                 <Divider/>
             </AppBar>

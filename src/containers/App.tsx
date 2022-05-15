@@ -18,7 +18,7 @@ import {QueryClient, QueryClientProvider} from 'react-query';
 const queryClient = new QueryClient();
 
 export default function App() {
-    const theme = useSelector((s: RootState) => s.userPreferences.theme);
+    const theme = useSelector((s: RootState) => s.user.theme);
 
     return (
         <Provider store={store}>
