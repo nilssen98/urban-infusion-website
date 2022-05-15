@@ -40,7 +40,7 @@ export default function Register() {
                                 variant={'contained'}
                                 sx={{width: '100%'}}
                             >
-                                Login
+                                Register
                             </Button>
                             <Typography>
                                 <span>Already have an account? </span>
