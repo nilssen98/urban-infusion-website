@@ -2,20 +2,24 @@ import {createSlice} from '@reduxjs/toolkit';
 
 export type Theme = 'light' | 'dark';
 
-export interface UserPreferences {
+export interface User {
     theme: Theme;
+    jwt?: string;
 }
 
-const initialState: UserPreferences = {
+const initialState: User = {
     theme: 'light',
 };
 
-export const userPreferencesSlice = createSlice({
-    name: 'userPreferences',
+export const userSlice = createSlice({
+    name: 'user',
     initialState,
     reducers: {
         toggleTheme: (state) => {
             state.theme = state.theme === 'light' ? 'dark' : 'light';
+        },
+        setJwtToken: (state, action) => {
+            state.jwt = action.payload;
         }
     }
 });
