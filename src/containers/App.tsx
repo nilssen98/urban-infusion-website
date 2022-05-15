@@ -14,6 +14,7 @@ import Cart from './Pages/Cart';
 import About from './Pages/About';
 import Product from './Pages/Product';
 import {QueryClient, QueryClientProvider} from 'react-query';
+import Login from './Pages/Login';
 
 const queryClient = new QueryClient();
 
@@ -36,6 +37,7 @@ export default function App() {
                                 <Route path={'/account'} element={<Account/>}/>
                                 <Route path={'/account/:id'} element={<Account/>}/>
                                 <Route path={'/cart'} element={<Cart/>}/>
+                                <Route path={'/login'} element={<Login/>}/>
                                 <Route path={'/about'} element={<About/>}/>
                                 <Route path={'*'} element={<NotFound/>}/>
                             </Routes>

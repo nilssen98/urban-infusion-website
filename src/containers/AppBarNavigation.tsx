@@ -79,7 +79,7 @@ function AppBarNavigation(props: Props) {
                         direction={'row'}
                         alignItems={'center'}
                         width={theme.breakpoints.values.lg}
-                        px={{md: 8, xs: 2}}
+                        mx={{md: 8, xs: 2}}
                     >
                         <Box sx={{flex: 1, display: {sm: 'flex', xs: 'none'}}}>
                             <Logo clickable onClick={() => navigate('/')}/>
