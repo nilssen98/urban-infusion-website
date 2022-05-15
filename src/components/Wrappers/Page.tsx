@@ -1,14 +1,17 @@
-import {CircularProgress, Stack} from '@mui/material';
+import {Box, CircularProgress, Stack} from '@mui/material';
 import {ReactNode} from 'react';
+import {SxProps} from '@mui/system';
 
 interface Props {
     isLoading?: boolean;
     children?: ReactNode;
+    sx?: SxProps;
 }
 
 export default function Page(props: Props) {
     return (
         <>
+            <Box sx={{...props.sx}}>
             {
                 props.isLoading
                     ? (
@@ -18,6 +21,7 @@ export default function Page(props: Props) {
                     )
                     : props.children
             }
+            </Box>
         </>
     );
 }
