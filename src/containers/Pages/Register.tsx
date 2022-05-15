@@ -3,7 +3,7 @@ import Page from '../../components/Wrappers/Page';
 import {NavLink} from 'react-router-dom';
 import Background from '../../assets/images/teashop-background.jpg';
 
-export default function Login() {
+export default function Register() {
     const theme = useTheme();
     return (
         <>
@@ -20,8 +20,12 @@ export default function Login() {
                 >
                     <Paper sx={{py: 4, px: 8, width: 400}}>
                         <Stack alignItems={'center'} spacing={8}>
-                            <Typography variant={'h4'}>Login</Typography>
+                            <Typography variant={'h4'}>Register</Typography>
                             <Stack width={'100%'} spacing={4}>
+                                <TextField
+                                    required
+                                    label={'Email'}
+                                />
                                 <TextField
                                     required
                                     label={'Username'}
@@ -39,8 +43,8 @@ export default function Login() {
                                 Login
                             </Button>
                             <Typography>
-                                <span>Not a member? </span>
-                                <NavLink to={'/register'}>Sign up</NavLink>
+                                <span>Already have an account? </span>
+                                <NavLink to={'/login'}>Login</NavLink>
                             </Typography>
                         </Stack>
                     </Paper>
