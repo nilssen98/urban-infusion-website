@@ -7,6 +7,7 @@ import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined
 import PasswordOutlinedIcon from '@mui/icons-material/PasswordOutlined';
 import {useState} from 'react';
 import {register} from '../../api/urbaninfusion/public/register';
+import {isEmailAddress} from '../../utils/emailVerifier';
 
 export default function Register() {
     const [error, setError] = useState<boolean>(false);
@@ -26,6 +27,22 @@ export default function Register() {
             .then(e => navigate('/login'))
             .catch(e => setError(true));
     };
+
+    function checkPassword(input: String): string | null {
+        if (input == null) {
+            return 'Password is invalid';
+        }
+        if (input.length === 0) {
+            return null;
+        }
+        if (input.length < 8) {
+            return 'Password is too short';
+        }
+        if (input.length > 20) {
+            return 'Password is too long';
+        }
+        return null;
+    }
 
     return (
         <>
@@ -56,6 +73,8 @@ export default function Register() {
                                     value={email}
                                     onChange={(event) => setEmail(event.target.value)}
                                     required
+                                    error={!isEmailAddress(email)}
+                                    helperText={isEmailAddress(email) ? '' : 'Must be a valid email!'}
                                     label={'Email'}
                                     InputProps={{
                                         endAdornment: (
@@ -82,6 +101,8 @@ export default function Register() {
                                     value={password}
                                     onChange={(event) => setPassword(event.target.value)}
                                     required
+                                    error={checkPassword(password) !== null}
+                                    helperText={checkPassword(password)}
                                     label={'Password'}
                                     type={'password'}
                                     InputProps={{
