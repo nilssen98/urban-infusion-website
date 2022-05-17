@@ -36,17 +36,14 @@ export default function Register() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        let timeout: number;
-
         if (success) {
-            timeout = setTimeout(() => {
+            const timeout = setTimeout(() => {
                 navigate('/login');
             }, 2000);
+            return () => {
+                clearTimeout(timeout);
+            };
         }
-
-        return () => {
-            clearTimeout(timeout);
-        };
     }, [success]);
 
     const handleRegister = async () => {
@@ -68,7 +65,6 @@ export default function Register() {
                 }
                 setError(true);
             });
-
         setLoading(false);
     };
 
