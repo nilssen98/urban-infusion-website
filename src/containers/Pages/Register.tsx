@@ -16,7 +16,7 @@ import Background from '../../assets/images/teashop-background.jpg';
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import PasswordOutlinedIcon from '@mui/icons-material/PasswordOutlined';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {register} from '../../api/urbaninfusion/public/register';
 import {isEmailAddress} from '../../utils/emailVerifier';
 
@@ -35,6 +35,20 @@ export default function Register() {
     const theme = useTheme();
     const navigate = useNavigate();
 
+    useEffect(() => {
+        let timeout: number;
+
+        if (success) {
+            timeout = setTimeout(() => {
+                navigate('/login');
+            }, 2000);
+        }
+
+        return () => {
+            clearTimeout(timeout);
+        };
+    }, [success]);
+
     const handleRegister = async () => {
         setLoading(true);
 
@@ -45,9 +59,6 @@ export default function Register() {
         })
             .then(() => {
                 setSuccess(true);
-                setTimeout(() => {
-                    navigate('/login');
-                }, 2000);
             })
             .catch(e => {
                 if (e.response.data.length > 0) {
