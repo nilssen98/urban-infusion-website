@@ -20,7 +20,7 @@ export default function Register() {
     const navigate = useNavigate();
 
     const handleRegister = async () => {
-        const r = await register({
+        await register({
             username,
             email,
             password
