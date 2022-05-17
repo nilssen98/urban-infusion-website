@@ -1,4 +1,16 @@
-import {Alert, Button, InputAdornment, Paper, Snackbar, Stack, TextField, Typography, useTheme} from '@mui/material';
+import {
+    Alert,
+    Box,
+    Button,
+    CircularProgress,
+    InputAdornment,
+    Paper,
+    Snackbar,
+    Stack,
+    TextField,
+    Typography,
+    useTheme
+} from '@mui/material';
 import Page from '../../components/Wrappers/Page';
 import {NavLink, useNavigate} from 'react-router-dom';
 import Background from '../../assets/images/teashop-background.jpg';
@@ -8,8 +20,11 @@ import PasswordOutlinedIcon from '@mui/icons-material/PasswordOutlined';
 import {useState} from 'react';
 import {register} from '../../api/urbaninfusion/public/register';
 import {isEmailAddress} from '../../utils/emailVerifier';
+import {green} from '@mui/material/colors';
 
 export default function Register() {
+    const [loading, setLoading] = useState(false);
+    const [success, setSuccess] = useState<boolean>(false);
     const [error, setError] = useState<boolean>(false);
     const [errorMessage, setErrorMessage] = useState<string>('');
     const [email, setEmail] = useState<string>('');
@@ -20,12 +35,19 @@ export default function Register() {
     const navigate = useNavigate();
 
     const handleRegister = async () => {
+        setLoading(true);
+
         await register({
             username,
             email,
             password
         })
-            .then(() => navigate('/login'))
+            .then(() => {
+                setSuccess(true);
+                setTimeout(() => {
+                    navigate('/login');
+                }, 3000);
+            })
             .catch(e => {
                 if (e.response.data.length > 0) {
                     setErrorMessage(e.response.data);
@@ -34,6 +56,8 @@ export default function Register() {
                 }
                 setError(true);
             });
+
+        setLoading(false);
     };
 
     function checkPassword(input: String): string | null {
@@ -62,6 +86,17 @@ export default function Register() {
             >
                 <Alert severity={'error'}>{errorMessage}</Alert>
             </Snackbar>
+            {
+                success && (
+                    <Snackbar
+                        open={success}
+                        autoHideDuration={6000}
+                        anchorOrigin={{vertical: 'top', horizontal: 'center'}}
+                    >
+                        <Alert severity={'success'}>Registered successfully! Redirecting</Alert>
+                    </Snackbar>
+                )
+            }
             <Page>
                 <Stack
                     sx={{
@@ -122,13 +157,29 @@ export default function Register() {
                                     }}
                                 />
                             </Stack>
-                            <Button
-                                variant={'contained'}
-                                sx={{width: '100%'}}
-                                onClick={handleRegister}
-                            >
-                                Register
-                            </Button>
+                            <Box sx={{margin: 1, position: 'relative'}}>
+                                <Button
+                                    variant={'contained'}
+                                    sx={{width: '100%'}}
+                                    disabled={success || loading}
+                                    onClick={handleRegister}
+                                >
+                                    Register
+                                </Button>
+                                {loading && !error && (
+                                    <CircularProgress
+                                        size={24}
+                                        sx={{
+                                            color: green[500],
+                                            position: 'absolute',
+                                            top: '50%',
+                                            left: '50%',
+                                            marginTop: '-12px',
+                                            marginLeft: '-12px',
+                                        }}
+                                    />
+                                )}
+                            </Box>
                             <Typography>
                                 <span>Already have an account? </span>
                                 <NavLink to={'/login'}>Login</NavLink>
