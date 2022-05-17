@@ -1,24 +1,9 @@
-import {
-    AppBar,
-    Box,
-    Button,
-    Divider,
-    IconButton,
-    Menu,
-    MenuItem,
-    Stack,
-    Toolbar,
-    Typography,
-    useTheme
-} from '@mui/material';
+import {AppBar, Button, Divider, Stack, Toolbar, useTheme} from '@mui/material';
 import Logo from '../components/Logo';
-import {ReactElement, ReactNode, useState} from 'react';
+import {ReactElement} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {RootState} from '../state/store';
 import {userSlice} from '../state/slices/user';
-import MenuIcon from '@mui/icons-material/Menu';
-import {SxProps} from '@mui/system';
-import {Theme} from '@mui/material/styles';
 import CartButton from '../components/AppBarNavigation/CartButton';
 import AccountButton from '../components/AppBarNavigation/AccountButton';
 import {connect} from 'react-redux';
@@ -61,10 +46,10 @@ function TopAppBar(props: Props) {
                 <Toolbar sx={{justifyContent: 'center'}} disableGutters>
                     <Stack
                         flex={1}
-                        maxWidth={theme.breakpoints.values.lg}
+                        alignItems={'center'}
                         mx={{md: 8, xs: 2}}
                     >
-                        <Stack direction={'row'} alignItems={'center'}>
+                        <Stack width={'100%'} direction={'row'} alignItems={'center'}>
                             <Stack>
                                 <Logo clickable onClick={() => navigate('/')}/>
                             </Stack>
@@ -90,11 +75,13 @@ function TopAppBar(props: Props) {
                                 }
                             </Stack>
                         </Stack>
-                        <ProductNavigation/>
+                        <Stack width={'100%'} maxWidth={theme.breakpoints.values.lg}>
+                            <ProductNavigation/>
+                        </Stack>
                     </Stack>
                 </Toolbar>
                 <Divider/>
             </AppBar>
         </>
-    );
+);
 }
