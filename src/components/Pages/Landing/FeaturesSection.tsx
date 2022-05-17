@@ -1,18 +1,20 @@
-import {Avatar, Box, Button, Chip, Fade, Grid, Typography} from '@mui/material';
+import {Avatar, Box, Button, Chip, Fade, Grid, Stack, Typography} from '@mui/material';
 import {useNavigate} from 'react-router-dom';
 import Section from '../../Wrappers/Section';
 import {useState} from 'react';
 import {useInView} from 'react-intersection-observer';
+import BlackTea from '../../../assets/images/tea/black-tea.png';
+import DarkTea from '../../../assets/images/tea/dark-tea.png';
+import GreenTea from '../../../assets/images/tea/green-tea.png';
+import WhiteTea from '../../../assets/images/tea/white-tea.jpg';
 
 export default function FeaturesSection() {
-    const imageURL: string = 'https://picsum.photos/570/350?grayscale';
-
     const navigate = useNavigate();
 
     return (
         <>
             <Section>
-                <Box>
+                <Stack spacing={32}>
                     <Feature
                         header={'Black tea'}
                         description={{
@@ -20,7 +22,7 @@ export default function FeaturesSection() {
                             benefits: 'The nutrients in black tea may reduce the risk of cancer, protect the heart against atherosclerosis, and help maintain a healthy blood pressure.',
                             fact: 'Black tea is the most consumed tea across the world; in the US, 86% of the tea enjoyed throughout 2017 was black tea.'
                         }}
-                        image_url={imageURL + '&' + Math.random()}
+                        image_url={BlackTea}
                         onClick={() => navigate('/products/black tea')}
                     />
                     <Feature
@@ -31,7 +33,7 @@ export default function FeaturesSection() {
                             benefits: 'Studies suggest that green tea may have positive effects on weight loss, liver disorders, type 2 diabetes, Alzheimer’s disease, and more.',
                             fact: 'Ancient cultures used green tea as medicine to control bleeding, heal wounds, aid digestion, and to improve heart and mental health.'
                         }}
-                        image_url={imageURL + '&' + Math.random()}
+                        image_url={GreenTea}
                         onClick={() => navigate('/products/green tea')}
                     />
                     <Feature
@@ -39,9 +41,9 @@ export default function FeaturesSection() {
                         description={{
                             flavor: 'A mythical and elusive verity light and subtle in flavor with often floral sweet notes.',
                             benefits: 'White tea is proven to have many health benefits, such as: improving skin and hair health, reducing the risk of cancer, improving brain health, lowering the risk of heart disease, and improving oral health.',
-                            fact: 'White tea is the least processed of all teas, most white teas are simply picked and withered. Therefore, white tea contains elevated levels of antioxidants that are present in fresh tea leaves.'
+                            fact: 'White tea is the least processed of all tea, most white tea are simply picked and withered. Therefore, white tea contains elevated levels of antioxidants that are present in fresh tea leaves.'
                         }}
-                        image_url={imageURL + '&' + Math.random()}
+                        image_url={WhiteTea}
                         onClick={() => navigate('/products/white tea')}
                     />
                     <Feature
@@ -50,12 +52,12 @@ export default function FeaturesSection() {
                         description={{
                             flavor: 'This brew shows an amber color, with a little sticky feeling, mellow and smooth, and a unique sweetness. The marvelous taste will make you hooked and can’t stop drinking.',
                             benefits: 'Dark tea may have similar benefits to green tea. The nutrients in it may reduce the risk of several cancers, protect the heart, and help maintain healthy blood pressure.',
-                            fact: 'Dark teas are closer to green teas in that they are processed like green teas initially. Then, they go through a bacterial fermentation process and are aged for many years to come.'
+                            fact: 'Dark tea are closer to green tea in that they are processed like green tea initially. Then, they go through a bacterial fermentation process and are aged for many years to come.'
                         }}
-                        image_url={imageURL + '&' + Math.random()}
+                        image_url={DarkTea}
                         onClick={() => navigate('/products/dark tea')}
                     />
-                </Box>
+                </Stack>
             </Section>
         </>
     );
@@ -87,17 +89,16 @@ function Feature(props: FeatureProps) {
                     ref={ref}
                     container
                     spacing={8}
-                    pb={48}
                     sx={{
                         flexDirection: props.flipped ? 'row-reverse' : 'row',
                         alignItems: 'center',
                         justifyContent: 'center',
                     }}
                 >
-                    <Grid md={6} item container>
+                    <Grid md={6} item container justifyContent={'center'}>
                         <img
                             src={props.image_url}
-                            style={{width: '100%', minWidth: 1}}
+                            style={{width: 400}}
                             alt={''}
                         />
                     </Grid>
@@ -111,7 +112,6 @@ function Feature(props: FeatureProps) {
                             flexDirection: 'column',
                         }}
                     >
-
                         <Box sx={{mb: 4, alignSelf: {md: 'start', xs: 'center'}}}>
                             <Typography
                                 pb={4}

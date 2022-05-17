@@ -21,12 +21,12 @@ export default function TestimonialSection() {
             image_url={'https://i.imgur.com/Y4nQhCY.jpg'}
             name={'Purple Floyd'}
             comment={'I love the great selection Urban Infusion have! I try a new tea every day and I still have' +
-                'many teas to try out! Recommend!'}
+                'many tea to try out! Recommend!'}
         />,
         <Testimonial
             image_url={'https://i.imgur.com/nHPps1g.jpg'}
             name={'James Jagger'}
-            comment={'Man, their teas are dope! P.S. You can also smoke them, just don\'t tell anyone I told you' +
+            comment={'Man, their tea are dope! P.S. You can also smoke them, just don\'t tell anyone I told you' +
                 ' that '}
         />
     ];
