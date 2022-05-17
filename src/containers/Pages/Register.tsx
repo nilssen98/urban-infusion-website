@@ -1,6 +1,5 @@
 import {
     Alert,
-    Box,
     Button,
     CircularProgress,
     InputAdornment,
@@ -20,13 +19,15 @@ import PasswordOutlinedIcon from '@mui/icons-material/PasswordOutlined';
 import {useState} from 'react';
 import {register} from '../../api/urbaninfusion/public/register';
 import {isEmailAddress} from '../../utils/emailVerifier';
-import {green} from '@mui/material/colors';
 
 export default function Register() {
     const [loading, setLoading] = useState(false);
+
     const [success, setSuccess] = useState<boolean>(false);
+
     const [error, setError] = useState<boolean>(false);
     const [errorMessage, setErrorMessage] = useState<string>('');
+
     const [email, setEmail] = useState<string>('');
     const [username, setUsername] = useState<string>('');
     const [password, setPassword] = useState<string>('');
@@ -46,7 +47,7 @@ export default function Register() {
                 setSuccess(true);
                 setTimeout(() => {
                     navigate('/login');
-                }, 3000);
+                }, 2000);
             })
             .catch(e => {
                 if (e.response.data.length > 0) {
@@ -86,17 +87,13 @@ export default function Register() {
             >
                 <Alert severity={'error'}>{errorMessage}</Alert>
             </Snackbar>
-            {
-                success && (
-                    <Snackbar
-                        open={success}
-                        autoHideDuration={6000}
-                        anchorOrigin={{vertical: 'top', horizontal: 'center'}}
-                    >
-                        <Alert severity={'success'}>Registered successfully! Redirecting</Alert>
-                    </Snackbar>
-                )
-            }
+            <Snackbar
+                open={success}
+                autoHideDuration={6000}
+                anchorOrigin={{vertical: 'top', horizontal: 'center'}}
+            >
+                <Alert severity={'success'}>Registration successful! Redirecting...</Alert>
+            </Snackbar>
             <Page>
                 <Stack
                     sx={{
@@ -157,29 +154,16 @@ export default function Register() {
                                     }}
                                 />
                             </Stack>
-                            <Box sx={{margin: 1, position: 'relative'}}>
+                            <Stack width={'100%'}>
                                 <Button
+                                    endIcon={loading && (<CircularProgress color={'info'} size={24}/>)}
                                     variant={'contained'}
-                                    sx={{width: '100%'}}
                                     disabled={success || loading}
                                     onClick={handleRegister}
                                 >
                                     Register
                                 </Button>
-                                {loading && !error && (
-                                    <CircularProgress
-                                        size={24}
-                                        sx={{
-                                            color: green[500],
-                                            position: 'absolute',
-                                            top: '50%',
-                                            left: '50%',
-                                            marginTop: '-12px',
-                                            marginLeft: '-12px',
-                                        }}
-                                    />
-                                )}
-                            </Box>
+                            </Stack>
                             <Typography>
                                 <span>Already have an account? </span>
                                 <NavLink to={'/login'}>Login</NavLink>
