@@ -11,6 +11,7 @@ import {isEmailAddress} from '../../utils/emailVerifier';
 
 export default function Register() {
     const [error, setError] = useState<boolean>(false);
+    const [errorMessage, setErrorMessage] = useState<string>('');
     const [email, setEmail] = useState<string>('');
     const [username, setUsername] = useState<string>('');
     const [password, setPassword] = useState<string>('');
@@ -25,7 +26,11 @@ export default function Register() {
             password
         })
             .then(e => navigate('/login'))
-            .catch(e => setError(true));
+            .catch(e => {
+                console.log(e);
+                setErrorMessage('');
+                setError(true);
+            });
     };
 
     function checkPassword(input: String): string | null {
@@ -52,7 +57,7 @@ export default function Register() {
                 onClose={() => setError(false)}
                 anchorOrigin={{vertical: 'top', horizontal: 'center'}}
             >
-                <Alert severity={'error'}>Could not register, please try again!</Alert>
+                <Alert severity={'error'}>{errorMessage}</Alert>
             </Snackbar>
             <Page>
                 <Stack
