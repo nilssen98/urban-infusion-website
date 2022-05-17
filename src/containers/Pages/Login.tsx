@@ -26,6 +26,7 @@ type Props = ReturnType<typeof mapStateToProps> & typeof mapDispatchToProps;
 
 function Login(props: Props) {
     const [error, setError] = useState<boolean>(false);
+    const [errorMessage, setErrorMessage] = useState<string>('');
     const [username, setUsername] = useState<string>('');
     const [password, setPassword] = useState<string>('');
 
@@ -46,7 +47,14 @@ function Login(props: Props) {
             .then(e => {
                 props.setJwtToken(e);
             })
-            .catch(_ => setError(true));
+            .catch(e => {
+                if (e.response.data.length > 0) {
+                    setErrorMessage(e.response.data);
+                } else {
+                    setErrorMessage('Invalid username or password!');
+                }
+                setError(true);
+            });
     };
 
     return (
@@ -57,7 +65,7 @@ function Login(props: Props) {
                 onClose={() => setError(false)}
                 anchorOrigin={{vertical: 'top', horizontal: 'center'}}
             >
-                <Alert severity={'error'}>Invalid username or password!</Alert>
+                <Alert severity={'error'}>{errorMessage}</Alert>
             </Snackbar>
             <Page>
                 <Stack

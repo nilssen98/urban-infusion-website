@@ -20,15 +20,18 @@ export default function Register() {
     const navigate = useNavigate();
 
     const handleRegister = async () => {
-        await register({
+        const r = await register({
             username,
             email,
             password
         })
-            .then(e => navigate('/login'))
+            .then(() => navigate('/login'))
             .catch(e => {
-                console.log(e);
-                setErrorMessage('');
+                if (e.response.data.length > 0) {
+                    setErrorMessage(e.response.data);
+                } else {
+                    setErrorMessage('Could not register!');
+                }
                 setError(true);
             });
     };
