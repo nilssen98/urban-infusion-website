@@ -1,8 +1,7 @@
-import {CssBaseline, Divider, ThemeProvider} from '@mui/material';
+import {CssBaseline, ThemeProvider} from '@mui/material';
 import {getTheme} from '../theme/theme';
 import Landing from './Pages/Landing';
-import NavigationBar from './AppBarNavigation';
-import Footer from './Footer';
+import NavigationBar from './TopAppBar';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import Products from './Pages/Products';
 import NotFound from './Pages/NotFound';

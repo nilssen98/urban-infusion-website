@@ -11,38 +11,20 @@ import useCategories from '../../hooks/categories/useCategories';
 
 export default function Products() {
     const {isLoading, data: products} = useProducts();
-    const {isLoading: isLoadingCategories, data: categories} = useCategories();
-
-    const [currentTab, setCurrentTab] = useState<number>(0);
 
     const {id} = useParams();
     const theme = useTheme();
 
-    const filteredCategories = (): Array<Category | string> => {
-        return categories?.reduce((acc: Array<Category | string>, curr: Category) => {
-            acc.push(curr);
-            return acc;
-        }, ['all']) || [];
-    };
-
     const filteredProducts = (): ProductDto[] | undefined => {
-        return Object.values(Category).includes(filteredCategories()[currentTab] as Category)
-            ? products?.filter(product => product.category === filteredCategories()[currentTab])
+        return Object.values(Category).includes(id as Category)
+            ? products?.filter(product => product.category === id)
             : products;
     };
 
     return (
         <>
-            <Page isLoading={isLoading || isLoadingCategories}>
+            <Page isLoading={isLoading}>
                 <Stack direction={'column'} alignItems={'center'}>
-                    <Box width={'100%'} maxWidth={theme.breakpoints.values.lg}>
-                        <TabNavigation
-                            tabs={filteredCategories()}
-                            currentTab={currentTab}
-                            onChange={(newValue) => setCurrentTab(newValue)}
-                        />
-                    </Box>
-                    <Divider flexItem/>
                     <Box width={'100%'} maxWidth={theme.breakpoints.values.lg}>
                         {
                             products ? (

@@ -3,7 +3,7 @@ import {Tab, Tabs, TabsProps} from '@mui/material';
 interface Props {
     tabsProps?: TabsProps;
     tabs?: string[];
-    currentTab: number;
+    currentTab: any;
     onChange: (newValue: any) => void;
 }
 
