@@ -1,6 +1,6 @@
 import {Stack, Typography, useTheme} from '@mui/material';
 import Section from '../../Wrappers/Section';
-import Background from '../../../assets/images/about-section-background.jpg'
+import Background from '../../../assets/images/about-section-background.jpg';
 
 export default function AboutUsSection() {
     const theme = useTheme();

@@ -22,7 +22,7 @@ export default function Section(props: Props) {
                     backgroundColor: props.bgColor || undefined,
                     justifyContent: 'center',
                     backgroundImage: {
-                        xs: `url(${props.backgroundUrlMobile || undefined})`,
+                        xs: `url(${props.backgroundUrlMobile || props.backgroundUrl || undefined})`,
                         md: `url(${props.backgroundUrl || undefined})`,
                     },
                     backgroundRepeat: 'no-repeat',
