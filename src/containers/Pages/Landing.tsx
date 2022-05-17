@@ -19,7 +19,7 @@ export default function Landing() {
                 <FeaturesSection/>
                 <TestimonialSection/>
                 <AboutUsSection/>
-                <InstagramSection/>
+                {/*<InstagramSection/>*/}
                 <Divider/>
                 <Footer/>
             </Box>
