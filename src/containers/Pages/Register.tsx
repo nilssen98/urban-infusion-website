@@ -99,7 +99,9 @@ export default function Register() {
                 autoHideDuration={6000}
                 anchorOrigin={{vertical: 'top', horizontal: 'center'}}
             >
-                <Alert severity={'success'}>Registration successful! Redirecting...</Alert>
+                <Alert severity={'success'}>
+                    Registration successful! Redirecting to the <NavLink to={'/login'}>login</NavLink> page
+                </Alert>
             </Snackbar>
             <Page>
                 <Stack
