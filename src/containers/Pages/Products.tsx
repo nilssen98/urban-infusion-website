@@ -1,13 +1,9 @@
-import {Box, Divider, Stack, Typography, useTheme} from '@mui/material';
+import {Box, Stack, Typography, useTheme} from '@mui/material';
 import {ProductsList} from '../../components/Pages/Products/ProductsList';
 import {useParams} from 'react-router-dom';
 import Page from '../../components/Wrappers/Page';
-import {Category} from '../../api/urbaninfusion/dto/categories-dto';
-import {useState} from 'react';
-import TabNavigation from '../../components/TabNavigation';
 import {ProductDto} from '../../api/urbaninfusion/dto/product-dto';
 import useProducts from '../../hooks/products/useProducts';
-import useCategories from '../../hooks/categories/useCategories';
 
 export default function Products() {
     const {isLoading, data: products} = useProducts();
@@ -16,9 +12,8 @@ export default function Products() {
     const theme = useTheme();
 
     const filteredProducts = (): ProductDto[] | undefined => {
-        return Object.values(Category).includes(id as Category)
-            ? products?.filter(product => product.category === id)
-            : products;
+        const filtered_products = products?.filter(product => product.category.toLowerCase() === id?.toLowerCase());
+        return filtered_products?.length === 0 ? products : filtered_products;
     };
 
     return (
