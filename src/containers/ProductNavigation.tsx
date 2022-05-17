@@ -29,8 +29,9 @@ export default function ProductNavigation() {
                         <UnstyledLink to={`/products/${category.toLowerCase()}`}>
                             <Stack
                                 key={category}
-                                height={40}
+                                height={32}
                                 px={4}
+                                my={1}
                                 alignItems={'center'}
                                 justifyContent={'center'}
                                 borderBottom={'2px solid'}
