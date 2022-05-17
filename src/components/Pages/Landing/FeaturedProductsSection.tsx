@@ -36,7 +36,7 @@ export default function FeaturedProductsSection() {
 
     return (
         <>
-            <Section bgColor={theme.palette.primary.light}>
+            <Section bgColor={theme.palette.primary.light} sx={{my: 16}}>
                 <Box
                     sx={{
                         display: 'flex',
