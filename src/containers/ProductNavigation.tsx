@@ -4,7 +4,6 @@ import {useLocation, useNavigate} from 'react-router-dom';
 import {Stack, Typography, useTheme} from '@mui/material';
 
 export default function ProductNavigation() {
-    const [tab, setTab] = useState<number | undefined>(undefined);
     const [categories, setCategories] = useState<string[]>(['ALL']);
 
     const {data: fetchedCategories} = useCategories();
@@ -37,16 +36,16 @@ export default function ProductNavigation() {
                         <Stack
                             onClick={() => handleTabChange(category)}
                             height={32}
-                            borderBottom={isActiveCategory(category) ? '2px solid' : 'default'}
-                            borderColor={theme.palette.secondary.main}
+                            borderBottom={'2px solid'}
+                            borderColor={isActiveCategory(category) ? theme.palette.primary.main : 'transparent'}
                             px={4}
                             my={2}
                             sx={{
+                                transition: 'all .2s ease',
                                 cursor: 'pointer',
                                 userSelect: 'none',
                                 '&:hover': {
-                                    borderBottom: '2px solid',
-                                    borderColor: theme.palette.secondary.main,
+                                    borderColor: theme.palette.primary.main,
                                 }
                             }}
                         >
