@@ -29,11 +29,12 @@ export default function ProductNavigation() {
                         <UnstyledLink to={`/products/${category.toLowerCase()}`}>
                             <Stack
                                 key={category}
-                                height={32}
+                                height={48}
+                                px={4}
+                                alignItems={'center'}
+                                justifyContent={'center'}
                                 borderBottom={'2px solid'}
                                 borderColor={isActiveCategory(category) ? theme.palette.primary.main : 'transparent'}
-                                px={4}
-                                my={2}
                                 sx={{
                                     transition: 'all .2s ease',
                                     cursor: 'pointer',

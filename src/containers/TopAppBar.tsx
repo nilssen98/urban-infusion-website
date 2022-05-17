@@ -47,9 +47,8 @@ function TopAppBar(props: Props) {
                     <Stack
                         flex={1}
                         alignItems={'center'}
-                        mx={{md: 8, xs: 2}}
                     >
-                        <Stack width={'100%'} direction={'row'} alignItems={'center'}>
+                        <Stack px={4} width={'100%'} direction={'row'} alignItems={'center'}>
                             <Stack>
                                 <Logo clickable onClick={() => navigate('/')}/>
                             </Stack>
@@ -75,7 +74,8 @@ function TopAppBar(props: Props) {
                                 }
                             </Stack>
                         </Stack>
-                        <Stack width={'100%'} maxWidth={theme.breakpoints.values.lg}>
+                        <Divider flexItem/>
+                        <Stack px={4} width={'100%'} maxWidth={theme.breakpoints.values.lg}>
                             <ProductNavigation/>
                         </Stack>
                     </Stack>
