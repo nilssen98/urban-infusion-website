@@ -4,6 +4,8 @@ import FeaturesSection from '../../components/Pages/Landing/FeaturesSection';
 import FeaturedProductsSection from '../../components/Pages/Landing/FeaturedProductsSection';
 import TestimonialSection from '../../components/Pages/Landing/TestimonialSection';
 import Footer from '../Footer';
+import AboutUsSection from '../../components/Pages/About/AboutUsSection';
+import InstagramSection from '../../components/Pages/About/InstagramSection';
 
 export default function Landing() {
     return (
@@ -16,6 +18,8 @@ export default function Landing() {
                 <FeaturedProductsSection/>
                 <FeaturesSection/>
                 <TestimonialSection/>
+                <AboutUsSection/>
+                <InstagramSection/>
                 <Divider/>
                 <Footer/>
             </Box>

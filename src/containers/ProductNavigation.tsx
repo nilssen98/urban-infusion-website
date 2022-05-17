@@ -12,9 +12,6 @@ export default function ProductNavigation() {
     const theme = useTheme();
 
     useEffect(() => {
-    }, [pathname]);
-
-    useEffect(() => {
         if (fetchedCategories) {
             setCategories(['ALL', ...(fetchedCategories as Array<string>)]);
         }
@@ -34,6 +31,7 @@ export default function ProductNavigation() {
                 {
                     categories.map(category => (
                         <Stack
+                            key={category}
                             onClick={() => handleTabChange(category)}
                             height={32}
                             borderBottom={'2px solid'}

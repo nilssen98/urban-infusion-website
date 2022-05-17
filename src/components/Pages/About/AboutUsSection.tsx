@@ -2,7 +2,6 @@ import {Stack, Typography} from '@mui/material';
 import Section from '../../Wrappers/Section';
 
 export default function AboutUsSection() {
-
     return (
         <>
             <Section>
