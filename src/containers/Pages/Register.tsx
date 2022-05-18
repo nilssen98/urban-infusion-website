@@ -22,7 +22,7 @@ import {isEmailAddress} from '../../utils/emailVerifier';
 import {passwordStrength, defaultOptions} from 'check-password-strength';
 
 export default function Register() {
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState<boolean>(false);
 
     const [success, setSuccess] = useState<boolean>(false);
 
@@ -48,6 +48,14 @@ export default function Register() {
     }, [success]);
 
     const handleRegister = async () => {
+        for (const length of [email.length, username.length, password.length]) {
+            if (length === 0) {
+                setErrorMessage('Input fields can not be blank!');
+                setError(true);
+                return;
+            }
+        }
+
         setLoading(true);
 
         await register({
@@ -86,6 +94,9 @@ export default function Register() {
     }
 
     function getPasswordStrength(input: String): string {
+        if (input == null) {
+            return '';
+        }
         return input.length !== 0
             ? passwordStrength(password, [...defaultOptions, {
                 id: 0,
