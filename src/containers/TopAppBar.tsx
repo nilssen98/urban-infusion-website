@@ -15,7 +15,6 @@ import useMe from '../hooks/users/useMe';
 
 const mapStateToProps = (state: RootState) => {
     return {
-        jwt: state.user.jwt,
         cartItemCount: selectCartItems(state.cart).length,
         themeColor: state.user.theme,
         isAuthenticated: state.user.jwt !== undefined,
@@ -37,7 +36,7 @@ function TopAppBar(props: Props) {
     const theme = useTheme();
     const navigate = useNavigate();
 
-    const {data: user} = useMe(props.jwt);
+    const {data: user} = useMe();
 
     return (
         <>

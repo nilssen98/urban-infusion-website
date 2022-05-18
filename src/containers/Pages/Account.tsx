@@ -55,7 +55,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(Account);
 function Account(props: Props) {
     const navigate = useNavigate();
     const [currentTab, setCurrentTab] = useState<number>(0);
-    const {isLoading, isError, data: user} = useMe(props.jwt);
+    const {isLoading, isError, data: user} = useMe();
     const theme = useTheme();
     const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
     const accountActionsOpen = Boolean(anchorEl);
