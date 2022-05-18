@@ -4,7 +4,7 @@ import {UserDto} from '../../api/urbaninfusion/dto/user-dto';
 
 export default function useMe(jwt?: string): UseQueryResult<UserDto> {
     return useQuery(
-        ['user', jwt],
+        ['user'],
         () => getMe(jwt!), {
             enabled: jwt !== undefined
         }

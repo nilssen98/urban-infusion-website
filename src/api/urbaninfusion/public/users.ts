@@ -8,3 +8,7 @@ export async function getMe(jwt: string): Promise<UserDto> {
         { headers: { Authorization: jwt } }
     )).data;
 }
+
+export async function updateUser(id: number, data: Partial<UserDto>): Promise<any> {
+    return axios.patch(`${baseUrl}/users/${id}`, {data});
+}

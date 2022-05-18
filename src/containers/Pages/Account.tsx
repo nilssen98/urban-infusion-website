@@ -27,6 +27,8 @@ import {userSlice} from '../../state/slices/user';
 import ProfileSection from '../../components/Pages/Account/ProfileSection';
 import OrdersSection from '../../components/Pages/Account/OrdersSection';
 import AdminSection from '../../components/Pages/Account/AdminSection';
+import {useUpdateUser} from '../../hooks/users/useUpdateUser';
+import {UserDto} from '../../api/urbaninfusion/dto/user-dto';
 
 const navigation = [
     'profile',
@@ -57,6 +59,11 @@ function Account(props: Props) {
     const theme = useTheme();
     const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
     const accountActionsOpen = Boolean(anchorEl);
+    const updateMutation = useUpdateUser(user?.id || -1);
+
+    const handleUpdate = (data: Partial<UserDto>) => {
+        updateMutation.mutate(data);
+    };
 
     useEffect(() => {
         if (isError || !props.jwt) {
@@ -67,7 +74,7 @@ function Account(props: Props) {
     const renderSection = (name: string): ReactNode => {
         switch (name) {
             case 'profile':
-                return <ProfileSection {...user!}/>;
+                return <ProfileSection onUpdate={handleUpdate} {...user!}/>;
             case 'orders':
                 return <OrdersSection/>;
             case 'admin':
