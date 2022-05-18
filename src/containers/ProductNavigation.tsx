@@ -26,7 +26,7 @@ export default function ProductNavigation() {
             <Stack flex={1} direction={'row'} alignItems={'center'} spacing={2}>
                 {
                     categories.map(category => (
-                        <UnstyledLink to={`/products/${category.toLowerCase()}`}>
+                        <UnstyledLink to={`/products/${category.toLowerCase()}`} key={category}>
                             <Stack
                                 key={category}
                                 height={32}

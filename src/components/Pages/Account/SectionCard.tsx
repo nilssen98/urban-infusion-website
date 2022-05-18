@@ -1,0 +1,48 @@
+import {Divider, Paper, Stack, Typography} from '@mui/material';
+import {ReactNode} from 'react';
+import {SxProps} from '@mui/system';
+
+interface Props {
+    header?: string;
+    children?: ReactNode;
+}
+
+export default function SectionCard(props: Props) {
+    return (
+        <>
+            <Paper variant={'outlined'}>
+                {
+                    props.header && (
+                        <Stack>
+                            <Stack px={4} py={6} bgcolor={'oldlace'}>
+                                <Typography fontWeight={400} variant={'h6'} textTransform={'capitalize'}>
+                                    {props.header}
+                                </Typography>
+                            </Stack>
+                            <Divider/>
+                        </Stack>
+                    )
+                }
+                <Stack direction={'column'}>
+                    {props.children}
+                </Stack>
+            </Paper>
+        </>
+    );
+}
+
+interface SectionCardItemProps {
+    children?: ReactNode;
+    sx?: SxProps;
+}
+
+export function SectionCardItem(props: SectionCardItemProps) {
+    return (
+        <>
+            <Stack px={4} py={2} sx={{...props.sx}}>
+                {props.children}
+            </Stack>
+            <Divider/>
+        </>
+    );
+}
