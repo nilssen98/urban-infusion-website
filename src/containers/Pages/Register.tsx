@@ -19,6 +19,7 @@ import PasswordOutlinedIcon from '@mui/icons-material/PasswordOutlined';
 import {useEffect, useState} from 'react';
 import {register} from '../../api/urbaninfusion/public/register';
 import {isEmailAddress} from '../../utils/emailVerifier';
+import {passwordStrength, defaultOptions} from 'check-password-strength';
 
 export default function Register() {
     const [loading, setLoading] = useState(false);
@@ -82,6 +83,17 @@ export default function Register() {
             return 'Password is too long';
         }
         return null;
+    }
+
+    function getPasswordStrength(input: String): string {
+        return input.length !== 0
+            ? passwordStrength(password, [...defaultOptions, {
+                id: 0,
+                value: 'Very weak',
+                minDiversity: 0,
+                minLength: 0
+            }]).value
+            : '';
     }
 
     return (
@@ -151,7 +163,7 @@ export default function Register() {
                                     onChange={(event) => setPassword(event.target.value)}
                                     required
                                     error={checkPassword(password) !== null}
-                                    helperText={checkPassword(password)}
+                                    helperText={checkPassword(password) || getPasswordStrength(password)}
                                     label={'Password'}
                                     type={'password'}
                                     InputProps={{

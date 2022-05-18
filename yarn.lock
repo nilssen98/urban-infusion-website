@@ -716,6 +716,11 @@ chalk@^2.0.0, chalk@^2.3.0:
     escape-string-regexp "^1.0.5"
     supports-color "^5.3.0"
 
+check-password-strength@^2.0.5:
+  version "2.0.5"
+  resolved "https://registry.yarnpkg.com/check-password-strength/-/check-password-strength-2.0.5.tgz#bb10da01d24bd69e5e629c5cea2a6b729e5061af"
+  integrity sha512-b61T/+4OIGWSMRxJUsYOY44Cf9w7orIt2OQmF/WgH16qbJKIT1jG3XHx3jP+o090eH7rq13DRleKgXCiROBzMQ==
+
 clsx@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/clsx/-/clsx-1.1.1.tgz#98b3134f9abbdf23b2663491ace13c5c03a73188"
