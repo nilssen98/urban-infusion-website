@@ -10,6 +10,7 @@ import {connect} from 'react-redux';
 import {selectCartItems} from '../state/slices/cart';
 import UnstyledLink from '../components/UnstyledLink';
 import ProductNavigation from './ProductNavigation';
+import {hexToRgb} from '../utils/utils';
 
 const mapStateToProps = (state: RootState) => {
     return {
@@ -74,16 +75,23 @@ function TopAppBar(props: Props) {
                                 }
                             </Stack>
                         </Stack>
-                        <Divider flexItem/>
-                        <Stack px={4} width={'100%'} bgcolor={theme.palette.secondary.light} alignItems={'center'}>
-                            <Stack maxWidth={theme.breakpoints.values.lg} width={'100%'}>
-                                <ProductNavigation/>
-                            </Stack>
-                        </Stack>
                     </Stack>
                 </Toolbar>
-                <Divider/>
+                <Divider flexItem/>
+                <Stack
+                    px={4}
+                    width={'100%'}
+                    alignItems={'center'}
+                    sx={{
+                        background: theme.palette.secondary.light,
+                    }}
+                >
+                    <Stack maxWidth={theme.breakpoints.values.lg} width={'100%'}>
+                        <ProductNavigation/>
+                    </Stack>
+                </Stack>
+                <Divider flexItem/>
             </AppBar>
         </>
-);
+    );
 }
