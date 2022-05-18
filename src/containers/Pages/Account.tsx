@@ -101,13 +101,13 @@ function ProfileSection() {
             <Stack spacing={4}>
                 <SectionCard header={'Personal information'}>
                     <SectionCardItem>
-                        <TextField label={'Email'}/>
-                    </SectionCardItem>
-                    <SectionCardItem>
                         <TextField label={'Username'} disabled/>
                     </SectionCardItem>
                     <SectionCardItem>
                         <TextField label={'Password'}/>
+                    </SectionCardItem>
+                    <SectionCardItem>
+                        <TextField label={'Email'}/>
                     </SectionCardItem>
                     <SectionCardItem sx={{alignItems: 'start'}}>
                         <Button startIcon={<SaveOutlinedIcon/>} variant={'contained'}>Save changes</Button>
