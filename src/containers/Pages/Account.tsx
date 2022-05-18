@@ -10,11 +10,16 @@ import {
     Typography,
     useTheme
 } from '@mui/material';
-import {ReactNode, useState} from 'react';
+import {ReactElement, ReactNode, useState} from 'react';
 import {stringToColor} from '../../utils/avatarUtils';
 import Page from '../../components/Wrappers/Page';
 import SectionCard, {SectionCardItem} from '../../components/Pages/Account/SectionCard';
 import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
+import {connect} from 'react-redux';
+import {RootState} from '../../state/store';
+import {selectCartItems} from '../../state/slices/cart';
+import {userSlice} from '../../state/slices/user';
+import useMe from '../../hooks/users/useMe';
 
 const navigation = [
     'profile',
@@ -30,10 +35,24 @@ const initialData = {
     password: 'kasper.n',
 };
 
-export default function Account() {
-    const user = initialData;
+const mapStateToProps = (state: RootState) => {
+    return {
+        jwt: state.user.jwt
+    };
+};
+
+type Props = ReturnType<typeof mapStateToProps> & {
+    children?: ReactElement;
+};
+
+export default connect(mapStateToProps)(Account);
+
+function Account(props: Props) {
+    // const user = initialData;
 
     const [currentTab, setCurrentTab] = useState<number>(0);
+
+    const {data: user} = useMe(props.jwt);
 
     const theme = useTheme();
 
@@ -56,12 +75,12 @@ export default function Account() {
                 <Stack alignItems={'center'} px={4} py={8}>
                     <Stack spacing={8} width={'100%'} maxWidth={'lg'}>
                         <Stack direction={'row'} alignItems={'center'} spacing={4}>
-                            <Avatar sx={{height: 64, width: 64, background: stringToColor(user.username)}}>
-                                <Typography variant={'h4'}>{user.username[0]}</Typography>
+                            <Avatar sx={{height: 64, width: 64, background: stringToColor(user?.username)}}>
+                                <Typography variant={'h4'}>{user?.username[0]}</Typography>
                             </Avatar>
                             <Stack>
-                                <Typography variant={'h5'}>{user.username}</Typography>
-                                <Typography color={theme.palette.text.secondary}>{user.email}</Typography>
+                                <Typography variant={'h5'}>{user?.username}</Typography>
+                                <Typography color={theme.palette.text.secondary}>{user?.email}</Typography>
                             </Stack>
                         </Stack>
                         <Stack>
