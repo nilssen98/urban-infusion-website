@@ -28,7 +28,7 @@ import ProfileSection from '../../components/Pages/Account/ProfileSection';
 import OrdersSection from '../../components/Pages/Account/OrdersSection';
 import AdminSection from '../../components/Pages/Account/AdminSection';
 import {useUpdateUser} from '../../hooks/users/useUpdateUser';
-import {UserDto} from '../../api/urbaninfusion/dto/user-dto';
+import {UserDto, UserRole} from '../../api/urbaninfusion/dto/user-dto';
 
 const navigation = [
     'profile',
@@ -133,10 +133,12 @@ function Account(props: Props) {
                             <Tabs value={currentTab} onChange={(_, newValue) => setCurrentTab(newValue)}>
                                 {
                                     navigation.map(name => (
-                                        <Tab
-                                            label={<Typography textTransform={'capitalize'}>{name}</Typography>}
-                                            key={name}
-                                        />
+                                        name === 'admin' && user?.role !== UserRole.ADMIN
+                                            ? <></>
+                                            : <Tab
+                                                label={<Typography textTransform={'capitalize'}>{name}</Typography>}
+                                                key={name}
+                                            />
                                     ))
                                 }
                             </Tabs>
