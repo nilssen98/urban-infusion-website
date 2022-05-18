@@ -1,14 +1,25 @@
-import {Alert, Button, InputAdornment, Paper, Snackbar, Stack, TextField, Typography, useTheme} from '@mui/material';
+import {
+    Alert,
+    Button,
+    IconButton,
+    InputAdornment,
+    Paper,
+    Snackbar,
+    Stack,
+    TextField,
+    Typography,
+    useTheme
+} from '@mui/material';
 import Page from '../../components/Wrappers/Page';
 import {NavLink, useNavigate} from 'react-router-dom';
 import Background from '../../assets/images/teashop-background.jpg';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
-import PasswordOutlinedIcon from '@mui/icons-material/PasswordOutlined';
 import {login} from '../../api/urbaninfusion/public/login';
 import {useEffect, useState} from 'react';
 import {RootState} from '../../state/store';
 import {connect} from 'react-redux';
 import {userSlice} from '../../state/slices/user';
+import {Visibility, VisibilityOff} from '@mui/icons-material';
 
 const mapStateToProps = (state: RootState) => {
     return {
@@ -29,6 +40,7 @@ function Login(props: Props) {
     const [errorMessage, setErrorMessage] = useState<string>('');
     const [username, setUsername] = useState<string>('');
     const [password, setPassword] = useState<string>('');
+    const [showPassword, setShowPassword] = useState<boolean>(false);
 
     const theme = useTheme();
     const navigate = useNavigate();
@@ -100,11 +112,15 @@ function Login(props: Props) {
                                     value={password}
                                     onChange={(event) => setPassword(event.target.value)}
                                     label={'Password'}
-                                    type={'password'}
+                                    type={showPassword ? 'text' : 'password'}
                                     InputProps={{
                                         endAdornment: (
-                                            <InputAdornment position={'start'}>
-                                                <PasswordOutlinedIcon/>
+                                            <InputAdornment position={'end'}>
+                                                <IconButton
+                                                    onClick={() => setShowPassword(!showPassword)}
+                                                >
+                                                    {showPassword ? <Visibility/> : <VisibilityOff/>}
+                                                </IconButton>
                                             </InputAdornment>
                                         )
                                     }}

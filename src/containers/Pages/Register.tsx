@@ -2,6 +2,7 @@ import {
     Alert,
     Button,
     CircularProgress,
+    IconButton,
     InputAdornment,
     Paper,
     Snackbar,
@@ -15,14 +16,16 @@ import {NavLink, useNavigate} from 'react-router-dom';
 import Background from '../../assets/images/teashop-background.jpg';
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
-import PasswordOutlinedIcon from '@mui/icons-material/PasswordOutlined';
 import {useEffect, useState} from 'react';
 import {register} from '../../api/urbaninfusion/public/register';
 import {isEmailAddress} from '../../utils/emailVerifier';
 import {passwordStrength, defaultOptions} from 'check-password-strength';
+import {Visibility, VisibilityOff} from '@mui/icons-material';
 
 export default function Register() {
     const [loading, setLoading] = useState<boolean>(false);
+
+    const [showPassword, setShowPassword] = useState<boolean>(false);
 
     const [success, setSuccess] = useState<boolean>(false);
 
@@ -176,11 +179,15 @@ export default function Register() {
                                     error={checkPassword(password) !== null}
                                     helperText={checkPassword(password) || getPasswordStrength(password)}
                                     label={'Password'}
-                                    type={'password'}
+                                    type={showPassword ? 'text' : 'password'}
                                     InputProps={{
                                         endAdornment: (
-                                            <InputAdornment position={'start'}>
-                                                <PasswordOutlinedIcon/>
+                                            <InputAdornment position={'end'}>
+                                                <IconButton
+                                                    onClick={() => setShowPassword(!showPassword)}
+                                                >
+                                                    {showPassword ? <Visibility/> : <VisibilityOff/>}
+                                                </IconButton>
                                             </InputAdornment>
                                         )
                                     }}
