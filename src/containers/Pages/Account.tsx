@@ -1,14 +1,35 @@
-import {Avatar, Button, Divider, Stack, Tab, Tabs, TextField, Typography, useTheme} from '@mui/material';
-import {ReactElement, ReactNode, useEffect, useState} from 'react';
+import {
+    Avatar,
+    Button,
+    Divider,
+    IconButton,
+    List,
+    ListItem,
+    ListItemButton,
+    ListItemIcon,
+    ListItemText,
+    Popover,
+    Stack,
+    Tab,
+    Tabs,
+    TextField,
+    Typography,
+    useTheme
+} from '@mui/material';
+import React, {ReactElement, ReactNode, useEffect, useState} from 'react';
 import {stringToColor} from '../../utils/avatarUtils';
 import Page from '../../components/Wrappers/Page';
 import SectionCard, {SectionCardItem} from '../../components/Pages/Account/SectionCard';
 import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
 import {connect} from 'react-redux';
-import {RootState} from '../../state/store';
+import {RootState, store} from '../../state/store';
 import useMe from '../../hooks/users/useMe';
 import {useNavigate} from 'react-router-dom';
 import {UserDto} from '../../api/urbaninfusion/dto/user-dto';
+import MoreHorizOutlinedIcon from '@mui/icons-material/MoreHorizOutlined';
+import LogoutIcon from '@mui/icons-material/Logout';
+import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
+import {userSlice} from '../../state/slices/user';
 
 const navigation = [
     'profile',
@@ -30,25 +51,29 @@ const mapStateToProps = (state: RootState) => {
     };
 };
 
-type Props = ReturnType<typeof mapStateToProps> & {
+const mapDispatchToProps = {
+    clearJwtToken: userSlice.actions.clearJwtToken,
+};
+
+type Props = ReturnType<typeof mapStateToProps> & typeof mapDispatchToProps & {
     children?: ReactElement;
 };
 
-export default connect(mapStateToProps)(Account);
+export default connect(mapStateToProps, mapDispatchToProps)(Account);
 
 function Account(props: Props) {
     const navigate = useNavigate();
     const [currentTab, setCurrentTab] = useState<number>(0);
-
     const {isLoading, isError, data: user} = useMe(props.jwt);
-
     const theme = useTheme();
+    const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
+    const accountActionsOpen = Boolean(anchorEl);
 
     useEffect(() => {
-        if (isError && !isLoading) {
+        if (isError || !props.jwt) {
             navigate('/login');
         }
-    }, [isError]);
+    }, [isError, props.jwt]);
 
     const renderSection = (name: string): ReactNode => {
         switch (name) {
@@ -63,6 +88,14 @@ function Account(props: Props) {
         }
     };
 
+    const handleAccountActionsClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleAccountActionsClose = () => {
+        setAnchorEl(null);
+    };
+
     return (
         <>
             <Page sx={{height: '100vh'}} isLoading={isLoading}>
@@ -72,9 +105,32 @@ function Account(props: Props) {
                             <Avatar sx={{height: 64, width: 64, background: stringToColor(user?.username)}}>
                                 <Typography variant={'h4'}>{user?.username[0]}</Typography>
                             </Avatar>
-                            <Stack>
+                            <Stack flex={1}>
                                 <Typography variant={'h5'}>{user?.username}</Typography>
                                 <Typography color={theme.palette.text.secondary}>{user?.email}</Typography>
+                            </Stack>
+                            <Stack>
+                                <IconButton onClick={handleAccountActionsClick}>
+                                    <MoreHorizOutlinedIcon sx={{width: 28, height: 28}}/>
+                                </IconButton>
+                                <Popover
+                                    open={accountActionsOpen}
+                                    anchorEl={anchorEl}
+                                    onClose={handleAccountActionsClose}
+                                    anchorOrigin={{
+                                        vertical: 'bottom',
+                                        horizontal: 'left',
+                                    }}
+                                >
+                                    <List>
+                                        <ListItem disablePadding>
+                                            <ListItemButton onClick={() => props.clearJwtToken()}>
+                                                <ListItemIcon><LogoutIcon/></ListItemIcon>
+                                                <ListItemText primary={'Sign out'}/>
+                                            </ListItemButton>
+                                        </ListItem>
+                                    </List>
+                                </Popover>
                             </Stack>
                         </Stack>
                         <Stack>
@@ -115,8 +171,9 @@ function ProfileSection(props?: UserDto) {
                 <SectionCard header={'Personal information'}>
                     <SectionCardItem>
                         <TextField
-                            value={props?.username}
-                            onChange={() => {}}
+                            value={props?.username || ''}
+                            onChange={() => {
+                            }}
                             label={'Username'}
                             disabled
                         />
@@ -125,7 +182,7 @@ function ProfileSection(props?: UserDto) {
                         <TextField label={'Password'}/>
                     </SectionCardItem>
                     <SectionCardItem>
-                        <TextField label={'Email'} value={props?.email}/>
+                        <TextField label={'Email'} value={props?.email || ''}/>
                     </SectionCardItem>
                     <SectionCardItem sx={{alignItems: 'start'}}>
                         <Button startIcon={<SaveOutlinedIcon/>} variant={'contained'}>Save changes</Button>
@@ -133,16 +190,16 @@ function ProfileSection(props?: UserDto) {
                 </SectionCard>
                 <SectionCard header={'Contact information'}>
                     <SectionCardItem>
-                        <TextField label={'City'} value={props?.city}/>
+                        <TextField label={'City'} value={props?.city || ''}/>
                     </SectionCardItem>
                     <SectionCardItem>
-                        <TextField label={'Zipcode'} value={props?.zipcode}/>
+                        <TextField label={'Zipcode'} value={props?.zipcode || ''}/>
                     </SectionCardItem>
                     <SectionCardItem>
-                        <TextField label={'Address'} value={props?.address}/>
+                        <TextField label={'Address'} value={props?.address || ''}/>
                     </SectionCardItem>
                     <SectionCardItem>
-                        <TextField label={'Phone number'} value={props?.phone_number}/>
+                        <TextField label={'Phone number'} value={props?.phone_number || ''}/>
                     </SectionCardItem>
                     <SectionCardItem sx={{alignItems: 'start'}}>
                         <Button startIcon={<SaveOutlinedIcon/>} variant={'contained'}>Save changes</Button>

@@ -1,4 +1,4 @@
-import {Divider, Paper, Stack, Typography} from '@mui/material';
+import {Divider, Paper, Stack, Typography, useTheme} from '@mui/material';
 import {ReactNode} from 'react';
 import {SxProps} from '@mui/system';
 
@@ -8,13 +8,14 @@ interface Props {
 }
 
 export default function SectionCard(props: Props) {
+    const theme = useTheme();
     return (
         <>
             <Paper variant={'outlined'}>
                 {
                     props.header && (
                         <Stack>
-                            <Stack px={4} py={6} bgcolor={'oldlace'}>
+                            <Stack px={4} py={6} bgcolor={theme.palette.secondary.light}>
                                 <Typography fontWeight={400} variant={'h6'} textTransform={'capitalize'}>
                                     {props.header}
                                 </Typography>

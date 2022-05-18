@@ -20,6 +20,9 @@ export const userSlice = createSlice({
         },
         setJwtToken: (state, action) => {
             state.jwt = action.payload;
+        },
+        clearJwtToken: (state) => {
+            state.jwt = undefined;
         }
     }
 });

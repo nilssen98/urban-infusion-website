@@ -75,8 +75,10 @@ function TopAppBar(props: Props) {
                             </Stack>
                         </Stack>
                         <Divider flexItem/>
-                        <Stack px={4} width={'100%'} maxWidth={theme.breakpoints.values.lg}>
-                            <ProductNavigation/>
+                        <Stack px={4} width={'100%'} bgcolor={theme.palette.secondary.light} alignItems={'center'}>
+                            <Stack maxWidth={theme.breakpoints.values.lg} width={'100%'}>
+                                <ProductNavigation/>
+                            </Stack>
                         </Stack>
                     </Stack>
                 </Toolbar>
