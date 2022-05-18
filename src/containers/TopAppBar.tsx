@@ -11,6 +11,7 @@ import {selectCartItems} from '../state/slices/cart';
 import UnstyledLink from '../components/UnstyledLink';
 import ProductNavigation from './ProductNavigation';
 import {hexToRgb} from '../utils/utils';
+import useMe from '../hooks/users/useMe';
 
 const mapStateToProps = (state: RootState) => {
     return {
@@ -34,6 +35,8 @@ type Props = ReturnType<typeof mapStateToProps> & typeof mapDispatchToProps & {
 function TopAppBar(props: Props) {
     const theme = useTheme();
     const navigate = useNavigate();
+
+    const {data: user} = useMe();
 
     return (
         <>
@@ -66,7 +69,7 @@ function TopAppBar(props: Props) {
                                 <CartButton itemsCount={props.cartItemCount}/>
                                 {
                                     props.isAuthenticated
-                                        ? <AccountButton/>
+                                        ? <AccountButton name={user?.username || ''}/>
                                         : (<UnstyledLink to={'/login'}>
                                             <Button variant={'contained'}>
                                                 Login
