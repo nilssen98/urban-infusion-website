@@ -134,7 +134,7 @@ function Account(props: Props) {
                                 {
                                     navigation.map(name => (
                                         name === 'admin' && user?.role !== UserRole.ADMIN
-                                            ? <></>
+                                            ? []
                                             : <Tab
                                                 label={<Typography textTransform={'capitalize'}>{name}</Typography>}
                                                 key={name}
