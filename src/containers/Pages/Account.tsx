@@ -1,25 +1,14 @@
-import {
-    Avatar, Button,
-    Divider,
-    FormControl,
-    InputBase, InputLabel,
-    OutlinedInput,
-    Stack,
-    Tab,
-    Tabs, TextField,
-    Typography,
-    useTheme
-} from '@mui/material';
-import {ReactElement, ReactNode, useState} from 'react';
+import {Avatar, Button, Divider, Stack, Tab, Tabs, TextField, Typography, useTheme} from '@mui/material';
+import {ReactElement, ReactNode, useEffect, useState} from 'react';
 import {stringToColor} from '../../utils/avatarUtils';
 import Page from '../../components/Wrappers/Page';
 import SectionCard, {SectionCardItem} from '../../components/Pages/Account/SectionCard';
 import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
 import {connect} from 'react-redux';
 import {RootState} from '../../state/store';
-import {selectCartItems} from '../../state/slices/cart';
-import {userSlice} from '../../state/slices/user';
 import useMe from '../../hooks/users/useMe';
+import {useNavigate} from 'react-router-dom';
+import {UserDto} from '../../api/urbaninfusion/dto/user-dto';
 
 const navigation = [
     'profile',
@@ -48,18 +37,23 @@ type Props = ReturnType<typeof mapStateToProps> & {
 export default connect(mapStateToProps)(Account);
 
 function Account(props: Props) {
-    // const user = initialData;
-
+    const navigate = useNavigate();
     const [currentTab, setCurrentTab] = useState<number>(0);
 
-    const {data: user} = useMe(props.jwt);
+    const {isLoading, isError, data: user} = useMe(props.jwt);
 
     const theme = useTheme();
+
+    useEffect(() => {
+        if (isError && !isLoading) {
+            navigate('/login');
+        }
+    }, [isError]);
 
     const renderSection = (name: string): ReactNode => {
         switch (name) {
             case 'profile':
-                return <ProfileSection/>;
+                return <ProfileSection {...user!}/>;
             case 'orders':
                 return <OrdersSection/>;
             case 'admin':
@@ -71,7 +65,7 @@ function Account(props: Props) {
 
     return (
         <>
-            <Page sx={{height: '100vh'}}>
+            <Page sx={{height: '100vh'}} isLoading={isLoading}>
                 <Stack alignItems={'center'} px={4} py={8}>
                     <Stack spacing={8} width={'100%'} maxWidth={'lg'}>
                         <Stack direction={'row'} alignItems={'center'} spacing={4}>
@@ -114,19 +108,24 @@ function Account(props: Props) {
     );
 }
 
-function ProfileSection() {
+function ProfileSection(props?: UserDto) {
     return (
         <>
             <Stack spacing={4}>
                 <SectionCard header={'Personal information'}>
                     <SectionCardItem>
-                        <TextField label={'Username'} disabled/>
+                        <TextField
+                            value={props?.username}
+                            onChange={() => {}}
+                            label={'Username'}
+                            disabled
+                        />
                     </SectionCardItem>
                     <SectionCardItem>
                         <TextField label={'Password'}/>
                     </SectionCardItem>
                     <SectionCardItem>
-                        <TextField label={'Email'}/>
+                        <TextField label={'Email'} value={props?.email}/>
                     </SectionCardItem>
                     <SectionCardItem sx={{alignItems: 'start'}}>
                         <Button startIcon={<SaveOutlinedIcon/>} variant={'contained'}>Save changes</Button>
@@ -134,16 +133,16 @@ function ProfileSection() {
                 </SectionCard>
                 <SectionCard header={'Contact information'}>
                     <SectionCardItem>
-                        <TextField label={'City'}/>
+                        <TextField label={'City'} value={props?.city}/>
                     </SectionCardItem>
                     <SectionCardItem>
-                        <TextField label={'Zipcode'}/>
+                        <TextField label={'Zipcode'} value={props?.zipcode}/>
                     </SectionCardItem>
                     <SectionCardItem>
-                        <TextField label={'Address'}/>
+                        <TextField label={'Address'} value={props?.address}/>
                     </SectionCardItem>
                     <SectionCardItem>
-                        <TextField label={'Phone number'}/>
+                        <TextField label={'Phone number'} value={props?.phone_number}/>
                     </SectionCardItem>
                     <SectionCardItem sx={{alignItems: 'start'}}>
                         <Button startIcon={<SaveOutlinedIcon/>} variant={'contained'}>Save changes</Button>

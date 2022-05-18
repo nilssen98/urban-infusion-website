@@ -39,7 +39,7 @@ interface SectionCardItemProps {
 export function SectionCardItem(props: SectionCardItemProps) {
     return (
         <>
-            <Stack px={4} py={2} sx={{...props.sx}}>
+            <Stack p={4} sx={{...props.sx}}>
                 {props.children}
             </Stack>
             <Divider/>
