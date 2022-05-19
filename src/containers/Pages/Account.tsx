@@ -65,8 +65,6 @@ function Account(props: Props) {
 
     const isLoading = isLoadingMe && isLoadingOrders;
 
-    console.log(userOrders);
-
     const handleUpdate = (data: Partial<UserDto>) => {
         updateMutation.mutate(data);
     };
