@@ -20,6 +20,7 @@ import {RootState} from '../../state/store';
 import {connect} from 'react-redux';
 import {userSlice} from '../../state/slices/user';
 import {Visibility, VisibilityOff} from '@mui/icons-material';
+import ToggleIcon from '../../components/ToggleIcon';
 
 const mapStateToProps = (state: RootState) => {
     return {
@@ -119,7 +120,11 @@ function Login(props: Props) {
                                                 <IconButton
                                                     onClick={() => setShowPassword(!showPassword)}
                                                 >
-                                                    {showPassword ? <Visibility/> : <VisibilityOff/>}
+                                                    <ToggleIcon
+                                                        on={showPassword}
+                                                        onIcon={<Visibility />}
+                                                        offIcon={<VisibilityOff />}
+                                                    />
                                                 </IconButton>
                                             </InputAdornment>
                                         )

@@ -21,6 +21,7 @@ import {register} from '../../api/urbaninfusion/public/register';
 import {isEmailAddress} from '../../utils/emailVerifier';
 import {passwordStrength, defaultOptions} from 'check-password-strength';
 import {Visibility, VisibilityOff} from '@mui/icons-material';
+import ToggleIcon from '../../components/ToggleIcon';
 
 export default function Register() {
     const [loading, setLoading] = useState<boolean>(false);
@@ -186,7 +187,11 @@ export default function Register() {
                                                 <IconButton
                                                     onClick={() => setShowPassword(!showPassword)}
                                                 >
-                                                    {showPassword ? <Visibility/> : <VisibilityOff/>}
+                                                    <ToggleIcon
+                                                        on={showPassword}
+                                                        onIcon={<Visibility />}
+                                                        offIcon={<VisibilityOff />}
+                                                    />
                                                 </IconButton>
                                             </InputAdornment>
                                         )
