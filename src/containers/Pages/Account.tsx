@@ -15,7 +15,7 @@ import {
     useTheme
 } from '@mui/material';
 import React, {ReactElement, ReactNode, useEffect, useState} from 'react';
-import {stringToColor} from '../../utils/avatarUtils';
+import {firstLetterOfUsername, stringToColor} from '../../utils/avatarUtils';
 import Page from '../../components/Wrappers/Page';
 import {connect} from 'react-redux';
 import {RootState} from '../../state/store';
@@ -104,7 +104,7 @@ function Account(props: Props) {
                     <Stack spacing={8} width={'100%'} maxWidth={'lg'}>
                         <Stack direction={'row'} alignItems={'center'} spacing={4}>
                             <Avatar sx={{height: 64, width: 64, background: stringToColor(user?.username)}}>
-                                <Typography variant={'h4'}>{user?.username[0]}</Typography>
+                                <Typography variant={'h4'}>{firstLetterOfUsername(user?.username)}</Typography>
                             </Avatar>
                             <Stack flex={1}>
                                 <Typography variant={'h5'}>{user?.username}</Typography>

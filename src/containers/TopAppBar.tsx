@@ -10,7 +10,6 @@ import {connect} from 'react-redux';
 import {selectCartItems} from '../state/slices/cart';
 import UnstyledLink from '../components/UnstyledLink';
 import ProductNavigation from './ProductNavigation';
-import {hexToRgb} from '../utils/utils';
 import useMe from '../hooks/users/useMe';
 
 const mapStateToProps = (state: RootState) => {
