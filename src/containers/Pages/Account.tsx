@@ -29,6 +29,7 @@ import OrdersSection from '../../components/Pages/Account/OrdersSection';
 import AdminSection from '../../components/Pages/Account/AdminSection';
 import {useUpdateUser} from '../../hooks/users/useUpdateUser';
 import {UserDto, UserRole} from '../../api/urbaninfusion/dto/user-dto';
+import useUserOrders from '../../hooks/orders/useUserOrders';
 
 const navigation = [
     'profile',
@@ -55,11 +56,16 @@ export default connect(mapStateToProps, mapDispatchToProps)(Account);
 function Account(props: Props) {
     const navigate = useNavigate();
     const [currentTab, setCurrentTab] = useState<number>(0);
-    const {isLoading, isError, data: user} = useMe();
+    const {isLoading: isLoadingMe, isError, data: user} = useMe();
+    const {isLoading: isLoadingOrders, data: userOrders} = useUserOrders(user?.id);
     const theme = useTheme();
     const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
     const accountActionsOpen = Boolean(anchorEl);
     const updateMutation = useUpdateUser(user?.id || -1);
+
+    const isLoading = isLoadingMe && isLoadingOrders;
+
+    console.log(userOrders);
 
     const handleUpdate = (data: Partial<UserDto>) => {
         updateMutation.mutate(data);
