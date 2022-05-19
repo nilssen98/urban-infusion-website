@@ -1,12 +1,22 @@
 import {ProductDto} from './product-dto';
 import {UserDto} from './user-dto';
 
+export enum OrderStatus {
+    IDLE = 'IDLE',
+    PROCESSING = 'PROCESSING',
+    SENT = 'SENT',
+    DELIVERED = 'DELIVERED',
+}
+
+export interface OrderProduct {
+    quantity: number;
+    id: number;
+    product: ProductDto;
+}
+
 export interface OrderDto {
-    products: ProductDto[] & {
-        quantity: number,
-        id: number
-    };
-    status: string;
+    products: OrderProduct[];
+    status: OrderStatus;
     user: UserDto;
     totalPrice: number;
     date: string;

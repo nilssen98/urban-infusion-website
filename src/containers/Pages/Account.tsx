@@ -56,11 +56,12 @@ export default connect(mapStateToProps, mapDispatchToProps)(Account);
 function Account(props: Props) {
     const navigate = useNavigate();
     const [currentTab, setCurrentTab] = useState<number>(0);
-    const {isLoading: isLoadingMe, isError, data: user} = useMe();
-    const {isLoading: isLoadingOrders, data: userOrders} = useUserOrders(user?.id);
     const theme = useTheme();
     const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
     const accountActionsOpen = Boolean(anchorEl);
+
+    const {isLoading: isLoadingMe, isError, data: user} = useMe();
+    const {isLoading: isLoadingOrders, data: userOrders} = useUserOrders(user?.id);
     const updateMutation = useUpdateUser(user?.id || -1);
 
     const isLoading = isLoadingMe && isLoadingOrders;
@@ -80,7 +81,7 @@ function Account(props: Props) {
             case 'profile':
                 return <ProfileSection onUpdate={handleUpdate} {...user!}/>;
             case 'orders':
-                return <OrdersSection/>;
+                return <OrdersSection orders={userOrders || []}/>;
             case 'admin':
                 return <AdminSection/>;
             default:
