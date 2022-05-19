@@ -1,6 +1,6 @@
 import React from 'react';
 import {OrderDto, OrderStatus} from '../../../api/urbaninfusion/dto/order-dto';
-import {Divider, Paper, Stack, Typography} from '@mui/material';
+import {Divider, Paper, Stack, Typography, useTheme} from '@mui/material';
 import HourglassBottomOutlinedIcon from '@mui/icons-material/HourglassBottomOutlined';
 import SendAndArchiveOutlinedIcon from '@mui/icons-material/SendAndArchiveOutlined';
 import SendOutlinedIcon from '@mui/icons-material/SendOutlined';
@@ -12,6 +12,7 @@ interface Props {
 
 export default function OrdersSection(props: Props) {
     const {orders} = props;
+    const theme = useTheme();
 
     const getStatusIcon = (status: OrderStatus) => {
         switch (status) {
@@ -41,7 +42,7 @@ export default function OrdersSection(props: Props) {
                     orders.map(order => (
                         <Paper key={order.orderId} variant={'outlined'}>
                             <Stack>
-                                <Stack p={4} direction={'row'}>
+                                <Stack p={4} direction={'row'} bgcolor={theme.palette.primary.light}>
                                     <Typography flex={1} fontWeight={600}>{order.date}</Typography>
                                     <Typography flex={1} textAlign={'right'} fontWeight={600}>Products</Typography>
                                     <Typography flex={1} textAlign={'right'} fontWeight={600}>Total

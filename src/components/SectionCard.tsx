@@ -15,7 +15,7 @@ export default function SectionCard(props: Props) {
                 {
                     props.header && (
                         <Stack>
-                            <Stack px={4} py={6} bgcolor={theme.palette.secondary.light}>
+                            <Stack px={4} py={6} bgcolor={theme.palette.primary.light}>
                                 <Typography fontWeight={400} variant={'h6'} textTransform={'capitalize'}>
                                     {props.header}
                                 </Typography>
