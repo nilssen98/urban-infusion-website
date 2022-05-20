@@ -3,8 +3,7 @@ import axios from 'axios';
 import {baseUrl} from './public';
 import {store} from '../../../state/store';
 
-export async function getMe(): Promise<UserDto> {
-    const jwt = store.getState().user.jwt;
+export async function getMe(jwt?: string): Promise<UserDto> {
     return (await axios.get<UserDto>(
         `${baseUrl}/users/me`,
         {
