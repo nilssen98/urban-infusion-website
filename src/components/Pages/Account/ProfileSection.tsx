@@ -5,44 +5,24 @@ import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
 import React, {useEffect, useState} from 'react';
 
 interface Props {
-    onUpdate: (data: Partial<UserDto>) => void;
+    onUpdate: (data: UserDto) => void;
     user?: UserDto;
 }
 
 export default function ProfileSection(props: Props) {
-    const {user} = props;
-
-    const [personalInfo, setPersonalInfo] = useState<Partial<UserDto>>({});
-    const [contactInfo, setContactInfo] = useState<Partial<UserDto>>({});
+    const [tempUser, setTempUser] = useState<UserDto>();
 
     useEffect(() => {
         if (props.user) {
-            loadData();
+            setTempUser({...props.user});
         }
     }, [props.user]);
 
-    const loadData = () => {
-        setPersonalInfo({
-            ...personalInfo,
-            username: user?.username,
-            email: user?.email,
+    const updateTempData = (data: Partial<UserDto>) => {
+        setTempUser({
+            ...tempUser!,
+            ...data
         });
-
-        setContactInfo({
-            ...contactInfo,
-            city: user?.city,
-            zipcode: user?.zipcode,
-            address: user?.address,
-            phone_number: user?.phone_number,
-        });
-    };
-
-    const updatePersonalInfo = (data: Partial<UserDto>) => {
-        setPersonalInfo({...personalInfo, ...data});
-    };
-
-    const updateContactInfo = (data: Partial<UserDto>) => {
-        setContactInfo({...personalInfo, ...data});
     };
 
     return (
@@ -51,7 +31,7 @@ export default function ProfileSection(props: Props) {
                 <SectionCard header={'Personal information'}>
                     <SectionCardItem>
                         <TextField
-                            value={personalInfo.username || ''}
+                            value={tempUser?.username || ''}
                             onChange={() => {
                             }}
                             label={'Username'}
@@ -64,15 +44,15 @@ export default function ProfileSection(props: Props) {
                     <SectionCardItem>
                         <TextField
                             label={'Email'}
-                            value={personalInfo.email || ''}
-                            onChange={(event) => updatePersonalInfo({email: event.target.value})}
+                            value={tempUser?.email || ''}
+                            onChange={(event) => updateTempData({email: event.target.value})}
                         />
                     </SectionCardItem>
                     <SectionCardItem sx={{alignItems: 'start'}}>
                         <Button
                             startIcon={<SaveOutlinedIcon/>}
                             variant={'contained'}
-                            onClick={() => props.onUpdate(personalInfo)}
+                            onClick={() => props.onUpdate(tempUser!)}
                         >
                             Save changes
                         </Button>
@@ -82,36 +62,36 @@ export default function ProfileSection(props: Props) {
                     <SectionCardItem>
                         <TextField
                             label={'City'}
-                            value={contactInfo.city || ''}
-                            onChange={(event) => updateContactInfo({city: event.target.value})}
+                            value={tempUser?.city || ''}
+                            onChange={(event) => updateTempData({city: event.target.value})}
                         />
                     </SectionCardItem>
                     <SectionCardItem>
                         <TextField
                             label={'Zipcode'}
-                            value={contactInfo.zipcode || ''}
-                            onChange={(event) => updateContactInfo({zipcode: event.target.value})}
+                            value={tempUser?.zipcode || ''}
+                            onChange={(event) => updateTempData({zipcode: event.target.value})}
                         />
                     </SectionCardItem>
                     <SectionCardItem>
                         <TextField
                             label={'Address'}
-                            value={contactInfo.address || ''}
-                            onChange={(event) => updateContactInfo({address: event.target.value})}
+                            value={tempUser?.address || ''}
+                            onChange={(event) => updateTempData({address: event.target.value})}
                         />
                     </SectionCardItem>
                     <SectionCardItem>
                         <TextField
                             label={'Phone number'}
-                            value={contactInfo.phone_number || ''}
-                            onChange={(event) => updateContactInfo({phone_number: event.target.value})}
+                            value={tempUser?.phone_number || ''}
+                            onChange={(event) => updateTempData({phone_number: event.target.value})}
                         />
                     </SectionCardItem>
                     <SectionCardItem sx={{alignItems: 'start'}}>
                         <Button
                             startIcon={<SaveOutlinedIcon/>}
                             variant={'contained'}
-                            onClick={() => props.onUpdate(contactInfo)}
+                            onClick={() => props.onUpdate(tempUser!)}
                         >
                             Save changes
                         </Button>

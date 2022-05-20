@@ -62,11 +62,11 @@ function Account(props: Props) {
 
     const {isLoading: isLoadingMe, isError, data: user} = useMe();
     const {isLoading: isLoadingOrders, data: userOrders} = useUserOrders(user?.id);
-    const updateMutation = useUpdateUser(user?.id || -1);
+    const updateMutation = useUpdateUser();
 
     const isLoading = isLoadingMe && isLoadingOrders;
 
-    const handleUpdate = (data: Partial<UserDto>) => {
+    const handleUpdate = (data: UserDto) => {
         updateMutation.mutate(data);
     };
 

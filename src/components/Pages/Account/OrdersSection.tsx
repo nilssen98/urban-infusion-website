@@ -43,15 +43,19 @@ export default function OrdersSection(props: Props) {
                         <Paper key={order.orderId} variant={'outlined'}>
                             <Stack>
                                 <Stack p={4} direction={'row'} bgcolor={theme.palette.primary.light}>
-                                    <Typography flex={1} fontWeight={600}>{order.date}</Typography>
-                                    <Typography flex={1} textAlign={'right'} fontWeight={600}>Products</Typography>
-                                    <Typography flex={1} textAlign={'right'} fontWeight={600}>Total
-                                        ${order.totalPrice}
+                                    <Typography flex={1} fontWeight={600}>
+                                        {order.date}
+                                    </Typography>
+                                    <Typography flex={1} textAlign={'right'} fontWeight={600}>
+                                        Products
+                                    </Typography>
+                                    <Typography flex={1} textAlign={'right'} fontWeight={600}>
+                                        Total ${order.totalPrice}
                                     </Typography>
                                 </Stack>
                                 <Divider/>
                                 <Stack p={4} direction={'row'}>
-                                    <Stack alignItems={'center'} direction={'row'} spacing={2}>
+                                    <Stack flex={1} alignItems={'center'} direction={'row'} spacing={2}>
                                         {getStatusIcon(order.status)}
                                         <Typography textTransform={'capitalize'} flex={1}>{order.status.toLowerCase()}</Typography>
                                     </Stack>
