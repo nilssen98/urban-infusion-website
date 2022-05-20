@@ -1,4 +1,5 @@
 import {
+    Alert,
     Avatar,
     Divider,
     IconButton,
@@ -8,6 +9,7 @@ import {
     ListItemIcon,
     ListItemText,
     Popover,
+    Snackbar,
     Stack,
     Tab,
     Tabs,
@@ -59,12 +61,18 @@ function Account(props: Props) {
     const theme = useTheme();
     const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
     const accountActionsOpen = Boolean(anchorEl);
-
     const {isLoading: isLoadingMe, isError, data: user} = useMe();
     const {isLoading: isLoadingOrders, data: userOrders} = useUserOrders(user?.id);
     const updateMutation = useUpdateUser();
+    const [success, setSuccess] = useState<boolean>(false);
+    const [error, setError] = useState<boolean>(false);
 
     const isLoading = isLoadingMe && isLoadingOrders;
+
+    useEffect(() => {
+        setSuccess(updateMutation.isSuccess);
+        setError(updateMutation.isError);
+    }, [updateMutation.isSuccess, updateMutation.isError]);
 
     const handleUpdate = (data: UserDto) => {
         updateMutation.mutate(data);
@@ -99,6 +107,22 @@ function Account(props: Props) {
 
     return (
         <>
+            <Snackbar
+                open={success}
+                onClose={() => setSuccess(false)}
+                autoHideDuration={5000}
+                anchorOrigin={{horizontal: 'center', vertical: 'top'}}
+            >
+                <Alert severity={'success'}>Successfully updated the information!</Alert>
+            </Snackbar>
+            <Snackbar
+                open={error}
+                onClose={() => setError(false)}
+                autoHideDuration={5000}
+                anchorOrigin={{horizontal: 'center', vertical: 'top'}}
+            >
+                <Alert severity={'error'}>Could not update your information!</Alert>
+            </Snackbar>
             <Page sx={{height: '100vh'}} isLoading={isLoading}>
                 <Stack alignItems={'center'} px={4} py={8}>
                     <Stack spacing={8} width={'100%'} maxWidth={'lg'}>
