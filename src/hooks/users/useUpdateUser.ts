@@ -5,9 +5,11 @@ import {store} from '../../state/store';
 
 export const useUpdateUser = (id: number) => {
     const queryClient = useQueryClient();
+    const jwt = store.getState().user.jwt;
+
     return useMutation(
         (data: Partial<UserDto>) => updateUser(id, data), {
-            onSuccess: () => queryClient.invalidateQueries('user')
+            onSuccess: () => queryClient.invalidateQueries(['user', jwt])
         }
     );
 };

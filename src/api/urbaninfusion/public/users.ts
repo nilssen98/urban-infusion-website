@@ -14,7 +14,6 @@ export async function getMe(jwt?: string): Promise<UserDto> {
     )).data;
 }
 
-export async function updateUser(id: number, data: Partial<UserDto>): Promise<any> {
-    const jwt = store.getState().user.jwt;
+export async function updateUser(id: number, data: Partial<UserDto>, jwt?: string): Promise<any> {
     await axios.patch(`${baseUrl}/users/${id}`, {data}, {headers: {Authorization: jwt || ''}});
 }

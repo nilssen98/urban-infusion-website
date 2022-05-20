@@ -6,7 +6,7 @@ import {store} from '../../state/store';
 export default function useMe(): UseQueryResult<UserDto> {
     const jwt = store.getState().user.jwt;
     return useQuery(
-        ['user'],
+        ['user', jwt],
         () => getMe(jwt), {
             enabled: jwt !== undefined
         }

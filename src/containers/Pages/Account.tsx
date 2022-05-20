@@ -79,7 +79,7 @@ function Account(props: Props) {
     const renderSection = (name: string): ReactNode => {
         switch (name) {
             case 'profile':
-                return <ProfileSection onUpdate={handleUpdate} {...user!}/>;
+                return <ProfileSection onUpdate={handleUpdate} user={user}/>;
             case 'orders':
                 return <OrdersSection orders={userOrders || []}/>;
             case 'admin':

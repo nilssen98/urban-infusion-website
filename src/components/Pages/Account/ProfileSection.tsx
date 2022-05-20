@@ -2,24 +2,40 @@ import {UserDto} from '../../../api/urbaninfusion/dto/user-dto';
 import {Button, Stack, TextField} from '@mui/material';
 import SectionCard, {SectionCardItem} from '../../SectionCard';
 import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 
-type Props = {
+interface Props {
     onUpdate: (data: Partial<UserDto>) => void;
-} & UserDto;
+    user?: UserDto;
+}
 
 export default function ProfileSection(props: Props) {
-    const [personalInfo, setPersonalInfo] = useState<Partial<UserDto>>({
-        username: props?.username,
-        email: props?.email,
-    });
+    const {user} = props;
 
-    const [contactInfo, setContactInfo] = useState<Partial<UserDto>>({
-        city: props?.city,
-        zipcode: props?.zipcode,
-        address: props?.address,
-        phone_number: props?.phone_number,
-    });
+    const [personalInfo, setPersonalInfo] = useState<Partial<UserDto>>({});
+    const [contactInfo, setContactInfo] = useState<Partial<UserDto>>({});
+
+    useEffect(() => {
+        if (props.user) {
+            loadData();
+        }
+    }, [props.user]);
+
+    const loadData = () => {
+        setPersonalInfo({
+            ...personalInfo,
+            username: user?.username,
+            email: user?.email,
+        });
+
+        setContactInfo({
+            ...contactInfo,
+            city: user?.city,
+            zipcode: user?.zipcode,
+            address: user?.address,
+            phone_number: user?.phone_number,
+        });
+    };
 
     const updatePersonalInfo = (data: Partial<UserDto>) => {
         setPersonalInfo({...personalInfo, ...data});
@@ -35,7 +51,7 @@ export default function ProfileSection(props: Props) {
                 <SectionCard header={'Personal information'}>
                     <SectionCardItem>
                         <TextField
-                            value={personalInfo.username}
+                            value={personalInfo.username || ''}
                             onChange={() => {
                             }}
                             label={'Username'}
@@ -48,7 +64,7 @@ export default function ProfileSection(props: Props) {
                     <SectionCardItem>
                         <TextField
                             label={'Email'}
-                            value={personalInfo.email}
+                            value={personalInfo.email || ''}
                             onChange={(event) => updatePersonalInfo({email: event.target.value})}
                         />
                     </SectionCardItem>
@@ -66,28 +82,28 @@ export default function ProfileSection(props: Props) {
                     <SectionCardItem>
                         <TextField
                             label={'City'}
-                            value={contactInfo.city}
+                            value={contactInfo.city || ''}
                             onChange={(event) => updateContactInfo({city: event.target.value})}
                         />
                     </SectionCardItem>
                     <SectionCardItem>
                         <TextField
                             label={'Zipcode'}
-                            value={contactInfo.zipcode}
+                            value={contactInfo.zipcode || ''}
                             onChange={(event) => updateContactInfo({zipcode: event.target.value})}
                         />
                     </SectionCardItem>
                     <SectionCardItem>
                         <TextField
                             label={'Address'}
-                            value={contactInfo.address}
+                            value={contactInfo.address || ''}
                             onChange={(event) => updateContactInfo({address: event.target.value})}
                         />
                     </SectionCardItem>
                     <SectionCardItem>
                         <TextField
                             label={'Phone number'}
-                            value={contactInfo.phone_number}
+                            value={contactInfo.phone_number || ''}
                             onChange={(event) => updateContactInfo({phone_number: event.target.value})}
                         />
                     </SectionCardItem>
