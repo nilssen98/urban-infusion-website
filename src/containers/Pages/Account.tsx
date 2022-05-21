@@ -32,6 +32,8 @@ import AdminSection from '../../components/Pages/Account/AdminSection';
 import {useUpdateUser} from '../../hooks/users/useUpdateUser';
 import {UserDto, UserRole} from '../../api/urbaninfusion/dto/user-dto';
 import useUserOrders from '../../hooks/orders/useUserOrders';
+import {useChangePassword} from '../../hooks/users/useChangePassword';
+import {isValidPassword} from '../../api/urbaninfusion/public/users';
 
 const navigation = [
     'profile',
@@ -68,6 +70,7 @@ function Account(props: Props) {
     const [successMessage, setSuccessMessage] = useState<string>('Successfully updated the information!');
     const [error, setError] = useState<boolean>(false);
     const [errorMessage, setErrorMessage] = useState<string>('Could not update your information!');
+    const changePasswordMutation = useChangePassword(user!);
 
     const isLoading = isLoadingMe && isLoadingOrders;
 
@@ -80,11 +83,19 @@ function Account(props: Props) {
         updateUserMutation.mutate(data);
     };
 
-    const handleChangePassword = (oldPassword: string, newPassword: string) => {
+    const handleChangePassword = async (oldPassword: string, newPassword: string) => {
         if (oldPassword === newPassword) {
             setErrorMessage('Old and new password cannot be the same!');
             setError(true);
+            return;
         }
+        const valid = await isValidPassword(oldPassword, user!);
+        if (!valid) {
+            setErrorMessage('Old password is invalid!');
+            setError(true);
+            return;
+        }
+        changePasswordMutation.mutate(newPassword);
     };
 
     useEffect(() => {

@@ -21,8 +21,8 @@ export async function updateUser(user: UserDto, jwt?: string): Promise<any> {
     );
 }
 
-export async function changePassword(id: number, password: string, jwt?: string): Promise<any> {
-    return await axios.patch(`${baseUrl}/users/${id}`,
+export async function changePassword(user: UserDto, password: string, jwt?: string): Promise<any> {
+    return await axios.patch(`${baseUrl}/users/${user.id}`,
         {password},
         {headers: {Authorization: jwt || ''}}
     );

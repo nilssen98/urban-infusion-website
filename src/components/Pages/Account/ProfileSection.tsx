@@ -23,13 +23,6 @@ export default function ProfileSection(props: Props) {
     const [newPasswordRepeat, setNewPasswordRepeat] = useState<string>('');
 
     useEffect(() => {
-        void (async () => {
-            const validPassword = await isValidPassword('user', props.user!);
-            console.log(validPassword);
-        })();
-    });
-
-    useEffect(() => {
         if (props.user) {
             setTempUser({...props.user});
         }
