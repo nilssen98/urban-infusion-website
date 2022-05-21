@@ -63,19 +63,23 @@ function Account(props: Props) {
     const accountActionsOpen = Boolean(anchorEl);
     const {isLoading: isLoadingMe, isError, data: user} = useMe();
     const {isLoading: isLoadingOrders, data: userOrders} = useUserOrders(user?.id);
-    const updateMutation = useUpdateUser();
+    const updateUserMutation = useUpdateUser();
     const [success, setSuccess] = useState<boolean>(false);
     const [error, setError] = useState<boolean>(false);
 
     const isLoading = isLoadingMe && isLoadingOrders;
 
     useEffect(() => {
-        setSuccess(updateMutation.isSuccess);
-        setError(updateMutation.isError);
-    }, [updateMutation.isSuccess, updateMutation.isError]);
+        setSuccess(updateUserMutation.isSuccess);
+        setError(updateUserMutation.isError);
+    }, [updateUserMutation.isSuccess, updateUserMutation.isError]);
 
-    const handleUpdate = (data: UserDto) => {
-        updateMutation.mutate(data);
+    const handleUpdateUser = (data: UserDto) => {
+        updateUserMutation.mutate(data);
+    };
+
+    const handleChangePassword = (password: string) => {
+
     };
 
     useEffect(() => {
@@ -87,7 +91,13 @@ function Account(props: Props) {
     const renderSection = (name: string): ReactNode => {
         switch (name) {
             case 'profile':
-                return <ProfileSection onUpdate={handleUpdate} user={user}/>;
+                return (
+                    <ProfileSection
+                        onChangePassword={handleChangePassword}
+                        onUpdateUser={handleUpdateUser}
+                        user={user}
+                    />
+                );
             case 'orders':
                 return <OrdersSection orders={userOrders || []}/>;
             case 'admin':
