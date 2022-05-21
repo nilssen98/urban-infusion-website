@@ -39,9 +39,6 @@ export default function ProfileSection(props: Props) {
                         />
                     </SectionCardItem>
                     <SectionCardItem>
-                        <TextField label={'Password'}/>
-                    </SectionCardItem>
-                    <SectionCardItem>
                         <TextField
                             label={'Email'}
                             value={tempUser?.email || ''}
@@ -55,6 +52,23 @@ export default function ProfileSection(props: Props) {
                             onClick={() => props.onUpdate(tempUser!)}
                         >
                             Save changes
+                        </Button>
+                    </SectionCardItem>
+                </SectionCard>
+                <SectionCard header={'Change password'}>
+                    <SectionCardItem>
+                        <TextField type={'password'} label={'Old Password'}/>
+                    </SectionCardItem>
+                    <SectionCardItem>
+                        <TextField type={'password'} label={'New Password'}/>
+                    </SectionCardItem>
+                    <SectionCardItem sx={{alignItems: 'start'}}>
+                        <Button
+                            startIcon={<SaveOutlinedIcon/>}
+                            variant={'contained'}
+                            onClick={() => props.onUpdate(tempUser!)}
+                        >
+                            Change password
                         </Button>
                     </SectionCardItem>
                 </SectionCard>
