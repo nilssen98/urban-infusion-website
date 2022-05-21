@@ -62,6 +62,9 @@ export default function ProfileSection(props: Props) {
                     <SectionCardItem>
                         <TextField type={'password'} label={'New Password'}/>
                     </SectionCardItem>
+                    <SectionCardItem>
+                        <TextField type={'password'} label={'Repeat New Password'}/>
+                    </SectionCardItem>
                     <SectionCardItem sx={{alignItems: 'start'}}>
                         <Button
                             startIcon={<SaveOutlinedIcon/>}
