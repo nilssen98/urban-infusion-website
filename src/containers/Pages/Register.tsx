@@ -2,7 +2,6 @@ import {
     Alert,
     Button,
     CircularProgress,
-    IconButton,
     InputAdornment,
     Paper,
     Snackbar,
@@ -19,14 +18,10 @@ import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined
 import {useEffect, useState} from 'react';
 import {register} from '../../api/urbaninfusion/public/register';
 import {isEmailAddress} from '../../utils/emailVerifier';
-import {passwordStrength, defaultOptions} from 'check-password-strength';
-import {Visibility, VisibilityOff} from '@mui/icons-material';
-import ToggleIcon from '../../components/ToggleIcon';
+import PasswordField from '../../components/PasswordField';
 
 export default function Register() {
     const [loading, setLoading] = useState<boolean>(false);
-
-    const [showPassword, setShowPassword] = useState<boolean>(false);
 
     const [success, setSuccess] = useState<boolean>(false);
 
@@ -80,36 +75,6 @@ export default function Register() {
             });
         setLoading(false);
     };
-
-    function checkPassword(input: String): string | null {
-        if (input == null) {
-            return 'Password is invalid';
-        }
-        if (input.length === 0) {
-            return null;
-        }
-        if (input.length < 8) {
-            return 'Password is too short';
-        }
-        if (input.length > 20) {
-            return 'Password is too long';
-        }
-        return null;
-    }
-
-    function getPasswordStrength(input: String): string {
-        if (input == null) {
-            return '';
-        }
-        return input.length !== 0
-            ? passwordStrength(password, [...defaultOptions, {
-                id: 0,
-                value: 'Very weak',
-                minDiversity: 0,
-                minLength: 0
-            }]).value
-            : '';
-    }
 
     return (
         <>
@@ -173,29 +138,11 @@ export default function Register() {
                                         )
                                     }}
                                 />
-                                <TextField
+                                <PasswordField
                                     value={password}
+                                    verifyPassword={true}
                                     onChange={(event) => setPassword(event.target.value)}
-                                    required
-                                    error={checkPassword(password) !== null}
-                                    helperText={checkPassword(password) || getPasswordStrength(password)}
                                     label={'Password'}
-                                    type={showPassword ? 'text' : 'password'}
-                                    InputProps={{
-                                        endAdornment: (
-                                            <InputAdornment position={'end'}>
-                                                <IconButton
-                                                    onClick={() => setShowPassword(!showPassword)}
-                                                >
-                                                    <ToggleIcon
-                                                        on={showPassword}
-                                                        onIcon={<Visibility />}
-                                                        offIcon={<VisibilityOff />}
-                                                    />
-                                                </IconButton>
-                                            </InputAdornment>
-                                        )
-                                    }}
                                 />
                             </Stack>
                             <Stack width={'100%'}>

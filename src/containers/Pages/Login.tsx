@@ -1,7 +1,6 @@
 import {
     Alert,
     Button,
-    IconButton,
     InputAdornment,
     Paper,
     Snackbar,
@@ -19,8 +18,7 @@ import {useEffect, useState} from 'react';
 import {RootState} from '../../state/store';
 import {connect} from 'react-redux';
 import {userSlice} from '../../state/slices/user';
-import {Visibility, VisibilityOff} from '@mui/icons-material';
-import ToggleIcon from '../../components/ToggleIcon';
+import PasswordField from '../../components/PasswordField';
 
 const mapStateToProps = (state: RootState) => {
     return {
@@ -41,7 +39,6 @@ function Login(props: Props) {
     const [errorMessage, setErrorMessage] = useState<string>('');
     const [username, setUsername] = useState<string>('');
     const [password, setPassword] = useState<string>('');
-    const [showPassword, setShowPassword] = useState<boolean>(false);
 
     const theme = useTheme();
     const navigate = useNavigate();
@@ -108,27 +105,10 @@ function Login(props: Props) {
                                         )
                                     }}
                                 />
-                                <TextField
-                                    required
+                                <PasswordField
                                     value={password}
                                     onChange={(event) => setPassword(event.target.value)}
                                     label={'Password'}
-                                    type={showPassword ? 'text' : 'password'}
-                                    InputProps={{
-                                        endAdornment: (
-                                            <InputAdornment position={'end'}>
-                                                <IconButton
-                                                    onClick={() => setShowPassword(!showPassword)}
-                                                >
-                                                    <ToggleIcon
-                                                        on={showPassword}
-                                                        onIcon={<Visibility />}
-                                                        offIcon={<VisibilityOff />}
-                                                    />
-                                                </IconButton>
-                                            </InputAdornment>
-                                        )
-                                    }}
                                 />
                             </Stack>
                             <Button
