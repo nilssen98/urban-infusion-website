@@ -65,7 +65,9 @@ function Account(props: Props) {
     const {isLoading: isLoadingOrders, data: userOrders} = useUserOrders(user?.id);
     const updateUserMutation = useUpdateUser();
     const [success, setSuccess] = useState<boolean>(false);
+    const [successMessage, setSuccessMessage] = useState<string>('Successfully updated the information!');
     const [error, setError] = useState<boolean>(false);
+    const [errorMessage, setErrorMessage] = useState<string>('Could not update your information!');
 
     const isLoading = isLoadingMe && isLoadingOrders;
 
@@ -78,8 +80,11 @@ function Account(props: Props) {
         updateUserMutation.mutate(data);
     };
 
-    const handleChangePassword = (password: string) => {
-
+    const handleChangePassword = (oldPassword: string, newPassword: string) => {
+        if (oldPassword === newPassword) {
+            setErrorMessage('Old and new password cannot be the same!');
+            setError(true);
+        }
     };
 
     useEffect(() => {
@@ -123,7 +128,7 @@ function Account(props: Props) {
                 autoHideDuration={5000}
                 anchorOrigin={{horizontal: 'center', vertical: 'top'}}
             >
-                <Alert severity={'success'}>Successfully updated the information!</Alert>
+                <Alert severity={'success'}>{successMessage}</Alert>
             </Snackbar>
             <Snackbar
                 open={error}
@@ -131,7 +136,7 @@ function Account(props: Props) {
                 autoHideDuration={5000}
                 anchorOrigin={{horizontal: 'center', vertical: 'top'}}
             >
-                <Alert severity={'error'}>Could not update your information!</Alert>
+                <Alert severity={'error'}>{errorMessage}</Alert>
             </Snackbar>
             <Page sx={{height: '100vh'}} isLoading={isLoading}>
                 <Stack alignItems={'center'} px={4} py={8}>

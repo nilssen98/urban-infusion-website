@@ -6,10 +6,12 @@ import React, {useEffect, useState} from 'react';
 import ChangeCircleOutlinedIcon from '@mui/icons-material/ChangeCircleOutlined';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import LocalShippingOutlinedIcon from '@mui/icons-material/LocalShippingOutlined';
+import {isValidPassword} from '../../../api/urbaninfusion/public/users';
+import PasswordField from '../../PasswordField';
 
 interface Props {
     onUpdateUser: (data: UserDto) => void;
-    onChangePassword: (password: string) => void;
+    onChangePassword: (oldPassword: string, newPassword: string) => void;
     user?: UserDto;
 }
 
@@ -19,6 +21,13 @@ export default function ProfileSection(props: Props) {
     const [oldPassword, setOldPassword] = useState<string>('');
     const [newPassword, setNewPassword] = useState<string>('');
     const [newPasswordRepeat, setNewPasswordRepeat] = useState<string>('');
+
+    useEffect(() => {
+        void (async () => {
+            const validPassword = await isValidPassword('user', props.user!);
+            console.log(validPassword);
+        })();
+    });
 
     useEffect(() => {
         if (props.user) {
@@ -34,7 +43,7 @@ export default function ProfileSection(props: Props) {
     };
 
     const handleChangePassword = () => {
-        props.onChangePassword('');
+        props.onChangePassword(oldPassword, newPassword);
     };
 
     return (
@@ -76,26 +85,25 @@ export default function ProfileSection(props: Props) {
                 </SectionCard>
                 <SectionCard header={'Change password'} icon={<ChangeCircleOutlinedIcon/>}>
                     <SectionCardItem>
-                        <TextField
+                        <PasswordField
                             value={oldPassword}
                             onChange={(event) => setOldPassword(event.target.value)}
-                            type={'password'}
                             label={'Old Password'}
                         />
                     </SectionCardItem>
                     <SectionCardItem>
-                        <TextField
+                        <PasswordField
+                            verifyPassword
                             value={newPassword}
                             onChange={(event) => setNewPassword(event.target.value)}
-                            type={'password'}
                             label={'New Password'}
                         />
                     </SectionCardItem>
                     <SectionCardItem>
-                        <TextField
+                        <PasswordField
+                            verifyPassword
                             value={newPasswordRepeat}
                             onChange={(event) => setNewPasswordRepeat(event.target.value)}
-                            type={'password'}
                             label={'Repeat New Password'}
                         />
                     </SectionCardItem>
@@ -103,7 +111,7 @@ export default function ProfileSection(props: Props) {
                         <Button
                             startIcon={<ChangeCircleOutlinedIcon/>}
                             variant={'contained'}
-                            onClick={() => props.onUpdateUser(tempUser!)}
+                            onClick={() => handleChangePassword()}
                         >
                             Change password
                         </Button>
