@@ -3,10 +3,11 @@ import {IconButton, InputAdornment, TextField, TextFieldProps} from '@mui/materi
 import ToggleIcon from './ToggleIcon';
 import {Visibility, VisibilityOff} from '@mui/icons-material';
 import {defaultOptions, passwordStrength} from 'check-password-strength';
+import {omit} from 'lodash-es';
 
 type Props = {
     verifyPassword?: boolean;
-    value: string;
+    value: any;
 } & TextFieldProps;
 
 PasswordField.defaultProps = {
@@ -14,15 +15,16 @@ PasswordField.defaultProps = {
 };
 
 export default function PasswordField(props: Props) {
+    const textFieldProps = omit(props, ['verifyPassword']);
 
     const [showPassword, setShowPassword] = useState<boolean>(false);
 
-    function checkPassword(input: string): string | null {
+    function checkPassword(input: string): string | undefined {
         if (input == null) {
             return 'Password is invalid';
         }
         if (input.length === 0) {
-            return null;
+            return undefined;
         }
         if (input.length < 8) {
             return 'Password is too short';
@@ -30,7 +32,7 @@ export default function PasswordField(props: Props) {
         if (input.length > 20) {
             return 'Password is too long';
         }
-        return null;
+        return undefined;
     }
 
     function getPasswordStrength(input: string): string {
@@ -50,11 +52,11 @@ export default function PasswordField(props: Props) {
     return (
         <>
             <TextField
+                {...textFieldProps}
                 required={true}
                 type={showPassword ? 'text' : 'password'}
-                error={props.verifyPassword && checkPassword(props.value) !== null}
-                helperText={props.verifyPassword ? (checkPassword(props.value) || getPasswordStrength(props.value)) : ''}
-                {...props}
+                error={props.verifyPassword && (checkPassword(textFieldProps.value) !== undefined)}
+                helperText={props.verifyPassword && (checkPassword(textFieldProps.value) || getPasswordStrength(textFieldProps.value))}
                 InputProps={{
                     endAdornment: (
                         <InputAdornment position={'end'}>
