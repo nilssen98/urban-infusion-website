@@ -76,21 +76,34 @@ function Account(props: Props) {
 
     useEffect(() => {
         setSuccess(updateUserMutation.isSuccess);
+        setSuccessMessage('Information updated successfully!');
         setError(updateUserMutation.isError);
+        setErrorMessage('Could not change the information!');
     }, [updateUserMutation.isSuccess, updateUserMutation.isError]);
+
+    useEffect(() => {
+        setSuccess(changePasswordMutation.isSuccess);
+        setSuccessMessage('Password changed successfully!');
+        setError(changePasswordMutation.isError);
+        setErrorMessage('Could not change the password!');
+    }, [changePasswordMutation.isSuccess, changePasswordMutation.isError]);
 
     const handleUpdateUser = (data: UserDto) => {
         updateUserMutation.mutate(data);
     };
 
-    const handleChangePassword = async (oldPassword: string, newPassword: string) => {
+    const handleChangePassword = async (oldPassword: string, newPassword: string, newPasswordRepeat: string) => {
         if (oldPassword === newPassword) {
             setErrorMessage('Old and new password cannot be the same!');
             setError(true);
             return;
         }
-        const valid = await isValidPassword(oldPassword, user!);
-        if (!valid) {
+        if (newPassword !== newPasswordRepeat) {
+            setErrorMessage('New and repeated passwords are not matching!');
+            setError(true);
+            return;
+        }
+        if (!await isValidPassword(oldPassword, user!)) {
             setErrorMessage('Old password is invalid!');
             setError(true);
             return;
@@ -109,6 +122,7 @@ function Account(props: Props) {
             case 'profile':
                 return (
                     <ProfileSection
+                        changePasswordSuccess={changePasswordMutation.isSuccess}
                         onChangePassword={handleChangePassword}
                         onUpdateUser={handleUpdateUser}
                         user={user}

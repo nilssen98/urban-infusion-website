@@ -6,12 +6,12 @@ import React, {useEffect, useState} from 'react';
 import ChangeCircleOutlinedIcon from '@mui/icons-material/ChangeCircleOutlined';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import LocalShippingOutlinedIcon from '@mui/icons-material/LocalShippingOutlined';
-import {isValidPassword} from '../../../api/urbaninfusion/public/users';
 import PasswordField from '../../PasswordField';
 
 interface Props {
     onUpdateUser: (data: UserDto) => void;
-    onChangePassword: (oldPassword: string, newPassword: string) => void;
+    onChangePassword: (oldPassword: string, newPassword: string, newPasswordRepeat: string) => void;
+    changePasswordSuccess: boolean;
     user?: UserDto;
 }
 
@@ -21,6 +21,14 @@ export default function ProfileSection(props: Props) {
     const [oldPassword, setOldPassword] = useState<string>('');
     const [newPassword, setNewPassword] = useState<string>('');
     const [newPasswordRepeat, setNewPasswordRepeat] = useState<string>('');
+
+    useEffect(() => {
+        if (props.changePasswordSuccess) {
+            setOldPassword('');
+            setNewPassword('');
+            setNewPasswordRepeat('');
+        }
+    }, [props.changePasswordSuccess]);
 
     useEffect(() => {
         if (props.user) {
@@ -36,7 +44,7 @@ export default function ProfileSection(props: Props) {
     };
 
     const handleChangePassword = () => {
-        props.onChangePassword(oldPassword, newPassword);
+        props.onChangePassword(oldPassword, newPassword, newPasswordRepeat);
     };
 
     return (
@@ -46,8 +54,6 @@ export default function ProfileSection(props: Props) {
                     <SectionCardItem>
                         <TextField
                             value={tempUser?.username || ''}
-                            onChange={() => {
-                            }}
                             label={'Username'}
                             disabled
                         />
