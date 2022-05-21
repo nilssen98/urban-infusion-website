@@ -4,6 +4,7 @@ import {SxProps} from '@mui/system';
 
 interface Props {
     header?: string;
+    icon?: ReactNode;
     children?: ReactNode;
 }
 
@@ -15,7 +16,8 @@ export default function SectionCard(props: Props) {
                 {
                     props.header && (
                         <Stack>
-                            <Stack px={4} py={6} bgcolor={theme.palette.primary.light}>
+                            <Stack px={4} py={6} bgcolor={theme.palette.primary.light} direction={'row'} alignItems={'center'} spacing={2}>
+                                {props.icon}
                                 <Typography fontWeight={400} variant={'h6'} textTransform={'capitalize'}>
                                     {props.header}
                                 </Typography>

@@ -3,6 +3,9 @@ import {Button, Stack, TextField} from '@mui/material';
 import SectionCard, {SectionCardItem} from '../../SectionCard';
 import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
 import React, {useEffect, useState} from 'react';
+import ChangeCircleOutlinedIcon from '@mui/icons-material/ChangeCircleOutlined';
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
+import LocalShippingOutlinedIcon from '@mui/icons-material/LocalShippingOutlined';
 
 interface Props {
     onUpdate: (data: UserDto) => void;
@@ -28,7 +31,7 @@ export default function ProfileSection(props: Props) {
     return (
         <>
             <Stack spacing={4}>
-                <SectionCard header={'Personal information'}>
+                <SectionCard header={'Personal information'} icon={<AccountCircleOutlinedIcon/>}>
                     <SectionCardItem>
                         <TextField
                             value={tempUser?.username || ''}
@@ -45,6 +48,13 @@ export default function ProfileSection(props: Props) {
                             onChange={(event) => updateTempData({email: event.target.value})}
                         />
                     </SectionCardItem>
+                    <SectionCardItem>
+                        <TextField
+                            label={'Phone number'}
+                            value={tempUser?.phone_number || ''}
+                            onChange={(event) => updateTempData({phone_number: event.target.value})}
+                        />
+                    </SectionCardItem>
                     <SectionCardItem sx={{alignItems: 'start'}}>
                         <Button
                             startIcon={<SaveOutlinedIcon/>}
@@ -55,7 +65,7 @@ export default function ProfileSection(props: Props) {
                         </Button>
                     </SectionCardItem>
                 </SectionCard>
-                <SectionCard header={'Change password'}>
+                <SectionCard header={'Change password'} icon={<ChangeCircleOutlinedIcon/>}>
                     <SectionCardItem>
                         <TextField type={'password'} label={'Old Password'}/>
                     </SectionCardItem>
@@ -67,7 +77,7 @@ export default function ProfileSection(props: Props) {
                     </SectionCardItem>
                     <SectionCardItem sx={{alignItems: 'start'}}>
                         <Button
-                            startIcon={<SaveOutlinedIcon/>}
+                            startIcon={<ChangeCircleOutlinedIcon/>}
                             variant={'contained'}
                             onClick={() => props.onUpdate(tempUser!)}
                         >
@@ -75,7 +85,7 @@ export default function ProfileSection(props: Props) {
                         </Button>
                     </SectionCardItem>
                 </SectionCard>
-                <SectionCard header={'Contact information'}>
+                <SectionCard header={'Delivery information'} icon={<LocalShippingOutlinedIcon/>}>
                     <SectionCardItem>
                         <TextField
                             label={'City'}
@@ -95,13 +105,6 @@ export default function ProfileSection(props: Props) {
                             label={'Address'}
                             value={tempUser?.address || ''}
                             onChange={(event) => updateTempData({address: event.target.value})}
-                        />
-                    </SectionCardItem>
-                    <SectionCardItem>
-                        <TextField
-                            label={'Phone number'}
-                            value={tempUser?.phone_number || ''}
-                            onChange={(event) => updateTempData({phone_number: event.target.value})}
                         />
                     </SectionCardItem>
                     <SectionCardItem sx={{alignItems: 'start'}}>
