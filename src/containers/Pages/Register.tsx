@@ -35,8 +35,16 @@ export default function Register() {
     const theme = useTheme();
     const navigate = useNavigate();
 
+    const onEnter = (event: KeyboardEvent) => {
+        if (event.code === 'Enter') {
+            handleRegister().catch(console.error);
+        }
+    };
+
     useEffect(() => {
+        window.addEventListener('keyup', onEnter, false);
         if (success) {
+            window.removeEventListener('keyup', onEnter, false);
             const timeout = setTimeout(() => {
                 navigate('/login');
             }, 2000);
@@ -44,7 +52,10 @@ export default function Register() {
                 clearTimeout(timeout);
             };
         }
-    }, [success]);
+        return () => {
+            window.removeEventListener('keyup', onEnter, false);
+        };
+    }, [success, onEnter]);
 
     const handleRegister = async () => {
         for (const length of [email.length, username.length, password.length]) {

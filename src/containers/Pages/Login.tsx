@@ -43,11 +43,21 @@ function Login(props: Props) {
     const theme = useTheme();
     const navigate = useNavigate();
 
+    const onEnter = (event: KeyboardEvent) => {
+        if (event.code === 'Enter') {
+            handleLogin().catch(console.error);
+        }
+    };
+
     useEffect(() => {
         if (props.isAuthenticated) {
             navigate('/account');
         }
-    }, [props.isAuthenticated]);
+        window.addEventListener('keyup', onEnter, false);
+        return () => {
+            window.removeEventListener('keyup', onEnter, false);
+        };
+    }, [props.isAuthenticated, onEnter]);
 
     const handleLogin = async () => {
         await login({
