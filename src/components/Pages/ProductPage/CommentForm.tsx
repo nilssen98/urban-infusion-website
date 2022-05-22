@@ -26,15 +26,6 @@ export default function CommentForm() {
                     </Typography>
                     <TextField
                         required
-                        variant={'outlined'}
-                        id={'comment-title'}
-                        label={'Comment title'}
-                        placeholder={'Give your comment a title'}
-                        inputProps={{maxLength: 50}}
-                        sx={{width: '100%'}}
-                    />
-                    <TextField
-                        required
                         multiline
                         variant={'outlined'}
                         rows={4}
