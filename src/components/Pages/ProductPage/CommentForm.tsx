@@ -1,6 +1,10 @@
 import {Button, Stack, TextField, Typography} from '@mui/material';
+import useMe from '../../../hooks/users/useMe';
 
 export default function CommentForm() {
+
+    const {data: user} = useMe();
+
     return (
         <>
             <Stack
@@ -24,6 +28,16 @@ export default function CommentForm() {
                     >
                         Write a comment
                     </Typography>
+                    <Typography
+                        variant={'body2'}
+                        alignSelf={{xs: 'center', sm: 'flex-start'}}
+                        margin={0}
+                        sx={{fontStyle: 'italic'}}
+                    >
+                        {user
+                            ? `Commenting as ${user?.username}`
+                            : `You must be logged in or registered to post a comment!`}
+                    </Typography>
                     <TextField
                         required
                         multiline
@@ -33,11 +47,13 @@ export default function CommentForm() {
                         label={'Comment body'}
                         placeholder={'Write your comment here'}
                         inputProps={{maxLength: 1000}}
+                        disabled={user == null}
                         sx={{width: '100%'}}
                     />
                     <Button
                         variant={'contained'}
                         type={'submit'}
+                        disabled={user == null}
                     >
                         Submit Comment
                     </Button>
