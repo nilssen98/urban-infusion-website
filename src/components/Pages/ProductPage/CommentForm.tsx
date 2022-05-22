@@ -34,9 +34,7 @@ export default function CommentForm() {
                         margin={0}
                         sx={{fontStyle: 'italic'}}
                     >
-                        {user
-                            ? `Commenting as ${user?.username}`
-                            : `You must be logged in or registered to post a comment!`}
+                        {user ? `Commenting as ${user.username}` : `You must be logged in to post a comment!`}
                     </Typography>
                     <TextField
                         required
