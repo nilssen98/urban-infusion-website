@@ -46,7 +46,7 @@ function Cart(props: Props) {
 
     return (
         <>
-            <Page sx={{height: `calc(100vh - ${theme.custom.heights.topBar + theme.custom.heights.navBar}px)`}}>
+            <Page>
                 <Section>
                     <CartItemList items={props.cart}/>
                 </Section>

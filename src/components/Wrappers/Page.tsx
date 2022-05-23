@@ -1,4 +1,4 @@
-import {Box, CircularProgress, Stack} from '@mui/material';
+import {CircularProgress, Stack, useTheme} from '@mui/material';
 import {ReactNode} from 'react';
 import {SxProps} from '@mui/system';
 
@@ -9,24 +9,24 @@ interface Props {
 }
 
 export default function Page(props: Props) {
+    const theme = useTheme();
     return (
         <>
-            <Box
+            <Stack
                 sx={{
                     overflow: 'auto',
+                    minHeight: `calc(100vh - ${theme.custom.heights.topBar + theme.custom.heights.navBar}px)`,
                     ...props.sx
                 }}
             >
                 {
                     props.isLoading
-                        ? (
-                            <Stack alignItems={'center'} justifyContent={'center'}>
-                                <CircularProgress size={64}/>
-                            </Stack>
-                        )
+                        ? <Stack flex={1} alignItems={'center'} justifyContent={'center'}>
+                            <CircularProgress size={64}/>
+                    </Stack>
                         : props.children
                 }
-            </Box>
+            </Stack>
         </>
     );
 }

@@ -1,4 +1,4 @@
-import {useParams} from 'react-router-dom';
+import {useNavigate, useParams} from 'react-router-dom';
 import Section from '../../components/Wrappers/Section';
 import {Button, Collapse, Stack, Typography, useTheme} from '@mui/material';
 import Page from '../../components/Wrappers/Page';
@@ -6,7 +6,7 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import PictureBox from '../../components/PictureBox';
 import Comments from '../../components/Pages/Product/Comments';
 import {hexToRgb} from '../../utils/utils';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import CommentForm from '../../components/Pages/Product/CommentForm';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import {defaultProductImageURL, getProductImageURL} from '../../utils/productImageUtils';
@@ -23,10 +23,19 @@ Product.defaultProps = {
 export default function Product(props: Props) {
     const {id} = useParams();
     const theme = useTheme();
+    const navigate = useNavigate();
+
+    console.log(id);
 
     const [showForm, setShowForm] = useState<boolean>(false);
 
-    const {isLoading, data} = useProduct(id);
+    const {isLoading, isError, data} = useProduct(id);
+
+    useEffect(() => {
+        if (isError) {
+            navigate('/products');
+        }
+    }, [isError]);
 
     return (
         <>

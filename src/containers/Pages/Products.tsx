@@ -8,7 +8,7 @@ import useProducts from '../../hooks/products/useProducts';
 export default function Products() {
     const {isLoading, data: products} = useProducts();
     const theme = useTheme();
-    const {id} = useParams();
+    const {id} = useParams()
 
     const filteredProducts = (): ProductDto[] | undefined => {
         const filtered_products = products?.filter(product => product.category.toLowerCase() === id?.toLowerCase());
@@ -17,7 +17,7 @@ export default function Products() {
 
     return (
         <>
-            <Page isLoading={isLoading} sx={{height: `calc(100vh - ${theme.custom.heights.topBar + theme.custom.heights.navBar}px)`}}>
+            <Page isLoading={isLoading}>
                 <Stack direction={'column'} alignItems={'center'}>
                     <Box width={'100%'} maxWidth={theme.breakpoints.values.lg}>
                         {

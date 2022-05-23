@@ -7,6 +7,7 @@ export default function useProduct(id?: string): UseQueryResult<ProductDto> {
         ['product', id],
         () => getProductById(id!), {
             enabled: id !== undefined,
+            retry: 0,
         }
     );
 }
