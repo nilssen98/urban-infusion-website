@@ -19,7 +19,7 @@ export function ProductsList(props: Props) {
         <>
             <Box
                 sx={{overflowY: 'auto'}}
-                py={2}
+                py={4}
             >
                 <Stack
                     flexWrap={'wrap'}
