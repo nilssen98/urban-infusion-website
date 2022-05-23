@@ -1,9 +1,10 @@
-import {Box, Typography} from '@mui/material';
+import {Stack, Typography, useTheme} from '@mui/material';
 import {useNavigate} from 'react-router-dom';
-import Section from './Wrappers/Section';
-import StyledButton from './StyledButton';
-import BackgroundImage from '../assets/images/hero-section.jpg';
-import BackgroundImageMobile from '../assets/images/hero-section-mobile.jpg';
+import Section from '../../Wrappers/Section';
+import StyledButton from '../../StyledButton';
+import BackgroundImage from '../../../assets/images/hero-section.jpg';
+import BackgroundImageMobile from '../../../assets/images/hero-section-mobile.jpg';
+import UnstyledLink from '../../UnstyledLink';
 
 interface Props {
     title?: string;
@@ -19,31 +20,23 @@ HeroSection.defaultProps = {
 
 export default function HeroSection(props: Props) {
     const navigate = useNavigate();
+    const theme = useTheme();
 
     return (
         <>
             <Section
-                sx={{my: 48}}
+                sx={{height: `calc(100vh - ${theme.custom.heights.topBar + theme.custom.heights.navBar}px)`, my: 0}}
                 backgroundUrl={props.backgroundUrl}
                 backgroundUrlMobile={props.backgroundUrlMobile}
             >
-                <Box
-                    sx={{
-                        py: 16,
-                        display: 'flex',
-                        flexDirection: 'column',
-                        justifyContent: 'center',
-                        alignItems: {xs: 'center', md: 'start'},
-                        width: '100%',
-                    }}
+                <Stack
+                    justifyContent={'center'}
+                    alignItems={{xs: 'center', md: 'start'}}
+                    width={'100%'}
                 >
-                    <Box
-                        sx={{
-                            display: 'flex',
-                            flexDirection: 'column',
-                            maxWidth: 500,
-                            alignItems: {xs: 'center', md: 'flex-start'},
-                        }}
+                    <Stack
+                        minWidth={500}
+                        alignItems={{xs: 'center', md: 'flex-start'}}
                     >
                         <Typography
                             variant={'h2'}
@@ -67,13 +60,13 @@ export default function HeroSection(props: Props) {
                         >
                             {props.description}
                         </Typography>
-                        <StyledButton
-                            onClick={() => navigate('/products')}
-                        >
-                            Get started
-                        </StyledButton>
-                    </Box>
-                </Box>
+                        <UnstyledLink to={'/products/all'}>
+                            <StyledButton>
+                                Get started
+                            </StyledButton>
+                        </UnstyledLink>
+                    </Stack>
+                </Stack>
             </Section>
         </>
     );

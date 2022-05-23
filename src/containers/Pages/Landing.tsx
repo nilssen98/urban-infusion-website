@@ -1,5 +1,5 @@
 import {Box, Divider} from '@mui/material';
-import HeroSection from '../../components/HeroSection';
+import HeroSection from '../../components/Pages/Landing/HeroSection';
 import FeaturesSection from '../../components/Pages/Landing/FeaturesSection';
 import FeaturedProductsSection from '../../components/Pages/Landing/FeaturedProductsSection';
 import TestimonialSection from '../../components/Pages/Landing/TestimonialSection';
