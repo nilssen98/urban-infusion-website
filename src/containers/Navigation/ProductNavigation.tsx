@@ -23,7 +23,14 @@ export default function ProductNavigation() {
 
     return (
         <>
-            <AppBar position={'sticky'} color={'primary'}>
+            <AppBar
+                sx={{
+                    boxShadow: 'none',
+                    maxHeight: theme.custom.heights.navBar
+                }}
+                position={'sticky'}
+                color={'primary'}
+            >
                 <Divider/>
                 <Stack px={8} py={1} alignItems={'center'}>
                     <Stack

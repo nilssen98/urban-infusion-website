@@ -11,16 +11,21 @@ interface Props {
 export default function Page(props: Props) {
     return (
         <>
-            <Box sx={{...props.sx}}>
-            {
-                props.isLoading
-                    ? (
-                        <Stack alignItems={'center'} justifyContent={'center'} height={'100vh'}>
-                            <CircularProgress size={64}/>
-                        </Stack>
-                    )
-                    : props.children
-            }
+            <Box
+                sx={{
+                    overflow: 'auto',
+                    ...props.sx
+                }}
+            >
+                {
+                    props.isLoading
+                        ? (
+                            <Stack alignItems={'center'} justifyContent={'center'}>
+                                <CircularProgress size={64}/>
+                            </Stack>
+                        )
+                        : props.children
+                }
             </Box>
         </>
     );

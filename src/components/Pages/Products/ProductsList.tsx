@@ -19,10 +19,7 @@ export function ProductsList(props: Props) {
         <>
             <Box
                 padding={4}
-                sx={{
-                    overflowY: 'auto',
-                    height: `calc(100vh - ${theme.mixins.toolbar.minHeight}px)`,
-                }}
+                sx={{overflowY: 'auto'}}
             >
                 <Stack
                     flexWrap={'wrap'}

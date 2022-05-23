@@ -5,6 +5,8 @@ import {CartItem, cartSlice, selectCartItems} from '../../state/slices/cart';
 import {connect} from 'react-redux';
 import {useEffect} from 'react';
 import {Category} from '../../api/urbaninfusion/dto/categories-dto';
+import Page from '../../components/Wrappers/Page';
+import {useTheme} from '@mui/material';
 
 const dummyData: CartItem[] = [
     {
@@ -34,6 +36,8 @@ const dummyData: CartItem[] = [
 type Props = StateProps;
 
 function Cart(props: Props) {
+    const theme = useTheme();
+
     useEffect(() => {
         if (props.cart.length < 1) {
             store.dispatch(cartSlice.actions.set(dummyData));
@@ -42,9 +46,11 @@ function Cart(props: Props) {
 
     return (
         <>
-            <Section>
-                <CartItemList items={props.cart}/>
-            </Section>
+            <Page sx={{height: `calc(100vh - ${theme.custom.heights.topBar + theme.custom.heights.navBar}px)`}}>
+                <Section>
+                    <CartItemList items={props.cart}/>
+                </Section>
+            </Page>
         </>
     );
 }

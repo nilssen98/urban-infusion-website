@@ -163,8 +163,8 @@ function Account(props: Props) {
             >
                 <Alert severity={'error'}>{errorMessage}</Alert>
             </Snackbar>
-            <Page sx={{height: '100vh'}} isLoading={isLoading}>
-                <Stack alignItems={'center'} px={4} py={8}>
+            <Page sx={{height: `calc(100vh - ${theme.custom.heights.topBar + theme.custom.heights.navBar}px)`}} isLoading={isLoading}>
+                <Stack alignItems={'center'} px={4} py={8} border={'1px solid blue'}>
                     <Stack spacing={8} width={'100%'} maxWidth={'lg'}>
                         <Stack direction={'row'} alignItems={'center'} spacing={4}>
                             <Avatar sx={{height: 64, width: 64, background: stringToColor(user?.username)}}>

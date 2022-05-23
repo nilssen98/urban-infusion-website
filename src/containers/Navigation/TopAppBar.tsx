@@ -39,7 +39,7 @@ function TopAppBar(props: Props) {
 
     return (
         <>
-            <Stack>
+            <Stack maxHeight={theme.custom.heights.topBar}>
                 <Toolbar sx={{justifyContent: 'center'}} disableGutters>
                     <Stack
                         flex={1}

@@ -1,7 +1,34 @@
 import {createTheme} from '@mui/material/styles';
 
+declare module '@mui/material/styles' {
+    interface Theme {
+        custom: {
+            heights: {
+                topBar: number;
+                navBar: number;
+            }
+        };
+    }
+
+    // allow configuration using `createTheme`
+    interface ThemeOptions {
+        custom: {
+            heights: {
+                topBar: number;
+                navBar: number;
+            }
+        };
+    }
+}
+
 export const getTheme = (theme: 'light' | 'dark') => {
     return createTheme({
+        custom: {
+            heights: {
+                topBar: 64,
+                navBar: 48,
+            }
+        },
         spacing: 4,
         palette: {
             mode: theme,
