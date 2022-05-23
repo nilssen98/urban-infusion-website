@@ -1,16 +1,16 @@
 import {AppBar, Button, Divider, Stack, Toolbar, useTheme} from '@mui/material';
-import Logo from '../components/Logo';
+import Logo from '../../components/Logo';
 import {ReactElement} from 'react';
 import {useNavigate} from 'react-router-dom';
-import {RootState} from '../state/store';
-import {userSlice} from '../state/slices/user';
-import CartButton from '../components/AppBarNavigation/CartButton';
-import AccountButton from '../components/AppBarNavigation/AccountButton';
+import {RootState} from '../../state/store';
+import {userSlice} from '../../state/slices/user';
+import CartButton from '../../components/AppBarNavigation/CartButton';
+import AccountButton from '../../components/AppBarNavigation/AccountButton';
 import {connect} from 'react-redux';
-import {selectCartItems} from '../state/slices/cart';
-import UnstyledLink from '../components/UnstyledLink';
+import {selectCartItems} from '../../state/slices/cart';
+import UnstyledLink from '../../components/UnstyledLink';
 import ProductNavigation from './ProductNavigation';
-import useMe from '../hooks/users/useMe';
+import useMe from '../../hooks/users/useMe';
 
 const mapStateToProps = (state: RootState) => {
     return {
@@ -39,13 +39,7 @@ function TopAppBar(props: Props) {
 
     return (
         <>
-            <AppBar
-                color={'inherit'}
-                position={'sticky'}
-                sx={{
-                    boxShadow: 0,
-                }}
-            >
+            <Stack>
                 <Toolbar sx={{justifyContent: 'center'}} disableGutters>
                     <Stack
                         flex={1}
@@ -80,20 +74,8 @@ function TopAppBar(props: Props) {
                     </Stack>
                 </Toolbar>
                 <Divider flexItem/>
-                <Stack
-                    px={4}
-                    width={'100%'}
-                    alignItems={'center'}
-                    sx={{
-                        background: theme.palette.secondary.light,
-                    }}
-                >
-                    <Stack maxWidth={theme.breakpoints.values.lg} width={'100%'}>
-                        <ProductNavigation/>
-                    </Stack>
-                </Stack>
-                <Divider flexItem/>
-            </AppBar>
+            </Stack>
+            <ProductNavigation/>
         </>
     );
 }

@@ -1,19 +1,19 @@
 import {CssBaseline, ThemeProvider} from '@mui/material';
 import {getTheme} from '../theme/theme';
 import Landing from './Pages/Landing';
-import NavigationBar from './TopAppBar';
-import {BrowserRouter, Route, Routes} from 'react-router-dom';
-import Products from './Pages/Products';
-import NotFound from './Pages/NotFound';
+import {BrowserRouter, Navigate, Route, Routes} from 'react-router-dom';
 import {persistor, RootState, store} from '../state/store';
 import {Provider, useSelector} from 'react-redux';
 import {PersistGate} from 'redux-persist/integration/react';
-import Account from './Pages/Account';
-import Cart from './Pages/Cart';
-import Product from './Pages/Product';
 import {QueryClient, QueryClientProvider} from 'react-query';
-import Login from './Pages/Login';
+import Products from './Pages/Products';
+import Product from './Pages/Product';
+import Account from './Pages/Account';
 import Register from './Pages/Register';
+import Cart from './Pages/Cart';
+import NotFound from './Pages/NotFound';
+import Login from './Pages/Login';
+import TopAppBar from './Navigation/TopAppBar';
 
 const queryClient = new QueryClient();
 
@@ -27,11 +27,11 @@ export default function App() {
                     <ThemeProvider theme={getTheme(theme)}>
                         <CssBaseline/>
                         <BrowserRouter>
-                            <NavigationBar/>
+                            <TopAppBar/>
                             <Routes>
                                 <Route path={'/'} element={<Landing/>}/>
-                                <Route path={'/products'} element={<Products/>}/>
-                                <Route path={'/products'} element={<Products/>}/>
+                                <Route path={'/products'} element={<Navigate to={'/products/all'}/>}/>
+                                <Route path={'/products/:id'} element={<Products/>}/>
                                 <Route path={'/product/:id'} element={<Product/>}/>
                                 <Route path={'/account'} element={<Account/>}/>
                                 <Route path={'/account/:id'} element={<Account/>}/>
