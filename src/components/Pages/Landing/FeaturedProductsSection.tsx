@@ -17,8 +17,8 @@ export default function FeaturedProductsSection(props: Props) {
 
     const getFeaturedProducts = (amount: number): ProductDto[] => {
         return sampleSize(range(0, amount), amount)
-            .map(index =>  props.products[index])
-            .filter(Boolean)
+            .map(index => props.products[index])
+            .filter(Boolean);
     };
 
     return (
