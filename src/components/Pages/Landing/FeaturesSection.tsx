@@ -1,12 +1,15 @@
 import {Avatar, Box, Button, Chip, Fade, Grid, Stack, Typography} from '@mui/material';
 import {useNavigate} from 'react-router-dom';
 import Section from '../../Wrappers/Section';
-import {useState} from 'react';
+import {ReactElement, ReactNode, useState} from 'react';
 import {useInView} from 'react-intersection-observer';
 import BlackTea from '../../../assets/images/tea/black-tea.png';
 import DarkTea from '../../../assets/images/tea/dark-tea.png';
 import GreenTea from '../../../assets/images/tea/green-tea.png';
 import WhiteTea from '../../../assets/images/tea/white-tea.jpg';
+import SpaOutlinedIcon from '@mui/icons-material/SpaOutlined';
+import SelfImprovementOutlinedIcon from '@mui/icons-material/SelfImprovementOutlined';
+import FactCheckOutlinedIcon from '@mui/icons-material/FactCheckOutlined';
 
 export default function FeaturesSection() {
     const navigate = useNavigate();
@@ -78,6 +81,17 @@ function Feature(props: FeatureProps) {
 
     const {ref, inView} = useInView();
 
+    const getIcon = (key: string): ReactElement => {
+        switch (key) {
+            case 'flavor':
+                return <SpaOutlinedIcon/>;
+            case 'benefits':
+                return <SelfImprovementOutlinedIcon/>;
+            case 'fact':
+                return <FactCheckOutlinedIcon/>;
+        }
+    };
+
     return (
         <>
             <Fade
@@ -124,8 +138,8 @@ function Feature(props: FeatureProps) {
                             {
                                 Object.keys(props.description).map((key, i) => (
                                     <Chip
+                                        color={'primary'}
                                         key={i}
-                                        avatar={<Avatar sx={{bgcolor: 'transparent'}}>{i + 1}</Avatar>}
                                         label={key}
                                         variant={currentItem === key ? 'filled' : 'outlined'}
                                         onClick={() => setCurrentItem(key)}
@@ -134,6 +148,7 @@ function Feature(props: FeatureProps) {
                                             alignSelf: {md: 'start', xs: 'center'},
                                             textTransform: 'capitalize',
                                         }}
+                                        icon={getIcon(key)}
                                     />
                                 ))
                             }
