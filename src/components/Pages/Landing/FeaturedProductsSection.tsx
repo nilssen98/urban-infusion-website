@@ -13,8 +13,6 @@ interface Props {
 export default function FeaturedProductsSection(props: Props) {
     const theme = useTheme();
 
-    const navigate = useNavigate();
-
     const getFeaturedProducts = (amount: number): ProductDto[] => {
         return sampleSize(range(0, amount), amount)
             .map(index => props.products[index])
@@ -23,7 +21,7 @@ export default function FeaturedProductsSection(props: Props) {
 
     return (
         <>
-            <Section bgColor={theme.palette.primary.light} sx={{my: 16}}>
+            <Section bgColor={theme.palette.primary.light} sx={{my: 16}} label={'Featured'}>
                 <Box
                     sx={{
                         display: 'flex',

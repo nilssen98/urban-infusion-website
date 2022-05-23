@@ -15,5 +15,20 @@ export const getTheme = (theme: 'light' | 'dark') => {
                 light: '#FDF5E6'
             },
         },
+        typography: {
+            fontFamily: [
+                'Roboto',
+                '-apple-system',
+                'BlinkMacSystemFont',
+                '"Segoe UI"',
+                'Roboto',
+                '"Helvetica Neue"',
+                'Arial',
+                'sans-serif',
+                '"Apple Color Emoji"',
+                '"Segoe UI Emoji"',
+                '"Segoe UI Symbol"',
+            ].join(','),
+        },
     });
 };
