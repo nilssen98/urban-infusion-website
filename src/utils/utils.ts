@@ -24,3 +24,7 @@ export function enumValues<T extends Record<string, string | number>>(t: T): str
         return Object.values(t).slice(Object.values(t).length / 2) as number[];
     }
 }
+
+export function capitalize(str: string) {
+    return str.replace(/^\w/, c => c.toLocaleLowerCase());
+}
