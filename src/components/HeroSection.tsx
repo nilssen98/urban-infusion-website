@@ -23,6 +23,9 @@ export default function HeroSection(props: Props) {
     return (
         <>
             <Section
+                sx={{
+                    my: 48,
+                }}
                 backgroundUrl={props.backgroundUrl}
                 backgroundUrlMobile={props.backgroundUrlMobile}
             >
