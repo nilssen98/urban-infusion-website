@@ -4,7 +4,7 @@ import {useNavigate} from 'react-router-dom';
 import {ProductDto} from '../../../api/urbaninfusion/dto/product-dto';
 import {defaultProductImageURL, getProductImageURL} from '../../../utils/productImageUtils';
 import ProductCard from '../../Cards/ProductCard';
-import {range, sampleSize} from 'lodash-es';
+import {range, sampleSize, shuffle} from 'lodash-es';
 
 interface Props {
     products: ProductDto[];
@@ -14,7 +14,7 @@ export default function FeaturedProductsSection(props: Props) {
     const theme = useTheme();
 
     const getFeaturedProducts = (amount: number): ProductDto[] => {
-        return sampleSize(range(0, amount), amount)
+        return sampleSize(range(amount), amount)
             .map(index => props.products[index])
             .filter(Boolean);
     };
