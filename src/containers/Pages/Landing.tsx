@@ -18,7 +18,7 @@ export default function Landing() {
                     title={'Find your herbal friend'}
                     description={'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'}
                 />
-                <FeaturedProductsSection products={products}/>
+                <FeaturedProductsSection products={products || []}/>
                 <FeaturesSection/>
                 <TestimonialSection/>
                 <AboutUsSection/>

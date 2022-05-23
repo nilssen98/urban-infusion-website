@@ -33,27 +33,17 @@ export default function FeaturedProductsSection(props: Props) {
                         width: '100%',
                     }}
                 >
-                    <Typography
-                        variant={'h4'}
-                        sx={{
-                            textAlign: 'center',
-                            marginBottom: 12,
-                        }}
-                    >
-                        Featured products
-                    </Typography>
                     <Grid
                         container
                         sx={{
                             justifyContent: 'space-around',
                             width: '100%',
-                            marginBottom: 16,
                             rowGap: 12,
                         }}
                     >
                         {
                             props.products &&
-                            getFeaturedProducts(3)?.map(product => (
+                            getFeaturedProducts(4)?.map(product => (
                                 <Grid
                                     container
                                     key={product.id}
@@ -75,13 +65,6 @@ export default function FeaturedProductsSection(props: Props) {
                             ))
                         }
                     </Grid>
-                    <Button
-                        variant={'contained'}
-                        size={'large'}
-                        onClick={() => navigate('/products')}
-                    >
-                        Shop all
-                    </Button>
                 </Box>
             </Section>
         </>
