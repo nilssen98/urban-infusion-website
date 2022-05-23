@@ -37,7 +37,6 @@ export function ProductsList(props: Props) {
                                 img={product.imageId
                                     ? getProductImageURL(product.imageId)
                                     : defaultProductImageURL}
-                                onClick={() => navigate(`/product/${product.id}`)}
                             />
                         )
                     }

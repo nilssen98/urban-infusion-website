@@ -36,16 +36,16 @@ export default function ProductCard(props: Props) {
                     {
                         props.img && (
                             <Stack>
-                                <UnstyledLink to={`/products/${props.data.id}`}>
-                                    <Stack p={6}>
+                                <Stack p={6}>
+                                    <UnstyledLink to={`/products/${props.data.id}`} onClick={() => console.log('clicked ' + props.data.id)}>
                                         <img src={props.img} style={{width: '100%'}} alt={''}/>
-                                    </Stack>
-                                    <Divider/>
-                                </UnstyledLink>
+                                    </UnstyledLink>
+                                </Stack>
+                                <Divider/>
                             </Stack>
                         )
                     }
-                    <Stack width={'100%'}  flex={1} p={2} alignItems={'center'} justifyContent={'center'}>
+                    <Stack width={'100%'} flex={1} p={2} alignItems={'center'} justifyContent={'center'}>
                         <Typography variant={'h6'}>{props.data.title}</Typography>
                         <Stack direction={'row'} alignItems={'center'} spacing={1}>
                             <Typography variant={'subtitle1'}>

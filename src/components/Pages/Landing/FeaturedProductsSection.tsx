@@ -85,7 +85,6 @@ export default function FeaturedProductsSection() {
                                             img={product.imageId
                                                 ? getProductImageURL(product.imageId)
                                                 : defaultProductImageURL}
-                                            onClick={() => navigate(`/product/${product.id}`)}
                                         />
                                     </Grid>
                                 ))
