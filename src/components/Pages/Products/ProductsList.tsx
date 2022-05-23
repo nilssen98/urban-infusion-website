@@ -1,8 +1,8 @@
-import ProductCard from '../../ProductCard';
+import ProductCard from '../../Cards/ProductCard';
 import {ProductDto} from '../../../api/urbaninfusion/dto/product-dto';
-import {Box, Stack, useTheme} from '@mui/material';
+import {Box, Container, Stack, useTheme} from '@mui/material';
 import {range} from 'lodash-es';
-import ProductCardNew from '../../ProductCardNew';
+import ProductCardNew from '../../Cards/ProductCardNew';
 import {useNavigate} from 'react-router-dom';
 import {defaultProductImageURL, getProductImageURL} from '../../../utils/productImageUtils';
 
@@ -14,19 +14,6 @@ interface Props {
 export function ProductsList(props: Props) {
     const theme = useTheme();
     const navigate = useNavigate();
-
-    const tempData = range(3).map(item =>
-        <ProductCard
-            key={item}
-            title={'Title'}
-            price={9.99}
-            image_url={defaultProductImageURL}
-            sx={{
-                marginRight: 4,
-                marginBottom: 4
-            }}
-        />
-    );
 
     return (
         <>
@@ -40,22 +27,17 @@ export function ProductsList(props: Props) {
                 <Stack
                     flexWrap={'wrap'}
                     direction={'row'}
+                    gap={4}
                 >
                     {
                         props.products?.map(product =>
-                            <ProductCardNew
+                            <ProductCard
+                                data={product}
                                 key={product.id}
-                                id={product.id}
-                                title={product.title}
-                                price={product.price}
-                                image_url={product.imageId
+                                img={product.imageId
                                     ? getProductImageURL(product.imageId)
                                     : defaultProductImageURL}
                                 onClick={() => navigate(`/product/${product.id}`)}
-                                sx={{
-                                    marginRight: 4,
-                                    marginBottom: 4
-                                }}
                             />
                         )
                     }

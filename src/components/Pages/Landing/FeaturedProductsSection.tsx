@@ -1,7 +1,7 @@
 import Section from '../../Wrappers/Section';
 import {Box, Button, Grid, Typography, useTheme} from '@mui/material';
 import {useNavigate} from 'react-router-dom';
-import ProductCardNew from '../../ProductCardNew';
+import ProductCardNew from '../../Cards/ProductCardNew';
 import {getProducts} from '../../../api/urbaninfusion/public/products';
 import {ProductDto} from '../../../api/urbaninfusion/dto/product-dto';
 import {useQuery} from 'react-query';

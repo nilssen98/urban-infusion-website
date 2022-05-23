@@ -1,6 +1,6 @@
 import {UserDto} from '../../../api/urbaninfusion/dto/user-dto';
 import {Button, Stack, TextField} from '@mui/material';
-import SectionCard, {SectionCardItem} from '../../SectionCard';
+import SectionCard, {SectionCardItem} from '../../Cards/SectionCard';
 import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
 import React, {useEffect, useState} from 'react';
 import ChangeCircleOutlinedIcon from '@mui/icons-material/ChangeCircleOutlined';

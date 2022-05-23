@@ -3,7 +3,7 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import {useState} from 'react';
 import {SxProps} from '@mui/system';
 import {Theme} from '@mui/material/styles';
-import PictureBox from './PictureBox';
+import PictureBox from '../PictureBox';
 
 interface Props {
     id?: number;
