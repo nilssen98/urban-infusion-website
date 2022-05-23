@@ -37,7 +37,7 @@ export default function TestimonialSection() {
     return (
         <>
             <Stack bgcolor={theme.palette.secondary.light}>
-                <img src={Divider} alt={''}/>
+                <img src={Divider} alt={''} style={{transform: 'scaleX(-1)'}}/>
                 <Section sx={{my: 8}} label={'Testimonials'}>
                     <Carousel items={items} infinite/>
                 </Section>
