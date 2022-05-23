@@ -73,7 +73,6 @@ function TopAppBar(props: Props) {
                         </Stack>
                     </Stack>
                 </Toolbar>
-                <Divider flexItem/>
             </Stack>
             <ProductNavigation/>
         </>

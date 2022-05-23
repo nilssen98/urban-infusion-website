@@ -24,10 +24,11 @@ export default function ProductNavigation() {
     return (
         <>
             <AppBar position={'sticky'} color={'primary'}>
+                <Divider/>
                 <Stack px={8} py={1} alignItems={'center'}>
                     <Stack
                         direction={'row'}
-                        spacing={1}
+                        spacing={2}
                         width={'100%'}
                         maxWidth={theme.breakpoints.values.lg}
                     >
@@ -42,13 +43,13 @@ export default function ProductNavigation() {
                                         alignItems={'center'}
                                         justifyContent={'center'}
                                         borderBottom={'2px solid'}
-                                        borderColor={isActiveCategory(category) ? theme.palette.primary.main : 'transparent'}
+                                        borderColor={isActiveCategory(category) ? theme.palette.secondary.main : 'transparent'}
                                         sx={{
                                             transition: 'all .2s ease',
                                             cursor: 'pointer',
                                             userSelect: 'none',
                                             '&:hover': {
-                                                borderColor: theme.palette.primary.main,
+                                                borderColor: theme.palette.secondary.main,
                                             }
                                         }}
                                     >
@@ -64,6 +65,7 @@ export default function ProductNavigation() {
                         }
                     </Stack>
                 </Stack>
+                <Divider/>
             </AppBar>
         </>
     );
