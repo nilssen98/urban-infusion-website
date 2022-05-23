@@ -10,7 +10,6 @@ import {Provider, useSelector} from 'react-redux';
 import {PersistGate} from 'redux-persist/integration/react';
 import Account from './Pages/Account';
 import Cart from './Pages/Cart';
-import About from './Pages/About';
 import Product from './Pages/Product';
 import {QueryClient, QueryClientProvider} from 'react-query';
 import Login from './Pages/Login';
@@ -33,13 +32,12 @@ export default function App() {
                                 <Route path={'/'} element={<Landing/>}/>
                                 <Route path={'/products'} element={<Products/>}/>
                                 <Route path={'/products/:id'} element={<Products/>}/>
-                                <Route path={'/product/:id'} element={<Product/>}/>
+                                <Route path={'/products/:id'} element={<Product/>}/>
                                 <Route path={'/account'} element={<Account/>}/>
                                 <Route path={'/account/:id'} element={<Account/>}/>
                                 <Route path={'/cart'} element={<Cart/>}/>
                                 <Route path={'/login'} element={<Login/>}/>
                                 <Route path={'/register'} element={<Register/>}/>
-                                <Route path={'/about'} element={<About/>}/>
                                 <Route path={'*'} element={<NotFound/>}/>
                             </Routes>
                         </BrowserRouter>
