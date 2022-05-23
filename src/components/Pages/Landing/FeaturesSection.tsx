@@ -1,7 +1,7 @@
-import {Avatar, Box, Button, Chip, Fade, Grid, Stack, Typography} from '@mui/material';
+import {Box, Chip, Fade, Grid, Stack, Typography, useTheme} from '@mui/material';
 import {useNavigate} from 'react-router-dom';
 import Section from '../../Wrappers/Section';
-import {ReactElement, ReactNode, useState} from 'react';
+import {ReactElement, useState} from 'react';
 import {useInView} from 'react-intersection-observer';
 import BlackTea from '../../../assets/images/tea/black-tea.png';
 import DarkTea from '../../../assets/images/tea/dark-tea.png';
@@ -10,6 +10,8 @@ import WhiteTea from '../../../assets/images/tea/white-tea.jpg';
 import SpaOutlinedIcon from '@mui/icons-material/SpaOutlined';
 import SelfImprovementOutlinedIcon from '@mui/icons-material/SelfImprovementOutlined';
 import FactCheckOutlinedIcon from '@mui/icons-material/FactCheckOutlined';
+import UnstyledLink from '../../UnstyledLink';
+import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 
 export default function FeaturesSection() {
     const navigate = useNavigate();
@@ -19,6 +21,7 @@ export default function FeaturesSection() {
             <Section>
                 <Stack spacing={32}>
                     <Feature
+                        navigation={'black tea'}
                         header={'Black tea'}
                         description={{
                             flavor: 'Comforting flavors of honey, stone fruits, or roasted almonds and much more',
@@ -26,9 +29,9 @@ export default function FeaturesSection() {
                             fact: 'Black tea is the most consumed tea across the world; in the US, 86% of the tea enjoyed throughout 2017 was black tea.'
                         }}
                         image_url={BlackTea}
-                        onClick={() => navigate('/products/black tea')}
                     />
                     <Feature
+                        navigation={'green tea'}
                         flipped
                         header={'Green tea'}
                         description={{
@@ -37,9 +40,9 @@ export default function FeaturesSection() {
                             fact: 'Ancient cultures used green tea as medicine to control bleeding, heal wounds, aid digestion, and to improve heart and mental health.'
                         }}
                         image_url={GreenTea}
-                        onClick={() => navigate('/products/green tea')}
                     />
                     <Feature
+                        navigation={'white tea'}
                         header={'White tea'}
                         description={{
                             flavor: 'A mythical and elusive verity light and subtle in flavor with often floral sweet notes.',
@@ -47,9 +50,9 @@ export default function FeaturesSection() {
                             fact: 'White tea is the least processed of all tea, most white tea are simply picked and withered. Therefore, white tea contains elevated levels of antioxidants that are present in fresh tea leaves.'
                         }}
                         image_url={WhiteTea}
-                        onClick={() => navigate('/products/white tea')}
                     />
                     <Feature
+                        navigation={'dark tea'}
                         flipped
                         header={'Dark tea'}
                         description={{
@@ -58,7 +61,6 @@ export default function FeaturesSection() {
                             fact: 'Dark tea are closer to green tea in that they are processed like green tea initially. Then, they go through a bacterial fermentation process and are aged for many years to come.'
                         }}
                         image_url={DarkTea}
-                        onClick={() => navigate('/products/dark tea')}
                     />
                 </Stack>
             </Section>
@@ -68,6 +70,7 @@ export default function FeaturesSection() {
 
 interface FeatureProps {
     flipped?: boolean;
+    navigation?: string;
     header?: string;
     image_url?: string;
     onClick?: () => void;
@@ -80,6 +83,7 @@ function Feature(props: FeatureProps) {
     const [didAnimate, setDidAnimate] = useState<boolean>(false);
 
     const {ref, inView} = useInView();
+    const theme = useTheme();
 
     const getIcon = (key: string): ReactElement => {
         switch (key) {
@@ -89,6 +93,8 @@ function Feature(props: FeatureProps) {
                 return <SelfImprovementOutlinedIcon/>;
             case 'fact':
                 return <FactCheckOutlinedIcon/>;
+            default:
+                return <></>;
         }
     };
 
@@ -176,13 +182,19 @@ function Feature(props: FeatureProps) {
                                 justifyContent: {xs: 'center', md: `${props.flipped ? 'flex-start' : 'flex-end'}`}
                             }}
                         >
-                            <Button
-                                variant={'contained'}
-                                size={'large'}
-                                onClick={props.onClick}
-                            >
-                                shop now
-                            </Button>
+                            <UnstyledLink to={`/products/${props.navigation}`}>
+                                <Stack
+                                    alignItems={'center'}
+                                    direction={'row'}
+                                    spacing={1}
+                                    color={theme.palette.primary.main}
+                                >
+                                    <Typography>
+                                        Get now
+                                    </Typography>
+                                    <ArrowRightAltIcon/>
+                                </Stack>
+                            </UnstyledLink>
                         </Box>
                     </Grid>
                 </Grid>
