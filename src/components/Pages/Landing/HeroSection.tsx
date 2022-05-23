@@ -19,7 +19,6 @@ HeroSection.defaultProps = {
 };
 
 export default function HeroSection(props: Props) {
-    const navigate = useNavigate();
     const theme = useTheme();
 
     return (
@@ -35,7 +34,7 @@ export default function HeroSection(props: Props) {
                     width={'100%'}
                 >
                     <Stack
-                        minWidth={500}
+                        maxWidth={500}
                         alignItems={{xs: 'center', md: 'flex-start'}}
                     >
                         <Typography
