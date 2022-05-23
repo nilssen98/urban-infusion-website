@@ -31,7 +31,6 @@ export default function ProductNavigation() {
                 position={'sticky'}
                 color={'primary'}
             >
-                <Divider/>
                 <Stack px={8} py={1} alignItems={'center'}>
                     <Stack
                         direction={'row'}

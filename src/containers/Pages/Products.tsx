@@ -1,9 +1,10 @@
-import {Box, Stack, Typography, useTheme} from '@mui/material';
+import {Box, Divider, Stack, Typography, useTheme} from '@mui/material';
 import {ProductsList} from '../../components/Pages/Products/ProductsList';
 import {useParams} from 'react-router-dom';
 import Page from '../../components/Wrappers/Page';
 import {ProductDto} from '../../api/urbaninfusion/dto/product-dto';
 import useProducts from '../../hooks/products/useProducts';
+import ProductsFilter from '../../components/Pages/Products/ProductsFilter';
 
 export default function Products() {
     const {isLoading, data: products} = useProducts();
@@ -19,6 +20,8 @@ export default function Products() {
         <>
             <Page isLoading={isLoading}>
                 <Stack direction={'column'} alignItems={'center'}>
+                    <ProductsFilter/>
+                    <Divider flexItem/>
                     <Box width={'100%'} maxWidth={theme.breakpoints.values.lg}>
                         {
                             products ? (

@@ -18,8 +18,8 @@ export function ProductsList(props: Props) {
     return (
         <>
             <Box
-                padding={4}
                 sx={{overflowY: 'auto'}}
+                py={2}
             >
                 <Stack
                     flexWrap={'wrap'}
