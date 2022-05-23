@@ -6,8 +6,11 @@ import TestimonialSection from '../../components/Pages/Landing/TestimonialSectio
 import Footer from '../Footer';
 import AboutUsSection from '../../components/Pages/About/AboutUsSection';
 import InstagramSection from '../../components/Pages/About/InstagramSection';
+import useProducts from '../../hooks/products/useProducts';
 
 export default function Landing() {
+    const {data: products} = useProducts();
+
     return (
         <>
             <Box>
@@ -15,7 +18,7 @@ export default function Landing() {
                     title={'Find your herbal friend'}
                     description={'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'}
                 />
-                <FeaturedProductsSection/>
+                <FeaturedProductsSection products={products}/>
                 <FeaturesSection/>
                 <TestimonialSection/>
                 <AboutUsSection/>
