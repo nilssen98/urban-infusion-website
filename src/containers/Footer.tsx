@@ -6,7 +6,7 @@ import Section from '../components/Wrappers/Section';
 export default function Footer() {
     return (
         <>
-            <Section sx={{my: 32}}>
+            <Section sx={{my: 48}}>
                 <Stack
                     justifyContent={'center'}
                     alignItems={'center'}

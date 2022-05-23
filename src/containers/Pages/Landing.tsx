@@ -4,8 +4,6 @@ import FeaturesSection from '../../components/Pages/Landing/FeaturesSection';
 import FeaturedProductsSection from '../../components/Pages/Landing/FeaturedProductsSection';
 import TestimonialSection from '../../components/Pages/Landing/TestimonialSection';
 import Footer from '../Footer';
-import AboutUsSection from '../../components/Pages/About/AboutUsSection';
-import InstagramSection from '../../components/Pages/About/InstagramSection';
 import useProducts from '../../hooks/products/useProducts';
 
 export default function Landing() {
@@ -21,9 +19,6 @@ export default function Landing() {
                 <FeaturedProductsSection products={products || []}/>
                 <FeaturesSection/>
                 <TestimonialSection/>
-                <AboutUsSection/>
-                {/*<InstagramSection/>*/}
-                <Divider/>
                 <Footer/>
             </Box>
         </>
