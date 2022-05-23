@@ -1,6 +1,4 @@
 import {useParams} from 'react-router-dom';
-import {useQuery} from 'react-query';
-import {getProductById} from '../../api/urbaninfusion/public/products';
 import Section from '../../components/Wrappers/Section';
 import {Button, Collapse, Stack, Typography, useTheme} from '@mui/material';
 import Page from '../../components/Wrappers/Page';
@@ -12,6 +10,7 @@ import {useState} from 'react';
 import CommentForm from '../../components/Pages/ProductPage/CommentForm';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import {defaultProductImageURL, getProductImageURL} from '../../utils/productImageUtils';
+import useProduct from '../../hooks/products/useProduct';
 
 interface Props {
     image_url?: string;
@@ -27,10 +26,7 @@ export default function Product(props: Props) {
 
     const [showForm, setShowForm] = useState<boolean>(false);
 
-    const {isLoading, data} = useQuery(
-        'product',
-        () => getProductById(id || '')
-    );
+    const {isLoading, data} = useProduct(id);
 
     return (
         <>
@@ -60,9 +56,6 @@ export default function Product(props: Props) {
                                         direction={'column'}
                                         justifyContent={'center'}
                                         alignItems={'center'}
-                                        sx={{
-                                            flexGrow: '1',
-                                        }}
                                     >
                                         <Typography
                                             variant={'h3'}

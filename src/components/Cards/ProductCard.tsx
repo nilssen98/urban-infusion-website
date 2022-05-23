@@ -37,7 +37,7 @@ export default function ProductCard(props: Props) {
                         props.img && (
                             <Stack>
                                 <Stack p={6}>
-                                    <UnstyledLink to={`/products/${props.data.id}`} onClick={() => console.log('clicked ' + props.data.id)}>
+                                    <UnstyledLink to={`/product/${props.data.id}`} onClick={() => console.log('clicked ' + props.data.id)}>
                                         <img src={props.img} style={{width: '100%'}} alt={''}/>
                                     </UnstyledLink>
                                 </Stack>
