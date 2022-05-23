@@ -1,6 +1,9 @@
 import {Avatar, Stack, Typography, useTheme} from '@mui/material';
 import Carousel from '../../Carousel';
 import Section from '../../Wrappers/Section';
+import DividerTop from '../../../assets/images/divider-top.svg';
+import DividerBottom from '../../../assets/images/divider-bottom.svg';
+import Divider from '../../../assets/images/divider.svg';
 
 interface TestimonialProps {
     image_url: string;
@@ -33,9 +36,13 @@ export default function TestimonialSection() {
 
     return (
         <>
-            <Section sx={{my: 32}} bgColor={theme.palette.primary.light} label={'Testimonials'}>
-                <Carousel items={items} infinite/>
-            </Section>
+            <Stack bgcolor={theme.palette.secondary.light}>
+                <img src={Divider} alt={''}/>
+                <Section sx={{my: 8}} label={'Testimonials'}>
+                    <Carousel items={items} infinite/>
+                </Section>
+                <img src={Divider} alt={''} style={{transform: 'scale(1, -1)', marginBottom: -1}}/>
+            </Stack>
         </>
     );
 }

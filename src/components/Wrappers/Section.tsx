@@ -37,12 +37,12 @@ export default function Section(props: Props) {
                         maxWidth: 'lg',
                         height: '100%',
                         mx: 8,
-                        my: 32,
+                        my: 16,
                         ...props.sx
                     }}
                 >
                     {
-                        props.label && (<Stack pb={8} width={'100%'} alignItems={'center'}>
+                        props.label && (<Stack mb={16} width={'100%'} alignItems={'center'}>
                             <Chip label={<Typography variant={'body2'} p={1} fontWeight={5400}>{props.label}</Typography>}/>
                         </Stack>)
                     }

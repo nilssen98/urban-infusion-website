@@ -18,7 +18,7 @@ export default function FeaturesSection() {
 
     return (
         <>
-            <Section>
+            <Section label={'Products'}>
                 <Stack spacing={32}>
                     <Feature
                         navigation={'black tea'}
