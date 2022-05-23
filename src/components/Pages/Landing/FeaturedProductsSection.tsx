@@ -7,6 +7,7 @@ import {ProductDto} from '../../../api/urbaninfusion/dto/product-dto';
 import {useQuery} from 'react-query';
 import {defaultProductImageURL, getProductImageURL} from '../../../utils/productImageUtils';
 import useProducts from '../../../hooks/products/useProducts';
+import ProductCard from '../../Cards/ProductCard';
 
 export default function FeaturedProductsSection() {
     const theme = useTheme();
@@ -78,12 +79,10 @@ export default function FeaturedProductsSection() {
                                             alignItems: 'center',
                                         }}
                                     >
-                                        <ProductCardNew
+                                        <ProductCard
                                             key={product.id}
-                                            id={product.id}
-                                            title={product.title}
-                                            price={product.price}
-                                            image_url={product.imageId
+                                            data={product}
+                                            img={product.imageId
                                                 ? getProductImageURL(product.imageId)
                                                 : defaultProductImageURL}
                                             onClick={() => navigate(`/product/${product.id}`)}

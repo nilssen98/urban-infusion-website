@@ -22,23 +22,30 @@ export default function ProductCard(props: Props) {
             <Paper
                 variant={'outlined'}
                 {...paperProps}
+                sx={{
+                    width: 225,
+                    height: 350
+                }}
             >
                 <Stack
-                    width={'100%'}
+                    textAlign={'center'}
+                    alignItems={'center'}
+                    justifyContent={'center'}
                     height={'100%'}
-                    maxWidth={200}
-                    maxHeight={400}
                 >
                     {
                         props.img && (
-                            <UnstyledLink to={`/products/${props.data.id}`}>
-                                <Stack p={4}>
-                                    <img src={props.img} style={{width: '100%'}} alt={''}/>
-                                </Stack>
-                            </UnstyledLink>
+                            <Stack>
+                                <UnstyledLink to={`/products/${props.data.id}`}>
+                                    <Stack p={6}>
+                                        <img src={props.img} style={{width: '100%'}} alt={''}/>
+                                    </Stack>
+                                    <Divider/>
+                                </UnstyledLink>
+                            </Stack>
                         )
                     }
-                    <Stack flex={1} p={4} alignItems={'center'}>
+                    <Stack width={'100%'}  flex={1} p={2} alignItems={'center'} justifyContent={'center'}>
                         <Typography variant={'h6'}>{props.data.title}</Typography>
                         <Stack direction={'row'} alignItems={'center'} spacing={1}>
                             <Typography variant={'subtitle1'}>
@@ -52,8 +59,8 @@ export default function ProductCard(props: Props) {
                             </Typography>
                         </Stack>
                     </Stack>
-                    <Divider/>
-                    <Stack>
+                    <Divider flexItem/>
+                    <Stack width={'100%'}>
                         <Button
                             variant={'contained'}
                             sx={{
