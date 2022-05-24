@@ -6,7 +6,6 @@ import {ProductDto} from '../../api/urbaninfusion/dto/product-dto';
 import useProducts from '../../hooks/products/useProducts';
 import ProductsFilter from '../../components/Pages/Products/ProductsFilter';
 import {useEffect, useState} from 'react';
-import Section from '../../components/Wrappers/Section';
 
 export default function Products() {
     const {isLoading, data: products} = useProducts();
@@ -14,22 +13,25 @@ export default function Products() {
     const theme = useTheme();
     const {id} = useParams();
 
-    useEffect(() => setFilteredProducts(products), [products]);
+    useEffect(() => {
+        if (products) {
+            setFilteredProducts(products);
+        }
+    }, [products]);
 
     const onFilter = (filtered?: ProductDto[]) => {
-        console.log(filtered);
-        setFilteredProducts(filtered);
+        setFilteredProducts(filtered?.filter(product => product.category.toLowerCase() === id?.toLowerCase()));
     };
 
     return (
         <>
             <Page isLoading={isLoading}>
                 <Stack direction={'column'} alignItems={'center'}>
-                    <ProductsFilter products={filteredProducts} onFilter={onFilter}/>
+                    <ProductsFilter products={products} onFilter={onFilter}/>
                     <Divider flexItem/>
                     <Box width={'100%'} maxWidth={theme.breakpoints.values.lg}>
                         {
-                            !filteredProducts ? (
+                            filteredProducts ? (
                                 <ProductsList products={filteredProducts}/>
                             ) : (
                                 <Stack

@@ -5,8 +5,7 @@ import AttachMoneyOutlinedIcon from '@mui/icons-material/AttachMoneyOutlined';
 import SortByAlphaOutlinedIcon from '@mui/icons-material/SortByAlphaOutlined';
 import MonitorWeightOutlinedIcon from '@mui/icons-material/MonitorWeightOutlined';
 import LocalOfferOutlinedIcon from '@mui/icons-material/LocalOfferOutlined';
-import {capitalize} from 'lodash-es';
-import {useEffect, useState} from 'react';
+import {useEffect, useMemo, useState} from 'react';
 import {ProductDto} from '../../../api/urbaninfusion/dto/product-dto';
 import {enumValues} from '../../../utils/utils';
 
@@ -33,11 +32,36 @@ export default function ProductsFilter(props: Props) {
 
     const theme = useTheme();
 
-    useEffect(() => {
-        if (order && sort) {
-            props.onFilter(getFilteredProducts());
+    const filteredProducts = useMemo(() => {
+        const filtered = props.products;
+        switch (sort) {
+            case SortOption.NAME:
+                return filtered?.sort((a, b) => a.title.localeCompare(b.title));
+            case SortOption.PRICE:
+                return filtered?.sort((a, b) => b.price - a.price);
+            case SortOption.DISCOUNT:
+                return filtered?.sort((a, b) => b.discount - a.discount);
+            case SortOption.WEIGHT:
+                return filtered?.sort((a, b) => a.title.localeCompare(b.title));
+            default:
+                return filtered;
         }
-    }, [order, sort]);
+    }, [props.products, sort, order]);
+
+
+    useEffect(() => {
+        if (props.products) {
+            applyFilter();
+        }
+    }, [props.products]);
+
+    const applyFilter = () => {
+        props.onFilter(filteredProducts);
+    };
+
+    useEffect(() => {
+        console.log(filteredProducts);
+    }, [filteredProducts]);
 
     const getIcon = (option: OrderOption | SortOption) => {
         switch (option) {
@@ -58,20 +82,6 @@ export default function ProductsFilter(props: Props) {
         }
     };
 
-    const getFilteredProducts = (): ProductDto[] | undefined => {
-        const filtered = order === OrderOption.ASCENDING ? props.products || [] : props.products?.reverse() || [];
-        switch (sort) {
-            case SortOption.NAME:
-                return filtered?.sort((a, b) => a.title.localeCompare(b.title));
-            case SortOption.PRICE:
-                return filtered?.sort((a, b) => b.price - a.price);
-            case SortOption.DISCOUNT:
-                return filtered?.sort((a, b) => b.discount - a.discount);
-            case SortOption.WEIGHT:
-                return filtered?.sort((a, b) => a.title.localeCompare(b.title));
-        }
-    };
-
     return (
         <>
             <Stack width={'100%'} alignItems={'center'}>
@@ -84,12 +94,14 @@ export default function ProductsFilter(props: Props) {
                     alignItems={'start'}
                 >
                     <Autocomplete
-                        inputValue={sort}
                         defaultValue={SortOption.NAME}
-                        onInputChange={(_, newValue) => setSort(newValue as SortOption)}
+                        value={sort}
+                        onChange={(_, newValue) => {
+                            setSort(newValue as SortOption);
+                            applyFilter();
+                        }}
                         disableClearable
                         size={'small'}
-                        getOptionLabel={(option) => capitalize(option)}
                         renderOption={(boxProps, option) => (
                             <Box component={'li'} {...boxProps}>
                                 <Typography flex={1} textTransform={'capitalize'}>{option}</Typography>
@@ -106,15 +118,17 @@ export default function ProductsFilter(props: Props) {
                         options={enumValues(SortOption)}
                     />
                     <Autocomplete
-                        inputValue={order}
+                        value={order}
+                        onChange={(_, newValue) => {
+                            setOrder(newValue as OrderOption);
+                            applyFilter();
+                        }}
                         defaultValue={OrderOption.DESCENDING}
-                        onInputChange={(_, newValue) => setOrder(newValue as OrderOption)}
                         disableClearable
                         size={'small'}
-                        getOptionLabel={(option) => capitalize(option)}
                         renderOption={(boxProps, option) => (
                             <Box component={'li'} {...boxProps}>
-                                <Typography flex={1} textTransform={'capitalize'}>{option}</Typography>
+                                <Typography flex={1}>{option}</Typography>
                                 {getIcon(option as OrderOption)}
                             </Box>
                         )}
