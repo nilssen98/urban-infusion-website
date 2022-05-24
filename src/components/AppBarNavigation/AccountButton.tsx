@@ -19,8 +19,8 @@ export default function AccountButton(props: Props) {
                         height: theme.mixins.toolbar.minHeight,
                     }}
                 >
-                    <Avatar sx={{width: 32, height: 32, background: stringToColor(props.name)}}>
-                        {firstLetterOfUsername(props.name)}
+                    <Avatar sx={{width: 32, height: 32, background: stringToColor(props.option)}}>
+                        {firstLetterOfUsername(props.option)}
                     </Avatar>
                 </IconButton>
             </Tooltip>

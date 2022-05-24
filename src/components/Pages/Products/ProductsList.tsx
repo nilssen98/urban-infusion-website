@@ -7,7 +7,6 @@ import {useNavigate} from 'react-router-dom';
 import {defaultProductImageURL, getProductImageURL} from '../../../utils/productImageUtils';
 
 interface Props {
-    id?: string;
     products?: ProductDto[];
 }
 

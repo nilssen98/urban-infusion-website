@@ -5,35 +5,39 @@ import Page from '../../components/Wrappers/Page';
 import {ProductDto} from '../../api/urbaninfusion/dto/product-dto';
 import useProducts from '../../hooks/products/useProducts';
 import ProductsFilter from '../../components/Pages/Products/ProductsFilter';
+import {useEffect, useState} from 'react';
+import Section from '../../components/Wrappers/Section';
 
 export default function Products() {
     const {isLoading, data: products} = useProducts();
+    const [filteredProducts, setFilteredProducts] = useState<ProductDto[] | undefined>([]);
     const theme = useTheme();
     const {id} = useParams();
 
-    const filteredProducts = (): ProductDto[] | undefined => {
-        const filtered_products = products?.filter(product => product.category.toLowerCase() === id?.toLowerCase());
-        return filtered_products?.length === 0 ? products : filtered_products;
+    useEffect(() => setFilteredProducts(products), [products]);
+
+    const onFilter = (filtered?: ProductDto[]) => {
+        console.log(filtered);
+        setFilteredProducts(filtered);
     };
 
     return (
         <>
             <Page isLoading={isLoading}>
                 <Stack direction={'column'} alignItems={'center'}>
-                    <ProductsFilter/>
+                    <ProductsFilter products={filteredProducts} onFilter={onFilter}/>
                     <Divider flexItem/>
                     <Box width={'100%'} maxWidth={theme.breakpoints.values.lg}>
                         {
-                            products ? (
-                                <ProductsList products={filteredProducts()} id={id}/>
+                            !filteredProducts ? (
+                                <ProductsList products={filteredProducts}/>
                             ) : (
                                 <Stack
-                                    justifyContent={'center'}
-                                    alignItems={'center'}
+                                    pt={8}
+                                    color={theme.palette.text.disabled}
                                     width={'100%'}
-                                    height={`calc(100vh - ${theme.mixins.toolbar.minHeight}px)`}
                                 >
-                                    <Typography variant={'h5'} component={'h1'}>No products to show!</Typography>
+                                    <Typography variant={'h5'}>No products</Typography>
                                 </Stack>
                             )
                         }
