@@ -39,6 +39,13 @@ export default function Orders(props: Props) {
                                         {
                                             props.admin ?? (
                                                 <Typography flex={1} textAlign={'right'} fontWeight={600}>
+                                                    Order ID
+                                                </Typography>
+                                            )
+                                        }
+                                        {
+                                            props.admin ?? (
+                                                <Typography flex={1} textAlign={'right'} fontWeight={600}>
                                                     User
                                                 </Typography>
                                             )
@@ -60,6 +67,15 @@ export default function Orders(props: Props) {
                                                 {order.status.toLowerCase()}
                                             </Typography>
                                         </Stack>
+                                        {
+                                            props.admin ?? (
+                                                <Stack flex={1} spacing={2}>
+                                                    <Typography textAlign={'right'}>
+                                                        {order.orderId}
+                                                    </Typography>
+                                                </Stack>
+                                            )
+                                        }
                                         {
                                             props.admin ?? (
                                                 <Stack flex={1} spacing={2}>
