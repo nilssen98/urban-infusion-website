@@ -1,10 +1,10 @@
 import {Divider, Paper, Stack, Typography, useTheme} from '@mui/material';
 import React from 'react';
 import {OrderDto, OrderStatus} from '../../../api/urbaninfusion/dto/order-dto';
+import LocalShippingOutlinedIcon from '@mui/icons-material/LocalShippingOutlined';
 import HourglassBottomOutlinedIcon from '@mui/icons-material/HourglassBottomOutlined';
-import SendAndArchiveOutlinedIcon from '@mui/icons-material/SendAndArchiveOutlined';
-import SendOutlinedIcon from '@mui/icons-material/SendOutlined';
 import DoneOutlineOutlinedIcon from '@mui/icons-material/DoneOutlineOutlined';
+import PendingOutlinedIcon from '@mui/icons-material/PendingOutlined';
 import {round} from 'lodash-es';
 
 interface Props {
@@ -17,10 +17,10 @@ export default function Orders(props: Props) {
 
     const getStatusIcon = (status: OrderStatus) => {
         return {
-            [OrderStatus.IDLE]: <HourglassBottomOutlinedIcon color={'disabled'}/>,
-            [OrderStatus.PROCESSING]: <SendAndArchiveOutlinedIcon color={'disabled'}/>,
-            [OrderStatus.SENT]: <SendOutlinedIcon color={'disabled'}/>,
-            [OrderStatus.DELIVERED]: <DoneOutlineOutlinedIcon color={'disabled'}/>,
+            [OrderStatus.IDLE]: <PendingOutlinedIcon color={'disabled'}/>,
+            [OrderStatus.PROCESSING]: <HourglassBottomOutlinedIcon color={'warning'}/>,
+            [OrderStatus.SENT]: <LocalShippingOutlinedIcon color={'info'}/>,
+            [OrderStatus.DELIVERED]: <DoneOutlineOutlinedIcon color={'success'}/>,
         }[status] || <></>;
     };
 

@@ -9,7 +9,7 @@ interface Props {
 export default function ManageOrdersSection(props: Props) {
     return (
         <>
-            <Orders orders={props.orders}/>
+            <Orders orders={props.orders} admin/>
         </>
     );
 }
