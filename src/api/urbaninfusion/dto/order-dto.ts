@@ -22,3 +22,9 @@ export interface OrderDto {
     date: string;
     orderId: number;
 }
+
+
+export interface OrderUpdateDto {
+    id: number,
+    status: OrderStatus,
+}
