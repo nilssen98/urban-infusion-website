@@ -35,14 +35,19 @@ export default function ProductCard(props: Props) {
                 >
                     {
                         props.img && (
-                            <Stack>
-                                <Stack p={6}>
-                                    <UnstyledLink to={`/product/${props.data.id}`}>
-                                        <img src={props.img} style={{width: '100%'}} alt={''}/>
-                                    </UnstyledLink>
-                                </Stack>
-                                <Divider/>
-                            </Stack>
+                            <>
+                                <UnstyledLink style={{width: '100%'}} to={`/product/${props.data.id}`}>
+                                    <Stack
+                                        p={4}
+                                        alignItems={'center'}
+                                        justifyContent={'center'}
+                                        sx={{cursor: 'pointer'}}
+                                    >
+                                        <img src={props.img} style={{width: '100%', height: 175}} alt={''}/>
+                                    </Stack>
+                                </UnstyledLink>
+                                <Divider flexItem/>
+                            </>
                         )
                     }
                     <Stack width={'100%'} flex={1} p={2} alignItems={'center'} justifyContent={'center'}>
