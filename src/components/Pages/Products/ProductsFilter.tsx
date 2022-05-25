@@ -5,81 +5,37 @@ import AttachMoneyOutlinedIcon from '@mui/icons-material/AttachMoneyOutlined';
 import SortByAlphaOutlinedIcon from '@mui/icons-material/SortByAlphaOutlined';
 import MonitorWeightOutlinedIcon from '@mui/icons-material/MonitorWeightOutlined';
 import LocalOfferOutlinedIcon from '@mui/icons-material/LocalOfferOutlined';
-import {useEffect, useMemo, useState} from 'react';
-import {ProductDto} from '../../../api/urbaninfusion/dto/product-dto';
+import {ReactElement} from 'react';
 import {enumValues} from '../../../utils/utils';
-
-enum OrderOption {
-    ASCENDING = 'ascending',
-    DESCENDING = 'descending'
-}
-
-enum SortOption {
-    PRICE = 'price',
-    NAME = 'name',
-    DISCOUNT = 'discount',
-    WEIGHT = 'weight'
-}
+import {OrderOption, SortOption} from '../../../containers/Pages/Products';
 
 interface Props {
-    products?: ProductDto[];
-    onFilter: (filteredProducts?: ProductDto[]) => void;
+    sort: SortOption;
+    order: OrderOption;
+    onSort: (sort: SortOption) => void;
+    onOrder: (order: OrderOption) => void;
 }
 
 export default function ProductsFilter(props: Props) {
-    const [order, setOrder] = useState<OrderOption>(OrderOption.DESCENDING);
-    const [sort, setSort] = useState<SortOption>(SortOption.NAME);
-
     const theme = useTheme();
 
-    const filteredProducts = useMemo(() => {
-        const filtered = props.products;
-        switch (sort) {
-            case SortOption.NAME:
-                return filtered?.sort((a, b) => a.title.localeCompare(b.title));
-            case SortOption.PRICE:
-                return filtered?.sort((a, b) => b.price - a.price);
-            case SortOption.DISCOUNT:
-                return filtered?.sort((a, b) => b.discount - a.discount);
-            case SortOption.WEIGHT:
-                return filtered?.sort((a, b) => a.title.localeCompare(b.title));
-            default:
-                return filtered;
-        }
-    }, [props.products, sort, order]);
-
-
-    useEffect(() => {
-        if (props.products) {
-            applyFilter();
-        }
-    }, [props.products]);
-
-    const applyFilter = () => {
-        props.onFilter(filteredProducts);
+    const handleSort = (newValue: SortOption) => {
+        props.onSort(newValue);
     };
 
-    useEffect(() => {
-        console.log(filteredProducts);
-    }, [filteredProducts]);
+    const handleOrder = (newValue: OrderOption) => {
+        props.onOrder(newValue);
+    };
 
-    const getIcon = (option: OrderOption | SortOption) => {
-        switch (option) {
-            case OrderOption.ASCENDING:
-                return <ArrowUpwardIcon/>;
-            case OrderOption.DESCENDING:
-                return <ArrowDownwardIcon/>;
-            case SortOption.NAME:
-                return <SortByAlphaOutlinedIcon/>;
-            case SortOption.PRICE:
-                return <AttachMoneyOutlinedIcon/>;
-            case SortOption.DISCOUNT:
-                return <LocalOfferOutlinedIcon/>;
-            case SortOption.WEIGHT:
-                return <MonitorWeightOutlinedIcon/>;
-            default:
-                return <></>;
-        }
+    const getIcon = (option: OrderOption | SortOption): ReactElement => {
+        return {
+            [OrderOption.ASCENDING]: <ArrowUpwardIcon/>,
+            [OrderOption.DESCENDING]: <ArrowDownwardIcon/>,
+            [SortOption.NAME]: <SortByAlphaOutlinedIcon/>,
+            [SortOption.PRICE]: <AttachMoneyOutlinedIcon/>,
+            [SortOption.DISCOUNT]: <LocalOfferOutlinedIcon/>,
+            [SortOption.WEIGHT]: <MonitorWeightOutlinedIcon/>,
+        }[option] || <></>;
     };
 
     return (
@@ -95,10 +51,9 @@ export default function ProductsFilter(props: Props) {
                 >
                     <Autocomplete
                         defaultValue={SortOption.NAME}
-                        value={sort}
+                        value={props.sort}
                         onChange={(_, newValue) => {
-                            setSort(newValue as SortOption);
-                            applyFilter();
+                            handleSort(newValue as SortOption);
                         }}
                         disableClearable
                         size={'small'}
@@ -116,12 +71,11 @@ export default function ProductsFilter(props: Props) {
                             />
                         )}
                         options={enumValues(SortOption)}
-                    />
+                    />x
                     <Autocomplete
-                        value={order}
+                        value={props.order}
                         onChange={(_, newValue) => {
-                            setOrder(newValue as OrderOption);
-                            applyFilter();
+                            handleOrder(newValue as OrderOption);
                         }}
                         defaultValue={OrderOption.DESCENDING}
                         disableClearable
