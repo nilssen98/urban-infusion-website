@@ -205,7 +205,7 @@ function Account(props: Props) {
                             >
                                 {
                                     navigation.map(name => (
-                                        name === 'admin' && user?.role !== UserRole.ADMIN
+                                        ['manage orders', 'manage products'].includes(name) && user?.role !== UserRole.ADMIN
                                             ? []
                                             : <Tab
                                                 label={<Typography textTransform={'capitalize'}>{name}</Typography>}

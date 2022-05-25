@@ -37,14 +37,14 @@ export default function Orders(props: Props) {
                                             {order.date}
                                         </Typography>
                                         {
-                                            props.admin ?? (
+                                            props.admin && (
                                                 <Typography flex={1} textAlign={'right'} fontWeight={600}>
                                                     Order ID
                                                 </Typography>
                                             )
                                         }
                                         {
-                                            props.admin ?? (
+                                            props.admin && (
                                                 <Typography flex={1} textAlign={'right'} fontWeight={600}>
                                                     User
                                                 </Typography>
@@ -68,7 +68,7 @@ export default function Orders(props: Props) {
                                             </Typography>
                                         </Stack>
                                         {
-                                            props.admin ?? (
+                                            props.admin && (
                                                 <Stack flex={1} spacing={2}>
                                                     <Typography textAlign={'right'}>
                                                         {order.orderId}
@@ -77,7 +77,7 @@ export default function Orders(props: Props) {
                                             )
                                         }
                                         {
-                                            props.admin ?? (
+                                            props.admin && (
                                                 <Stack flex={1} spacing={2}>
                                                     <Typography textAlign={'right'}>
                                                         {order.user.username}
