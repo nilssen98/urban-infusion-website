@@ -51,11 +51,11 @@ export default function ProductNavigation() {
                                         borderBottom={'2px solid'}
                                         borderColor={isActiveCategory(category) ? theme.palette.secondary.main : 'transparent'}
                                         sx={{
-                                            transition: 'all .2s ease',
+                                            transition: 'all .1s ease',
                                             cursor: 'pointer',
                                             userSelect: 'none',
                                             '&:hover': {
-                                                borderColor: theme.palette.secondary.main,
+                                                borderColor: theme.palette.secondary.dark,
                                             }
                                         }}
                                     >
