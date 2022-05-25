@@ -43,7 +43,7 @@ export default function ProductCard(props: Props) {
                                         justifyContent={'center'}
                                         sx={{cursor: 'pointer'}}
                                     >
-                                        <img src={props.img} style={{width: '100%', height: 175}} alt={''}/>
+                                        <img loading={'lazy'} src={props.img} style={{width: '100%', height: 175}} alt={''}/>
                                     </Stack>
                                 </UnstyledLink>
                                 <Divider flexItem/>
