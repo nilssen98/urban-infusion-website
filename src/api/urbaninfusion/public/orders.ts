@@ -8,3 +8,8 @@ export async function getUserOrders(id: number): Promise<OrderDto[]> {
     const jwt = store.getState().user.jwt;
     return (await axios.get<OrderDto[]>(`${baseUrl}/orders/users/${id}`, { headers: { Authorization: jwt || '' } })).data;
 }
+
+export async function getOrders(): Promise<OrderDto[]> {
+    const jwt = store.getState().user.jwt;
+    return (await axios.get<OrderDto[]>(`${baseUrl}/orders`, { headers: { Authorization: jwt || '' } })).data;
+}

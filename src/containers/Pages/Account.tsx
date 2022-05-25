@@ -35,6 +35,7 @@ import {useChangePassword} from '../../hooks/users/useChangePassword';
 import {isValidPassword} from '../../api/urbaninfusion/public/users';
 import Orders from '../../components/Pages/Account/Orders';
 import ManageOrdersSection from '../../components/Pages/Account/ManageOrdersSection';
+import useOrders from '../../hooks/orders/useOrders';
 
 const navigation = [
     'profile',
@@ -65,16 +66,17 @@ function Account(props: Props) {
     const theme = useTheme();
     const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
     const accountActionsOpen = Boolean(anchorEl);
-    const {isLoading: isLoadingMe, isError, data: user} = useMe();
-    const {isLoading: isLoadingOrders, data: userOrders} = useUserOrders(user?.id);
     const updateUserMutation = useUpdateUser();
     const [success, setSuccess] = useState<boolean>(false);
     const [successMessage, setSuccessMessage] = useState<string>('Successfully updated the information!');
     const [error, setError] = useState<boolean>(false);
     const [errorMessage, setErrorMessage] = useState<string>('Could not update your information!');
+    const {isLoading: isLoadingMe, isError, data: user} = useMe();
+    const {isLoading: isLoadingUserOrders, data: userOrders} = useUserOrders(user?.id);
+    const {isLoading: isLoadingOrders, data: orders} = useOrders();
     const changePasswordMutation = useChangePassword(user!);
 
-    const isLoading = isLoadingMe && isLoadingOrders;
+    const isLoading = isLoadingMe && isLoadingUserOrders && isLoadingOrders;
 
     useEffect(() => {
         setSuccess(updateUserMutation.isSuccess);
@@ -129,7 +131,7 @@ function Account(props: Props) {
             />),
             orders: (<Orders orders={userOrders || []}/>),
             admin: <AdminSection/>,
-            'manage orders': <ManageOrdersSection orders={[]}/>,
+            'manage orders': <ManageOrdersSection orders={orders}/>,
         }[name] || <></>;
     };
 

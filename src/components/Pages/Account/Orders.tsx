@@ -5,9 +5,11 @@ import HourglassBottomOutlinedIcon from '@mui/icons-material/HourglassBottomOutl
 import SendAndArchiveOutlinedIcon from '@mui/icons-material/SendAndArchiveOutlined';
 import SendOutlinedIcon from '@mui/icons-material/SendOutlined';
 import DoneOutlineOutlinedIcon from '@mui/icons-material/DoneOutlineOutlined';
+import {round} from 'lodash-es';
 
 interface Props {
     orders?: OrderDto[];
+    admin?: boolean;
 }
 
 export default function Orders(props: Props) {
@@ -34,6 +36,13 @@ export default function Orders(props: Props) {
                                         <Typography flex={1} fontWeight={600}>
                                             {order.date}
                                         </Typography>
+                                        {
+                                            props.admin ?? (
+                                                <Typography flex={1} textAlign={'right'} fontWeight={600}>
+                                                    User
+                                                </Typography>
+                                            )
+                                        }
                                         <Typography flex={1} textAlign={'right'} fontWeight={600}>
                                             Products
                                         </Typography>
@@ -45,9 +54,21 @@ export default function Orders(props: Props) {
                                     <Stack p={4} direction={'row'}>
                                         <Stack flex={1} alignItems={'center'} direction={'row'} spacing={2}>
                                             {getStatusIcon(order.status)}
-                                            <Typography textTransform={'capitalize'}
-                                                        flex={1}>{order.status.toLowerCase()}</Typography>
+                                            <Typography
+                                                textTransform={'capitalize'}
+                                                flex={1}>
+                                                {order.status.toLowerCase()}
+                                            </Typography>
                                         </Stack>
+                                        {
+                                            props.admin ?? (
+                                                <Stack flex={1} spacing={2}>
+                                                    <Typography textAlign={'right'}>
+                                                        {order.user.username}
+                                                    </Typography>
+                                                </Stack>
+                                            )
+                                        }
                                         <Stack flex={1} spacing={2}>
                                             {
                                                 order.products.map(({product, quantity}) => (
@@ -61,7 +82,7 @@ export default function Orders(props: Props) {
                                             {
                                                 order.products.map(({product, quantity}) => (
                                                     <Typography textAlign={'right'} key={product.id}>
-                                                        ${product.price * quantity}
+                                                        ${round((product.price * quantity), 2)}
                                                     </Typography>
                                                 ))
                                             }

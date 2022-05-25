@@ -3,7 +3,7 @@ import {OrderDto} from '../../../api/urbaninfusion/dto/order-dto';
 import Orders from './Orders';
 
 interface Props {
-    orders: OrderDto[];
+    orders?: OrderDto[];
 }
 
 export default function ManageOrdersSection(props: Props) {
