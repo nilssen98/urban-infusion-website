@@ -166,7 +166,7 @@ function Account(props: Props) {
                     <Stack spacing={8} width={'100%'} maxWidth={'lg'}>
                         <Stack direction={'row'} alignItems={'center'} spacing={4}>
                             <Avatar sx={{height: 64, width: 64, background: stringToColor(user?.username)}}>
-                                <Typography variant={'h4'}>{firstLetterOfUsername(user?.username)}</Typography>
+                                <Typography variant={'h4'}>{user?.username[0]}</Typography>
                             </Avatar>
                             <Stack flex={1}>
                                 <Typography variant={'h5'}>{user?.username}</Typography>

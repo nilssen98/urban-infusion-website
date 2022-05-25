@@ -17,7 +17,7 @@ export default function Orders(props: Props) {
 
     const getStatusIcon = (status: OrderStatus) => {
         return {
-            [OrderStatus.IDLE]: <PendingOutlinedIcon color={'disabled'}/>,
+            [OrderStatus.RECEIVED]: <PendingOutlinedIcon color={'disabled'}/>,
             [OrderStatus.PROCESSING]: <HourglassBottomOutlinedIcon color={'warning'}/>,
             [OrderStatus.SENT]: <LocalShippingOutlinedIcon color={'info'}/>,
             [OrderStatus.DELIVERED]: <DoneOutlineOutlinedIcon color={'success'}/>,

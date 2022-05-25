@@ -2,7 +2,7 @@ import {ProductDto} from './product-dto';
 import {UserDto} from './user-dto';
 
 export enum OrderStatus {
-    IDLE = 'IDLE',
+    RECEIVED = 'RECEIVED',
     PROCESSING = 'PROCESSING',
     SENT = 'SENT',
     DELIVERED = 'DELIVERED',
@@ -25,6 +25,6 @@ export interface OrderDto {
 
 
 export interface OrderUpdateDto {
-    id: number,
-    status: OrderStatus,
+    id: number;
+    status: OrderStatus;
 }
