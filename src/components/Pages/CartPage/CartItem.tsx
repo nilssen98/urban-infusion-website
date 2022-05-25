@@ -19,7 +19,6 @@ export default function CartItem(props: Props) {
                     border: '1px solid blue'
                 }}
             >
-                <PictureBox height={120} image={props.item.image} alt={'Product image'}/>
                 <Typography flex={1}>{props.item.title}</Typography>
                 <Typography flex={1}>{props.item.description}</Typography>
                 <Typography flex={1}>{props.count}</Typography>

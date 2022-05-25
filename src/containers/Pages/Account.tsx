@@ -27,18 +27,20 @@ import MoreHorizOutlinedIcon from '@mui/icons-material/MoreHorizOutlined';
 import LogoutIcon from '@mui/icons-material/Logout';
 import {userSlice} from '../../state/slices/user';
 import ProfileSection from '../../components/Pages/Account/ProfileSection';
-import OrdersSection from '../../components/Pages/Account/OrdersSection';
 import AdminSection from '../../components/Pages/Account/AdminSection';
 import {useUpdateUser} from '../../hooks/users/useUpdateUser';
 import {UserDto, UserRole} from '../../api/urbaninfusion/dto/user-dto';
 import useUserOrders from '../../hooks/orders/useUserOrders';
 import {useChangePassword} from '../../hooks/users/useChangePassword';
 import {isValidPassword} from '../../api/urbaninfusion/public/users';
+import Orders from '../../components/Pages/Account/Orders';
+import ManageOrdersSection from '../../components/Pages/Account/ManageOrdersSection';
 
 const navigation = [
     'profile',
     'orders',
-    'admin'
+    'manage orders',
+    'manage products'
 ];
 
 const mapStateToProps = (state: RootState) => {
@@ -118,23 +120,17 @@ function Account(props: Props) {
     }, [isError, props.jwt]);
 
     const renderSection = (name: string): ReactNode => {
-        switch (name) {
-            case 'profile':
-                return (
-                    <ProfileSection
-                        changePasswordSuccess={changePasswordMutation.isSuccess}
-                        onChangePassword={handleChangePassword}
-                        onUpdateUser={handleUpdateUser}
-                        user={user}
-                    />
-                );
-            case 'orders':
-                return <OrdersSection orders={userOrders || []}/>;
-            case 'admin':
-                return <AdminSection/>;
-            default:
-                return <></>;
-        }
+        return {
+            profile: (<ProfileSection
+                changePasswordSuccess={changePasswordMutation.isSuccess}
+                onChangePassword={handleChangePassword}
+                onUpdateUser={handleUpdateUser}
+                user={user}
+            />),
+            orders: (<Orders orders={userOrders || []}/>),
+            admin: <AdminSection/>,
+            'manage orders': <ManageOrdersSection orders={[]}/>,
+        }[name] || <></>;
     };
 
     const handleAccountActionsClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -199,7 +195,12 @@ function Account(props: Props) {
                             </Stack>
                         </Stack>
                         <Stack>
-                            <Tabs value={currentTab} onChange={(_, newValue) => setCurrentTab(newValue)}>
+                            <Tabs
+                                allowScrollButtonsMobile
+                                variant={'scrollable'}
+                                value={currentTab}
+                                onChange={(_, newValue) => setCurrentTab(newValue)}
+                            >
                                 {
                                     navigation.map(name => (
                                         name === 'admin' && user?.role !== UserRole.ADMIN
