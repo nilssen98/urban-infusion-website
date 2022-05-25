@@ -12,15 +12,9 @@ export default function AccountButton(props: Props) {
     return (
         <>
             <Tooltip arrow title={'Account'}>
-                <IconButton
-                    onClick={() => navigate('/account/')}
-                    sx={{
-                        width: theme.mixins.toolbar.minHeight,
-                        height: theme.mixins.toolbar.minHeight,
-                    }}
-                >
-                    <Avatar sx={{width: 32, height: 32, background: stringToColor(props.option)}}>
-                        {firstLetterOfUsername(props.option)}
+                <IconButton onClick={() => navigate('/account/')}>
+                    <Avatar sx={{width: 32, height: 32, background: stringToColor(props.name)}}>
+                        {props.name[0]}
                     </Avatar>
                 </IconButton>
             </Tooltip>
