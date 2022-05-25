@@ -1,8 +1,6 @@
 import ProductCard from '../../Cards/ProductCard';
 import {ProductDto} from '../../../api/urbaninfusion/dto/product-dto';
-import {Box, Container, Stack, useTheme} from '@mui/material';
-import {range} from 'lodash-es';
-import ProductCardNew from '../../Cards/ProductCardNew';
+import {Stack, useTheme} from '@mui/material';
 import {useNavigate} from 'react-router-dom';
 import {defaultProductImageURL, getProductImageURL} from '../../../utils/productImageUtils';
 
@@ -16,28 +14,24 @@ export function ProductsList(props: Props) {
 
     return (
         <>
-            <Box
-                sx={{overflowY: 'auto'}}
-                py={4}
+            <Stack
+                flexWrap={'wrap'}
+                direction={'row'}
+                gap={4}
+                overflow={'auto'}
             >
-                <Stack
-                    flexWrap={'wrap'}
-                    direction={'row'}
-                    gap={4}
-                >
-                    {
-                        props.products?.map(product =>
-                            <ProductCard
-                                data={product}
-                                key={product.id}
-                                img={product.imageId
-                                    ? getProductImageURL(product.imageId)
-                                    : defaultProductImageURL}
-                            />
-                        )
-                    }
-                </Stack>
-            </Box>
+                {
+                    props.products?.map(product =>
+                        <ProductCard
+                            data={product}
+                            key={product.id}
+                            img={product.imageId
+                                ? getProductImageURL(product.imageId)
+                                : defaultProductImageURL}
+                        />
+                    )
+                }
+            </Stack>
         </>
     );
 }

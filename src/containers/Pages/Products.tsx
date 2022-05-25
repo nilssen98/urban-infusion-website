@@ -1,10 +1,9 @@
-import {Box, Divider, Stack, Typography, useTheme} from '@mui/material';
+import {Divider, Stack, Typography, useTheme} from '@mui/material';
 import {ProductsList} from '../../components/Pages/Products/ProductsList';
 import {useParams} from 'react-router-dom';
 import Page from '../../components/Wrappers/Page';
-import {ProductDto} from '../../api/urbaninfusion/dto/product-dto';
 import useProducts from '../../hooks/products/useProducts';
-import {useEffect, useState} from 'react';
+import {useMemo, useState} from 'react';
 import ProductsFilter from '../../components/Pages/Products/ProductsFilter';
 
 export enum OrderOption {
@@ -21,18 +20,13 @@ export enum SortOption {
 
 export default function Products() {
     const {isLoading, data: products} = useProducts();
-    const [filtered, setFiltered] = useState<ProductDto[]>();
     const theme = useTheme();
     const {id} = useParams();
 
     const [order, setOrder] = useState<OrderOption>(OrderOption.DESCENDING);
     const [sort, setSort] = useState<SortOption>(SortOption.NAME);
 
-    useEffect(() => {
-        applyFilters();
-    }, [products, id, sort, order]);
-
-    const applyFilters = () => {
+    const filtered = useMemo(() => {
         let temp = [...(products || [])];
 
         temp = temp.filter(product =>
@@ -50,8 +44,8 @@ export default function Products() {
             temp = temp.reverse();
         }
 
-        setFiltered(temp);
-    };
+        return temp;
+    }, [products, id, sort, order]);
 
     const onSort = (newValue: SortOption) => {
         setSort(newValue);
@@ -64,15 +58,25 @@ export default function Products() {
     return (
         <>
             <Page isLoading={isLoading}>
-                <Stack direction={'column'} alignItems={'center'}>
-                    <ProductsFilter
-                        sort={sort}
-                        order={order}
-                        onSort={onSort}
-                        onOrder={onOrder}
-                    />
-                    <Divider flexItem/>
-                    <Box width={'100%'} maxWidth={theme.breakpoints.values.lg}>
+                <Stack width={'100%'} alignItems={'center'} px={4}>
+                    <Stack
+                        maxWidth={theme.breakpoints.values.lg}
+                        width={'100%'}
+                        py={4}
+                    >
+                        <ProductsFilter
+                            sort={sort}
+                            order={order}
+                            onSort={onSort}
+                            onOrder={onOrder}
+                        />
+                    </Stack>
+                    <Divider flexItem sx={{width: '100vw', marginLeft: -4}}/>
+                    <Stack
+                        py={4}
+                        maxWidth={theme.breakpoints.values.lg}
+                        width={'100%'}
+                    >
                         {
                             filtered && filtered.length > 0 ? (
                                 <ProductsList products={filtered}/>
@@ -86,7 +90,7 @@ export default function Products() {
                                 </Stack>
                             )
                         }
-                    </Box>
+                    </Stack>
                 </Stack>
             </Page>
         </>
