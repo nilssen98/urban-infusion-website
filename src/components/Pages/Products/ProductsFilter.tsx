@@ -81,7 +81,7 @@ export default function ProductsFilter(props: Props) {
                     getOptionLabel={(option) => capitalize(option)}
                     renderOption={(boxProps, option) => (
                         <Box component={'li'} {...boxProps}>
-                            <Typography flex={1}>{option}</Typography>
+                            <Typography flex={1} textTransform={'capitalize'}>{option}</Typography>
                             {getIcon(option as OrderOption)}
                         </Box>
                     )}
