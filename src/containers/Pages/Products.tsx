@@ -82,7 +82,6 @@ export default function Products() {
                                 <ProductsList products={filtered}/>
                             ) : (
                                 <Stack
-                                    pt={8}
                                     color={theme.palette.text.disabled}
                                     width={'100%'}
                                 >
