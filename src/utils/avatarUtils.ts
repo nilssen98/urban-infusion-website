@@ -1,8 +1,4 @@
 
-export function firstLetterOfUsername(username: string | undefined): string {
-    return username ? username.charAt(0).toUpperCase() : 'A';
-}
-
 export function stringToColor(string: string | undefined): string {
     if (!string) {
         return 'default';

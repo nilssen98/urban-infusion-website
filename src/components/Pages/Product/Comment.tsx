@@ -1,6 +1,6 @@
 import {Avatar, Button, Divider, Stack, Tooltip, Typography} from '@mui/material';
 import {formatDate} from '../../../utils/dateParser';
-import {firstLetterOfUsername, stringToColor} from '../../../utils/avatarUtils';
+import {stringToColor} from '../../../utils/avatarUtils';
 
 interface Props {
     id?: number;
@@ -20,7 +20,7 @@ export default function Comment(props: Props) {
                         <Avatar
                             sx={{bgcolor: `${stringToColor(props.username)}`}}
                         >
-                            {firstLetterOfUsername(props.username)}
+                            {props.username?.[0]}
                         </Avatar>
                     </Tooltip>
                     <Stack direction={'column'}>
