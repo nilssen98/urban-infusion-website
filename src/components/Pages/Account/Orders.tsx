@@ -58,7 +58,7 @@ export default function Orders(props: Props) {
                                         </Typography>
                                     </Stack>
                                     <Divider/>
-                                    <Stack p={4} direction={'row'}>
+                                    <Stack p={4} direction={'row'} alignItems={'center'}>
                                         <Stack flex={1} alignItems={'center'} direction={'row'} spacing={2}>
                                             {getStatusIcon(order.status)}
                                             <Typography
