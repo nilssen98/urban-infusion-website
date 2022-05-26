@@ -1,14 +1,28 @@
 import axios from 'axios';
 import {baseUrl} from './public';
 import {store} from '../../../state/store';
-import {OrderDto} from '../dto/order-dto';
+import {OrderDto, OrderUpdateDto} from '../dto/order-dto';
+
+const jwt = store.getState().user.jwt;
+const authHeaders = {
+    Authorization: jwt || ''
+};
 
 export async function getUserOrders(id: number): Promise<OrderDto[]> {
-    const jwt = store.getState().user.jwt;
-    return (await axios.get<OrderDto[]>(`${baseUrl}/orders/users/${id}`, { headers: { Authorization: jwt || '' } })).data;
+    return (await axios.get<OrderDto[]>(`${baseUrl}/orders/users/${id}`,
+        {headers: authHeaders}
+    )).data;
 }
 
 export async function getOrders(): Promise<OrderDto[]> {
-    const jwt = store.getState().user.jwt;
-    return (await axios.get<OrderDto[]>(`${baseUrl}/orders`, { headers: { Authorization: jwt || '' } })).data;
+    return (await axios.get<OrderDto[]>(`${baseUrl}/orders`,
+        {headers: authHeaders}
+    )).data;
+}
+
+export async function updateOrderStatus(data: OrderUpdateDto): Promise<any> {
+    return (await axios.patch(`${baseUrl}/orders`,
+        {...data},
+        {headers: authHeaders}
+    ));
 }
