@@ -63,7 +63,7 @@ function Testimonial(props: TestimonialProps) {
                     <q>{props.comment}</q>
                 </Typography>
                 <Typography>
-                    {props.option}
+                    {props.name}
                 </Typography>
             </Stack>
         </>
