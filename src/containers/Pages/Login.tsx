@@ -84,7 +84,7 @@ function Login(props: Props) {
                         backgroundSize: 'cover',
                     }}
                     width={'100%'}
-                    height={`calc(100vh - ${theme.mixins.toolbar.minHeight}px)`}
+                    height={`calc(100vh - ${theme.custom.heights.navBar + theme.custom.heights.topBar}px)`}
                     alignItems={'center'}
                     justifyContent={'center'}
                 >
