@@ -4,7 +4,7 @@ import {OrderDto} from '../../api/urbaninfusion/dto/order-dto';
 
 export default function useUserOrders(id?: number): UseQueryResult<OrderDto[]> {
     return useQuery(
-        'user_orders',
+        ['orders', id],
         () => getUserOrders(id!), {
             enabled: id !== undefined
         }

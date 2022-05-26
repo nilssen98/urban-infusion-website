@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {baseUrl} from './public';
 import {store} from '../../../state/store';
-import {OrderDto, OrderUpdateDto} from '../dto/order-dto';
+import {OrderDto, OrderStatusUpdateDto} from '../dto/order-dto';
 
 const jwt = store.getState().user.jwt;
 const authHeaders = {
@@ -20,7 +20,7 @@ export async function getOrders(): Promise<OrderDto[]> {
     )).data;
 }
 
-export async function updateOrderStatus(data: OrderUpdateDto): Promise<any> {
+export async function updateOrderStatus(data: OrderStatusUpdateDto): Promise<any> {
     return (await axios.patch(`${baseUrl}/orders`,
         {...data},
         {headers: authHeaders}

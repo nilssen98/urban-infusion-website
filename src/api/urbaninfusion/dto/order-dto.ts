@@ -25,7 +25,7 @@ export interface OrderDto {
 }
 
 
-export interface OrderUpdateDto {
+export interface OrderStatusUpdateDto {
     id: number;
     status: OrderStatus;
 }
