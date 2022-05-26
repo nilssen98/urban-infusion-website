@@ -1,14 +1,4 @@
-import {
-    Alert,
-    Button,
-    InputAdornment,
-    Paper,
-    Snackbar,
-    Stack,
-    TextField,
-    Typography,
-    useTheme
-} from '@mui/material';
+import {Alert, Button, InputAdornment, Paper, Snackbar, Stack, TextField, Typography, useTheme} from '@mui/material';
 import Page from '../../components/Wrappers/Page';
 import {NavLink, useNavigate} from 'react-router-dom';
 import Background from '../../assets/images/teashop-background.jpg';

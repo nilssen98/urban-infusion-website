@@ -1,5 +1,4 @@
 import {Stack, Typography, useTheme} from '@mui/material';
-import {useNavigate} from 'react-router-dom';
 import Section from '../../Wrappers/Section';
 import StyledButton from '../../StyledButton';
 import BackgroundImage from '../../../assets/images/hero-section.jpg';

@@ -17,7 +17,7 @@ import {
     useTheme
 } from '@mui/material';
 import React, {ReactElement, ReactNode, useEffect, useState} from 'react';
-import {firstLetterOfUsername, stringToColor} from '../../utils/avatarUtils';
+import {stringToColor} from '../../utils/avatarUtils';
 import Page from '../../components/Wrappers/Page';
 import {connect} from 'react-redux';
 import {RootState} from '../../state/store';

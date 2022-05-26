@@ -1,6 +1,6 @@
 import {Avatar, IconButton, Tooltip, useTheme} from '@mui/material';
 import {useNavigate} from 'react-router-dom';
-import {firstLetterOfUsername, stringToColor} from '../../utils/avatarUtils';
+import {stringToColor} from '../../utils/avatarUtils';
 
 interface Props {
     name: string;

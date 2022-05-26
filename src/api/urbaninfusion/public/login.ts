@@ -1,4 +1,3 @@
-import {CategoriesDto} from '../dto/categories-dto';
 import axios from 'axios';
 import {baseUrl} from './public';
 import {LoginFormDto} from '../dto/login-dto';

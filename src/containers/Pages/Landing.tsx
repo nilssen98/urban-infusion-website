@@ -1,4 +1,4 @@
-import {Box, Divider} from '@mui/material';
+import {Box} from '@mui/material';
 import HeroSection from '../../components/Pages/Landing/HeroSection';
 import FeaturesSection from '../../components/Pages/Landing/FeaturesSection';
 import FeaturedProductsSection from '../../components/Pages/Landing/FeaturedProductsSection';

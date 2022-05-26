@@ -1,6 +1,5 @@
 import {Stack, Typography} from '@mui/material';
 import {ProductDto} from '../../../api/urbaninfusion/dto/product-dto';
-import PictureBox from '../../PictureBox';
 
 interface Props {
     item: ProductDto;

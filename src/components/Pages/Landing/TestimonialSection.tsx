@@ -1,8 +1,6 @@
 import {Avatar, Stack, Typography, useTheme} from '@mui/material';
 import Carousel from '../../Carousel';
 import Section from '../../Wrappers/Section';
-import DividerTop from '../../../assets/images/divider-top.svg';
-import DividerBottom from '../../../assets/images/divider-bottom.svg';
 import Divider from '../../../assets/images/divider.svg';
 
 interface TestimonialProps {

@@ -1,4 +1,4 @@
-import {AppBar, Button, Divider, Stack, Toolbar, useTheme} from '@mui/material';
+import {Button, Stack, Toolbar, useTheme} from '@mui/material';
 import Logo from '../../components/Logo';
 import {ReactElement} from 'react';
 import {useNavigate} from 'react-router-dom';

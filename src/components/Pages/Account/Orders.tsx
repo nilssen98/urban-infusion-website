@@ -1,10 +1,6 @@
-import {Paper, Stack, Typography, useTheme} from '@mui/material';
+import {Stack, Typography, useTheme} from '@mui/material';
 import React from 'react';
-import {OrderDto, OrderStatus} from '../../../api/urbaninfusion/dto/order-dto';
-import LocalShippingOutlinedIcon from '@mui/icons-material/LocalShippingOutlined';
-import HourglassBottomOutlinedIcon from '@mui/icons-material/HourglassBottomOutlined';
-import DoneOutlineOutlinedIcon from '@mui/icons-material/DoneOutlineOutlined';
-import PendingOutlinedIcon from '@mui/icons-material/PendingOutlined';
+import {OrderDto} from '../../../api/urbaninfusion/dto/order-dto';
 import Order from './Order';
 
 interface Props {
