@@ -6,6 +6,7 @@ import PendingOutlinedIcon from '@mui/icons-material/PendingOutlined';
 import HourglassBottomOutlinedIcon from '@mui/icons-material/HourglassBottomOutlined';
 import LocalShippingOutlinedIcon from '@mui/icons-material/LocalShippingOutlined';
 import DoneOutlineOutlinedIcon from '@mui/icons-material/DoneOutlineOutlined';
+import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
 
 interface Props {
     order: OrderDto;
@@ -18,9 +19,10 @@ export default function Order(props: Props) {
     const statusIcon = useMemo(() => {
         return {
             [OrderStatus.RECEIVED]: <PendingOutlinedIcon color={'disabled'}/>,
-            [OrderStatus.PROCESSING]: <HourglassBottomOutlinedIcon color={'warning'}/>,
-            [OrderStatus.SENT]: <LocalShippingOutlinedIcon color={'info'}/>,
+            [OrderStatus.PROCESSING]: <HourglassBottomOutlinedIcon color={'info'}/>,
+            [OrderStatus.SENT]: <LocalShippingOutlinedIcon color={'warning'}/>,
             [OrderStatus.DELIVERED]: <DoneOutlineOutlinedIcon color={'success'}/>,
+            [OrderStatus.CANCELED]: <CancelOutlinedIcon color={'error'}/>,
         }[props.order.status] || <></>;
     }, [props.order.status]);
 

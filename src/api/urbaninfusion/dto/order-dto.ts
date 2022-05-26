@@ -6,6 +6,7 @@ export enum OrderStatus {
     PROCESSING = 'PROCESSING',
     SENT = 'SENT',
     DELIVERED = 'DELIVERED',
+    CANCELED = 'CANCELED'
 }
 
 export interface OrderProduct {
