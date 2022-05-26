@@ -31,13 +31,9 @@ export default function Order(props: Props) {
                     <Typography flex={1} fontWeight={600}>
                         {props.order.date}
                     </Typography>
-                    {
-                        props.admin && (
-                            <Typography flex={1} textAlign={'right'} fontWeight={600}>
-                                Order ID
-                            </Typography>
-                        )
-                    }
+                    <Typography flex={1} textAlign={'right'} fontWeight={600}>
+                        Order ID
+                    </Typography>
                     {
                         props.admin && (
                             <Typography flex={1} textAlign={'right'} fontWeight={600}>
@@ -62,15 +58,11 @@ export default function Order(props: Props) {
                             {props.order.status.toLowerCase()}
                         </Typography>
                     </Stack>
-                    {
-                        props.admin && (
-                            <Stack flex={1} spacing={2}>
-                                <Typography textAlign={'right'}>
-                                    {props.order.orderId}
-                                </Typography>
-                            </Stack>
-                        )
-                    }
+                    <Stack flex={1} spacing={2}>
+                        <Typography textAlign={'right'}>
+                            {props.order.orderId}
+                        </Typography>
+                    </Stack>
                     {
                         props.admin && (
                             <Stack flex={1} spacing={2}>
