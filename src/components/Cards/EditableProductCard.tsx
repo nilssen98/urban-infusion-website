@@ -21,6 +21,7 @@ type Props = {
     img?: string;
     onUpdateProduct?: (data: Partial<ProductDto>) => void;
     onDeleteProduct?: (id: number) => void;
+    isLoading?: boolean;
 } & PaperProps;
 
 export default function EditableProductCard(props: Props) {
@@ -174,6 +175,7 @@ export default function EditableProductCard(props: Props) {
                                 startIcon={<DeleteForeverOutlinedIcon/>}
                                 onClick={handleDeleteProduct}
                                 color={'error'}
+                                disabled={props.isLoading}
                             >
                                 Delete
                             </Button>
@@ -181,6 +183,7 @@ export default function EditableProductCard(props: Props) {
                                 variant={'contained'}
                                 onClick={handleUpdateProduct}
                                 startIcon={<SaveOutlinedIcon/>}
+                                disabled={props.isLoading}
                             >
                                 Save
                             </Button>

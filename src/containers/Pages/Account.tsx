@@ -39,6 +39,8 @@ import {OrderStatusUpdateDto} from '../../api/urbaninfusion/dto/order-dto';
 import {useUpdateOrderStatus} from '../../hooks/orders/useUpdateOrderStatus';
 import {ProductsList} from '../../components/Pages/Products/ProductsList';
 import useProducts from '../../hooks/products/useProducts';
+import {useUpdateProduct} from '../../hooks/products/useUpdateProduct';
+import {useDeleteProduct} from '../../hooks/products/useDeleteProduct';
 
 const navigation = [
     'profile',
@@ -78,6 +80,8 @@ function Account(props: Props) {
     const {isLoading: isLoadingUserOrders, data: userOrders} = useUserOrders(user?.id);
     const {isLoading: isLoadingOrders, data: orders} = useOrders();
     const {isLoading: isLoadingProducts, data: products} = useProducts();
+    const updateProductMutation = useUpdateProduct();
+    const deleteProductMutation = useDeleteProduct();
     const changePasswordMutation = useChangePassword(user!);
     const useUpdateOrderStatusMutation = useUpdateOrderStatus();
 
@@ -144,6 +148,9 @@ function Account(props: Props) {
             'manage products': (
                 <ProductsList
                     products={products}
+                    onDeleteProduct={deleteProductMutation.mutate}
+                    onUpdateProduct={updateProductMutation.mutate}
+                    isLoading={deleteProductMutation.isLoading || updateProductMutation.isLoading}
                     admin
                 />
             )

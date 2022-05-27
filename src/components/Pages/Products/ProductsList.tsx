@@ -9,6 +9,7 @@ interface Props {
     admin?: boolean;
     onUpdateProduct?: (data: Partial<ProductDto>) => void;
     onDeleteProduct?: (id: number) => void;
+    isLoading?: boolean;
 }
 
 export function ProductsList(props: Props) {
@@ -25,6 +26,8 @@ export function ProductsList(props: Props) {
                             return props.admin
                                 ? (<EditableProductCard
                                         data={product}
+                                        isLoading={props.isLoading}
+                                        onDeleteProduct={props.onDeleteProduct}
                                         onUpdateProduct={props.onUpdateProduct}
                                         key={product.id}
                                         img={product.imageId
