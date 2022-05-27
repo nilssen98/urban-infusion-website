@@ -41,6 +41,7 @@ import {ProductsList} from '../../components/Pages/Products/ProductsList';
 import useProducts from '../../hooks/products/useProducts';
 import {useUpdateProduct} from '../../hooks/products/useUpdateProduct';
 import {useDeleteProduct} from '../../hooks/products/useDeleteProduct';
+import {useUpdateProductPicture} from '../../hooks/products/useUpdateProductPicture';
 
 const navigation = [
     'profile',
@@ -83,7 +84,8 @@ function Account(props: Props) {
     const updateProductMutation = useUpdateProduct();
     const deleteProductMutation = useDeleteProduct();
     const changePasswordMutation = useChangePassword(user!);
-    const useUpdateOrderStatusMutation = useUpdateOrderStatus();
+    const updateOrderStatusMutation = useUpdateOrderStatus();
+    const updateProductPictureMutation = useUpdateProductPicture();
 
     const isLoading = isLoadingMe || isLoadingUserOrders || isLoadingOrders || isLoadingProducts;
 
@@ -150,7 +152,8 @@ function Account(props: Props) {
                     products={products}
                     onDeleteProduct={deleteProductMutation.mutate}
                     onUpdateProduct={updateProductMutation.mutate}
-                    isLoading={deleteProductMutation.isLoading || updateProductMutation.isLoading}
+                    onUpdateProductPicture={updateProductPictureMutation.mutate}
+                    isLoading={deleteProductMutation.isLoading || updateProductMutation.isLoading || updateProductPictureMutation.isLoading}
                     admin
                 />
             )
@@ -166,7 +169,7 @@ function Account(props: Props) {
     };
 
     const onOrderStatusChange = (newOrder: OrderStatusUpdateDto) => {
-        useUpdateOrderStatusMutation.mutate(newOrder);
+        updateOrderStatusMutation.mutate(newOrder);
     };
 
     return (

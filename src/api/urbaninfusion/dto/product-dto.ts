@@ -1,5 +1,4 @@
 import {CommentDto} from './comment-dto';
-import {Category} from './categories-dto';
 
 export interface ProductDto {
     id: number;
@@ -11,4 +10,9 @@ export interface ProductDto {
     weight: string;
     comments: CommentDto[];
     category: string;
+}
+
+export interface UpdateProductPictureDto {
+    data: any;
+    id: number;
 }

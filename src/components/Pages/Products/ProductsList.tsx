@@ -1,5 +1,5 @@
 import ProductCard from '../../Cards/ProductCard';
-import {ProductDto} from '../../../api/urbaninfusion/dto/product-dto';
+import {ProductDto, UpdateProductPictureDto} from '../../../api/urbaninfusion/dto/product-dto';
 import {Stack} from '@mui/material';
 import {defaultProductImageURL, getProductImageURL} from '../../../utils/productImageUtils';
 import EditableProductCard from '../../Cards/EditableProductCard';
@@ -9,6 +9,7 @@ interface Props {
     admin?: boolean;
     onUpdateProduct?: (data: Partial<ProductDto>) => void;
     onDeleteProduct?: (id: number) => void;
+    onUpdateProductPicture?: (data: UpdateProductPictureDto) => void;
     isLoading?: boolean;
 }
 
@@ -29,6 +30,7 @@ export function ProductsList(props: Props) {
                                         isLoading={props.isLoading}
                                         onDeleteProduct={props.onDeleteProduct}
                                         onUpdateProduct={props.onUpdateProduct}
+                                        onUpdateProductPicture={props.onUpdateProductPicture}
                                         key={product.id}
                                         img={product.imageId
                                             ? getProductImageURL(product.imageId)

@@ -10,7 +10,7 @@ import {
     useTheme
 } from '@mui/material';
 import {capitalize, omit, toNumber} from 'lodash-es';
-import {ProductDto} from '../../api/urbaninfusion/dto/product-dto';
+import {ProductDto, UpdateProductPictureDto} from '../../api/urbaninfusion/dto/product-dto';
 import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
 import AddPhotoAlternateOutlinedIcon from '@mui/icons-material/AddPhotoAlternateOutlined';
 import {useEffect, useState} from 'react';
@@ -21,6 +21,7 @@ type Props = {
     img?: string;
     onUpdateProduct?: (data: Partial<ProductDto>) => void;
     onDeleteProduct?: (id: number) => void;
+    onUpdateProductPicture?: (data: UpdateProductPictureDto) => void;
     isLoading?: boolean;
 } & PaperProps;
 
@@ -48,6 +49,7 @@ export default function EditableProductCard(props: Props) {
     const handleUpdateProduct = () => {
         if (props.onUpdateProduct) {
             props.onUpdateProduct({
+                id: props.data.id,
                 title,
                 description,
                 price,
@@ -61,6 +63,15 @@ export default function EditableProductCard(props: Props) {
     const handleDeleteProduct = () => {
         if (props.onDeleteProduct) {
             props.onDeleteProduct(props.data.id);
+        }
+    };
+
+    const handleUpdateProductPicture = () => {
+        if (props.onUpdateProductPicture) {
+            props.onUpdateProductPicture({
+                id: props.data.id,
+                data: undefined,
+            });
         }
     };
 
@@ -90,6 +101,8 @@ export default function EditableProductCard(props: Props) {
                             alt={''}
                         />
                         <IconButton
+                            disabled={props.isLoading}
+                            onClick={handleUpdateProductPicture}
                             sx={{
                                 position: 'absolute',
                                 top: '75%',
