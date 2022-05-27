@@ -16,7 +16,7 @@ type Props = {
 } & PaperProps;
 
 export default function EditableProductCard(props: Props) {
-    const paperProps = omit(props, ['data']);
+    const paperProps = omit(props, ['data', 'img', 'onUpdateProduct', 'onDeleteProduct', 'onUpdateProductPicture', 'isLoading']);
 
     const [title, setTitle] = useState<string>('');
     const [description, setDescription] = useState<string>('');
