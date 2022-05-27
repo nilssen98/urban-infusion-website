@@ -34,7 +34,6 @@ import useUserOrders from '../../hooks/orders/useUserOrders';
 import {useChangePassword} from '../../hooks/users/useChangePassword';
 import {isValidPassword} from '../../api/urbaninfusion/public/users';
 import Orders from '../../components/Pages/Account/Orders';
-import ManageOrdersSection from '../../components/Pages/Account/ManageOrdersSection';
 import useOrders from '../../hooks/orders/useOrders';
 import {OrderStatusUpdateDto} from '../../api/urbaninfusion/dto/order-dto';
 import {useUpdateOrderStatus} from '../../hooks/orders/useUpdateOrderStatus';
@@ -134,7 +133,11 @@ function Account(props: Props) {
             />),
             orders: (<Orders orders={userOrders || []}/>),
             admin: <AdminSection/>,
-            'manage orders': <ManageOrdersSection orders={orders} onChangeStatus={onOrderStatusChange}/>,
+            'manage orders': (<Orders
+                admin
+                orders={orders}
+                onChangeStatus={onOrderStatusChange}
+            />),
         }[name] || <></>;
     };
 
