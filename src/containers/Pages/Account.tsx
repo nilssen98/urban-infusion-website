@@ -36,6 +36,8 @@ import {isValidPassword} from '../../api/urbaninfusion/public/users';
 import Orders from '../../components/Pages/Account/Orders';
 import ManageOrdersSection from '../../components/Pages/Account/ManageOrdersSection';
 import useOrders from '../../hooks/orders/useOrders';
+import {OrderStatusUpdateDto} from '../../api/urbaninfusion/dto/order-dto';
+import {useUpdateOrderStatus} from '../../hooks/orders/useUpdateOrderStatus';
 
 const navigation = [
     'profile',
@@ -75,8 +77,9 @@ function Account(props: Props) {
     const {isLoading: isLoadingUserOrders, data: userOrders} = useUserOrders(user?.id);
     const {isLoading: isLoadingOrders, data: orders} = useOrders();
     const changePasswordMutation = useChangePassword(user!);
+    const useUpdateOrderStatusMutation = useUpdateOrderStatus();
 
-    const isLoading = isLoadingMe && isLoadingUserOrders && isLoadingOrders;
+    const isLoading = isLoadingMe || isLoadingUserOrders || isLoadingOrders;
 
     useEffect(() => {
         setSuccess(updateUserMutation.isSuccess);
@@ -131,7 +134,7 @@ function Account(props: Props) {
             />),
             orders: (<Orders orders={userOrders || []}/>),
             admin: <AdminSection/>,
-            'manage orders': <ManageOrdersSection orders={orders}/>,
+            'manage orders': <ManageOrdersSection orders={orders} onChangeStatus={onOrderStatusChange}/>,
         }[name] || <></>;
     };
 
@@ -141,6 +144,10 @@ function Account(props: Props) {
 
     const handleAccountActionsClose = () => {
         setAnchorEl(null);
+    };
+
+    const onOrderStatusChange = (newOrder: OrderStatusUpdateDto) => {
+        useUpdateOrderStatusMutation.mutate(newOrder);
     };
 
     return (

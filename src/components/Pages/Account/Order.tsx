@@ -68,7 +68,6 @@ export default function Order(props: Props) {
                             ? (
                                 <Stack flex={1}>
                                     <TextField
-                                        disabled={props.loading}
                                         select
                                         value={props.order.status}
                                         onChange={handleChangeOrderStatus}
