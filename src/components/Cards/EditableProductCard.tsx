@@ -1,14 +1,4 @@
-import {
-    Button,
-    Divider,
-    IconButton,
-    InputAdornment,
-    Paper,
-    PaperProps,
-    Stack,
-    TextField,
-    useTheme
-} from '@mui/material';
+import {Button, Divider, InputAdornment, Paper, PaperProps, Stack, TextField, useTheme} from '@mui/material';
 import {capitalize, omit, toNumber} from 'lodash-es';
 import {ProductDto, UpdateProductPictureDto} from '../../api/urbaninfusion/dto/product-dto';
 import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
@@ -37,6 +27,7 @@ export default function EditableProductCard(props: Props) {
 
     const theme = useTheme();
 
+
     useEffect(() => {
         setTitle(props.data.title);
         setDescription(props.data.description);
@@ -49,7 +40,7 @@ export default function EditableProductCard(props: Props) {
     const handleUpdateProduct = () => {
         if (props.onUpdateProduct) {
             props.onUpdateProduct({
-                id: props.data.id,
+                id: props.data.imageId || -1,
                 title,
                 description,
                 price,
@@ -66,11 +57,11 @@ export default function EditableProductCard(props: Props) {
         }
     };
 
-    const handleUpdateProductPicture = () => {
+    const handleUpdateProductPicture = (event: any) => {
         if (props.onUpdateProductPicture) {
             props.onUpdateProductPicture({
                 id: props.data.id,
-                data: undefined,
+                file: event.target.files[0]
             });
         }
     };
@@ -80,7 +71,6 @@ export default function EditableProductCard(props: Props) {
             <Paper
                 variant={'outlined'}
                 {...paperProps}
-                sx={{width: '32.445%'}}
             >
                 <Stack
                     textAlign={'center'}
@@ -100,17 +90,36 @@ export default function EditableProductCard(props: Props) {
                             style={{width: 175, height: 175}}
                             alt={''}
                         />
-                        <IconButton
-                            disabled={props.isLoading}
-                            onClick={handleUpdateProductPicture}
-                            sx={{
+                        <Stack
+                            style={{
                                 position: 'absolute',
-                                top: '75%',
+                                top: '80%',
                                 left: '85%',
                             }}
                         >
-                            <AddPhotoAlternateOutlinedIcon/>
-                        </IconButton>
+                            <Stack alignItems={'center'} justifyContent={'center'}>
+                                <label>
+                                    <input
+                                        hidden
+                                        style={{
+                                            position: 'absolute',
+                                        }}
+                                        type={'file'}
+                                        multiple={false}
+                                        accept={'image/*'}
+                                        onChange={handleUpdateProductPicture}
+                                    />
+                                    <AddPhotoAlternateOutlinedIcon
+                                        style={{
+                                            height: 32,
+                                            width: 32,
+                                            cursor: 'pointer',
+                                            color: theme.palette.primary.main
+                                        }}
+                                    />
+                                </label>
+                            </Stack>
+                        </Stack>
                     </Stack>
                     <Divider flexItem/>
                     <Stack flex={1} p={4} spacing={4} alignItems={'start'} width={'100%'}>
@@ -205,5 +214,6 @@ export default function EditableProductCard(props: Props) {
                 </Stack>
             </Paper>
         </>
-    );
+    )
+        ;
 }

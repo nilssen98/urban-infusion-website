@@ -33,7 +33,7 @@ export function ProductsList(props: Props) {
                                         onUpdateProductPicture={props.onUpdateProductPicture}
                                         key={product.id}
                                         img={product.imageId
-                                            ? getProductImageURL(product.imageId)
+                                            ? `${getProductImageURL(product.imageId)}#${Math.random()}`
                                             : defaultProductImageURL}
                                     />
                                 )
@@ -41,7 +41,7 @@ export function ProductsList(props: Props) {
                                     data={product}
                                     key={product.id}
                                     img={product.imageId
-                                        ? getProductImageURL(product.imageId)
+                                        ? `${getProductImageURL(product.imageId)}#${Math.random()}`
                                         : defaultProductImageURL}
                                 />);
                         }

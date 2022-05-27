@@ -4,7 +4,7 @@ import {getProducts} from '../../api/urbaninfusion/public/products';
 
 export default function useProducts(): UseQueryResult<ProductDto[]> {
     return useQuery(
-        'products',
+        ['products'],
         () => getProducts(), {
             retry: 0,
         }

@@ -13,6 +13,6 @@ export interface ProductDto {
 }
 
 export interface UpdateProductPictureDto {
-    data: any;
+    file: any;
     id: number;
 }

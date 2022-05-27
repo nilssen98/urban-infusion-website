@@ -28,8 +28,11 @@ export async function deleteProduct(id: number): Promise<any> {
 
 export async function updateProductPicture(data: UpdateProductPictureDto): Promise<any> {
     const jwt = store.getState().user.jwt || '';
+    console.log(data.file);
+    const formData = new FormData();
+    formData.append('data', data.file);
     return (await axios.post(`${baseUrl}/product-images/${data.id}`,
-        {data: data.data},
-        {headers: {Authorization: jwt}}
+        formData,
+        {headers: {Authorization: jwt, 'Content-Type': 'Multipart/form-data'}}
     ));
 }
