@@ -142,7 +142,10 @@ function Account(props: Props) {
                 onChangeStatus={onOrderStatusChange}
             />),
             'manage products': (
-                <ProductsList products={products} admin/>
+                <ProductsList
+                    products={products}
+                    admin
+                />
             )
         }[name] || <></>;
     };
