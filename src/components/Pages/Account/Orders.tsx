@@ -1,11 +1,12 @@
 import {Stack, Typography, useTheme} from '@mui/material';
 import React from 'react';
-import {OrderDto} from '../../../api/urbaninfusion/dto/order-dto';
+import {OrderDto, OrderStatus, OrderStatusUpdateDto} from '../../../api/urbaninfusion/dto/order-dto';
 import Order from './Order';
 
 interface Props {
     orders?: OrderDto[];
     admin?: boolean;
+    onChangeStatus?: (newOrder: OrderStatusUpdateDto) => void;
 }
 
 export default function Orders(props: Props) {
@@ -17,7 +18,12 @@ export default function Orders(props: Props) {
                 props.orders && props.orders.length > 0
                     ? (
                         props.orders?.map(order => (
-                                <Order key={order.orderId} order={order} admin={props.admin}/>
+                            <Order
+                                key={order.orderId}
+                                order={order}
+                                admin={props.admin}
+                                onChangeStatus={props.onChangeStatus}
+                            />
                         )))
                     : (
                         <Stack

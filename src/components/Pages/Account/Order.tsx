@@ -1,30 +1,41 @@
-import {OrderDto, OrderStatus} from '../../../api/urbaninfusion/dto/order-dto';
-import {Divider, Paper, Stack, Typography, useTheme} from '@mui/material';
-import {round} from 'lodash-es';
-import React, {useMemo} from 'react';
+import {OrderDto, OrderStatus, OrderStatusUpdateDto} from '../../../api/urbaninfusion/dto/order-dto';
+import {Divider, MenuItem, Paper, Stack, TextField, Typography, useTheme} from '@mui/material';
+import {capitalize, round} from 'lodash-es';
+import React, {ChangeEvent} from 'react';
 import PendingOutlinedIcon from '@mui/icons-material/PendingOutlined';
 import HourglassBottomOutlinedIcon from '@mui/icons-material/HourglassBottomOutlined';
 import LocalShippingOutlinedIcon from '@mui/icons-material/LocalShippingOutlined';
 import DoneOutlineOutlinedIcon from '@mui/icons-material/DoneOutlineOutlined';
 import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
+import {enumValues} from '../../../utils/utils';
 
 interface Props {
     order: OrderDto;
     admin?: boolean;
+    onChangeStatus?: (newOrder: OrderStatusUpdateDto) => void;
 }
 
 export default function Order(props: Props) {
     const theme = useTheme();
 
-    const statusIcon = useMemo(() => {
+    const getStatusIcon = (status: OrderStatus) => {
         return {
             [OrderStatus.RECEIVED]: <PendingOutlinedIcon color={'disabled'}/>,
             [OrderStatus.PROCESSING]: <HourglassBottomOutlinedIcon color={'info'}/>,
             [OrderStatus.SENT]: <LocalShippingOutlinedIcon color={'warning'}/>,
             [OrderStatus.DELIVERED]: <DoneOutlineOutlinedIcon color={'success'}/>,
             [OrderStatus.CANCELED]: <CancelOutlinedIcon color={'error'}/>,
-        }[props.order.status] || <></>;
-    }, [props.order.status]);
+        }[status] || <></>;
+    };
+
+    const handleChangeOrderStatus = (event: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+        if (props.onChangeStatus) {
+            props.onChangeStatus({
+                id: props.order.orderId,
+                status: event.target.value as OrderStatus
+            });
+        }
+    };
 
     return (
         <>
@@ -52,14 +63,38 @@ export default function Order(props: Props) {
                 </Stack>
                 <Divider/>
                 <Stack p={4} direction={'row'} alignItems={'center'}>
-                    <Stack flex={1} alignItems={'center'} direction={'row'} spacing={2}>
-                        {statusIcon}
-                        <Typography
-                            textTransform={'capitalize'}
-                            flex={1}>
-                            {props.order.status.toLowerCase()}
-                        </Typography>
-                    </Stack>
+                    {
+                        props.admin && props.onChangeStatus
+                            ? (
+                                <Stack flex={1}>
+                                    <TextField
+                                        disabled={props.loading}
+                                        select
+                                        value={props.order.status}
+                                        onChange={handleChangeOrderStatus}
+                                    >
+                                        {
+                                            enumValues(OrderStatus).map(option => (
+                                                <MenuItem key={option} value={option}>
+                                                    <Stack direction={'row'} spacing={2}>
+                                                        {getStatusIcon(option as OrderStatus)}
+                                                        <Typography>{capitalize(option)}</Typography>
+                                                    </Stack>
+                                                </MenuItem>
+                                            ))
+                                        }
+                                    </TextField>
+                                </Stack>
+                            )
+                            : (
+                                <Stack flex={1} alignItems={'center'} direction={'row'} spacing={2}>
+                                    {getStatusIcon(props.order.status)}
+                                    <Typography textTransform={'capitalize'} flex={1}>
+                                        {props.order.status.toLowerCase()}
+                                    </Typography>
+                                </Stack>
+                            )
+                    }
                     <Stack flex={1} spacing={2}>
                         <Typography textAlign={'right'}>
                             {props.order.orderId}
