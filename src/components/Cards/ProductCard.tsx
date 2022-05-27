@@ -8,10 +8,6 @@ type Props = {
     img?: string;
 } & PaperProps;
 
-ProductCard.defaultProps = {
-    title: '',
-};
-
 export default function ProductCard(props: Props) {
     const paperProps = omit(props, ['data']);
 

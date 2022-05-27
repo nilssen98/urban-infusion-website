@@ -10,5 +10,5 @@ export interface ProductDto {
     description: string;
     weight: string;
     comments: CommentDto[];
-    category: Category;
+    category: string;
 }

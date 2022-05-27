@@ -37,6 +37,8 @@ import Orders from '../../components/Pages/Account/Orders';
 import useOrders from '../../hooks/orders/useOrders';
 import {OrderStatusUpdateDto} from '../../api/urbaninfusion/dto/order-dto';
 import {useUpdateOrderStatus} from '../../hooks/orders/useUpdateOrderStatus';
+import {ProductsList} from '../../components/Pages/Products/ProductsList';
+import useProducts from '../../hooks/products/useProducts';
 
 const navigation = [
     'profile',
@@ -75,10 +77,11 @@ function Account(props: Props) {
     const {isLoading: isLoadingMe, isError, data: user} = useMe();
     const {isLoading: isLoadingUserOrders, data: userOrders} = useUserOrders(user?.id);
     const {isLoading: isLoadingOrders, data: orders} = useOrders();
+    const {isLoading: isLoadingProducts, data: products} = useProducts();
     const changePasswordMutation = useChangePassword(user!);
     const useUpdateOrderStatusMutation = useUpdateOrderStatus();
 
-    const isLoading = isLoadingMe || isLoadingUserOrders || isLoadingOrders;
+    const isLoading = isLoadingMe || isLoadingUserOrders || isLoadingOrders || isLoadingProducts;
 
     useEffect(() => {
         setSuccess(updateUserMutation.isSuccess);
@@ -138,6 +141,9 @@ function Account(props: Props) {
                 orders={orders}
                 onChangeStatus={onOrderStatusChange}
             />),
+            'manage products': (
+                <ProductsList products={products} admin/>
+            )
         }[name] || <></>;
     };
 

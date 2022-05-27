@@ -1,17 +1,16 @@
 import ProductCard from '../../Cards/ProductCard';
 import {ProductDto} from '../../../api/urbaninfusion/dto/product-dto';
-import {Stack, useTheme} from '@mui/material';
-import {useNavigate} from 'react-router-dom';
+import {Stack} from '@mui/material';
 import {defaultProductImageURL, getProductImageURL} from '../../../utils/productImageUtils';
+import EditableProductCard from '../../Cards/EditableProductCard';
 
 interface Props {
     products?: ProductDto[];
+    admin?: boolean;
+    onUpdateProduct?: (data: Partial<ProductDto>) => void;
 }
 
 export function ProductsList(props: Props) {
-    const theme = useTheme();
-    const navigate = useNavigate();
-
     return (
         <>
             <Stack
@@ -21,14 +20,25 @@ export function ProductsList(props: Props) {
                 overflow={'auto'}
             >
                 {
-                    props.products?.map(product =>
-                        <ProductCard
-                            data={product}
-                            key={product.id}
-                            img={product.imageId
-                                ? getProductImageURL(product.imageId)
-                                : defaultProductImageURL}
-                        />
+                    props.products?.map(product => {
+                            return props.admin
+                                ? (<EditableProductCard
+                                        data={product}
+                                        onUpdateProduct={props.onUpdateProduct}
+                                        key={product.id}
+                                        img={product.imageId
+                                            ? getProductImageURL(product.imageId)
+                                            : defaultProductImageURL}
+                                    />
+                                )
+                                : (<ProductCard
+                                    data={product}
+                                    key={product.id}
+                                    img={product.imageId
+                                        ? getProductImageURL(product.imageId)
+                                        : defaultProductImageURL}
+                                />);
+                        }
                     )
                 }
             </Stack>
