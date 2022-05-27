@@ -8,6 +8,7 @@ interface Props {
     products?: ProductDto[];
     admin?: boolean;
     onUpdateProduct?: (data: Partial<ProductDto>) => void;
+    onDeleteProduct?: (id: number) => void;
 }
 
 export function ProductsList(props: Props) {

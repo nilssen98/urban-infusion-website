@@ -58,7 +58,9 @@ export default function EditableProductCard(props: Props) {
     };
 
     const handleDeleteProduct = () => {
-
+        if (props.onDeleteProduct) {
+            props.onDeleteProduct(props.data.id);
+        }
     };
 
     return (
@@ -66,9 +68,7 @@ export default function EditableProductCard(props: Props) {
             <Paper
                 variant={'outlined'}
                 {...paperProps}
-                sx={{
-                    width: '32%',
-                }}
+                sx={{width: '32.445%'}}
             >
                 <Stack
                     textAlign={'center'}
