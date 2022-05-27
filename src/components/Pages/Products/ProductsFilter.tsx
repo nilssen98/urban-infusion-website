@@ -1,4 +1,4 @@
-import {Autocomplete, Box, Stack, TextField, Typography, useTheme} from '@mui/material';
+import {MenuItem, Stack, TextField, Typography, useTheme} from '@mui/material';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import AttachMoneyOutlinedIcon from '@mui/icons-material/AttachMoneyOutlined';
@@ -8,7 +8,6 @@ import LocalOfferOutlinedIcon from '@mui/icons-material/LocalOfferOutlined';
 import {ReactElement} from 'react';
 import {enumValues} from '../../../utils/utils';
 import {OrderOption, SortOption} from '../../../containers/Pages/Products';
-import {capitalize} from 'lodash-es';
 
 interface Props {
     sort: SortOption;
@@ -46,54 +45,48 @@ export default function ProductsFilter(props: Props) {
                 spacing={4}
                 alignItems={'start'}
             >
-                <Autocomplete
+                <TextField
+                    select
+                    label={'Sort by'}
                     defaultValue={SortOption.NAME}
                     value={props.sort}
-                    onChange={(_, newValue) => {
-                        handleSort(newValue as SortOption);
+                    onChange={(event) => {
+                        handleSort(event.target.value as SortOption);
                     }}
-                    disableClearable
                     size={'small'}
-                    getOptionLabel={(option) => capitalize(option)}
-                    renderOption={(boxProps, option) => (
-                        <Box component={'li'} {...boxProps}>
-                            <Typography flex={1} textTransform={'capitalize'}>{option}</Typography>
-                            {getIcon(option as SortOption)}
-                        </Box>
-                    )}
-                    renderInput={(params) => (
-                        <TextField
-                            {...params}
-                            sx={{width: 175}}
-                            label={'Sort by'}
-                        />
-                    )}
-                    options={enumValues(SortOption)}
-                />
-                <Autocomplete
-                    value={props.order}
-                    onChange={(_, newValue) => {
-                        handleOrder(newValue as OrderOption);
-                    }}
+                >
+                    {
+                        enumValues(SortOption).map(option => (
+                            <MenuItem key={option} value={option}>
+                                <Stack spacing={4} direction={'row'}>
+                                    {getIcon(option as SortOption)}
+                                    <Typography flex={1} textTransform={'capitalize'}>{option}</Typography>
+                                </Stack>
+                            </MenuItem>
+                        ))
+                    }
+                </TextField>
+                <TextField
+                    select
+                    label={'Order by'}
                     defaultValue={OrderOption.DESCENDING}
-                    disableClearable
+                    value={props.order}
+                    onChange={(event) => {
+                        handleOrder(event.target.value as OrderOption);
+                    }}
                     size={'small'}
-                    getOptionLabel={(option) => capitalize(option)}
-                    renderOption={(boxProps, option) => (
-                        <Box component={'li'} {...boxProps}>
-                            <Typography flex={1} textTransform={'capitalize'}>{option}</Typography>
-                            {getIcon(option as OrderOption)}
-                        </Box>
-                    )}
-                    renderInput={(params) => (
-                        <TextField
-                            {...params}
-                            sx={{width: 175}}
-                            label={'Order by'}
-                        />
-                    )}
-                    options={enumValues(OrderOption)}
-                />
+                >
+                    {
+                        enumValues(OrderOption).map(option => (
+                            <MenuItem key={option} value={option}>
+                                <Stack spacing={4} direction={'row'}>
+                                    {getIcon(option as OrderOption)}
+                                    <Typography flex={1} textTransform={'capitalize'}>{option}</Typography>
+                                </Stack>
+                            </MenuItem>
+                        ))
+                    }
+                </TextField>
             </Stack>
         </>
     );
