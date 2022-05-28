@@ -1,10 +1,13 @@
-import {Button, Divider, InputAdornment, Paper, PaperProps, Stack, TextField, useTheme} from '@mui/material';
+import {Button, Divider, InputBase, Paper, PaperProps, Stack, Typography, useTheme} from '@mui/material';
 import {capitalize, omit} from 'lodash-es';
 import {ProductDto, UpdateProductPictureDto} from '../../api/urbaninfusion/dto/product-dto';
 import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
 import AddPhotoAlternateOutlinedIcon from '@mui/icons-material/AddPhotoAlternateOutlined';
-import {useState} from 'react';
+import {ReactNode, useState} from 'react';
 import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
+import {InputBaseProps} from '@mui/material/InputBase/InputBase';
+import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
+import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 
 type Props = {
     data: ProductDto;
@@ -18,12 +21,14 @@ type Props = {
 export default function EditableProductCard(props: Props) {
     const paperProps = omit(props, ['data', 'img', 'onUpdateProduct', 'onDeleteProduct', 'onUpdateProductPicture', 'isLoading']);
 
-    const [title, setTitle] = useState<string>(props.data.title);
-    const [description, setDescription] = useState<string>(props.data.description);
-    const [price, setPrice] = useState<number>(props.data.price);
-    const [discount, setDiscount] = useState<number>(props.data.discount * 100);
-    const [weight, setWeight] = useState<number>(Number(props.data.weight.replace('oz', '')));
-    const [category, setCategory] = useState<string>(capitalize(props.data.category));
+    const [title, setTitle] = useState<string>(props.data.title || '');
+    const [description, setDescription] = useState<string>(props.data.description || '');
+    const [price, setPrice] = useState<number>(props.data.price || 0);
+    const [discount, setDiscount] = useState<number>(props.data.discount * 100 || 0);
+    const [weight, setWeight] = useState<number>(Number(props.data.weight.replace('oz', '')) || 0);
+    const [category, setCategory] = useState<string>(capitalize(props.data.category) || '');
+
+    const [editing, setEditing] = useState<boolean>(false);
 
     const theme = useTheme();
 
@@ -55,6 +60,7 @@ export default function EditableProductCard(props: Props) {
             <Paper
                 variant={'outlined'}
                 {...paperProps}
+                sx={{width: 387.5}}
             >
                 <Stack
                     textAlign={'center'}
@@ -79,7 +85,7 @@ export default function EditableProductCard(props: Props) {
                             style={{
                                 position: 'absolute',
                                 top: '80%',
-                                left: '85%',
+                                left: '90%',
                             }}
                         >
                             <Stack alignItems={'center'} justifyContent={'center'}>
@@ -107,98 +113,156 @@ export default function EditableProductCard(props: Props) {
                         </Stack>
                     </Stack>
                     <Divider flexItem/>
-                    <Stack flex={1} p={4} spacing={4} alignItems={'start'} width={'100%'}>
-                        <TextField
-                            fullWidth
+                    <Stack flex={1} alignItems={'start'} width={'100%'}>
+                        <Input
+                            editing={editing}
                             value={title}
                             onChange={(e) =>
                                 setTitle(e.target.value)
                             }
-                            label={'Title'}
                             size={'small'}
+                            label={'title'}
                         />
-                        <TextField
-                            fullWidth
+                        <Divider flexItem/>
+                        <Input
+                            editing={editing}
                             multiline
-                            rows={4}
                             value={description}
                             onChange={(e) =>
                                 setDescription(e.target.value)
                             }
                             type={'number'}
-                            label={'Description'}
                             size={'small'}
+                            label={'description'}
                         />
-                        <TextField
-                            fullWidth
+                        <Divider flexItem/>
+                        <Input
+                            editing={editing}
                             value={price}
                             type={'number'}
                             onChange={(e) =>
                                 setPrice(Number(e.target.value))
                             }
-                            label={'Price'}
                             size={'small'}
-                            InputProps={{
-                                startAdornment: <InputAdornment position={'start'}>$</InputAdornment>,
-                            }}
+                            adornment={'$'}
+                            label={'price'}
                         />
-                        <TextField
-                            fullWidth
+                        <Divider flexItem/>
+                        <Input
+                            editing={editing}
                             value={discount}
                             onChange={(e) =>
                                 setDiscount(Number(e.target.value))
                             }
                             type={'number'}
-                            label={'Discount'}
                             size={'small'}
-                            InputProps={{
-                                startAdornment: <InputAdornment position={'start'}>%</InputAdornment>,
-                            }}
+                            adornment={'%'}
+                            label={'discount'}
                         />
-                        <TextField
-                            fullWidth
+                        <Divider flexItem/>
+                        <Input
+                            editing={editing}
                             value={weight}
                             onChange={(e) =>
                                 setWeight(Number(e.target.value))
                             }
                             type={'number'}
-                            label={'Weight'}
                             size={'small'}
-                            InputProps={{
-                                startAdornment: <InputAdornment position={'start'}>oz</InputAdornment>,
-                            }}
+                            adornment={'oz'}
+                            label={'weight'}
                         />
-                        <TextField
-                            fullWidth
+                        <Divider flexItem/>
+                        <Input
+                            editing={editing}
                             value={category}
                             onChange={(e) =>
                                 setCategory(e.target.value)
                             }
-                            label={'Category'}
                             size={'small'}
+                            label={'category'}
                         />
-                        <Stack alignSelf={'end'} direction={'row'} spacing={2}>
+                        <Divider flexItem/>
+                        <Stack alignSelf={'end'} direction={'row'} spacing={2} p={2}>
                             <Button
-                                startIcon={<DeleteForeverOutlinedIcon/>}
-                                onClick={handleDeleteProduct}
+                                startIcon={editing
+                                    ? <CancelOutlinedIcon/>
+                                    : <DeleteForeverOutlinedIcon/>
+                                }
+                                onClick={editing
+                                    ? () => setEditing(false)
+                                    : handleDeleteProduct
+                                }
                                 color={'error'}
                                 disabled={props.isLoading}
                             >
-                                Delete
+                                {editing ? 'Cancel' : 'Delete'}
                             </Button>
                             <Button
                                 variant={'contained'}
-                                onClick={handleUpdateProduct}
-                                startIcon={<SaveOutlinedIcon/>}
+                                onClick={editing
+                                    ? handleUpdateProduct
+                                    : () => setEditing(true)
+                                }
+                                startIcon={editing
+                                    ? <SaveOutlinedIcon/>
+                                    : <EditOutlinedIcon/>
+                                }
                                 disabled={props.isLoading}
                             >
-                                Save
+                                {editing ? 'Save' : 'Edit'}
                             </Button>
                         </Stack>
                     </Stack>
                 </Stack>
             </Paper>
         </>
-    )
-        ;
+    );
+}
+
+type InputProps = {
+    label?: string;
+    adornment?: string;
+    editing?: boolean;
+    value?: any;
+} & InputBaseProps;
+
+function Input(props: InputProps) {
+    const inputBaseProps = omit(props, ['label', 'adornment']);
+    const theme = useTheme();
+    return (
+        <>
+            <Stack width={'100%'} p={2} alignItems={'center'}>
+                {props.label && (
+                    <Typography
+                        sx={{userSelect: 'none'}}
+                        variant={'subtitle2'}
+                        alignSelf={'start'}
+                        color={theme.palette.text.secondary}
+                    >
+                        {props.label}
+                    </Typography>
+                )}
+                <Stack direction={'row'} width={'100%'} spacing={2} alignItems={'center'}>
+                    {props.adornment && (
+                        <Typography
+                            sx={{userSelect: 'none'}}
+                            variant={'subtitle2'}
+                            color={theme.palette.text.disabled}
+                        >
+                            {props.adornment}
+                        </Typography>
+                    )}
+                    {
+                        props.editing
+                            ? (<InputBase
+                                sx={{'*': {p: 0}}}
+                                fullWidth
+                                {...inputBaseProps}
+                            />)
+                            : (<Typography textAlign={'left'}>{props.value}</Typography>)
+                    }
+                </Stack>
+            </Stack>
+        </>
+    );
 }

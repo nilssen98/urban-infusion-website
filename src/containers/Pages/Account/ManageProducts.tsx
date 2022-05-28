@@ -35,7 +35,7 @@ export default function ManageProducts() {
                     flexWrap={'wrap'}
                     direction={'row'}
                     gap={4}
-                    overflow={'auto'}
+                    alignItems={'start'}
                 >
                     {
                         products?.map(product => (<EditableProductCard
