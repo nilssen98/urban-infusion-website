@@ -9,7 +9,7 @@ interface Props {
     onChangeStatus?: (newOrder: OrderStatusUpdateDto) => void;
 }
 
-export default function Orders(props: Props) {
+export default function OrdersList(props: Props) {
     const theme = useTheme();
 
     return (
