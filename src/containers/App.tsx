@@ -14,6 +14,10 @@ import Cart from './Pages/Cart';
 import NotFound from './Pages/NotFound';
 import Login from './Pages/Login';
 import TopAppBar from './Navigation/TopAppBar';
+import Profile from './Pages/Account/Profile';
+import Orders from './Pages/Account/Orders';
+import ManageOrders from './Pages/Account/ManageOrders';
+import ManageProducts from './Pages/Account/ManageProducts';
 
 const queryClient = new QueryClient();
 
@@ -33,8 +37,13 @@ export default function App() {
                                 <Route path={'/products'} element={<Navigate to={'/products/all'}/>}/>
                                 <Route path={'/products/:id'} element={<Products/>}/>
                                 <Route path={'/product/:id'} element={<Product/>}/>
-                                <Route path={'/account'} element={<Account/>}/>
-                                <Route path={'/account/:id'} element={<Account/>}/>
+                                <Route path={'/account'} element={<Account/>}>
+                                    <Route index element={<Navigate to={'profile'}/>}/>
+                                    <Route path={'profile'} element={<Profile/>}/>
+                                    <Route path={'orders'} element={<Orders/>}/>
+                                    <Route path={'manage-orders'} element={<ManageOrders/>}/>
+                                    <Route path={'manage-products'} element={<ManageProducts/>}/>
+                                </Route>
                                 <Route path={'/cart'} element={<Cart/>}/>
                                 <Route path={'/login'} element={<Login/>}/>
                                 <Route path={'/register'} element={<Register/>}/>
