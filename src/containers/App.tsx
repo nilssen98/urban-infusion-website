@@ -31,12 +31,10 @@ const queryClient = new QueryClient({
 
 export default function App() {
     const theme = useSelector((s: RootState) => s.user.theme);
-
     return (
         <QueryClientProvider client={queryClient}>
-
             <Provider store={store}>
-                {<ReactQueryDevtools initialIsOpen={false}/>}
+                {/*<ReactQueryDevtools initialIsOpen={false}/>*/}
                 <PersistGate persistor={persistor} loading={<div>Loading</div>}>
                     <ThemeProvider theme={getTheme(theme)}>
                         <CssBaseline/>
