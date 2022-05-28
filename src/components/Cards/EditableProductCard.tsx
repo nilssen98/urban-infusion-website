@@ -255,7 +255,7 @@ function Input(props: InputProps) {
                     {
                         props.editing
                             ? (<InputBase
-                                sx={{'*': {p: 0}}}
+                                sx={{'*': {p: 0, m: 0}}}
                                 fullWidth
                                 {...inputBaseProps}
                             />)
