@@ -8,7 +8,7 @@ import {PersistGate} from 'redux-persist/integration/react';
 import {QueryClient, QueryClientProvider} from 'react-query';
 import Products from './Pages/Products';
 import Product from './Pages/Product';
-import Account from './Pages/Account';
+import Account from './Pages/Account/Account';
 import Register from './Pages/Register';
 import Cart from './Pages/Cart';
 import NotFound from './Pages/NotFound';

@@ -17,31 +17,31 @@ import {
     useTheme
 } from '@mui/material';
 import React, {ReactElement, ReactNode, useEffect, useState} from 'react';
-import {stringToColor} from '../../utils/avatarUtils';
-import Page from '../../components/Wrappers/Page';
+import {stringToColor} from '../../../utils/avatarUtils';
+import Page from '../../../components/Wrappers/Page';
 import {connect} from 'react-redux';
-import {RootState} from '../../state/store';
-import useMe from '../../hooks/users/useMe';
+import {RootState} from '../../../state/store';
+import useMe from '../../../hooks/users/useMe';
 import {useNavigate} from 'react-router-dom';
 import MoreHorizOutlinedIcon from '@mui/icons-material/MoreHorizOutlined';
 import LogoutIcon from '@mui/icons-material/Logout';
-import {userSlice} from '../../state/slices/user';
-import ProfileSection from '../../components/Pages/Account/ProfileSection';
-import AdminSection from '../../components/Pages/Account/AdminSection';
-import {useUpdateUser} from '../../hooks/users/useUpdateUser';
-import {UserDto, UserRole} from '../../api/urbaninfusion/dto/user-dto';
-import useUserOrders from '../../hooks/orders/useUserOrders';
-import {useChangePassword} from '../../hooks/users/useChangePassword';
-import {isValidPassword} from '../../api/urbaninfusion/public/users';
-import Orders from '../../components/Pages/Account/Orders';
-import useOrders from '../../hooks/orders/useOrders';
-import {OrderStatusUpdateDto} from '../../api/urbaninfusion/dto/order-dto';
-import {useUpdateOrderStatus} from '../../hooks/orders/useUpdateOrderStatus';
-import {ProductsList} from '../../components/Pages/Products/ProductsList';
-import useProducts from '../../hooks/products/useProducts';
-import {useUpdateProduct} from '../../hooks/products/useUpdateProduct';
-import {useDeleteProduct} from '../../hooks/products/useDeleteProduct';
-import {useUpdateProductPicture} from '../../hooks/products/useUpdateProductPicture';
+import {userSlice} from '../../../state/slices/user';
+import ProfileSection from '../../../components/Pages/Account/ProfileSection';
+import AdminSection from '../../../components/Pages/Account/AdminSection';
+import {useUpdateUser} from '../../../hooks/users/useUpdateUser';
+import {UserDto, UserRole} from '../../../api/urbaninfusion/dto/user-dto';
+import useUserOrders from '../../../hooks/orders/useUserOrders';
+import {useChangePassword} from '../../../hooks/users/useChangePassword';
+import {isValidPassword} from '../../../api/urbaninfusion/public/users';
+import Orders from '../../../components/Pages/Account/Orders';
+import useOrders from '../../../hooks/orders/useOrders';
+import {OrderStatusUpdateDto} from '../../../api/urbaninfusion/dto/order-dto';
+import {useUpdateOrderStatus} from '../../../hooks/orders/useUpdateOrderStatus';
+import {ProductsList} from '../../../components/Pages/Products/ProductsList';
+import useProducts from '../../../hooks/products/useProducts';
+import {useUpdateProduct} from '../../../hooks/products/useUpdateProduct';
+import {useDeleteProduct} from '../../../hooks/products/useDeleteProduct';
+import {useUpdateProductPicture} from '../../../hooks/products/useUpdateProductPicture';
 
 const navigation = [
     'profile',
