@@ -45,9 +45,9 @@ function Login(props: Props) {
     const theme = useTheme();
     const navigate = useNavigate();
 
-    const onEnter = (event: KeyboardEvent) => {
+    const onEnter = async (event: KeyboardEvent) => {
         if (event.code === 'Enter') {
-            handleLogin().catch(console.error);
+            await handleLogin();
         }
     };
 

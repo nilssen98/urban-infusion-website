@@ -35,9 +35,9 @@ export default function Register() {
     const theme = useTheme();
     const navigate = useNavigate();
 
-    const onEnter = (event: KeyboardEvent) => {
+    const onEnter = async (event: KeyboardEvent) => {
         if (event.code === 'Enter') {
-            handleRegister().catch(console.error);
+            await handleRegister();
         }
     };
 
