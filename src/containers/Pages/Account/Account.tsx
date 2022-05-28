@@ -22,7 +22,7 @@ import Page from '../../../components/Wrappers/Page';
 import {connect} from 'react-redux';
 import {RootState} from '../../../state/store';
 import useMe from '../../../hooks/users/useMe';
-import {useNavigate} from 'react-router-dom';
+import {Outlet, useNavigate} from 'react-router-dom';
 import MoreHorizOutlinedIcon from '@mui/icons-material/MoreHorizOutlined';
 import LogoutIcon from '@mui/icons-material/Logout';
 import {userSlice} from '../../../state/slices/user';
@@ -173,6 +173,11 @@ function Account(props: Props) {
         updateOrderStatusMutation.mutate(newOrder);
     };
 
+    const handleChangeTab = (newValue: number) => {
+        setCurrentTab(newValue);
+        navigate(`/account/${navigation[newValue].replace(' ', '-')}`);
+    };
+
     return (
         <>
             <Snackbar
@@ -231,7 +236,7 @@ function Account(props: Props) {
                                 allowScrollButtonsMobile
                                 variant={'scrollable'}
                                 value={currentTab}
-                                onChange={(_, newValue) => setCurrentTab(newValue)}
+                                onChange={(_, newValue) => handleChangeTab(newValue)}
                             >
                                 {
                                     navigation.map(name => (
@@ -245,17 +250,7 @@ function Account(props: Props) {
                                 }
                             </Tabs>
                             <Divider flexItem/>
-                            {
-                                navigation.map((name, index) => (
-                                    <Stack
-                                        pt={4}
-                                        sx={{display: currentTab === index ? 'default' : 'none'}}
-                                        key={`${name}${index}`}
-                                    >
-                                        {renderSection(name)}
-                                    </Stack>
-                                ))
-                            }
+                            <Outlet/>
                         </Stack>
                     </Stack>
                 </Stack>
