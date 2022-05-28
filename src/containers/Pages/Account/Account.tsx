@@ -20,11 +20,12 @@ import Page from '../../../components/Wrappers/Page';
 import {connect} from 'react-redux';
 import {RootState} from '../../../state/store';
 import useMe from '../../../hooks/users/useMe';
-import {Outlet, useNavigate} from 'react-router-dom';
+import {Outlet, useLocation, useNavigate} from 'react-router-dom';
 import MoreHorizOutlinedIcon from '@mui/icons-material/MoreHorizOutlined';
 import LogoutIcon from '@mui/icons-material/Logout';
 import {userSlice} from '../../../state/slices/user';
 import {UserRole} from '../../../api/urbaninfusion/dto/user-dto';
+import {last} from 'lodash-es';
 
 const navigation = [
     'profile',
@@ -53,6 +54,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(Account);
 function Account(props: Props) {
     const [currentTab, setCurrentTab] = useState<number>(0);
     const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
+    const {pathname} = useLocation();
 
     const theme = useTheme();
     const navigate = useNavigate();
@@ -67,6 +69,13 @@ function Account(props: Props) {
             navigate('/login');
         }
     }, [isError, props.jwt]);
+
+    useEffect(() => {
+        const path = last(pathname.split('/'))?.replace('-', ' ');
+        if (path) {
+            setCurrentTab(navigation.indexOf(path));
+        }
+    }, []);
 
     const handleAccountActionsClick = (event: React.MouseEvent<HTMLButtonElement>) => {
         setAnchorEl(event.currentTarget);
