@@ -83,8 +83,8 @@ export default function Register() {
                     setErrorMessage('Could not register!');
                 }
                 setError(true);
-            });
-        setLoading(false);
+            })
+            .finally(() => setLoading(false));
     };
 
     return (
@@ -123,6 +123,7 @@ export default function Register() {
                             <Stack width={'100%'} spacing={4}>
                                 <TextField
                                     value={email}
+                                    disabled={success || loading}
                                     onChange={(event) => setEmail(event.target.value)}
                                     required
                                     error={!isEmailAddress(email)}
@@ -138,6 +139,7 @@ export default function Register() {
                                 />
                                 <TextField
                                     value={username}
+                                    disabled={success || loading}
                                     onChange={(event) => setUsername(event.target.value)}
                                     required
                                     label={'Username'}
@@ -152,6 +154,7 @@ export default function Register() {
                                 <PasswordField
                                     value={password}
                                     verifyPassword={true}
+                                    disabled={success || loading}
                                     onChange={(event) => setPassword(event.target.value)}
                                     label={'Password'}
                                 />

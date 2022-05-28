@@ -1,4 +1,15 @@
-import {Alert, Button, InputAdornment, Paper, Snackbar, Stack, TextField, Typography, useTheme} from '@mui/material';
+import {
+    Alert,
+    Button,
+    CircularProgress,
+    InputAdornment,
+    Paper,
+    Snackbar,
+    Stack,
+    TextField,
+    Typography,
+    useTheme
+} from '@mui/material';
 import Page from '../../components/Wrappers/Page';
 import {NavLink, useNavigate} from 'react-router-dom';
 import Background from '../../assets/images/teashop-background.jpg';
@@ -25,6 +36,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(Login);
 type Props = ReturnType<typeof mapStateToProps> & typeof mapDispatchToProps;
 
 function Login(props: Props) {
+    const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<boolean>(false);
     const [errorMessage, setErrorMessage] = useState<string>('');
     const [username, setUsername] = useState<string>('');
@@ -50,6 +62,7 @@ function Login(props: Props) {
     }, [props.isAuthenticated, onEnter]);
 
     const handleLogin = async () => {
+        setLoading(true);
         await login({
             username,
             password,
@@ -64,7 +77,8 @@ function Login(props: Props) {
                     setErrorMessage('Invalid username or password!');
                 }
                 setError(true);
-            });
+            })
+            .finally(() => setLoading(false));
     };
 
     return (
@@ -95,6 +109,7 @@ function Login(props: Props) {
                                 <TextField
                                     required
                                     value={username}
+                                    disabled={props.isAuthenticated || loading}
                                     onChange={(event) => setUsername(event.target.value)}
                                     label={'Username'}
                                     InputProps={{
@@ -107,13 +122,16 @@ function Login(props: Props) {
                                 />
                                 <PasswordField
                                     value={password}
+                                    disabled={props.isAuthenticated || loading}
                                     onChange={(event) => setPassword(event.target.value)}
                                     label={'Password'}
                                 />
                             </Stack>
                             <Button
                                 onClick={handleLogin}
+                                endIcon={loading && (<CircularProgress color={'info'} size={24}/>)}
                                 variant={'contained'}
+                                disabled={props.isAuthenticated || loading}
                                 sx={{width: '100%'}}
                             >
                                 Login
