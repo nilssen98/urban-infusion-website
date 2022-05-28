@@ -7,7 +7,7 @@ export default function NotFound() {
     return (
         <>
             <Section
-                height={`calc(100vh - ${theme.mixins.toolbar.minHeight}px)`}
+                height={`calc(100vh - ${theme.custom.heights.topBar + theme.custom.heights.navBar}px)`}
                 sx={{
                     margin: 0,
                 }}
