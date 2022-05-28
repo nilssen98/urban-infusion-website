@@ -86,6 +86,7 @@ export default function EditableProductCard(props: Props) {
                         width={'100%'}
                     >
                         <img
+                            loading={'lazy'}
                             src={props.img}
                             style={{width: 175, height: 175}}
                             alt={''}

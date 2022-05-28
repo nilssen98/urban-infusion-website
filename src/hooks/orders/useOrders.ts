@@ -5,6 +5,8 @@ import {getOrders} from '../../api/urbaninfusion/public/orders';
 export default function useOrders(): UseQueryResult<OrderDto[]> {
     return useQuery(
         'orders',
-        () => getOrders(),
+        () => getOrders(), {
+            retry: 0,
+        }
     );
 }

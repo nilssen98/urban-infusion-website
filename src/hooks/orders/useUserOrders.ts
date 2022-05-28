@@ -6,7 +6,8 @@ export default function useUserOrders(id?: number): UseQueryResult<OrderDto[]> {
     return useQuery(
         ['orders', id],
         () => getUserOrders(id!), {
-            enabled: id !== undefined
+            enabled: id !== undefined,
+            retry: 0,
         }
     );
 }

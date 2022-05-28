@@ -5,6 +5,8 @@ import {getCategories} from '../../api/urbaninfusion/public/categories';
 export default function useCategories(): UseQueryResult<CategoriesDto> {
     return useQuery(
         'categories',
-        () => getCategories()
+        () => getCategories(), {
+            retry: 0,
+        }
     );
 }

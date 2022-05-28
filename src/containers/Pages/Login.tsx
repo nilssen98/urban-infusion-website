@@ -14,12 +14,12 @@ import Page from '../../components/Wrappers/Page';
 import {NavLink, useNavigate} from 'react-router-dom';
 import Background from '../../assets/images/teashop-background.jpg';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
-import {login} from '../../api/urbaninfusion/public/login';
 import {useEffect, useState} from 'react';
 import {RootState} from '../../state/store';
 import {connect} from 'react-redux';
 import {userSlice} from '../../state/slices/user';
 import PasswordField from '../../components/PasswordField';
+import {useLogin} from '../../hooks/authorization/useLogin';
 
 const mapStateToProps = (state: RootState) => {
     return {
@@ -36,11 +36,13 @@ export default connect(mapStateToProps, mapDispatchToProps)(Login);
 type Props = ReturnType<typeof mapStateToProps> & typeof mapDispatchToProps;
 
 function Login(props: Props) {
-    const [loading, setLoading] = useState<boolean>(false);
+    // const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<boolean>(false);
     const [errorMessage, setErrorMessage] = useState<string>('');
     const [username, setUsername] = useState<string>('');
     const [password, setPassword] = useState<string>('');
+    const useLoginMutation = useLogin();
+    const loading = useLoginMutation.isLoading;
 
     const theme = useTheme();
     const navigate = useNavigate();
@@ -62,23 +64,16 @@ function Login(props: Props) {
     }, [props.isAuthenticated, onEnter]);
 
     const handleLogin = async () => {
-        setLoading(true);
-        await login({
-            username,
-            password,
-        })
-            .then(e => {
-                props.setJwtToken(e);
-            })
-            .catch(e => {
-                if (e.response.data.length > 0) {
-                    setErrorMessage(e.response.data);
-                } else {
-                    setErrorMessage('Invalid username or password!');
-                }
-                setError(true);
-            })
-            .finally(() => setLoading(false));
+        try {
+            props.setJwtToken((await useLoginMutation.mutateAsync({username, password})).headers.authorization);
+        } catch (error: any) {
+            if (error.response.data.length > 0) {
+                setErrorMessage(error.response.data);
+            } else {
+                setErrorMessage('Invalid username or password!');
+            }
+            setError(true);
+        }
     };
 
     return (

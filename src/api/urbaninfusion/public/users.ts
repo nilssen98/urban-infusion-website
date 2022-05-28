@@ -2,29 +2,29 @@ import {UserDto} from '../dto/user-dto';
 import axios from 'axios';
 import {baseUrl} from './public';
 import {login} from './login';
+import {store} from '../../../state/store';
 
-export async function getMe(jwt?: string): Promise<UserDto> {
+export async function getMe(): Promise<UserDto> {
+    const jwt = store.getState().user.jwt || '';
     return (await axios.get<UserDto>(
         `${baseUrl}/users/me`,
-        {
-            headers: {
-                Authorization: jwt || ''
-            }
-        }
+        {headers: {Authorization: jwt}}
     )).data;
 }
 
-export async function updateUser(user: UserDto, jwt?: string): Promise<any> {
+export async function updateUser(user: UserDto): Promise<any> {
+    const jwt = store.getState().user.jwt || '';
     return await axios.patch(`${baseUrl}/users`,
         {...user},
-        {headers: {Authorization: jwt || ''}}
+        {headers: {Authorization: jwt}}
     );
 }
 
-export async function changePassword(user: UserDto, password: string, jwt?: string): Promise<any> {
+export async function changePassword(user: UserDto, password: string): Promise<any> {
+    const jwt = store.getState().user.jwt || '';
     return await axios.patch(`${baseUrl}/users/${user.id}`,
         {password},
-        {headers: {Authorization: jwt || ''}}
+        {headers: {Authorization: jwt}}
     );
 }
 

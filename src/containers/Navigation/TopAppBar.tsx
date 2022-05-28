@@ -35,7 +35,7 @@ function TopAppBar(props: Props) {
     const theme = useTheme();
     const navigate = useNavigate();
 
-    const {data: user} = useMe();
+    const {data: user} = useMe(props.isAuthenticated);
 
     return (
         <>

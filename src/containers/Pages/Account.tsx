@@ -52,7 +52,8 @@ const navigation = [
 
 const mapStateToProps = (state: RootState) => {
     return {
-        jwt: state.user.jwt
+        jwt: state.user.jwt,
+        isAuthenticated: state.user.jwt !== undefined,
     };
 };
 
@@ -77,7 +78,7 @@ function Account(props: Props) {
     const [successMessage, setSuccessMessage] = useState<string>('Successfully updated the information!');
     const [error, setError] = useState<boolean>(false);
     const [errorMessage, setErrorMessage] = useState<string>('Could not update your information!');
-    const {isLoading: isLoadingMe, isError, data: user} = useMe();
+    const {isLoading: isLoadingMe, isError, data: user} = useMe(props.isAuthenticated);
     const {isLoading: isLoadingUserOrders, data: userOrders} = useUserOrders(user?.id);
     const {isLoading: isLoadingOrders, data: orders} = useOrders();
     const {isLoading: isLoadingProducts, data: products} = useProducts();
