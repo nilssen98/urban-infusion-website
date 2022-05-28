@@ -18,15 +18,25 @@ import Profile from './Pages/Account/Profile';
 import Orders from './Pages/Account/Orders';
 import ManageOrders from './Pages/Account/ManageOrders';
 import ManageProducts from './Pages/Account/ManageProducts';
+import {ReactQueryDevtools} from 'react-query/devtools';
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+    defaultOptions: {
+        queries: {
+            staleTime: 60000,
+            retry: 0,
+        },
+    },
+});
 
 export default function App() {
     const theme = useSelector((s: RootState) => s.user.theme);
 
     return (
-        <Provider store={store}>
-            <QueryClientProvider client={queryClient}>
+        <QueryClientProvider client={queryClient}>
+
+            <Provider store={store}>
+                {<ReactQueryDevtools initialIsOpen={false}/>}
                 <PersistGate persistor={persistor} loading={<div>Loading</div>}>
                     <ThemeProvider theme={getTheme(theme)}>
                         <CssBaseline/>
@@ -52,7 +62,7 @@ export default function App() {
                         </BrowserRouter>
                     </ThemeProvider>
                 </PersistGate>
-            </QueryClientProvider>
-        </Provider>
+            </Provider>
+        </QueryClientProvider>
     );
 }

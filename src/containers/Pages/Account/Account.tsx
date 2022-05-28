@@ -62,13 +62,11 @@ function Account(props: Props) {
     const isLoading = isLoadingMe;
     const accountActionsOpen = Boolean(anchorEl);
 
-
     useEffect(() => {
         if (isError || !props.jwt) {
             navigate('/login');
         }
     }, [isError, props.jwt]);
-
 
     const handleAccountActionsClick = (event: React.MouseEvent<HTMLButtonElement>) => {
         setAnchorEl(event.currentTarget);

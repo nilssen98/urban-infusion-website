@@ -1,69 +1,53 @@
 import {Button, Divider, InputAdornment, Paper, PaperProps, Stack, TextField, useTheme} from '@mui/material';
-import {capitalize, omit, toNumber} from 'lodash-es';
+import {capitalize, omit} from 'lodash-es';
 import {ProductDto, UpdateProductPictureDto} from '../../api/urbaninfusion/dto/product-dto';
 import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
 import AddPhotoAlternateOutlinedIcon from '@mui/icons-material/AddPhotoAlternateOutlined';
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
 import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
 
 type Props = {
     data: ProductDto;
     img?: string;
-    onUpdateProduct?: (data: Partial<ProductDto>) => void;
-    onDeleteProduct?: (id: number) => void;
-    onUpdateProductPicture?: (data: UpdateProductPictureDto) => void;
+    onUpdateProduct: (data: Partial<ProductDto>) => void;
+    onDeleteProduct: (id: number) => void;
+    onUpdateProductPicture: (data: UpdateProductPictureDto) => void;
     isLoading?: boolean;
 } & PaperProps;
 
 export default function EditableProductCard(props: Props) {
     const paperProps = omit(props, ['data', 'img', 'onUpdateProduct', 'onDeleteProduct', 'onUpdateProductPicture', 'isLoading']);
 
-    const [title, setTitle] = useState<string>('');
-    const [description, setDescription] = useState<string>('');
-    const [price, setPrice] = useState<number>(0);
-    const [discount, setDiscount] = useState<number>(0);
-    const [weight, setWeight] = useState<number>(0);
-    const [category, setCategory] = useState<string>('');
+    const [title, setTitle] = useState<string>(props.data.title);
+    const [description, setDescription] = useState<string>(props.data.description);
+    const [price, setPrice] = useState<number>(props.data.price);
+    const [discount, setDiscount] = useState<number>(props.data.discount * 100);
+    const [weight, setWeight] = useState<number>(Number(props.data.weight.replace('oz', '')));
+    const [category, setCategory] = useState<string>(capitalize(props.data.category));
 
     const theme = useTheme();
 
-
-    useEffect(() => {
-        setTitle(props.data.title);
-        setDescription(props.data.description);
-        setPrice(props.data.price);
-        setDiscount(props.data.discount * 100);
-        setWeight(toNumber(props.data.weight.replace('oz', '')));
-        setCategory(capitalize(props.data.category));
-    }, []);
-
     const handleUpdateProduct = () => {
-        if (props.onUpdateProduct) {
-            props.onUpdateProduct({
-                id: props.data.imageId || -1,
-                title,
-                description,
-                price,
-                discount: discount / 100,
-                weight: `${weight}oz`,
-                category: category.toUpperCase()
-            });
-        }
+        props.onUpdateProduct({
+            id: props.data.imageId || -1,
+            title,
+            description,
+            price,
+            discount: discount / 100,
+            weight: `${weight}oz`,
+            category: category.toUpperCase()
+        });
     };
 
     const handleDeleteProduct = () => {
-        if (props.onDeleteProduct) {
-            props.onDeleteProduct(props.data.id);
-        }
+        props.onDeleteProduct(props.data.id);
     };
 
     const handleUpdateProductPicture = (event: any) => {
-        if (props.onUpdateProductPicture) {
-            props.onUpdateProductPicture({
-                id: props.data.id,
-                file: event.target.files[0]
-            });
-        }
+        props.onUpdateProductPicture({
+            id: props.data.id,
+            file: event.target.files[0]
+        });
     };
 
     return (
@@ -150,7 +134,7 @@ export default function EditableProductCard(props: Props) {
                             value={price}
                             type={'number'}
                             onChange={(e) =>
-                                setPrice(toNumber(e.target.value))
+                                setPrice(Number(e.target.value))
                             }
                             label={'Price'}
                             size={'small'}
@@ -162,7 +146,7 @@ export default function EditableProductCard(props: Props) {
                             fullWidth
                             value={discount}
                             onChange={(e) =>
-                                setDiscount(toNumber(e.target.value))
+                                setDiscount(Number(e.target.value))
                             }
                             type={'number'}
                             label={'Discount'}
@@ -175,7 +159,7 @@ export default function EditableProductCard(props: Props) {
                             fullWidth
                             value={weight}
                             onChange={(e) =>
-                                setWeight(toNumber(e.target.value))
+                                setWeight(Number(e.target.value))
                             }
                             type={'number'}
                             label={'Weight'}

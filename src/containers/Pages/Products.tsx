@@ -1,10 +1,11 @@
 import {Divider, Stack, Typography, useTheme} from '@mui/material';
-import {ProductsList} from '../../components/Pages/Products/ProductsList';
 import {useParams} from 'react-router-dom';
 import Page from '../../components/Wrappers/Page';
 import useProducts from '../../hooks/products/useProducts';
 import {useMemo, useState} from 'react';
 import ProductsFilter from '../../components/Pages/Products/ProductsFilter';
+import {defaultProductImageURL, getProductImageURL} from '../../utils/productImageUtils';
+import ProductCard from '../../components/Cards/ProductCard';
 
 export enum OrderOption {
     ASCENDING = 'ascending',
@@ -79,7 +80,22 @@ export default function Products() {
                     >
                         {
                             filtered && filtered.length > 0 ? (
-                                <ProductsList products={filtered}/>
+                                <Stack
+                                    flexWrap={'wrap'}
+                                    direction={'row'}
+                                    gap={4}
+                                    overflow={'auto'}
+                                >
+                                    {
+                                        filtered.map(product => (<ProductCard
+                                            data={product}
+                                            key={product.id}
+                                            img={product.imageId
+                                                ? `${getProductImageURL(product.imageId)}`
+                                                : defaultProductImageURL}
+                                        />))
+                                    }
+                                </Stack>
                             ) : (
                                 <Stack
                                     color={theme.palette.text.disabled}
