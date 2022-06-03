@@ -1,5 +1,5 @@
 import {Box, Typography} from '@mui/material';
-import CoffeeOutlinedIcon from '@mui/icons-material/CoffeeOutlined';
+import EmojiFoodBeverageIcon from '@mui/icons-material/EmojiFoodBeverage';
 
 interface Props {
     clickable?: boolean;
@@ -43,7 +43,7 @@ export default function Logo(props: Props) {
                         width: '2.2em',
                         height: '2.2em'
                     }}
-                    component={CoffeeOutlinedIcon}
+                    component={EmojiFoodBeverageIcon}
                 />
             </Box>
         </>
