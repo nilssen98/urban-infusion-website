@@ -9,6 +9,8 @@ import {InputBaseProps} from '@mui/material/InputBase/InputBase';
 import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 
+const acceptedFormats = ['image/jpg', 'image/png', 'image/jpeg', 'image/webp'];
+
 type Props = {
     data: ProductDto;
     img?: string;
@@ -20,7 +22,6 @@ type Props = {
 
 export default function EditableProductCard(props: Props) {
     const paperProps = omit(props, ['data', 'img', 'onUpdateProduct', 'onDeleteProduct', 'onUpdateProductPicture', 'isLoading']);
-    const acceptedFormats = ['image/jpg', 'image/png', 'image/jpeg', 'image/webp'];
 
     const [title, setTitle] = useState<string>(props.data.title || '');
     const [description, setDescription] = useState<string>(props.data.description || '');
