@@ -64,6 +64,7 @@ export default function ManageProducts() {
                 }
                 if (addProductMutation.isSuccess) {
                     setSuccessMessage('Successfully added the product!');
+                    setAddingProduct(false);
                 }
                 setSuccess(true);
             }
@@ -72,7 +73,6 @@ export default function ManageProducts() {
 
     const handleAddProduct = (data: AddProductDto) => {
         addProductMutation.mutate(data);
-        // handleCloseAddProduct();
     };
 
     const handleOpenAddProduct = () => {

@@ -6,7 +6,10 @@ export const useDeleteProduct = () => {
 
     return useMutation(
         (id: number) => deleteProduct(id), {
-            onSuccess: () => query.invalidateQueries(['products'])
+            onSuccess: async () => {
+                await query.invalidateQueries('products');
+                await query.invalidateQueries('categories');
+            }
         }
     );
 };

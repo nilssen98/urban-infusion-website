@@ -7,7 +7,10 @@ export const useUpdateProduct = () => {
 
     return useMutation(
         (data: Partial<ProductDto>) => updateProduct(data), {
-            onSuccess: () => query.invalidateQueries(['products'])
+            onSuccess: async () => {
+                await query.invalidateQueries('products');
+                await query.invalidateQueries('categories');
+            }
         }
     );
 };
