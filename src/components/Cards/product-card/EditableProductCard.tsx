@@ -124,7 +124,7 @@ export default function EditableProductCard(props: Props) {
                                 setTitle(e.target.value)
                             }
                             size={'small'}
-                            label={'title'}
+                            label={'Title'}
                         />
                         <Divider flexItem/>
                         <Input
@@ -136,7 +136,7 @@ export default function EditableProductCard(props: Props) {
                             }
                             type={'number'}
                             size={'small'}
-                            label={'description'}
+                            label={'Description'}
                         />
                         <Divider flexItem/>
                         <Input
@@ -148,7 +148,7 @@ export default function EditableProductCard(props: Props) {
                             }
                             size={'small'}
                             adornment={'$'}
-                            label={'price'}
+                            label={'Price'}
                         />
                         <Divider flexItem/>
                         <Input
@@ -160,7 +160,7 @@ export default function EditableProductCard(props: Props) {
                             type={'number'}
                             size={'small'}
                             adornment={'%'}
-                            label={'discount'}
+                            label={'Discount'}
                         />
                         <Divider flexItem/>
                         <Input
@@ -172,7 +172,7 @@ export default function EditableProductCard(props: Props) {
                             type={'number'}
                             size={'small'}
                             adornment={'oz'}
-                            label={'weight'}
+                            label={'Weight'}
                         />
                         <Divider flexItem/>
                         <Input
@@ -182,7 +182,7 @@ export default function EditableProductCard(props: Props) {
                                 setCategory(e.target.value)
                             }
                             size={'small'}
-                            label={'category'}
+                            label={'Category'}
                         />
                         <Divider flexItem/>
                         <Stack alignSelf={'end'} direction={'row'} spacing={2} p={2}>
