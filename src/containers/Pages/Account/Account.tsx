@@ -74,8 +74,10 @@ function Account(props: Props) {
         const path = last(pathname.split('/'))?.replace('-', ' ');
         if (path) {
             setCurrentTab(navigation.indexOf(path));
+        } else {
+            setCurrentTab(0);
         }
-    }, []);
+    }, [pathname]);
 
     const handleAccountActionsClick = (event: React.MouseEvent<HTMLButtonElement>) => {
         setAnchorEl(event.currentTarget);
