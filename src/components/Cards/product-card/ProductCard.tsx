@@ -19,8 +19,8 @@ export default function ProductCard(props: Props) {
         <>
             <Paper
                 variant={'outlined'}
-                {...paperProps}
                 sx={{width: '100%', maxWidth: 225, position: 'relative'}}
+                {...paperProps}
             >
                 <Stack
                     textAlign={'center'}
@@ -31,7 +31,7 @@ export default function ProductCard(props: Props) {
                     {
                         props.data.discount > 0 && (
                             <Stack sx={{position: 'absolute', top: 5, left: 10}}>
-                                <Typography variant={'h6'} color={'error'}>-{props.data.discount * 100}%</Typography>
+                                <Typography variant={'h6'} color={'error'}>-{round(props.data.discount * 100, 2)}%</Typography>
                             </Stack>
                         )
                     }
