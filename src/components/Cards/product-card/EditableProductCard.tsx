@@ -3,7 +3,7 @@ import {capitalize, omit} from 'lodash-es';
 import {ProductDto, UpdateProductPictureDto} from '../../../api/urbaninfusion/dto/product-dto';
 import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
 import AddPhotoAlternateOutlinedIcon from '@mui/icons-material/AddPhotoAlternateOutlined';
-import {ReactNode, useState} from 'react';
+import {useState} from 'react';
 import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
 import {InputBaseProps} from '@mui/material/InputBase/InputBase';
 import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
@@ -20,6 +20,7 @@ type Props = {
 
 export default function EditableProductCard(props: Props) {
     const paperProps = omit(props, ['data', 'img', 'onUpdateProduct', 'onDeleteProduct', 'onUpdateProductPicture', 'isLoading']);
+    const acceptedFormats = ['image/jpg', 'image/png', 'image/jpeg', 'image/webp'];
 
     const [title, setTitle] = useState<string>(props.data.title || '');
     const [description, setDescription] = useState<string>(props.data.description || '');
@@ -97,7 +98,7 @@ export default function EditableProductCard(props: Props) {
                                         }}
                                         type={'file'}
                                         multiple={false}
-                                        accept={'image/*'}
+                                        accept={acceptedFormats.toString()}
                                         onChange={handleUpdateProductPicture}
                                     />
                                     <AddPhotoAlternateOutlinedIcon
