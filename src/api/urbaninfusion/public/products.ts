@@ -1,4 +1,4 @@
-import {ProductDto, UpdateProductPictureDto} from '../dto/product-dto';
+import {AddProductDto, ProductDto, UpdateProductPictureDto} from '../dto/product-dto';
 import axios from 'axios';
 import {baseUrl} from './public';
 import {store} from '../../../state/store';
@@ -26,9 +26,11 @@ export async function deleteProduct(id: number): Promise<any> {
     ));
 }
 
-export async function addProduct(data: Partial<ProductDto> & Pick<ProductDto, 'price' | 'title'>): Promise<any> {
+export async function addProduct(data: AddProductDto): Promise<any> {
+    const jwt = store.getState().user.jwt || '';
     return (await axios.post(`${baseUrl}/products`,
-        {...data}
+        {...data},
+        {headers: {Authorization: jwt}}
     ));
 }
 

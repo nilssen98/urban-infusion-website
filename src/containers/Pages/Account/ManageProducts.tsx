@@ -43,9 +43,9 @@ export default function ManageProducts() {
 
     useEffect(() => {
             if (isError) {
-                const err = mutations.map(m => m.error)
-                    .find(Boolean) || 'An error occured, please try again...';
-                setErrorMessage(err as string);
+                const err: any = mutations.find((m: any) => m.error)?.error;
+                const msg = err?.response?.data || 'Unknown error occured, please try again...';
+                setErrorMessage(msg);
                 setError(true);
             }
         }, [isError]
@@ -72,7 +72,7 @@ export default function ManageProducts() {
 
     const handleAddProduct = (data: AddProductDto) => {
         addProductMutation.mutate(data);
-        handleCloseAddProduct();
+        // handleCloseAddProduct();
     };
 
     const handleOpenAddProduct = () => {
@@ -107,7 +107,7 @@ export default function ManageProducts() {
             </Snackbar>
             <Snackbar
                 open={error}
-                autoHideDuration={6000}
+                autoHideDuration={5000}
                 onClose={() => setError(false)}
                 anchorOrigin={{vertical: 'top', horizontal: 'center'}}
             >

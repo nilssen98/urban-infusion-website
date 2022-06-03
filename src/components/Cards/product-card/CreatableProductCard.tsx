@@ -1,4 +1,4 @@
-import {AddProductDto, ProductDto} from '../../../api/urbaninfusion/dto/product-dto';
+import {AddProductDto} from '../../../api/urbaninfusion/dto/product-dto';
 import {Button, Divider, InputAdornment, Paper, Stack, TextField} from '@mui/material';
 import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
 import {useState} from 'react';
@@ -42,101 +42,99 @@ export default function CreatableProductCard(props: Props) {
                 variant={'outlined'}
                 sx={{width: 387.5, background: 'transparent', border: 'none'}}
             >
-                <form>
-                    <Stack textAlign={'center'} alignItems={'center'} justifyContent={'center'}>
-                        <Stack spacing={4} px={4} pb={2} width={'100%'}>
-                            <TextField
-                                size={'small'}
-                                fullWidth
-                                required
-                                value={title}
-                                onChange={(e) =>
-                                    setTitle(e.target.value)
-                                }
-                                label={'Title'}
-                            />
-                            <TextField
-                                required
-                                size={'small'}
-                                fullWidth
-                                value={category}
-                                onChange={(e) =>
-                                    setCategory(e.target.value)
-                                }
-                                label={'Category'}
-                            />
-                            <TextField
-                                fullWidth
-                                multiline
-                                minRows={2}
-                                value={description}
-                                onChange={(e) =>
-                                    setDescription(e.target.value)
-                                }
-                                type={'number'}
-                                size={'small'}
-                                label={'Description'}
-                            />
-                            <TextField
-                                fullWidth
-                                value={price}
-                                type={'number'}
-                                onChange={(e) =>
-                                    setPrice(Number(e.target.value))
-                                }
-                                size={'small'}
-                                InputProps={{
-                                    startAdornment: <InputAdornment position={'start'}>$</InputAdornment>,
-                                }}
-                                label={'Price'}
-                            />
-                            <TextField
-                                fullWidth
-                                value={discount}
-                                onChange={(e) =>
-                                    setDiscount(Number(e.target.value))
-                                }
-                                type={'number'}
-                                size={'small'}
-                                InputProps={{
-                                    startAdornment: <InputAdornment position={'start'}>%</InputAdornment>,
-                                }}
-                                label={'Discount'}
-                            />
-                            <TextField
-                                fullWidth
-                                value={weight}
-                                onChange={(e) =>
-                                    setWeight(Number(e.target.value))
-                                }
-                                type={'number'}
-                                size={'small'}
-                                InputProps={{
-                                    startAdornment: <InputAdornment position={'start'}>oz</InputAdornment>,
-                                }}
-                                label={'Weight'}
-                            />
-                        </Stack>
-                        <Divider flexItem/>
-                        <Stack alignSelf={'end'} direction={'row'} spacing={2} p={2}>
-                            <Button
-                                startIcon={<CancelOutlinedIcon/>}
-                                color={'error'}
-                                onClick={handleCancel}
-                            >
-                                Cancel
-                            </Button>
-                            <Button
-                                variant={'contained'}
-                                startIcon={<AddOutlinedIcon/>}
-                                onClick={handleAdd}
-                                type={'submit'}
-                            >
-                                Add
-                            </Button>
-                        </Stack>
+                <Stack textAlign={'center'} alignItems={'center'} justifyContent={'center'}>
+                    <Stack spacing={4} px={4} pb={2} width={'100%'}>
+                        <TextField
+                            size={'small'}
+                            fullWidth
+                            required
+                            value={title}
+                            onChange={(e) =>
+                                setTitle(e.target.value)
+                            }
+                            label={'Title'}
+                        />
+                        <TextField
+                            required
+                            size={'small'}
+                            fullWidth
+                            value={category}
+                            onChange={(e) =>
+                                setCategory(e.target.value)
+                            }
+                            label={'Category'}
+                        />
+                        <TextField
+                            fullWidth
+                            multiline
+                            minRows={2}
+                            value={description}
+                            onChange={(e) =>
+                                setDescription(e.target.value)
+                            }
+                            type={'number'}
+                            size={'small'}
+                            label={'Description'}
+                        />
+                        <TextField
+                            fullWidth
+                            value={price}
+                            type={'number'}
+                            onChange={(e) =>
+                                setPrice(Number(e.target.value))
+                            }
+                            size={'small'}
+                            InputProps={{
+                                startAdornment: <InputAdornment position={'start'}>$</InputAdornment>,
+                            }}
+                            label={'Price'}
+                        />
+                        <TextField
+                            fullWidth
+                            value={discount}
+                            onChange={(e) =>
+                                setDiscount(Number(e.target.value))
+                            }
+                            type={'number'}
+                            size={'small'}
+                            InputProps={{
+                                startAdornment: <InputAdornment position={'start'}>%</InputAdornment>,
+                            }}
+                            label={'Discount'}
+                        />
+                        <TextField
+                            fullWidth
+                            value={weight}
+                            onChange={(e) =>
+                                setWeight(Number(e.target.value))
+                            }
+                            type={'number'}
+                            size={'small'}
+                            InputProps={{
+                                startAdornment: <InputAdornment position={'start'}>oz</InputAdornment>,
+                            }}
+                            label={'Weight'}
+                        />
                     </Stack>
-                </form>
+                    <Divider flexItem/>
+                    <Stack alignSelf={'end'} direction={'row'} spacing={2} p={2}>
+                        <Button
+                            startIcon={<CancelOutlinedIcon/>}
+                            color={'error'}
+                            onClick={handleCancel}
+                        >
+                            Cancel
+                        </Button>
+                        <Button
+                            variant={'contained'}
+                            startIcon={<AddOutlinedIcon/>}
+                            onClick={handleAdd}
+                            type={'submit'}
+                        >
+                            Add
+                        </Button>
+                    </Stack>
+                </Stack>
             </Paper>
         </>
     );
