@@ -31,14 +31,15 @@ export default function ManageProducts() {
     const updateProductPictureMutation = useUpdateProductPicture();
 
     const mutations = [
-        updateProductMutation,
+        addProductMutation,
         deleteProductMutation,
-        updateProductPictureMutation,
-        addProductMutation
+        updateProductMutation,
+        updateProductPictureMutation
     ];
 
-    const isError = mutations.map(m => m.isError).find(Boolean);
-    const isSuccess = mutations.map(m => m.isSuccess).find(Boolean);
+    const isError = mutations.filter(m => m.isError).length > 0;
+    const isSuccess = mutations.filter(m => m.isSuccess).length > 0;
+    const isMutating = mutations.filter(m => m.isLoading).length > 0;
 
     useEffect(() => {
             if (isError) {
@@ -52,7 +53,19 @@ export default function ManageProducts() {
 
     useEffect(() => {
             if (isSuccess) {
-
+                if (updateProductMutation.isSuccess) {
+                    setSuccessMessage('Successfully updated the product!');
+                }
+                if (deleteProductMutation.isSuccess) {
+                    setSuccessMessage('Successfully deleted the product!');
+                }
+                if (updateProductPictureMutation.isSuccess) {
+                    setSuccessMessage('Successfully updated the product image!');
+                }
+                if (addProductMutation.isSuccess) {
+                    setSuccessMessage('Successfully added the product!');
+                }
+                setSuccess(true);
             }
         }, [isSuccess]
     );
@@ -84,6 +97,14 @@ export default function ManageProducts() {
 
     return (
         <>
+            <Snackbar
+                open={success}
+                onClose={() => setSuccess(false)}
+                autoHideDuration={5000}
+                anchorOrigin={{horizontal: 'center', vertical: 'top'}}
+            >
+                <Alert severity={'success'}>{successMessage}</Alert>
+            </Snackbar>
             <Snackbar
                 open={error}
                 autoHideDuration={6000}
@@ -122,6 +143,7 @@ export default function ManageProducts() {
                     {
                         products?.map(product => (<EditableProductCard
                             data={product}
+                            isLoading={isMutating}
                             onDeleteProduct={handleDeleteProduct}
                             onUpdateProduct={handleUpdateProduct}
                             onUpdateProductPicture={handleUpdateProductPicture}
