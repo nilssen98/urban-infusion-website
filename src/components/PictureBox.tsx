@@ -27,6 +27,7 @@ export default function PictureBox(props: Props) {
                 <img
                     src={props.image}
                     alt={props.alt}
+                    loading={'lazy'}
                     style={{objectFit: 'contain', height: 'inherit'}}
                     draggable={false}
                 />
