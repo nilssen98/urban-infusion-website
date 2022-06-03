@@ -37,6 +37,13 @@ export default function Order(props: Props) {
         }
     };
 
+    const getTotalPrice = (price: number, quantity: number, discount?: number) => {
+        const total = round(price * quantity, 2);
+        return discount
+            ? round(total - (total * discount), 2)
+            : total;
+    };
+
     return (
         <>
             <Paper variant={'outlined'}>
@@ -111,7 +118,8 @@ export default function Order(props: Props) {
                     <Stack flex={1} spacing={2}>
                         {
                             props.order.products.map(({product, quantity}) => (
-                                <Stack alignItems={'center'} direction={'row'} alignSelf={'end'} spacing={1} key={product.id}>
+                                <Stack alignItems={'center'} direction={'row'} alignSelf={'end'} spacing={1}
+                                       key={product.id}>
                                     <Typography>
                                         {product.title} {quantity > 1 ? `x${quantity}` : null}
                                     </Typography>
@@ -129,16 +137,16 @@ export default function Order(props: Props) {
                                     ? (
                                         <Stack alignSelf={'end'} direction={'row'} alignItems={'center'} spacing={1}>
                                             <Typography variant={'subtitle2'} sx={{textDecorationLine: 'line-through'}}>
-                                                ${product.price}
+                                                ${getTotalPrice(product.price, quantity)}
                                             </Typography>
                                             <Typography variant={'subtitle1'}>
-                                                ${round(product.price - (product.price * product.discount), 2)}
+                                                ${getTotalPrice(product.price, quantity, product.discount)}
                                             </Typography>
                                         </Stack>
                                     )
                                     : (
                                         <Typography textAlign={'right'} key={product.id}>
-                                            ${round((product.price * quantity), 2)}
+                                            ${getTotalPrice(product.price, quantity)}
                                         </Typography>
                                     )
                             ))
