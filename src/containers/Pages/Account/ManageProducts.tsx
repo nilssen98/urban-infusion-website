@@ -7,10 +7,11 @@ import {useUpdateProductPicture} from '../../../hooks/products/useUpdateProductP
 import {Dialog, DialogTitle, Fab, Stack, Tooltip} from '@mui/material';
 import {defaultProductImageURL, getProductImageURL} from '../../../utils/productImageUtils';
 import EditableProductCard from '../../../components/Cards/product-card/EditableProductCard';
-import {ProductDto, UpdateProductPictureDto} from '../../../api/urbaninfusion/dto/product-dto';
+import {AddProductDto, ProductDto, UpdateProductPictureDto} from '../../../api/urbaninfusion/dto/product-dto';
 import {useAddProduct} from '../../../hooks/products/useAddProduct';
 import AddIcon from '@mui/icons-material/Add';
 import CreatableProductCard from '../../../components/Cards/product-card/CreatableProductCard';
+import useCategories from '../../../hooks/categories/useCategories';
 
 export default function ManageProducts() {
     const [errorMessage, setErrorMessage] = useState<string>('');
@@ -18,11 +19,14 @@ export default function ManageProducts() {
     const [addingProduct, setAddingProduct] = useState<boolean>(false);
 
     const {isLoading: isLoadingProducts, data: products} = useProducts();
+    const {isLoading: isLoadingCategories, data: categories} = useCategories();
 
     const addProductMutation = useAddProduct();
     const deleteProductMutation = useDeleteProduct();
     const updateProductMutation = useUpdateProduct();
     const updateProductPictureMutation = useUpdateProductPicture();
+
+    const isLoading = isLoadingProducts || isLoadingCategories;
 
     const isError = useMemo(() => {
             return updateProductMutation.isError
@@ -51,6 +55,10 @@ export default function ManageProducts() {
         }, [isError]
     );
 
+    const handleAddProduct = (data: AddProductDto) => {
+        addProductMutation.mutate(data);
+    };
+
     const handleOpenAddProduct = () => {
         setAddingProduct(true);
         // addProductMutation.mutate();
@@ -74,7 +82,7 @@ export default function ManageProducts() {
 
     return (
         <>
-            <Page isLoading={isLoadingProducts}>
+            <Page isLoading={isLoading}>
                 <Tooltip title={'Add product'} placement={'left'}>
                     <Fab
                         color={'secondary'}
@@ -89,7 +97,11 @@ export default function ManageProducts() {
                 </Tooltip>
                 <Dialog open={addingProduct} onClose={handleCloseAddProduct}>
                     <DialogTitle>Add a product</DialogTitle>
-                    <CreatableProductCard/>
+                    <CreatableProductCard
+                        onCancel={handleCloseAddProduct}
+                        onAdd={handleAddProduct}
+                        categories={categories}
+                    />
                 </Dialog>
                 <Stack
                     flexWrap={'wrap'}

@@ -1,12 +1,12 @@
 import {useMutation, useQueryClient} from 'react-query';
 import {addProduct, deleteProduct} from '../../api/urbaninfusion/public/products';
-import {ProductDto} from '../../api/urbaninfusion/dto/product-dto';
+import {AddProductDto, ProductDto} from '../../api/urbaninfusion/dto/product-dto';
 
 export const useAddProduct = () => {
     const query = useQueryClient();
 
     return useMutation(
-        (data: Partial<ProductDto> & Pick<ProductDto, 'title' | 'price'>) => addProduct(data), {
+        (data: AddProductDto) => addProduct(data), {
             onSuccess: () => query.invalidateQueries(['products'])
         }
     );

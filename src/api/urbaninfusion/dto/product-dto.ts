@@ -16,3 +16,5 @@ export interface UpdateProductPictureDto {
     file: any;
     id: number;
 }
+
+export type AddProductDto = Partial<ProductDto> & Pick<ProductDto, 'price' | 'title' | 'category'>;
