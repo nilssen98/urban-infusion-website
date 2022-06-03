@@ -2,7 +2,7 @@ import Section from '../../Wrappers/Section';
 import {Stack, useTheme} from '@mui/material';
 import {ProductDto} from '../../../api/urbaninfusion/dto/product-dto';
 import {defaultProductImageURL, getProductImageURL} from '../../../utils/productImageUtils';
-import ProductCard from '../../Cards/ProductCard';
+import ProductCard from '../../Cards/product-card/ProductCard';
 import {range, sampleSize} from 'lodash-es';
 
 interface Props {

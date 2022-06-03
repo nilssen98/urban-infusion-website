@@ -1,7 +1,7 @@
 import {Button, Divider, Paper, PaperProps, Stack, Typography, useTheme} from '@mui/material';
 import {omit} from 'lodash-es';
-import {ProductDto} from '../../api/urbaninfusion/dto/product-dto';
-import UnstyledLink from '../UnstyledLink';
+import {ProductDto} from '../../../api/urbaninfusion/dto/product-dto';
+import UnstyledLink from '../../UnstyledLink';
 
 type Props = {
     data: ProductDto;

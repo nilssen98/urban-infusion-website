@@ -5,7 +5,8 @@ import useProducts from '../../hooks/products/useProducts';
 import {useMemo, useState} from 'react';
 import ProductsFilter from '../../components/Pages/Products/ProductsFilter';
 import {defaultProductImageURL, getProductImageURL} from '../../utils/productImageUtils';
-import ProductCard from '../../components/Cards/ProductCard';
+import ProductCard from '../../components/Cards/product-card/ProductCard';
+import {useAddProduct} from '../../hooks/products/useAddProduct';
 
 export enum OrderOption {
     ASCENDING = 'ascending',
@@ -21,6 +22,7 @@ export enum SortOption {
 
 export default function Products() {
     const {isLoading, data: products} = useProducts();
+
     const theme = useTheme();
     const {id} = useParams();
 

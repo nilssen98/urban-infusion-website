@@ -26,6 +26,12 @@ export async function deleteProduct(id: number): Promise<any> {
     ));
 }
 
+export async function addProduct(data: Partial<ProductDto> & Pick<ProductDto, 'price' | 'title'>): Promise<any> {
+    return (await axios.post(`${baseUrl}/products`,
+        {...data}
+    ));
+}
+
 export async function updateProductPicture(data: UpdateProductPictureDto): Promise<any> {
     const jwt = store.getState().user.jwt || '';
     console.log(data.file);

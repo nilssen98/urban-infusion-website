@@ -1,6 +1,6 @@
 import {Button, Divider, InputBase, Paper, PaperProps, Stack, Typography, useTheme} from '@mui/material';
 import {capitalize, omit} from 'lodash-es';
-import {ProductDto, UpdateProductPictureDto} from '../../api/urbaninfusion/dto/product-dto';
+import {ProductDto, UpdateProductPictureDto} from '../../../api/urbaninfusion/dto/product-dto';
 import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
 import AddPhotoAlternateOutlinedIcon from '@mui/icons-material/AddPhotoAlternateOutlined';
 import {ReactNode, useState} from 'react';
