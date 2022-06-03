@@ -1,5 +1,5 @@
 import {Button, Divider, Paper, PaperProps, Stack, Typography, useTheme} from '@mui/material';
-import {omit} from 'lodash-es';
+import {omit, round} from 'lodash-es';
 import {ProductDto} from '../../../api/urbaninfusion/dto/product-dto';
 import UnstyledLink from '../../UnstyledLink';
 
@@ -13,15 +13,14 @@ export default function ProductCard(props: Props) {
 
     const theme = useTheme();
 
+    const discountedPrice = round(props.data.price - (props.data.price * props.data.discount), 2);
+
     return (
         <>
             <Paper
                 variant={'outlined'}
                 {...paperProps}
-                sx={{
-                    width: 225,
-                    height: 350
-                }}
+                sx={{width: '100%', maxWidth: 225, position: 'relative'}}
             >
                 <Stack
                     textAlign={'center'}
@@ -29,6 +28,13 @@ export default function ProductCard(props: Props) {
                     justifyContent={'center'}
                     height={'100%'}
                 >
+                    {
+                        props.data.discount > 0 && (
+                            <Stack sx={{position: 'absolute', top: 5, left: 10}}>
+                                <Typography variant={'h6'} color={'error'}>-{props.data.discount * 100}%</Typography>
+                            </Stack>
+                        )
+                    }
                     {
                         props.img && (
                             <>
@@ -39,25 +45,45 @@ export default function ProductCard(props: Props) {
                                         justifyContent={'center'}
                                         sx={{cursor: 'pointer'}}
                                     >
-                                        <img loading={'lazy'} src={props.img} style={{width: '100%', height: 175}} alt={''}/>
+                                        <img loading={'lazy'} src={props.img} style={{height: 175}}
+                                             alt={''}/>
                                     </Stack>
                                 </UnstyledLink>
                                 <Divider flexItem/>
                             </>
                         )
                     }
-                    <Stack width={'100%'} flex={1} p={2} alignItems={'center'} justifyContent={'center'}>
+                    <Stack width={'100%'} flex={1} px={2} py={4} alignItems={'center'} justifyContent={'center'}>
                         <Typography variant={'h6'}>{props.data.title}</Typography>
                         <Stack direction={'row'} alignItems={'center'} spacing={1}>
-                            <Typography variant={'subtitle1'}>
-                                ${props.data.price}
-                            </Typography>
-                            <Typography
-                                variant={'subtitle2'}
-                                color={theme.palette.text.secondary}
-                            >
-                                / {props.data.weight}
-                            </Typography>
+                            {
+                                props.data.discount
+                                    ? (
+                                        <Stack direction={'row'} alignItems={'center'} spacing={1}>
+                                            <Typography variant={'subtitle2'} sx={{textDecorationLine: 'line-through'}}>
+                                                ${props.data.price}
+                                            </Typography>
+                                            <Typography variant={'subtitle1'}>
+                                                ${discountedPrice}
+                                            </Typography>
+                                        </Stack>
+                                    )
+                                    : (
+                                        <Typography variant={'subtitle1'}>
+                                            ${props.data.price}
+                                        </Typography>
+                                    )
+                            }
+                            {
+                                props.data.weight && (
+                                    <Typography
+                                        variant={'subtitle2'}
+                                        color={theme.palette.text.secondary}
+                                    >
+                                        / {props.data.weight}
+                                    </Typography>
+                                )
+                            }
                         </Stack>
                     </Stack>
                     <Divider flexItem/>

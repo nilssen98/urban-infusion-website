@@ -34,7 +34,7 @@ export default function App() {
     return (
         <QueryClientProvider client={queryClient}>
             <Provider store={store}>
-                {<ReactQueryDevtools initialIsOpen={false}/>}
+                {/*<ReactQueryDevtools initialIsOpen={false}/>*/}
                 <PersistGate persistor={persistor} loading={<div>Loading</div>}>
                     <ThemeProvider theme={getTheme(theme)}>
                         <CssBaseline/>
