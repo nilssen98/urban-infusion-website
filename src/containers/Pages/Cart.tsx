@@ -18,7 +18,7 @@ const dummyData: CartItem[] = [
         description: 'This item is crazy',
         weight: '50kg',
         comments: [],
-        category: Category.TEA
+        category: 'Tea'
     },
     {
         id: 1,
@@ -29,7 +29,7 @@ const dummyData: CartItem[] = [
         description: 'This item is very nice',
         weight: '65kg',
         comments: [],
-        category: Category.TEA
+        category: 'Tea'
     }
 ];
 
