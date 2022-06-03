@@ -111,18 +111,36 @@ export default function Order(props: Props) {
                     <Stack flex={1} spacing={2}>
                         {
                             props.order.products.map(({product, quantity}) => (
-                                <Typography textAlign={'right'} key={product.id}>
-                                    {product.title} x{quantity}
-                                </Typography>
+                                <Stack alignItems={'center'} direction={'row'} alignSelf={'end'} spacing={1} key={product.id}>
+                                    <Typography>
+                                        {product.title} {quantity > 1 ? `x${quantity}` : null}
+                                    </Typography>
+                                    <Typography color={'error'} variant={'subtitle2'}>
+                                        {product.discount > 0 ? `-${product.discount * 100}%` : null}
+                                    </Typography>
+                                </Stack>
                             ))
                         }
                     </Stack>
                     <Stack flex={1} spacing={2}>
                         {
                             props.order.products.map(({product, quantity}) => (
-                                <Typography textAlign={'right'} key={product.id}>
-                                    ${round((product.price * quantity), 2)}
-                                </Typography>
+                                product.discount > 0
+                                    ? (
+                                        <Stack alignSelf={'end'} direction={'row'} alignItems={'center'} spacing={1}>
+                                            <Typography variant={'subtitle2'} sx={{textDecorationLine: 'line-through'}}>
+                                                ${product.price}
+                                            </Typography>
+                                            <Typography variant={'subtitle1'}>
+                                                ${round(product.price - (product.price * product.discount), 2)}
+                                            </Typography>
+                                        </Stack>
+                                    )
+                                    : (
+                                        <Typography textAlign={'right'} key={product.id}>
+                                            ${round((product.price * quantity), 2)}
+                                        </Typography>
+                                    )
                             ))
                         }
                     </Stack>
