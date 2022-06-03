@@ -8,6 +8,7 @@ import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined
 import {InputBaseProps} from '@mui/material/InputBase/InputBase';
 import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
+import Input from '../../Input';
 
 const acceptedFormats = ['image/jpg', 'image/png', 'image/jpeg', 'image/webp'];
 
@@ -217,54 +218,6 @@ export default function EditableProductCard(props: Props) {
                     </Stack>
                 </Stack>
             </Paper>
-        </>
-    );
-}
-
-type InputProps = {
-    label?: string;
-    adornment?: string;
-    editing?: boolean;
-    value?: any;
-} & InputBaseProps;
-
-function Input(props: InputProps) {
-    const inputBaseProps = omit(props, ['label', 'adornment']);
-    const theme = useTheme();
-    return (
-        <>
-            <Stack width={'100%'} p={2} alignItems={'center'}>
-                {props.label && (
-                    <Typography
-                        sx={{userSelect: 'none'}}
-                        variant={'subtitle2'}
-                        alignSelf={'start'}
-                        color={theme.palette.text.secondary}
-                    >
-                        {props.label}
-                    </Typography>
-                )}
-                <Stack direction={'row'} width={'100%'} spacing={2} alignItems={'center'}>
-                    {props.adornment && (
-                        <Typography
-                            sx={{userSelect: 'none'}}
-                            variant={'subtitle2'}
-                            color={theme.palette.text.disabled}
-                        >
-                            {props.adornment}
-                        </Typography>
-                    )}
-                    {
-                        props.editing
-                            ? (<InputBase
-                                sx={{'*': {p: 0, m: 0}}}
-                                fullWidth
-                                {...inputBaseProps}
-                            />)
-                            : (<Typography textAlign={'left'}>{props.value}</Typography>)
-                    }
-                </Stack>
-            </Stack>
         </>
     );
 }

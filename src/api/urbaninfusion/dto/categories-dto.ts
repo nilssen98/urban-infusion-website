@@ -3,4 +3,4 @@ export enum Category {
     ACCESSORIES = 'ACCESSORIES'
 }
 
-export type CategoriesDto = Category[];
+export type CategoriesDto = string[];

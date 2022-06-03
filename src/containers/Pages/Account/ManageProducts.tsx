@@ -4,7 +4,7 @@ import useProducts from '../../../hooks/products/useProducts';
 import {useDeleteProduct} from '../../../hooks/products/useDeleteProduct';
 import {useUpdateProduct} from '../../../hooks/products/useUpdateProduct';
 import {useUpdateProductPicture} from '../../../hooks/products/useUpdateProductPicture';
-import {Dialog, Fab, Stack, Tooltip} from '@mui/material';
+import {Dialog, DialogTitle, Fab, Stack, Tooltip} from '@mui/material';
 import {defaultProductImageURL, getProductImageURL} from '../../../utils/productImageUtils';
 import EditableProductCard from '../../../components/Cards/product-card/EditableProductCard';
 import {ProductDto, UpdateProductPictureDto} from '../../../api/urbaninfusion/dto/product-dto';
@@ -88,6 +88,7 @@ export default function ManageProducts() {
                     </Fab>
                 </Tooltip>
                 <Dialog open={addingProduct} onClose={handleCloseAddProduct}>
+                    <DialogTitle>Add a product</DialogTitle>
                     <CreatableProductCard/>
                 </Dialog>
                 <Stack
