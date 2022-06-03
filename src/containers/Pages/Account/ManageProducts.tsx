@@ -1,10 +1,10 @@
 import Page from '../../../components/Wrappers/Page';
-import React, {useEffect, useMemo, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import useProducts from '../../../hooks/products/useProducts';
 import {useDeleteProduct} from '../../../hooks/products/useDeleteProduct';
 import {useUpdateProduct} from '../../../hooks/products/useUpdateProduct';
 import {useUpdateProductPicture} from '../../../hooks/products/useUpdateProductPicture';
-import {Dialog, DialogTitle, Fab, Stack, Tooltip} from '@mui/material';
+import {Alert, Dialog, DialogTitle, Fab, Snackbar, Stack, Tooltip} from '@mui/material';
 import {defaultProductImageURL, getProductImageURL} from '../../../utils/productImageUtils';
 import EditableProductCard from '../../../components/Cards/product-card/EditableProductCard';
 import {AddProductDto, ProductDto, UpdateProductPictureDto} from '../../../api/urbaninfusion/dto/product-dto';
@@ -14,6 +14,8 @@ import CreatableProductCard from '../../../components/Cards/product-card/Creatab
 import useCategories from '../../../hooks/categories/useCategories';
 
 export default function ManageProducts() {
+    const [successMessage, setSuccessMessage] = useState<string>('');
+    const [success, setSuccess] = useState<boolean>(false);
     const [errorMessage, setErrorMessage] = useState<string>('');
     const [error, setError] = useState<boolean>(false);
     const [addingProduct, setAddingProduct] = useState<boolean>(false);
@@ -21,47 +23,47 @@ export default function ManageProducts() {
     const {isLoading: isLoadingProducts, data: products} = useProducts();
     const {isLoading: isLoadingCategories, data: categories} = useCategories();
 
+    const isLoading = isLoadingProducts || isLoadingCategories;
+
     const addProductMutation = useAddProduct();
     const deleteProductMutation = useDeleteProduct();
     const updateProductMutation = useUpdateProduct();
     const updateProductPictureMutation = useUpdateProductPicture();
 
-    const isLoading = isLoadingProducts || isLoadingCategories;
+    const mutations = [
+        updateProductMutation,
+        deleteProductMutation,
+        updateProductPictureMutation,
+        addProductMutation
+    ];
 
-    const isError = useMemo(() => {
-            return updateProductMutation.isError
-                || deleteProductMutation.isError
-                || updateProductPictureMutation.isError
-                || addProductMutation.isError;
-        }, [
-            updateProductMutation.isError,
-            deleteProductMutation.isError,
-            updateProductPictureMutation.isError,
-            addProductMutation.isError
-        ]
-    );
+    const isError = mutations.map(m => m.isError).find(Boolean);
+    const isSuccess = mutations.map(m => m.isSuccess).find(Boolean);
 
     useEffect(() => {
             if (isError) {
-                const err: any = [
-                    updateProductMutation.error,
-                    deleteProductMutation.error,
-                    updateProductPictureMutation.error,
-                    addProductMutation.error,
-                ].find(Boolean) || 'An error occured, please try again...';
+                const err = mutations.map(m => m.error)
+                    .find(Boolean) || 'An error occured, please try again...';
                 setErrorMessage(err as string);
                 setError(true);
             }
         }, [isError]
     );
 
+    useEffect(() => {
+            if (isSuccess) {
+
+            }
+        }, [isSuccess]
+    );
+
     const handleAddProduct = (data: AddProductDto) => {
         addProductMutation.mutate(data);
+        handleCloseAddProduct();
     };
 
     const handleOpenAddProduct = () => {
         setAddingProduct(true);
-        // addProductMutation.mutate();
     };
 
     const handleCloseAddProduct = () => {
@@ -82,6 +84,14 @@ export default function ManageProducts() {
 
     return (
         <>
+            <Snackbar
+                open={error}
+                autoHideDuration={6000}
+                onClose={() => setError(false)}
+                anchorOrigin={{vertical: 'top', horizontal: 'center'}}
+            >
+                <Alert severity={'error'}>{errorMessage}</Alert>
+            </Snackbar>
             <Page isLoading={isLoading}>
                 <Tooltip title={'Add product'} placement={'left'}>
                     <Fab
