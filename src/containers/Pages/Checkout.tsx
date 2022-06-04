@@ -77,7 +77,7 @@ function Checkout(props: Props) {
 
     useEffect(() => {
         if (postOrderMutation.isSuccess) {
-            setSuccessMessage('Order placed successfully!');
+            setSuccessMessage('Order placed successfully! Redirecting...');
             setSuccess(true);
             setTimeout(() => {
                 navigate('/account/orders');
