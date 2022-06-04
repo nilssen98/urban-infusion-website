@@ -13,8 +13,6 @@ const mapStateToProps = (state: RootState) => {
 };
 
 const mapDispatchToProps = {
-    toggleTheme: userSlice.actions.toggleTheme,
-    setJwtToken: userSlice.actions.setJwtToken,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Checkout);
