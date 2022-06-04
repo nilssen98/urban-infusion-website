@@ -45,12 +45,9 @@ export default function Register() {
         window.addEventListener('keyup', onEnter, false);
         if (success) {
             window.removeEventListener('keyup', onEnter, false);
-            const timeout = setTimeout(() => {
+            setTimeout(() => {
                 navigate('/login');
             }, 2000);
-            return () => {
-                clearTimeout(timeout);
-            };
         }
         return () => {
             window.removeEventListener('keyup', onEnter, false);
