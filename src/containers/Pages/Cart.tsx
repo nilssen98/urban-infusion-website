@@ -53,13 +53,13 @@ function Cart(props: Props) {
         return round(getItemCount(item) * (item.price - (item.price * item.discount)), 2);
     };
 
-    const getTotalPrice = () => {
+    const getTotalPrice = (): number => {
         return round(props.cart.reduce((acc, curr) => {
             return acc + (curr.price - (curr.price * curr.discount));
         }, 0), 2);
     };
 
-    const getTotalSavings = () => {
+    const getTotalSavings = (): number => {
         return round(props.cart.reduce((acc, curr) => {
             if (curr.discount > 0) {
                 return acc + (curr.price * curr.discount);
