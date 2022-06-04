@@ -79,10 +79,13 @@ function Checkout(props: Props) {
         if (postOrderMutation.isSuccess) {
             setSuccessMessage('Order placed successfully! Redirecting...');
             setSuccess(true);
-            setTimeout(() => {
+            const timeout = setTimeout(() => {
                 navigate('/account/orders');
                 props.resetCart();
             }, 2000);
+            return () => {
+                clearTimeout(timeout);
+            }
         } else if (postOrderMutation.isError) {
             const msg = (postOrderMutation.error as any)?.response?.data || 'Unknown error occured, could not place the order, please try again...';
             setErrorMessage(msg);
