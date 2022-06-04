@@ -6,10 +6,12 @@ import {RootState} from '../../state/store';
 import {useNavigate} from 'react-router-dom';
 import SectionCard, {SectionCardItem} from '../../components/Cards/SectionCard';
 import LocalShippingOutlinedIcon from '@mui/icons-material/LocalShippingOutlined';
-import {FormControlLabel, Radio, RadioGroup, Stack, TextField} from '@mui/material';
+import {FormControlLabel, Radio, RadioGroup, Stack, TextField, Typography} from '@mui/material';
 import useMe from '../../hooks/users/useMe';
 import PaymentIcon from '@mui/icons-material/Payment';
 import VippsLogo from '../../assets/images/vipps-logo.svg';
+import MastercardLogo from '../../assets/images/mastercard-logo.svg';
+import VisaLogo from '../../assets/images/visa-logo.svg';
 
 const mapStateToProps = (state: RootState) => {
     return {
@@ -82,7 +84,11 @@ function Checkout(props: Props) {
                                                 <FormControlLabel
                                                     value={'card'}
                                                     control={<Radio/>}
-                                                    label={'Card'}
+                                                    label={<Stack direction={'row'} alignItems={'center'} spacing={4}>
+                                                        <Typography>Card</Typography>
+                                                        <img style={{height: 32, width: 48}} src={VisaLogo} alt={''}/>
+                                                        <img style={{height: 32, width: 48}} src={MastercardLogo} alt={''}/>
+                                                    </Stack>}
                                                 />
                                             </SectionCardItem>
                                             <SectionCardItem>
