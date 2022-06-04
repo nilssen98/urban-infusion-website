@@ -9,7 +9,7 @@ import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import Input from '../../Input';
 
-const acceptedFormats = ['image/jpg', 'image/png', 'image/jpeg', 'image/webp'];
+const acceptedFormats = ['image/jpg', 'image/png', 'image/jpeg', 'image/webp'].toString();
 
 type Props = {
     data: ProductDto;
@@ -87,6 +87,7 @@ export default function EditableProductCard(props: Props) {
                             loading={'lazy'}
                             src={props.img}
                             style={{width: 175, height: 175}}
+                            draggable={false}
                             alt={''}
                         />
                         <Stack
@@ -105,7 +106,7 @@ export default function EditableProductCard(props: Props) {
                                         }}
                                         type={'file'}
                                         multiple={false}
-                                        accept={acceptedFormats.toString()}
+                                        accept={acceptedFormats}
                                         onChange={handleUpdateProductPicture}
                                     />
                                     <AddPhotoAlternateOutlinedIcon
