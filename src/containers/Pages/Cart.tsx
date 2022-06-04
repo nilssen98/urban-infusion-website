@@ -28,12 +28,10 @@ interface CountedCartItem {
 function Cart(props: Props) {
     const theme = useTheme();
 
-    const getCartItems = () => {
+    const getCartItems = (): CountedCartItem[] => {
         const counts = countBy(props.cart, 'id');
         return uniqBy(props.cart, 'id')
-            .map(e => {
-                return {item: e, count: counts[e.id]};
-            });
+            .map(e => ({item: e, count: counts[e.id]}));
     };
 
     const getItemCount = (item: CartItem): number => {
