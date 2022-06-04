@@ -36,7 +36,7 @@ export default function EditableProductCard(props: Props) {
 
     const handleUpdateProduct = () => {
         props.onUpdateProduct({
-            id: props.data.imageId || -1,
+            id: props.data.id || -1,
             title,
             description,
             price,
