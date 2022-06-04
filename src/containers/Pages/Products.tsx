@@ -91,7 +91,7 @@ export default function Products() {
                                         filtered.map(product => (<ProductCard
                                             data={product}
                                             key={product.id}
-                                            img={getProductImageURL(product.imageId || -1)}
+                                            img={getProductImageURL(product.imageId)}
                                         />))
                                     }
                                 </Stack>

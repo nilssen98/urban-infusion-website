@@ -2,6 +2,7 @@ import {AddProductDto, ProductDto, UpdateProductPictureDto} from '../dto/product
 import axios from 'axios';
 import {baseUrl} from './public';
 import {store} from '../../../state/store';
+import placeholderImage from '../../../assets/images/no-image.svg';
 
 export async function getProducts(): Promise<ProductDto[]> {
     return (await axios.get<ProductDto[]>(`${baseUrl}/products`)).data;
@@ -45,6 +46,8 @@ export async function updateProductPicture(data: UpdateProductPictureDto): Promi
     ));
 }
 
-export function getProductImageURL(productID: number): string {
-    return `${baseUrl}/product-images/${productID}`;
+export function getProductImageURL(id?: number): string {
+    return id
+        ? `${baseUrl}/product-images/${id}`
+        : placeholderImage;
 }

@@ -148,7 +148,7 @@ export default function ManageProducts() {
                             onUpdateProduct={handleUpdateProduct}
                             onUpdateProductPicture={handleUpdateProductPicture}
                             key={product.id}
-                            img={`${getProductImageURL(product.imageId || -1)}#${Math.random()}`}
+                            img={`${getProductImageURL(product.imageId)}#${Math.random()}`}
                         />))
                     }
                 </Stack>

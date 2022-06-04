@@ -34,7 +34,7 @@ export default function FeaturedProductsSection(props: Props) {
                             <ProductCard
                                 key={product.id}
                                 data={product}
-                                img={getProductImageURL(product.imageId || -1)}
+                                img={getProductImageURL(product.imageId)}
                             />
                         ))
                     }

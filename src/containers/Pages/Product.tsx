@@ -63,7 +63,7 @@ export default function Product() {
                                         }
                                         <PictureBox
                                             height={400}
-                                            image={getProductImageURL(data.imageId || -1)}
+                                            image={getProductImageURL(data.imageId)}
                                         />
                                     </Stack>
                                     <Stack
