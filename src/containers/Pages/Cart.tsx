@@ -7,7 +7,6 @@ import {Button, Divider, Stack, Typography, useTheme} from '@mui/material';
 import {getProductImageURL} from '../../api/urbaninfusion/public/products';
 import {countBy, round, uniqBy} from 'lodash-es';
 import UnstyledLink from '../../components/UnstyledLink';
-import {useEffect} from 'react';
 
 const mapStateToProps = (state: RootState) => {
     return {
@@ -31,10 +30,10 @@ function Cart(props: Props) {
 
     const getCartItems = () => {
         const counts = countBy(props.cart, 'id');
-        return uniqBy(props.cart, 'id').reduce((acc, curr) => {
-            acc.push({item: curr, count: counts[curr.id]});
-            return acc;
-        }, [] as CountedCartItem[]);
+        return uniqBy(props.cart, 'id')
+            .map(e => {
+                return {item: e, count: counts[e.id]};
+            });
     };
 
     const getItemCount = (item: CartItem): number => {
