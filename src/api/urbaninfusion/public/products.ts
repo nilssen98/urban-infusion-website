@@ -44,3 +44,7 @@ export async function updateProductPicture(data: UpdateProductPictureDto): Promi
         {headers: {Authorization: jwt, 'Content-Type': 'Multipart/form-data'}}
     ));
 }
+
+export function getProductImageURL(productID: number): string {
+    return `${baseUrl}/product-images/${productID}`;
+}

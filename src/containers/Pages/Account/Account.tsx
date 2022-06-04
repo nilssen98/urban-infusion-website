@@ -15,7 +15,6 @@ import {
     useTheme
 } from '@mui/material';
 import React, {ReactElement, useEffect, useState} from 'react';
-import {stringToColor} from '../../../utils/avatarUtils';
 import Page from '../../../components/Wrappers/Page';
 import {connect} from 'react-redux';
 import {RootState} from '../../../state/store';
@@ -26,6 +25,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import {userSlice} from '../../../state/slices/user';
 import {UserRole} from '../../../api/urbaninfusion/dto/user-dto';
 import {last} from 'lodash-es';
+import {stringToColor} from '../../../utils/utils';
 
 const navigation = [
     'profile',

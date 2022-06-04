@@ -4,9 +4,8 @@ import Page from '../../components/Wrappers/Page';
 import useProducts from '../../hooks/products/useProducts';
 import {useMemo, useState} from 'react';
 import ProductsFilter from '../../components/Pages/Products/ProductsFilter';
-import {defaultProductImageURL, getProductImageURL} from '../../utils/productImageUtils';
 import ProductCard from '../../components/Cards/product-card/ProductCard';
-import {useAddProduct} from '../../hooks/products/useAddProduct';
+import {getProductImageURL} from '../../api/urbaninfusion/public/products';
 
 export enum OrderOption {
     ASCENDING = 'ascending',
@@ -92,9 +91,7 @@ export default function Products() {
                                         filtered.map(product => (<ProductCard
                                             data={product}
                                             key={product.id}
-                                            img={product.imageId
-                                                ? `${getProductImageURL(product.imageId)}`
-                                                : defaultProductImageURL}
+                                            img={getProductImageURL(product.imageId || -1)}
                                         />))
                                     }
                                 </Stack>

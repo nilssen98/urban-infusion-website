@@ -17,8 +17,8 @@ import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import {useEffect, useState} from 'react';
 import {register} from '../../api/urbaninfusion/public/register';
-import {isEmailAddress} from '../../utils/emailVerifier';
 import PasswordField from '../../components/PasswordField';
+import {isEmailAddress} from '../../utils/utils';
 
 export default function Register() {
     const [loading, setLoading] = useState<boolean>(false);

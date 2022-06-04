@@ -9,19 +9,11 @@ import {hexToRgb} from '../../utils/utils';
 import {useEffect, useState} from 'react';
 import CommentForm from '../../components/Pages/Product/CommentForm';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import {defaultProductImageURL, getProductImageURL} from '../../utils/productImageUtils';
 import useProduct from '../../hooks/products/useProduct';
 import {round} from 'lodash-es';
+import {getProductImageURL} from '../../api/urbaninfusion/public/products';
 
-interface Props {
-    image_url?: string;
-}
-
-Product.defaultProps = {
-    image_url: defaultProductImageURL,
-};
-
-export default function Product(props: Props) {
+export default function Product() {
     const {id} = useParams();
     const theme = useTheme();
     const navigate = useNavigate();
@@ -71,7 +63,7 @@ export default function Product(props: Props) {
                                         }
                                         <PictureBox
                                             height={400}
-                                            image={data.imageId ? getProductImageURL(data.imageId) : props.image_url}
+                                            image={getProductImageURL(data.imageId || -1)}
                                         />
                                     </Stack>
                                     <Stack

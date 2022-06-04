@@ -5,13 +5,13 @@ import {useDeleteProduct} from '../../../hooks/products/useDeleteProduct';
 import {useUpdateProduct} from '../../../hooks/products/useUpdateProduct';
 import {useUpdateProductPicture} from '../../../hooks/products/useUpdateProductPicture';
 import {Alert, Dialog, DialogTitle, Fab, Snackbar, Stack, Tooltip} from '@mui/material';
-import {defaultProductImageURL, getProductImageURL} from '../../../utils/productImageUtils';
 import EditableProductCard from '../../../components/Cards/product-card/EditableProductCard';
 import {AddProductDto, ProductDto, UpdateProductPictureDto} from '../../../api/urbaninfusion/dto/product-dto';
 import {useAddProduct} from '../../../hooks/products/useAddProduct';
 import AddIcon from '@mui/icons-material/Add';
 import CreatableProductCard from '../../../components/Cards/product-card/CreatableProductCard';
 import useCategories from '../../../hooks/categories/useCategories';
+import {getProductImageURL} from '../../../api/urbaninfusion/public/products';
 
 export default function ManageProducts() {
     const [successMessage, setSuccessMessage] = useState<string>('');
@@ -148,9 +148,7 @@ export default function ManageProducts() {
                             onUpdateProduct={handleUpdateProduct}
                             onUpdateProductPicture={handleUpdateProductPicture}
                             key={product.id}
-                            img={product.imageId
-                                ? `${getProductImageURL(product.imageId)}#${Math.random()}`
-                                : defaultProductImageURL}
+                            img={`${getProductImageURL(product.imageId || -1)}#${Math.random()}`}
                         />))
                     }
                 </Stack>

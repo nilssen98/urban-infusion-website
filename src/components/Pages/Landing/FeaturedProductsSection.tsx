@@ -1,9 +1,9 @@
 import Section from '../../Wrappers/Section';
 import {Stack, useTheme} from '@mui/material';
 import {ProductDto} from '../../../api/urbaninfusion/dto/product-dto';
-import {defaultProductImageURL, getProductImageURL} from '../../../utils/productImageUtils';
 import ProductCard from '../../Cards/product-card/ProductCard';
 import {range, sampleSize} from 'lodash-es';
+import {getProductImageURL} from '../../../api/urbaninfusion/public/products';
 
 interface Props {
     products: ProductDto[];
@@ -34,9 +34,7 @@ export default function FeaturedProductsSection(props: Props) {
                             <ProductCard
                                 key={product.id}
                                 data={product}
-                                img={product.imageId
-                                    ? getProductImageURL(product.imageId)
-                                    : defaultProductImageURL}
+                                img={getProductImageURL(product.imageId || -1)}
                             />
                         ))
                     }

@@ -1,6 +1,6 @@
 import {Avatar, Button, Divider, Stack, Tooltip, Typography} from '@mui/material';
 import {formatDate} from '../../../utils/dateParser';
-import {stringToColor} from '../../../utils/avatarUtils';
+import {stringToColor} from '../../../utils/utils';
 
 interface Props {
     id?: number;
