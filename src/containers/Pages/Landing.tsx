@@ -14,7 +14,7 @@ export default function Landing() {
             <Box>
                 <HeroSection
                     title={'Find your herbal friend'}
-                    description={'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'}
+                    description={'High quality tea sourced from more than 140 different countries'}
                 />
                 <FeaturedProductsSection products={products || []}/>
                 <FeaturesSection/>
