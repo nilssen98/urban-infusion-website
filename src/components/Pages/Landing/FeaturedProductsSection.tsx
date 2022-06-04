@@ -7,6 +7,7 @@ import {getProductImageURL} from '../../../api/urbaninfusion/public/products';
 
 interface Props {
     products: ProductDto[];
+    onAddToCard: (product: ProductDto) => void;
 }
 
 export default function FeaturedProductsSection(props: Props) {
@@ -32,6 +33,7 @@ export default function FeaturedProductsSection(props: Props) {
                     {
                         getFeaturedProducts(4)?.map(product => (
                             <ProductCard
+                                onAddToCart={props.onAddToCard}
                                 key={product.id}
                                 data={product}
                                 img={getProductImageURL(product.imageId)}

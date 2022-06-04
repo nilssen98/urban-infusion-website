@@ -6,14 +6,19 @@ import UnstyledLink from '../../UnstyledLink';
 type Props = {
     data: ProductDto;
     img?: string;
+    onAddToCart: (product: ProductDto) => void;
 } & PaperProps;
 
 export default function ProductCard(props: Props) {
-    const paperProps = omit(props, ['data']);
+    const paperProps = omit(props, ['data', 'img', 'onAddToCart']);
 
     const theme = useTheme();
 
     const discountedPrice = round(props.data.price - (props.data.price * props.data.discount), 2);
+
+    const handleAddToCart = () => {
+        props.onAddToCart(props.data);
+    };
 
     return (
         <>
@@ -31,7 +36,8 @@ export default function ProductCard(props: Props) {
                     {
                         props.data.discount > 0 && (
                             <Stack sx={{position: 'absolute', top: 5, left: 10}}>
-                                <Typography variant={'h6'} color={'error'}>-{round(props.data.discount * 100, 2)}%</Typography>
+                                <Typography variant={'h6'}
+                                            color={'error'}>-{round(props.data.discount * 100, 2)}%</Typography>
                             </Stack>
                         )
                     }
@@ -89,6 +95,7 @@ export default function ProductCard(props: Props) {
                     <Divider flexItem/>
                     <Stack width={'100%'}>
                         <Button
+                            onClick={handleAddToCart}
                             variant={'contained'}
                             sx={{
                                 boxShadow: 'none',

@@ -2,10 +2,14 @@ import {Divider, Stack, Typography, useTheme} from '@mui/material';
 import {useParams} from 'react-router-dom';
 import Page from '../../components/Wrappers/Page';
 import useProducts from '../../hooks/products/useProducts';
-import {useMemo, useState} from 'react';
+import {ReactElement, useMemo, useState} from 'react';
 import ProductsFilter from '../../components/Pages/Products/ProductsFilter';
 import ProductCard from '../../components/Cards/product-card/ProductCard';
 import {getProductImageURL} from '../../api/urbaninfusion/public/products';
+import {ProductDto} from '../../api/urbaninfusion/dto/product-dto';
+import {RootState} from '../../state/store';
+import {cartSlice, selectCartItems} from '../../state/slices/cart';
+import {connect} from 'react-redux';
 
 export enum OrderOption {
     ASCENDING = 'ascending',
@@ -19,7 +23,21 @@ export enum SortOption {
     WEIGHT = 'weight'
 }
 
-export default function Products() {
+const mapStateToProps = (state: RootState) => {
+    return {
+        cart: selectCartItems(state.cart).map(item => item),
+    };
+};
+
+const mapDispatchToProps = {
+    addToCart: cartSlice.actions.add
+};
+
+type Props = ReturnType<typeof mapStateToProps> & typeof mapDispatchToProps & {};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Products);
+
+function Products(props: Props) {
     const {isLoading, data: products} = useProducts();
 
     const theme = useTheme();
@@ -49,12 +67,16 @@ export default function Products() {
         return temp;
     }, [products, id, sort, order]);
 
-    const onSort = (newValue: SortOption) => {
+    const handleSort = (newValue: SortOption) => {
         setSort(newValue);
     };
 
-    const onOrder = (newValue: OrderOption) => {
+    const handleOrder = (newValue: OrderOption) => {
         setOrder(newValue);
+    };
+
+    const handleAddToCart = (product: ProductDto) => {
+        props.addToCart(product);
     };
 
     return (
@@ -69,8 +91,8 @@ export default function Products() {
                         <ProductsFilter
                             sort={sort}
                             order={order}
-                            onSort={onSort}
-                            onOrder={onOrder}
+                            onSort={handleSort}
+                            onOrder={handleOrder}
                         />
                     </Stack>
                     <Divider flexItem sx={{width: '100vw', marginLeft: -4}}/>
@@ -89,6 +111,7 @@ export default function Products() {
                                 >
                                     {
                                         filtered.map(product => (<ProductCard
+                                            onAddToCart={handleAddToCart}
                                             data={product}
                                             key={product.id}
                                             img={getProductImageURL(product.imageId)}
