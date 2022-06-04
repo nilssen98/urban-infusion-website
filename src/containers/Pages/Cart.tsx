@@ -90,7 +90,7 @@ function Cart(props: Props) {
                                                 <Typography flex={1}>${itemTotalPrice}</Typography>
                                             </Stack>
                                         ))
-                                        : <Typography textAlign={'left'}>The cart is empty</Typography>
+                                        : <Typography textAlign={'center'}>The cart is empty</Typography>
                                 }
                             </Stack>
                             <Divider/>

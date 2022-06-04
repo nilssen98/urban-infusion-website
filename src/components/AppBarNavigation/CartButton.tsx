@@ -15,10 +15,6 @@ export default function CartButton(props: Props) {
             <Tooltip arrow title={'Cart'}>
                 <IconButton
                     onClick={() => navigate('/cart')}
-                    sx={{
-                        width: theme.mixins.toolbar.minHeight,
-                        height: theme.mixins.toolbar.minHeight,
-                    }}
                 >
                     <Badge
                         badgeContent={props.itemsCount}
@@ -28,7 +24,7 @@ export default function CartButton(props: Props) {
                             horizontal: 'right',
                         }}
                     >
-                        <ShoppingCartOutlinedIcon sx={{width: 32, height: 32}} color={'action'}/>
+                        <ShoppingCartOutlinedIcon sx={{width: 32, height: 32}} color={'primary'}/>
                     </Badge>
                 </IconButton>
             </Tooltip>
