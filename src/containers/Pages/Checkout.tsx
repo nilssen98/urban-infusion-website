@@ -57,6 +57,9 @@ function Checkout(props: Props) {
     const [error, setError] = useState<boolean>(false);
     const [errorMessage, setErrorMessage] = useState<string>('An error has occured');
 
+    const [success, setSuccess] = useState<boolean>(false);
+    const [successMessage, setSuccessMessage] = useState<string>('Success!');
+
     const postOrderMutation = usePostOrder();
 
     const {isLoading: isLoadingMe, data: me} = useMe();
@@ -74,8 +77,12 @@ function Checkout(props: Props) {
 
     useEffect(() => {
         if (postOrderMutation.isSuccess) {
-            props.resetCart();
-            navigate('/account/orders');
+            setSuccessMessage('Order placed successfully!');
+            setSuccess(true);
+            setTimeout(() => {
+                navigate('/account/orders');
+                props.resetCart();
+            }, 2000);
         } else if (postOrderMutation.isError) {
             const msg = (postOrderMutation.error as any)?.response?.data || 'Unknown error occured, could not place the order, please try again...';
             setErrorMessage(msg);
@@ -96,8 +103,16 @@ function Checkout(props: Props) {
     return (
         <>
             <Snackbar
+                open={success}
+                onClose={() => setSuccess(false)}
+                autoHideDuration={5000}
+                anchorOrigin={{horizontal: 'center', vertical: 'top'}}
+            >
+                <Alert severity={'success'}>{successMessage}</Alert>
+            </Snackbar>
+            <Snackbar
                 open={error}
-                autoHideDuration={6000}
+                autoHideDuration={5000}
                 onClose={() => setError(false)}
                 anchorOrigin={{vertical: 'top', horizontal: 'center'}}
             >
