@@ -56,13 +56,22 @@ export default function Product(props: Props) {
                                     <Stack
                                         justifyContent={'center'}
                                         alignItems={'center'}
+                                        sx={{
+                                            paddingLeft: {xs: 0, md: 6, lg: 28},
+                                    }}
                                     >
+                                        {
+                                            data.discount !== 0 && (
+                                                <Stack sx={{position: 'relative', top: 20, right: 160}}>
+                                                    <Typography variant={'h5'} color={'error'}>
+                                                        -{round(data.discount * 100, 2)}%
+                                                    </Typography>
+                                                </Stack>
+                                            )
+                                        }
                                         <PictureBox
                                             height={400}
                                             image={data.imageId ? getProductImageURL(data.imageId) : props.image_url}
-                                            sx={{
-                                                paddingLeft: {xs: 0, md: 6, lg: 28}
-                                            }}
                                         />
                                     </Stack>
                                     <Stack
