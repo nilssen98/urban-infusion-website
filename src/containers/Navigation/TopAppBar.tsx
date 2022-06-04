@@ -7,14 +7,13 @@ import {userSlice} from '../../state/slices/user';
 import CartButton from '../../components/AppBarNavigation/CartButton';
 import AccountButton from '../../components/AppBarNavigation/AccountButton';
 import {connect} from 'react-redux';
-import {selectCartItems} from '../../state/slices/cart';
 import UnstyledLink from '../../components/UnstyledLink';
 import ProductNavigation from './ProductNavigation';
 import useMe from '../../hooks/users/useMe';
 
 const mapStateToProps = (state: RootState) => {
     return {
-        cartItemCount: selectCartItems(state.cart).length,
+        cartItemCount: state.cart.items.length,
         themeColor: state.user.theme,
         isAuthenticated: state.user.jwt !== undefined,
     };

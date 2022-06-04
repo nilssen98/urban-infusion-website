@@ -1,30 +1,41 @@
 import Section from '../../components/Wrappers/Section';
 import {RootState} from '../../state/store';
-import {CartItem, selectCartItems} from '../../state/slices/cart';
+import {CartItem} from '../../state/slices/cart';
 import {connect} from 'react-redux';
-import {ReactElement} from 'react';
 import Page from '../../components/Wrappers/Page';
 import {Button, Divider, Stack, Typography, useTheme} from '@mui/material';
 import {getProductImageURL} from '../../api/urbaninfusion/public/products';
-import {round} from 'lodash-es';
+import {countBy, round, uniqBy} from 'lodash-es';
 import UnstyledLink from '../../components/UnstyledLink';
+import {useEffect} from 'react';
 
 const mapStateToProps = (state: RootState) => {
     return {
-        cart: selectCartItems(state.cart).map(item => item),
+        cart: state.cart.items,
     };
 };
 
 const mapDispatchToProps = {};
 
-type Props = ReturnType<typeof mapStateToProps> & typeof mapDispatchToProps & {
-    children?: ReactElement;
-};
+type Props = ReturnType<typeof mapStateToProps> & typeof mapDispatchToProps & {};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart);
 
+interface CountedCartItem {
+    item: CartItem;
+    count: number;
+}
+
 function Cart(props: Props) {
     const theme = useTheme();
+
+    const getCartItems = () => {
+        const counts = countBy(props.cart, 'id');
+        return uniqBy(props.cart, 'id').reduce((acc, curr) => {
+            acc.push({item: curr, count: counts[curr.id]});
+            return acc;
+        }, [] as CountedCartItem[]);
+    };
 
     const getItemCount = (item: CartItem): number => {
         return props.cart.filter(e => e.id === item.id).length;
@@ -71,7 +82,7 @@ function Cart(props: Props) {
                                     <Divider/>
                                     <Stack spacing={4}>
                                         {
-                                            props.cart.map(item => (
+                                            getCartItems().map(({item, count}) => (
                                                 <Stack direction={'row'} alignItems={'center'} key={item.id}>
                                                     <Stack flex={1} direction={'row'} alignItems={'center'} spacing={2}>
                                                         <img
@@ -82,7 +93,7 @@ function Cart(props: Props) {
                                                         <Typography flex={1} textAlign={'left'}>{item.title}</Typography>
                                                     </Stack>
                                                     <Typography flex={1}>${getItemPrice(item)}</Typography>
-                                                    <Typography flex={1}>{getItemCount(item)}</Typography>
+                                                    <Typography flex={1}>{count}</Typography>
                                                     <Typography flex={1}>${getItemTotalPrice(item)}</Typography>
                                                 </Stack>
                                             ))
@@ -95,9 +106,12 @@ function Cart(props: Props) {
                                             <Typography fontWeight={600}>${getTotalPrice()}</Typography>
                                         </Stack>
                                         <Stack justifyContent={'space-between'} direction={'row'}>
-                                            <Typography>Savings on this order</Typography>
-                                            <Typography fontWeight={600}
-                                                        sx={{color: theme.palette.success.main}}>${getTotalSavings()}</Typography>
+                                            <Typography>
+                                                Savings on this order
+                                            </Typography>
+                                            <Typography fontWeight={600} sx={{color: theme.palette.success.main}}>
+                                                ${getTotalSavings()}
+                                            </Typography>
                                         </Stack>
                                     </Stack>
                                     <Divider/>
@@ -114,7 +128,8 @@ function Cart(props: Props) {
                                 </Stack>
                             )
                             : (
-                                <Stack width={'100%'} height={500} justifyContent={'center'} alignItems={'center'} spacing={4}>
+                                <Stack width={'100%'} height={500} justifyContent={'center'} alignItems={'center'}
+                                       spacing={4}>
                                     <Typography variant={'h5'}>The cart is empty</Typography>
                                     <UnstyledLink to={'/products/all'}>
                                         <Button variant={'contained'}>Continue shopping</Button>

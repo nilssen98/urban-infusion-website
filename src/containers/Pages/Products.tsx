@@ -8,7 +8,7 @@ import ProductCard from '../../components/Cards/product-card/ProductCard';
 import {getProductImageURL} from '../../api/urbaninfusion/public/products';
 import {ProductDto} from '../../api/urbaninfusion/dto/product-dto';
 import {RootState} from '../../state/store';
-import {cartSlice, selectCartItems} from '../../state/slices/cart';
+import {cartSlice} from '../../state/slices/cart';
 import {connect} from 'react-redux';
 
 export enum OrderOption {
@@ -25,12 +25,12 @@ export enum SortOption {
 
 const mapStateToProps = (state: RootState) => {
     return {
-        cart: selectCartItems(state.cart).map(item => item),
+        cart: state.cart.items,
     };
 };
 
 const mapDispatchToProps = {
-    addToCart: cartSlice.actions.add
+    addToCart: cartSlice.actions.addOne
 };
 
 type Props = ReturnType<typeof mapStateToProps> & typeof mapDispatchToProps & {};
