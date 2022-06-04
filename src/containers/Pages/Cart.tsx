@@ -1,18 +1,20 @@
 import Section from '../../components/Wrappers/Section';
 import {RootState, store} from '../../state/store';
-import CartItemList from '../../components/Pages/CartPage/CartItemList';
 import {CartItem, cartSlice, selectCartItems} from '../../state/slices/cart';
 import {connect} from 'react-redux';
-import {useEffect} from 'react';
+import {ReactElement, useEffect} from 'react';
 import Page from '../../components/Wrappers/Page';
-import {useTheme} from '@mui/material';
+import {Button, Divider, Stack, Typography, useTheme} from '@mui/material';
+import {getProductImageURL} from '../../api/urbaninfusion/public/products';
+import {round} from 'lodash-es';
+import UnstyledLink from '../../components/UnstyledLink';
 
 const dummyData: CartItem[] = [
     {
         id: 0,
         price: 10,
         discount: 0.5,
-        imageId: null,
+        imageId: 0,
         title: 'Some crazy item',
         description: 'This item is crazy',
         weight: '50kg',
@@ -23,7 +25,7 @@ const dummyData: CartItem[] = [
         id: 1,
         price: 20,
         discount: 0.0,
-        imageId: null,
+        imageId: 0,
         title: 'Very nice item',
         description: 'This item is very nice',
         weight: '65kg',
@@ -32,7 +34,19 @@ const dummyData: CartItem[] = [
     }
 ];
 
-type Props = StateProps;
+const mapStateToProps = (state: RootState) => {
+    return {
+        cart: selectCartItems(state.cart).map(item => item),
+    };
+};
+
+const mapDispatchToProps = {};
+
+type Props = ReturnType<typeof mapStateToProps> & typeof mapDispatchToProps & {
+    children?: ReactElement;
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Cart);
 
 function Cart(props: Props) {
     const theme = useTheme();
@@ -43,25 +57,70 @@ function Cart(props: Props) {
         }
     });
 
+    const getItemCount = (item: CartItem): number => {
+        return props.cart.filter(e => e.id === item.id).length;
+    };
+
+    const getItemTotalPrice = (item: CartItem): number => {
+        return round(getItemCount(item) * item.price, 2);
+    };
+
     return (
         <>
             <Page>
                 <Section>
-                    <CartItemList items={props.cart}/>
+                    <Stack direction={'column'} width={'100%'} textAlign={'right'} spacing={4}>
+                        <Stack direction={'row'}>
+                            <Typography flex={1} textAlign={'left'}>Product</Typography>
+                            <Typography flex={1}>Price</Typography>
+                            <Typography flex={1}>Quantity</Typography>
+                            <Typography flex={1}>Total</Typography>
+                        </Stack>
+                        <Divider/>
+                        <Stack spacing={4}>
+                            {
+                                props.cart.map(item => (
+                                    <Stack direction={'row'} alignItems={'center'} key={item.id}>
+                                        <Stack flex={1} direction={'row'} alignItems={'center'} spacing={2}>
+                                            <img
+                                                style={{height: 64, width: 64}}
+                                                src={getProductImageURL(item.imageId)}
+                                                alt={''}
+                                            />
+                                            <Typography flex={1} textAlign={'left'}>{item.title}</Typography>
+                                        </Stack>
+                                        <Typography flex={1}>${item.price}</Typography>
+                                        <Typography flex={1}>{getItemCount(item)}</Typography>
+                                        <Typography flex={1}>${getItemTotalPrice(item)}</Typography>
+                                    </Stack>
+                                ))
+                            }
+                        </Stack>
+                        <Divider/>
+                        <Stack spacing={2}>
+                            <Stack justifyContent={'space-between'} direction={'row'}>
+                                <Typography>Subtotal</Typography>
+                                <Typography fontWeight={600}>$69</Typography>
+                            </Stack>
+                            <Stack justifyContent={'space-between'} direction={'row'}>
+                                <Typography>Savings on this order</Typography>
+                                <Typography fontWeight={600} sx={{color: theme.palette.success.main}}>$0</Typography>
+                            </Stack>
+                        </Stack>
+                        <Divider/>
+                        <Stack alignItems={'end'}>
+                            <Stack direction={'row'} spacing={4}>
+                                <UnstyledLink to={'/products/all'}>
+                                    <Button>Continue shopping</Button>
+                                </UnstyledLink>
+                                <UnstyledLink to={'/checkout'}>
+                                    <Button variant={'contained'} size={'large'}>Checkout</Button>
+                                </UnstyledLink>
+                            </Stack>
+                        </Stack>
+                    </Stack>
                 </Section>
             </Page>
         </>
     );
 }
-
-interface StateProps {
-    cart: CartItem[];
-}
-
-function mapStateToProps(state: RootState): StateProps {
-    return {
-        cart: selectCartItems(state.cart).map(item => item),
-    };
-}
-
-export default connect(mapStateToProps)(Cart);
