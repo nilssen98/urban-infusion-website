@@ -29,3 +29,12 @@ export interface OrderStatusUpdateDto {
     id: number;
     status: OrderStatus;
 }
+
+export interface PostOrderProductDto {
+    id: number;
+    quantity: number;
+}
+
+export interface PostOrderDto {
+    products: PostOrderProductDto[];
+}
