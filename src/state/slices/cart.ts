@@ -7,6 +7,7 @@ import {
     PayloadAction
 } from '@reduxjs/toolkit';
 import {ProductDto} from '../../api/urbaninfusion/dto/product-dto';
+import {remove} from 'lodash-es';
 
 export type CartItem = ProductDto;
 
@@ -29,8 +30,8 @@ export const cartSlice = createSlice({
         addOne: (state: Draft<Cart>, action: PayloadAction<CartItem>) => {
             state.items.push(action.payload);
         },
-        remove: (state: Draft<Cart>, action: PayloadAction<CartItem>) => {
-            // cartAdapter.removeOne(state.items, action.payload.id);
+        removeOne: (state: Draft<Cart>, action: PayloadAction<CartItem>) => {
+            remove(state.items, action.payload);
         }
     }
 });
