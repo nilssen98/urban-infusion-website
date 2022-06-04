@@ -21,7 +21,7 @@ type Props = ReturnType<typeof mapStateToProps> & typeof mapDispatchToProps & {
 export default connect(mapStateToProps, mapDispatchToProps)(Orders);
 
 function Orders(props: Props) {
-    const {isLoading: isLoadingMe, isError, data: user} = useMe(props.isAuthenticated);
+    const {isLoading: isLoadingMe, data: user} = useMe(props.isAuthenticated);
     const {isLoading: isLoadingUserOrders, data: userOrders} = useUserOrders(user?.id);
 
     const isLoading = isLoadingMe || isLoadingUserOrders;
