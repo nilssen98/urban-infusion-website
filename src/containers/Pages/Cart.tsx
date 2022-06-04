@@ -35,7 +35,10 @@ function Cart(props: Props) {
     const getCartItems = (): CountedCartItem[] => {
         const counts = countBy(props.cart, 'id');
         return uniqBy(props.cart, 'id')
-            .map(e => ({item: e, count: counts[e.id]}));
+            .map(e => ({item: e, count: counts[e.id]}))
+            .sort((a, b) => {
+                return b.item.id - a.item.id;
+            });
     };
 
     const getItemCount = (item: CartItem): number => {
