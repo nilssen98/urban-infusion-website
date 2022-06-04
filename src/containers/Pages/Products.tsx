@@ -1,8 +1,8 @@
-import {Divider, Stack, Typography, useTheme} from '@mui/material';
+import {Alert, Divider, Snackbar, Stack, Typography, useTheme} from '@mui/material';
 import {useParams} from 'react-router-dom';
 import Page from '../../components/Wrappers/Page';
 import useProducts from '../../hooks/products/useProducts';
-import {ReactElement, useMemo, useState} from 'react';
+import React, {ReactElement, useMemo, useState} from 'react';
 import ProductsFilter from '../../components/Pages/Products/ProductsFilter';
 import ProductCard from '../../components/Cards/product-card/ProductCard';
 import {getProductImageURL} from '../../api/urbaninfusion/public/products';
@@ -45,6 +45,8 @@ function Products(props: Props) {
 
     const [order, setOrder] = useState<OrderOption>(OrderOption.DESCENDING);
     const [sort, setSort] = useState<SortOption>(SortOption.NAME);
+    const [success, setSuccess] = useState<boolean>(false);
+    const [successMessage, setSuccessMessage] = useState<string>('Success!');
 
     const filtered = useMemo(() => {
         let temp = [...(products || [])];
@@ -77,10 +79,20 @@ function Products(props: Props) {
 
     const handleAddToCart = (product: ProductDto) => {
         props.addToCart(product);
+        setSuccess(true);
+        setSuccessMessage('Item added to cart!');
     };
 
     return (
         <>
+            <Snackbar
+                open={success}
+                onClose={() => setSuccess(false)}
+                autoHideDuration={500}
+                anchorOrigin={{horizontal: 'center', vertical: 'top'}}
+            >
+                <Alert severity={'success'}>{successMessage}</Alert>
+            </Snackbar>
             <Page isLoading={isLoading}>
                 <Stack width={'100%'} alignItems={'center'} px={4}>
                     <Stack
