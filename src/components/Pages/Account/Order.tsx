@@ -8,6 +8,7 @@ import LocalShippingOutlinedIcon from '@mui/icons-material/LocalShippingOutlined
 import DoneOutlineOutlinedIcon from '@mui/icons-material/DoneOutlineOutlined';
 import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
 import {enumValues} from '../../../utils/utils';
+import UnstyledLink from '../../UnstyledLink';
 
 interface Props {
     order: OrderDto;
@@ -121,7 +122,8 @@ export default function Order(props: Props) {
                                 <Stack alignItems={'center'} direction={'row'} alignSelf={'end'} spacing={1}
                                        key={product.id}>
                                     <Typography>
-                                        {product.title} {quantity > 1 ? `x${quantity}` : null}
+                                        <UnstyledLink to={`/product/${product.id}`}>{product.title}</UnstyledLink>
+                                        <span> {quantity > 1 ? `x${quantity}` : null}</span>
                                     </Typography>
                                     <Typography color={'error'} variant={'subtitle2'}>
                                         {product.discount > 0 ? `-${product.discount * 100}%` : null}
