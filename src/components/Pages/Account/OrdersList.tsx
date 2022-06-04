@@ -17,7 +17,7 @@ export default function OrdersList(props: Props) {
             {
                 props.orders && props.orders.length > 0
                     ? (
-                        props.orders?.map(order => (
+                        props.orders?.map((order) => (
                             <Order
                                 key={order.orderId}
                                 order={order}

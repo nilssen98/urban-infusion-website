@@ -135,7 +135,7 @@ export default function Order(props: Props) {
                             props.order.products.map(({product, quantity}) => (
                                 product.discount > 0
                                     ? (
-                                        <Stack alignSelf={'end'} direction={'row'} alignItems={'center'} spacing={1}>
+                                        <Stack key={product.id} alignSelf={'end'} direction={'row'} alignItems={'center'} spacing={1}>
                                             <Typography variant={'subtitle2'} sx={{textDecorationLine: 'line-through'}}>
                                                 ${getTotalPrice(product.price, quantity)}
                                             </Typography>
