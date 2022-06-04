@@ -116,9 +116,9 @@ function Cart(props: Props) {
                                     </Stack>
                                     <Divider/>
                                     <Stack alignItems={'end'}>
-                                        <Stack direction={'row'} spacing={4}>
+                                        <Stack direction={'row'} spacing={2} alignItems={'center'}>
                                             <UnstyledLink to={'/products/all'}>
-                                                <Button>Continue shopping</Button>
+                                                <Button size={'large'}>Continue shopping</Button>
                                             </UnstyledLink>
                                             <UnstyledLink to={'/checkout'}>
                                                 <Button variant={'contained'} size={'large'}>Checkout</Button>
