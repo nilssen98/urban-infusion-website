@@ -8,6 +8,7 @@ import {getProductImageURL} from '../../api/urbaninfusion/public/products';
 import {countBy, round, uniqBy} from 'lodash-es';
 import UnstyledLink from '../../components/UnstyledLink';
 import Counter from '../../components/Counter';
+import {getCartItems, getTotalPrice, getTotalSavings} from '../../utils/cartUtils';
 
 const mapStateToProps = (state: RootState) => {
     return {
@@ -31,43 +32,6 @@ interface CountedCartItem {
 
 function Cart(props: Props) {
     const theme = useTheme();
-
-    const getCartItems = (): CountedCartItem[] => {
-        const counts = countBy(props.cart, 'id');
-        return uniqBy(props.cart, 'id')
-            .map(e => ({item: e, count: counts[e.id]}))
-            .sort((a, b) => {
-                return b.item.id - a.item.id;
-            });
-    };
-
-    const getItemCount = (item: CartItem): number => {
-        return props.cart.filter(e => e.id === item.id).length;
-    };
-
-    const getItemPrice = (item: CartItem): number => {
-        return round(item.price - (item.price * item.discount), 2);
-    };
-
-    const getItemTotalPrice = (item: CartItem): number => {
-        return round(getItemCount(item) * (item.price - (item.price * item.discount)), 2);
-    };
-
-    const getTotalPrice = (): number => {
-        return round(props.cart.reduce((acc, curr) => {
-            return acc + (curr.price - (curr.price * curr.discount));
-        }, 0), 2);
-    };
-
-    const getTotalSavings = (): number => {
-        return round(props.cart.reduce((acc, curr) => {
-            if (curr.discount > 0) {
-                return acc + (curr.price * curr.discount);
-            } else {
-                return acc;
-            }
-        }, 0), 2);
-    };
 
     const handleIncreaseCount = (item: CartItem) => {
         props.addOne(item);
@@ -94,7 +58,7 @@ function Cart(props: Props) {
                                     <Divider/>
                                     <Stack spacing={4}>
                                         {
-                                            getCartItems().map(({item, count}) => (
+                                            getCartItems(props.cart).map(({item, count, itemPrice, itemTotalPrice}) => (
                                                 <Stack direction={'row'} alignItems={'center'} key={item.id}>
                                                     <Stack flex={1} direction={'row'} alignItems={'center'} spacing={2}>
                                                         <UnstyledLink to={`/product/${item.id}`}>
@@ -115,7 +79,7 @@ function Cart(props: Props) {
                                                             </Stack>
                                                         </UnstyledLink>
                                                     </Stack>
-                                                    <Typography flex={1}>${getItemPrice(item)}</Typography>
+                                                    <Typography flex={1}>${itemPrice}</Typography>
                                                     <Stack flex={1}>
                                                         <Counter
                                                             sx={{alignSelf: 'end'}}
@@ -124,7 +88,7 @@ function Cart(props: Props) {
                                                             onDecrement={() => handleDecreaseCount(item)}
                                                         />
                                                     </Stack>
-                                                    <Typography flex={1}>${getItemTotalPrice(item)}</Typography>
+                                                    <Typography flex={1}>${itemTotalPrice}</Typography>
                                                 </Stack>
                                             ))
                                         }
@@ -133,14 +97,14 @@ function Cart(props: Props) {
                                     <Stack spacing={2}>
                                         <Stack justifyContent={'space-between'} direction={'row'}>
                                             <Typography>Subtotal</Typography>
-                                            <Typography fontWeight={600}>${getTotalPrice()}</Typography>
+                                            <Typography fontWeight={600}>${getTotalPrice(props.cart)}</Typography>
                                         </Stack>
                                         <Stack justifyContent={'space-between'} direction={'row'}>
                                             <Typography sx={{color: theme.palette.success.main}}>
                                                 Savings on this order
                                             </Typography>
                                             <Typography fontWeight={600} sx={{color: theme.palette.success.main}}>
-                                                ${getTotalSavings()}
+                                                ${getTotalSavings(props.cart)}
                                             </Typography>
                                         </Stack>
                                     </Stack>
