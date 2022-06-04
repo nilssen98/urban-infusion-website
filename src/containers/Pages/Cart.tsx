@@ -61,8 +61,28 @@ function Cart(props: Props) {
         return props.cart.filter(e => e.id === item.id).length;
     };
 
+    const getItemPrice = (item: CartItem): number => {
+        return round(item.price - (item.price * item.discount), 2)
+    };
+
     const getItemTotalPrice = (item: CartItem): number => {
-        return round(getItemCount(item) * item.price, 2);
+        return round(getItemCount(item) * (item.price - (item.price * item.discount)), 2);
+    };
+
+    const getTotalPrice = () => {
+        return props.cart.reduce((acc, curr) => {
+            return acc + round(curr.price - (curr.price * curr.discount), 2);
+        }, 0);
+    };
+
+    const getTotalSavings = () => {
+        return props.cart.reduce((acc, curr) => {
+            if (curr.discount > 0) {
+                return acc + round(curr.price - (curr.price * curr.discount), 2);
+            } else {
+                return acc;
+            }
+        }, 0);
     };
 
     return (
@@ -89,7 +109,7 @@ function Cart(props: Props) {
                                             />
                                             <Typography flex={1} textAlign={'left'}>{item.title}</Typography>
                                         </Stack>
-                                        <Typography flex={1}>${item.price}</Typography>
+                                        <Typography flex={1}>${getItemPrice(item)}</Typography>
                                         <Typography flex={1}>{getItemCount(item)}</Typography>
                                         <Typography flex={1}>${getItemTotalPrice(item)}</Typography>
                                     </Stack>
@@ -100,11 +120,11 @@ function Cart(props: Props) {
                         <Stack spacing={2}>
                             <Stack justifyContent={'space-between'} direction={'row'}>
                                 <Typography>Subtotal</Typography>
-                                <Typography fontWeight={600}>$69</Typography>
+                                <Typography fontWeight={600}>${getTotalPrice()}</Typography>
                             </Stack>
                             <Stack justifyContent={'space-between'} direction={'row'}>
                                 <Typography>Savings on this order</Typography>
-                                <Typography fontWeight={600} sx={{color: theme.palette.success.main}}>$0</Typography>
+                                <Typography fontWeight={600} sx={{color: theme.palette.success.main}}>${getTotalSavings()}</Typography>
                             </Stack>
                         </Stack>
                         <Divider/>
