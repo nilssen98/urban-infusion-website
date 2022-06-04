@@ -1,12 +1,13 @@
 import Section from '../../components/Wrappers/Section';
 import {RootState} from '../../state/store';
-import {CartItem} from '../../state/slices/cart';
+import {CartItem, cartSlice} from '../../state/slices/cart';
 import {connect} from 'react-redux';
 import Page from '../../components/Wrappers/Page';
 import {Button, Divider, Stack, Typography, useTheme} from '@mui/material';
 import {getProductImageURL} from '../../api/urbaninfusion/public/products';
 import {countBy, round, uniqBy} from 'lodash-es';
 import UnstyledLink from '../../components/UnstyledLink';
+import Counter from '../../components/Counter';
 
 const mapStateToProps = (state: RootState) => {
     return {
@@ -14,7 +15,10 @@ const mapStateToProps = (state: RootState) => {
     };
 };
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+    addOne: cartSlice.actions.addOne,
+    removeOne: cartSlice.actions.removeOne,
+};
 
 type Props = ReturnType<typeof mapStateToProps> & typeof mapDispatchToProps & {};
 
@@ -62,6 +66,14 @@ function Cart(props: Props) {
         }, 0), 2);
     };
 
+    const handleIncreaseCount = (item: CartItem) => {
+        props.addOne(item);
+    };
+
+    const handleDecreaseCount = (item: CartItem) => {
+        props.removeOne(item);
+    };
+
     return (
         <>
             <Page>
@@ -90,7 +102,14 @@ function Cart(props: Props) {
                                                         <Typography flex={1} textAlign={'left'}>{item.title}</Typography>
                                                     </Stack>
                                                     <Typography flex={1}>${getItemPrice(item)}</Typography>
-                                                    <Typography flex={1}>{count}</Typography>
+                                                    <Stack flex={1}>
+                                                        <Counter
+                                                            sx={{alignSelf: 'end'}}
+                                                            count={count}
+                                                            onIncrement={() => handleIncreaseCount(item)}
+                                                            onDecrement={() => handleDecreaseCount(item)}
+                                                        />
+                                                    </Stack>
                                                     <Typography flex={1}>${getItemTotalPrice(item)}</Typography>
                                                 </Stack>
                                             ))

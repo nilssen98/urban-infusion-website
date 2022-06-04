@@ -7,7 +7,7 @@ import {
     PayloadAction
 } from '@reduxjs/toolkit';
 import {ProductDto} from '../../api/urbaninfusion/dto/product-dto';
-import {remove} from 'lodash-es';
+import {findLastIndex, remove} from 'lodash-es';
 
 export type CartItem = ProductDto;
 
@@ -31,7 +31,10 @@ export const cartSlice = createSlice({
             state.items.push(action.payload);
         },
         removeOne: (state: Draft<Cart>, action: PayloadAction<CartItem>) => {
-            remove(state.items, action.payload);
+            const index = state.items.findIndex(e => e.id === action.payload.id);
+            if (index > -1) {
+                state.items.splice(index, 1);
+            }
         }
     }
 });
