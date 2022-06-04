@@ -105,9 +105,14 @@ function Cart(props: Props) {
                                                             />
                                                         </UnstyledLink>
                                                         <UnstyledLink to={`/product/${item.id}`}>
-                                                            <Typography flex={1} textAlign={'left'}>
-                                                                {item.title}
-                                                            </Typography>
+                                                            <Stack flex={1} textAlign={'left'}>
+                                                                <Typography>
+                                                                    {item.title}
+                                                                </Typography>
+                                                                <Typography variant={'body2'} color={theme.palette.text.secondary}>
+                                                                    {item.weight}
+                                                                </Typography>
+                                                            </Stack>
                                                         </UnstyledLink>
                                                     </Stack>
                                                     <Typography flex={1}>${getItemPrice(item)}</Typography>
