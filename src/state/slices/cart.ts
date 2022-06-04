@@ -34,5 +34,8 @@ export const cartSlice = createSlice({
         add: (state, action: PayloadAction<CartItem>) => {
             cartAdapter.addOne(state.items, action);
         },
+        remove: (state, action: PayloadAction<CartItem>) => {
+            cartAdapter.removeOne(state.items, action.payload.id);
+        }
     }
 });
