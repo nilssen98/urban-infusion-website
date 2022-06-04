@@ -61,7 +61,7 @@ function Checkout(props: Props) {
         if (props.cart.length <= 0) {
             navigate('/cart');
         }
-    }, []);
+    }, [props.isAuthenticated, props.cart]);
 
     return (
         <>
