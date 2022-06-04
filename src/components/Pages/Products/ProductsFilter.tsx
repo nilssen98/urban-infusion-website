@@ -68,7 +68,7 @@ export default function ProductsFilter(props: Props) {
                 </TextField>
                 <TextField
                     select
-                    label={'Order by'}
+                    label={'Order'}
                     defaultValue={OrderOption.DESCENDING}
                     value={props.order}
                     onChange={(event) => {
