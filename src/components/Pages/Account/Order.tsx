@@ -52,17 +52,17 @@ export default function Order(props: Props) {
                     <Typography flex={1} fontWeight={600}>
                         {props.order.date}
                     </Typography>
-                    <Typography flex={1} textAlign={'right'} fontWeight={600}>
+                    <Typography flex={1} textAlign={{md: 'right', xs: 'center'}} fontWeight={600}>
                         Order ID
                     </Typography>
                     {
                         props.admin && (
-                            <Typography flex={1} textAlign={'right'} fontWeight={600}>
+                            <Typography flex={1} textAlign={{md: 'right', xs: 'center'}} fontWeight={600}>
                                 User
                             </Typography>
                         )
                     }
-                    <Typography flex={1} textAlign={'right'} fontWeight={600}>
+                    <Typography flex={1} textAlign={{md: 'right', xs: 'center'}} fontWeight={600}>
                         Products
                     </Typography>
                     <Typography flex={1} textAlign={'right'} fontWeight={600}>
@@ -103,14 +103,14 @@ export default function Order(props: Props) {
                             )
                     }
                     <Stack flex={1} spacing={2}>
-                        <Typography textAlign={'right'}>
+                        <Typography textAlign={{md: 'right', xs: 'center'}}>
                             {props.order.orderId}
                         </Typography>
                     </Stack>
                     {
                         props.admin && (
                             <Stack flex={1} spacing={2}>
-                                <Typography textAlign={'right'}>
+                                <Typography textAlign={{md: 'right', xs: 'center'}}>
                                     {props.order.user.username}
                                 </Typography>
                             </Stack>
@@ -119,14 +119,14 @@ export default function Order(props: Props) {
                     <Stack flex={1} spacing={2}>
                         {
                             props.order.products.map(({product, quantity}) => (
-                                <Stack alignItems={'center'} direction={'row'} alignSelf={'end'} spacing={1}
+                                <Stack alignItems={'center'} direction={'row'} alignSelf={{md: 'end', xs: 'center'}} spacing={1}
                                        key={product.id}>
                                     <Typography>
                                         <UnstyledLink to={`/product/${product.id}`}>{product.title}</UnstyledLink>
                                         <span> {quantity > 1 ? `x${quantity}` : null}</span>
                                     </Typography>
                                     <Typography color={'error'} variant={'subtitle2'}>
-                                        {product.discount > 0 ? `-${product.discount * 100}%` : null}
+                                        {product.discount > 0 && !props.admin ? `-${product.discount * 100}%` : null}
                                     </Typography>
                                 </Stack>
                             ))
@@ -135,7 +135,7 @@ export default function Order(props: Props) {
                     <Stack flex={1} spacing={2}>
                         {
                             props.order.products.map(({product, quantity}) => (
-                                product.discount > 0
+                                product.discount > 0 && !props.admin
                                     ? (
                                         <Stack key={product.id} alignSelf={'end'} direction={'row'} alignItems={'center'} spacing={1}>
                                             <Typography variant={'subtitle2'} sx={{textDecorationLine: 'line-through'}}>
