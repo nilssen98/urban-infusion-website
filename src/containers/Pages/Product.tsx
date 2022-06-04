@@ -11,6 +11,7 @@ import CommentForm from '../../components/Pages/Product/CommentForm';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import {defaultProductImageURL, getProductImageURL} from '../../utils/productImageUtils';
 import useProduct from '../../hooks/products/useProduct';
+import {round} from 'lodash-es';
 
 interface Props {
     image_url?: string;
@@ -25,9 +26,8 @@ export default function Product(props: Props) {
     const theme = useTheme();
     const navigate = useNavigate();
 
-    console.log(id);
-
     const [showForm, setShowForm] = useState<boolean>(false);
+    const priceTextColor = theme.palette.mode === 'light' ? `rgb(${hexToRgb(theme.palette.primary.main)})` : '';
 
     const {isLoading, isError, data} = useProduct(id);
 
@@ -36,6 +36,10 @@ export default function Product(props: Props) {
             navigate('/products');
         }
     }, [isError]);
+
+    function calcDiscountedPrice(starting: number, discount: number) {
+        return round(starting * (1 - discount), 2);
+    }
 
     return (
         <>
@@ -72,14 +76,33 @@ export default function Product(props: Props) {
                                         >
                                             {data.title}
                                         </Typography>
-                                        <Typography
-                                            variant={'h4'}
-                                            marginBottom={4}
-                                            color={theme.palette.mode === 'light'
-                                                ? `rgb(${hexToRgb(theme.palette.primary.main)})` : ''}
-                                        >
-                                            {`$${data.price}`}
-                                        </Typography>
+                                        {
+                                            data.discount ? (
+                                                <Stack direction={'row'} alignItems={'center'} spacing={1} mb={4}>
+                                                    <Typography
+                                                        variant={'h5'}
+                                                        color={priceTextColor}
+                                                        sx={{textDecorationLine: 'line-through'}}
+                                                    >
+                                                        ${data.price}
+                                                    </Typography>
+                                                    <Typography
+                                                        variant={'h4'}
+                                                        color={priceTextColor}
+                                                    >
+                                                        ${calcDiscountedPrice(data.price, data.discount)}
+                                                    </Typography>
+                                                </Stack>
+                                            ) : (
+                                                <Typography
+                                                    variant={'h4'}
+                                                    marginBottom={4}
+                                                    color={priceTextColor}
+                                                >
+                                                    ${data.price}
+                                                </Typography>
+                                            )
+                                        }
                                         <Button
                                             variant={'contained'}
                                             size={'large'}
