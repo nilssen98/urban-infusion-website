@@ -6,18 +6,21 @@ import UnstyledLink from '../../UnstyledLink';
 type Props = {
     data: ProductDto;
     img?: string;
-    onAddToCart: (product: ProductDto) => void;
+    addable?: boolean;
+    onAddToCart?: (product: ProductDto) => void;
 } & PaperProps;
 
 export default function ProductCard(props: Props) {
-    const paperProps = omit(props, ['data', 'img', 'onAddToCart']);
+    const paperProps = omit(props, ['data', 'img', 'onAddToCart', 'addable']);
 
     const theme = useTheme();
 
     const discountedPrice = round(props.data.price - (props.data.price * props.data.discount), 2);
 
     const handleAddToCart = () => {
-        props.onAddToCart(props.data);
+        if (props.onAddToCart) {
+            props.onAddToCart(props.data);
+        }
     };
 
     return (
@@ -93,25 +96,29 @@ export default function ProductCard(props: Props) {
                         </Stack>
                     </Stack>
                     <Divider flexItem/>
-                    <Stack width={'100%'}>
-                        <Button
-                            onClick={handleAddToCart}
-                            variant={'contained'}
-                            sx={{
-                                boxShadow: 'none',
-                                height: '100%',
-                                borderRadius: '0 0 4px 4px',
-                                fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
-                                background: theme.palette.secondary.light,
-                                color: theme.palette.getContrastText(theme.palette.secondary.light),
-                                '&:hover': {
-                                    background: theme.palette.secondary.main
-                                }
-                            }}
-                        >
-                            add to cart
-                        </Button>
-                    </Stack>
+                    {
+                        props.addable && (
+                            <Stack width={'100%'}>
+                                <Button
+                                    onClick={handleAddToCart}
+                                    variant={'contained'}
+                                    sx={{
+                                        boxShadow: 'none',
+                                        height: '100%',
+                                        borderRadius: '0 0 4px 4px',
+                                        fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
+                                        background: theme.palette.secondary.light,
+                                        color: theme.palette.getContrastText(theme.palette.secondary.light),
+                                        '&:hover': {
+                                            background: theme.palette.secondary.main
+                                        }
+                                    }}
+                                >
+                                    add to cart
+                                </Button>
+                            </Stack>
+                        )
+                    }
                 </Stack>
             </Paper>
         </>

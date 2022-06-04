@@ -111,6 +111,7 @@ function Products(props: Props) {
                                 >
                                     {
                                         filtered.map(product => (<ProductCard
+                                            addable
                                             onAddToCart={handleAddToCart}
                                             data={product}
                                             key={product.id}
