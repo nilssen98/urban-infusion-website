@@ -120,7 +120,6 @@ function Cart(props: Props) {
                                                         />
                                                     </Stack>
                                                     <Typography flex={1}>${getItemTotalPrice(item)}</Typography>
-
                                                 </Stack>
                                             ))
                                         }
