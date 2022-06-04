@@ -126,7 +126,7 @@ export default function Order(props: Props) {
                                         <span> {quantity > 1 ? `x${quantity}` : null}</span>
                                     </Typography>
                                     <Typography color={'error'} variant={'subtitle2'}>
-                                        {product.discount > 0 && !props.admin ? `-${product.discount * 100}%` : null}
+                                        {product.discount > 0 && !props.onChangeStatus ? `-${product.discount * 100}%` : null}
                                     </Typography>
                                 </Stack>
                             ))
@@ -135,7 +135,7 @@ export default function Order(props: Props) {
                     <Stack flex={1} spacing={2}>
                         {
                             props.order.products.map(({product, quantity}) => (
-                                product.discount > 0 && !props.admin
+                                product.discount > 0 && !props.onChangeStatus
                                     ? (
                                         <Stack key={product.id} alignSelf={'end'} direction={'row'} alignItems={'center'} spacing={1}>
                                             <Typography variant={'subtitle2'} sx={{textDecorationLine: 'line-through'}}>
