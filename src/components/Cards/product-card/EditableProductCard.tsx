@@ -1,11 +1,10 @@
-import {Button, Divider, InputBase, Paper, PaperProps, Stack, Typography, useTheme} from '@mui/material';
+import {Button, Divider, Paper, PaperProps, Stack, useTheme} from '@mui/material';
 import {capitalize, omit} from 'lodash-es';
 import {ProductDto, UpdateProductPictureDto} from '../../../api/urbaninfusion/dto/product-dto';
 import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
 import AddPhotoAlternateOutlinedIcon from '@mui/icons-material/AddPhotoAlternateOutlined';
 import {useState} from 'react';
 import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
-import {InputBaseProps} from '@mui/material/InputBase/InputBase';
 import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import Input from '../../Input';
@@ -56,6 +55,12 @@ export default function EditableProductCard(props: Props) {
             id: props.data.id,
             file: event.target.files[0]
         });
+    };
+
+    const limitDiscountRange = (e: any) => {
+        if (!(0 <= e.target.value && e.target.value <= 100)) {
+            e.target.value = Math.max(Math.min(100, e.target.value), 0);
+        }
     };
 
     return (
@@ -157,6 +162,7 @@ export default function EditableProductCard(props: Props) {
                             onChange={(e) =>
                                 setDiscount(Number(e.target.value))
                             }
+                            onInput={(e) => limitDiscountRange(e) }
                             type={'number'}
                             size={'small'}
                             adornment={'%'}
