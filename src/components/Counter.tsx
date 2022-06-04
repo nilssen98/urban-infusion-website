@@ -27,9 +27,7 @@ export default function Counter(props: Props) {
                         cursor: 'pointer'
                     }}
                 >
-                    <Typography>
-                        -
-                    </Typography>
+                    <Typography>-</Typography>
                 </Stack>
                 <Stack py={2} sx={{userSelect: 'none'}}>
                     <Typography>{props.count}</Typography>
