@@ -59,7 +59,7 @@ function Cart(props: Props) {
     const getTotalSavings = () => {
         return round(props.cart.reduce((acc, curr) => {
             if (curr.discount > 0) {
-                return acc + (curr.price - (curr.price * curr.discount));
+                return acc + (curr.price * curr.discount);
             } else {
                 return acc;
             }
