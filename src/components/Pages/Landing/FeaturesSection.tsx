@@ -182,7 +182,7 @@ function Feature(props: FeatureProps) {
                                 justifyContent: {xs: 'center', md: `${props.flipped ? 'flex-start' : 'flex-end'}`}
                             }}
                         >
-                            <UnstyledLink to={`/products/${props.navigation}`}>
+                            <UnstyledLink to={`/products/all`}>
                                 <Stack
                                     alignItems={'center'}
                                     direction={'row'}
