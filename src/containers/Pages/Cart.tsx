@@ -97,12 +97,18 @@ function Cart(props: Props) {
                                             getCartItems().map(({item, count}) => (
                                                 <Stack direction={'row'} alignItems={'center'} key={item.id}>
                                                     <Stack flex={1} direction={'row'} alignItems={'center'} spacing={2}>
-                                                        <img
-                                                            style={{height: 64, width: 64}}
-                                                            src={getProductImageURL(item.imageId)}
-                                                            alt={''}
-                                                        />
-                                                        <Typography flex={1} textAlign={'left'}>{item.title}</Typography>
+                                                        <UnstyledLink to={`/product/${item.id}`}>
+                                                            <img
+                                                                style={{height: 64, width: 64}}
+                                                                src={getProductImageURL(item.imageId)}
+                                                                alt={''}
+                                                            />
+                                                        </UnstyledLink>
+                                                        <UnstyledLink to={`/product/${item.id}`}>
+                                                            <Typography flex={1} textAlign={'left'}>
+                                                                {item.title}
+                                                            </Typography>
+                                                        </UnstyledLink>
                                                     </Stack>
                                                     <Typography flex={1}>${getItemPrice(item)}</Typography>
                                                     <Stack flex={1}>
@@ -114,6 +120,7 @@ function Cart(props: Props) {
                                                         />
                                                     </Stack>
                                                     <Typography flex={1}>${getItemTotalPrice(item)}</Typography>
+
                                                 </Stack>
                                             ))
                                         }
@@ -125,7 +132,7 @@ function Cart(props: Props) {
                                             <Typography fontWeight={600}>${getTotalPrice()}</Typography>
                                         </Stack>
                                         <Stack justifyContent={'space-between'} direction={'row'}>
-                                            <Typography>
+                                            <Typography sx={{color: theme.palette.success.main}}>
                                                 Savings on this order
                                             </Typography>
                                             <Typography fontWeight={600} sx={{color: theme.palette.success.main}}>
