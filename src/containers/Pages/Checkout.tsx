@@ -85,7 +85,7 @@ function Checkout(props: Props) {
             }, 2000);
             return () => {
                 clearTimeout(timeout);
-            }
+            };
         } else if (postOrderMutation.isError) {
             const msg = (postOrderMutation.error as any)?.response?.data || 'Unknown error occured, could not place the order, please try again...';
             setErrorMessage(msg);
