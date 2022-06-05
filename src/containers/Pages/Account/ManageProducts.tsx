@@ -137,7 +137,7 @@ export default function ManageProducts() {
                 <Grid container spacing={4}>
                     {
                         products?.map(product => (
-                            <Grid item md={3} xs={12}>
+                            <Grid item md={3} xs={12} key={product.id}>
                                 <EditableProductCard
                                     sx={{height: '100%'}}
                                     data={product}
@@ -145,7 +145,6 @@ export default function ManageProducts() {
                                     onDeleteProduct={handleDeleteProduct}
                                     onUpdateProduct={handleUpdateProduct}
                                     onUpdateProductPicture={handleUpdateProductPicture}
-                                    key={product.id}
                                     img={`${getProductImageURL(product.imageId)}#${Math.random()}`}
                                 />
                             </Grid>
