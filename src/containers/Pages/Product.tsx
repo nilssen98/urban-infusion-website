@@ -92,7 +92,7 @@ function Product(props: Props) {
                                                 {product.weight ? `/ ${product.weight}` : null}
                                             </Typography>
                                         </Stack>
-                                        <Typography>{product.description}</Typography>
+                                        <Typography py={8}>{product.description}</Typography>
                                         <Stack direction={'row'} alignItems={'center'} spacing={4}>
                                             <Counter
                                                 count={count}
