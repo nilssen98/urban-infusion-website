@@ -1,8 +1,8 @@
-import {Alert, Divider, Snackbar, Stack, Typography, useTheme} from '@mui/material';
+import {Alert, Divider, Grid, Snackbar, Stack, Typography, useTheme} from '@mui/material';
 import {useParams} from 'react-router-dom';
 import Page from '../../components/Wrappers/Page';
 import useProducts from '../../hooks/products/useProducts';
-import React, {ReactElement, useMemo, useState} from 'react';
+import React, {useMemo, useState} from 'react';
 import ProductsFilter from '../../components/Pages/Products/ProductsFilter';
 import ProductCard from '../../components/Cards/product-card/ProductCard';
 import {getProductImageURL} from '../../api/urbaninfusion/public/products';
@@ -115,22 +115,22 @@ function Products(props: Props) {
                     >
                         {
                             filtered && filtered.length > 0 ? (
-                                <Stack
-                                    flexWrap={'wrap'}
-                                    direction={'row'}
-                                    gap={4}
-                                    overflow={'auto'}
-                                >
+                                <Grid container spacing={4}>
                                     {
-                                        filtered.map(product => (<ProductCard
-                                            addable
-                                            onAddToCart={handleAddToCart}
-                                            data={product}
-                                            key={product.id}
-                                            img={getProductImageURL(product.imageId)}
-                                        />))
+                                        filtered.map(product => (
+                                            <Grid item md={3} xs={6}>
+                                                <ProductCard
+                                                    sx={{height: '100%'}}
+                                                    addable
+                                                    onAddToCart={handleAddToCart}
+                                                    data={product}
+                                                    key={product.id}
+                                                    img={getProductImageURL(product.imageId)}
+                                                />
+                                            </Grid>
+                                        ))
                                     }
-                                </Stack>
+                                </Grid>
                             ) : (
                                 <Stack
                                     color={theme.palette.text.disabled}

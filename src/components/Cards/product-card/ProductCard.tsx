@@ -27,10 +27,10 @@ export default function ProductCard(props: Props) {
         <>
             <Paper
                 variant={'outlined'}
-                sx={{width: '100%', maxWidth: 225, position: 'relative'}}
                 {...paperProps}
             >
                 <Stack
+                    sx={{position: 'relative'}}
                     textAlign={'center'}
                     alignItems={'center'}
                     justifyContent={'center'}
@@ -55,8 +55,12 @@ export default function ProductCard(props: Props) {
                                         justifyContent={'center'}
                                         sx={{cursor: 'pointer'}}
                                     >
-                                        <img loading={'lazy'} src={props.img} style={{height: 175}}
-                                             alt={''}/>
+                                        <img
+                                            loading={'lazy'}
+                                            src={props.img}
+                                            style={{width: 'auto', height: 175, padding: 8}}
+                                            alt={''}
+                                        />
                                     </Stack>
                                 </UnstyledLink>
                                 <Divider flexItem/>
