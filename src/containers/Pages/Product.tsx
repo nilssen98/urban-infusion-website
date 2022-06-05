@@ -10,30 +10,27 @@ import {useEffect, useState} from 'react';
 import CommentForm from '../../components/Pages/Product/CommentForm';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import useProduct from '../../hooks/products/useProduct';
-import {capitalize, round} from 'lodash-es';
+import {capitalize, range, round} from 'lodash-es';
 import {getProductImageURL} from '../../api/urbaninfusion/public/products';
 import Counter from '../../components/Counter';
 import {RootState} from '../../state/store';
 import {cartSlice} from '../../state/slices/cart';
 import {connect} from 'react-redux';
 
-const mapStateToProps = (state: RootState) => {
-    return {
-        cart: state.cart.items,
-    };
-};
-
 const mapDispatchToProps = {
+    addMany: cartSlice.actions.addMany
 };
 
-type Props = ReturnType<typeof mapStateToProps> & typeof mapDispatchToProps & {};
+type Props = typeof mapDispatchToProps & {};
 
-export default connect(mapStateToProps, mapDispatchToProps)(Product);
+export default connect(undefined, mapDispatchToProps)(Product);
 
-function Product() {
+function Product(props: Props) {
     const {id} = useParams();
     const navigate = useNavigate();
     const theme = useTheme();
+
+    const [count, setCount] = useState<number>(0);
 
     const {isLoading, isError, data: product} = useProduct(id);
 
@@ -43,9 +40,21 @@ function Product() {
         }
     }, [isError]);
 
-    const handleIncrement = () => {
+    const handleAddToCart = () => {
+        if (product) {
+            props.addMany(range(count).map(e => product));
+            setCount(0);
+        }
     };
+
+    const handleIncrement = () => {
+        setCount(count + 1);
+    };
+
     const handleDecrement = () => {
+        if (count > 0) {
+            setCount(count - 1);
+        }
     };
 
     return (
@@ -79,8 +88,7 @@ function Product() {
                                         <Typography>{product.description}</Typography>
                                         <Stack direction={'row'} alignItems={'center'} spacing={4}>
                                             <Counter
-                                                sx={{alignSelf: 'end'}}
-                                                count={0}
+                                                count={count}
                                                 onIncrement={handleIncrement}
                                                 onDecrement={handleDecrement}
                                             />
@@ -88,6 +96,7 @@ function Product() {
                                                 startIcon={<AddShoppingCartIcon/>}
                                                 variant={'contained'}
                                                 size={'large'}
+                                                onClick={handleAddToCart}
                                             >
                                                 Add to cart
                                             </Button>
@@ -96,7 +105,7 @@ function Product() {
                                 </Stack>
                                 <Divider/>
                                 <Stack>
-                                    yo
+
                                 </Stack>
                             </Stack>
                         )
