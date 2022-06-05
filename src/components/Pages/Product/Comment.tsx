@@ -58,7 +58,7 @@ export default function Comment(props: Props) {
                             )
                         }
                         {
-                            props.isAdmin && (
+                            props.isAdmin || props.isMe && (
                                 <Tooltip title={'Delete'}>
                                     <IconButton color={'error'} onClick={handleDelete}>
                                         <DeleteOutlineOutlinedIcon/>

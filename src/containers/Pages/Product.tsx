@@ -200,7 +200,7 @@ function Product(props: Props) {
                                     }
                                     <Stack spacing={4}>
                                         {
-                                            product.comments.length > 0 ? (
+                                            sortedComments && sortedComments.length > 0 ? (
                                                 <>
                                                     <Typography variant={'body1'}>
                                                         {`${product.comments.length} comment${product.comments.length !== 1 ? 's' : ''}`}
