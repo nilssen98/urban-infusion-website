@@ -248,8 +248,13 @@ function Checkout(props: Props) {
                                             </Stack>
                                         </Stack>
                                         <Divider/>
-                                        <Button onClick={handlePlaceOrder} size={'large'} type={'submit'}
-                                                variant={'contained'}>
+                                        <Button
+                                            onClick={handlePlaceOrder}
+                                            size={'large'}
+                                            type={'submit'}
+                                            variant={'contained'}
+                                            disabled={postOrderMutation.isSuccess}
+                                        >
                                             Order now (${getTotalPrice(props.cart)})
                                         </Button>
                                     </Stack>
