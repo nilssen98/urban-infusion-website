@@ -5,6 +5,11 @@ export interface AddCommentDto {
     text: string;
 }
 
+export interface UpdateCommentDto {
+    id: number;
+    text: string;
+}
+
 export interface CommentDto {
     id: number;
     user: UserDto;
