@@ -140,7 +140,7 @@ function Product(props: Props) {
                                             </Stack>
                                         )
                                     }
-                                    <Stack spacing={2}>
+                                    <Stack spacing={4}>
                                         {
                                             product.comments.length > 0 ? (
                                                 <>
