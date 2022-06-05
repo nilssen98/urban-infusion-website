@@ -35,7 +35,9 @@ export default function CommentForm(props: Props) {
                     inputProps={{maxLength: 1000}}
                 />
                 <Button
-                    startIcon={<PublishIcon/>}
+                    sx={{
+                        alignSelf: 'flex-end'
+                    }}
                     variant={'contained'}
                     type={'submit'}
                     onClick={handleSubmit}
