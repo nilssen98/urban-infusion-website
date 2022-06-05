@@ -7,7 +7,7 @@ import React, {useEffect, useMemo, useState} from 'react';
 import CommentForm from '../../components/Pages/Product/CommentForm';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import useProduct from '../../hooks/products/useProduct';
-import {capitalize} from 'lodash-es';
+import {capitalize, round} from 'lodash-es';
 import {getProductImageURL} from '../../api/urbaninfusion/public/products';
 import Counter from '../../components/Counter';
 import {cartSlice} from '../../state/slices/cart';
@@ -54,6 +54,8 @@ function Product(props: Props) {
     const {isLoading: isLoadingProduct, isError, data: product} = useProduct(id);
     const {isLoading: isLoadingMe, data: me} = useMe();
     const isLoading = isLoadingProduct || isLoadingMe;
+
+    const discountedPrice = round(product?.price - (product?.price * product?.discount), 2);
 
     useEffect(() => {
             if (isMutationError) {
@@ -135,7 +137,16 @@ function Product(props: Props) {
                         product && me && (
                             <Stack width={'100%'} spacing={16}>
                                 <Stack direction={{md: 'row', xs: 'column'}} spacing={8}>
-                                    <Stack flex={1} alignItems={'center'} justifyContent={'center'}>
+                                    <Stack flex={1} alignItems={'center'} justifyContent={'center'} position={'relative'}>
+                                        {
+                                            product.discount > 0 && (
+                                                <Stack sx={{position: 'absolute', top: 5, left: 10}}>
+                                                    <Typography variant={'h6'} color={'error'} fontWeight={600}>
+                                                        -{round(product.discount * 100, 2)}%
+                                                    </Typography>
+                                                </Stack>
+                                            )
+                                        }
                                         <img
                                             style={{height: 320, width: 320}}
                                             src={getProductImageURL(product.id)}
@@ -150,7 +161,24 @@ function Product(props: Props) {
                                         />
                                         <Typography variant={'h3'}>{product.title}</Typography>
                                         <Stack direction={'row'} alignItems={'center'} spacing={1}>
-                                            <Typography variant={'h5'}>${product.price}</Typography>
+                                            {
+                                                product.discount
+                                                    ? (
+                                                        <Stack direction={'row'} alignItems={'center'} spacing={2}>
+                                                            <Typography variant={'h5'}>
+                                                                ${discountedPrice}
+                                                            </Typography>
+                                                            <Typography sx={{textDecorationLine: 'line-through'}}>
+                                                                ${product.price}
+                                                            </Typography>
+                                                        </Stack>
+                                                    )
+                                                    : (
+                                                        <Typography variant={'h5'}>
+                                                            ${product.price}
+                                                        </Typography>
+                                                    )
+                                            }
                                             <Typography variant={'body2'} color={theme.palette.text.secondary}>
                                                 {product.weight ? `/ ${product.weight}` : null}
                                             </Typography>
