@@ -19,7 +19,7 @@ import {UserRole} from '../../api/urbaninfusion/dto/user-dto';
 import {useAddComment} from '../../hooks/comments/useAddComment';
 import {useUpdateComment} from '../../hooks/comments/useUpdateComment';
 import {useDeleteComment} from '../../hooks/comments/useDeleteComment';
-import {UpdateCommentDto} from '../../api/urbaninfusion/dto/comment-dto';
+import {CommentDto, UpdateCommentDto} from '../../api/urbaninfusion/dto/comment-dto';
 
 const mapStateToProps = (state: RootState) => {
     return {
@@ -106,13 +106,15 @@ function Product(props: Props) {
     };
 
     const sortedComments = useMemo(() => {
-        return product?.comments.sort((a, b) => {
-            if (b.lastUpdated === null) {
+        return product?.comments.sort((a: CommentDto, b: CommentDto) => {
+            if (a.lastUpdated && !b.lastUpdated) {
                 return -1;
-            } else if (a.lastUpdated === null) {
+            } else if (!a.lastUpdated && b.lastUpdated) {
                 return 1;
-            } else {
+            } else if (a.lastUpdated && b.lastUpdated) {
                 return b.lastUpdated.localeCompare(a.lastUpdated);
+            } else {
+                return b.created.localeCompare(a.created);
             }
         });
     }, [product?.comments]);
