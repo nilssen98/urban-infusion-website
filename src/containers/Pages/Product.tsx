@@ -58,8 +58,8 @@ function Product(props: Props) {
     useEffect(() => {
             if (isMutationError) {
                 const err: any = mutations.find((m: any) => m.error)?.error;
-                const msg = err?.response?.data || 'Unknown error occured, please try again...';
-                setErrorMessage(msg);
+                const msg = err?.response?.data.error || err?.response?.data || 'Unknown error occured, please try again...';
+                setErrorMessage(msg.toString());
                 setError(true);
             }
         }, [isMutationError]

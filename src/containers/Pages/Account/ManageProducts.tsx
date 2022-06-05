@@ -44,7 +44,7 @@ export default function ManageProducts() {
     useEffect(() => {
             if (isError) {
                 const err: any = mutations.find((m: any) => m.error)?.error;
-                const msg = err?.response?.data || 'Unknown error occured, please try again...';
+                const msg = err?.response?.data.error || err?.response?.data || 'Unknown error occured, please try again...';
                 setErrorMessage(msg);
                 setError(true);
             }

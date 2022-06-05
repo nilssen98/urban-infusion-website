@@ -1,9 +1,9 @@
-import {Avatar, IconButton, Paper, Stack, Tooltip, Typography, useTheme} from '@mui/material';
+import {Avatar, Button, IconButton, Paper, Stack, TextField, Tooltip, Typography, useTheme} from '@mui/material';
 import {stringToColor} from '../../../utils/utils';
 import {CommentDto, UpdateCommentDto} from '../../../api/urbaninfusion/dto/comment-dto';
 import {formatDate} from '../../../utils/dateParser';
 import TimeAgo from 'react-timeago';
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
 import ModeEditOutlineOutlinedIcon from '@mui/icons-material/ModeEditOutlineOutlined';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 
@@ -18,7 +18,8 @@ interface Props {
 export default function Comment(props: Props) {
     const theme = useTheme();
 
-    const [newText, setNewText] = useState<string>('');
+    const [newText, setNewText] = useState<string>(props.comment.text);
+    const [editing, setEditing] = useState<boolean>(false);
 
     const handleDelete = () => {
         props.onDelete(props.comment.id);
@@ -28,79 +29,88 @@ export default function Comment(props: Props) {
         if (newText.length > 0) {
             props.onEdit({
                 id: props.comment.id,
-                text: newText,
+                text: '',
             });
+            setEditing(false);
         }
     };
 
     return (
         <>
             <Paper sx={{p: 4, position: 'relative'}} variant={'outlined'}>
-                <Stack
-                    sx={{
-                        position: 'absolute',
-                        right: 10,
-                        bottom: 10,
-                    }}
-                >
-                    {
-                        props.comment.lastUpdated && (
-                            <Typography variant={'body2'} color={theme.palette.text.secondary}>
-                                updated <TimeAgo date={props.comment.lastUpdated}/>
-                            </Typography>
-                        )
-                    }
-                </Stack>
-                <Stack
-                    direction={'row'}
-                    spacing={2}
-                    sx={{
-                        position: 'absolute',
-                        right: 10,
-                        top: 10,
-                    }}
-                >
-                    {
-                        props.isMe && (
-                            <Tooltip title={'Edit'}>
-                                <IconButton onClick={handleEdit}>
-                                    <ModeEditOutlineOutlinedIcon/>
-                                </IconButton>
-                            </Tooltip>
-                        )
-                    }
-                    {
-                        props.isAdmin && (
-                            <Tooltip title={'Delete'}>
-                                <IconButton color={'error'} onClick={handleDelete}>
-                                    <DeleteOutlineOutlinedIcon/>
-                                </IconButton>
-                            </Tooltip>
-                        )
-                    }
-                </Stack>
-                <Stack spacing={4}>
+                <Stack spacing={2}>
                     <Stack
                         direction={'row'}
-                        justifyContent={'flex-start'}
-                        alignItems={'center'}
-                        spacing={4}
+                        spacing={2}
+                        sx={{
+                            position: 'absolute',
+                            right: 10,
+                            top: 10,
+                        }}
                     >
-                        <Avatar sx={{bgcolor: `${stringToColor(props.comment.user.username)}`}}>
-                            {props.comment.user.username?.[0]}
-                        </Avatar>
-                        <Stack>
-                            <Typography>
-                                {props.comment.user.username}
-                            </Typography>
-                            <Typography variant={'body2'} color={theme.palette.text.secondary}>
-                                {formatDate(props.comment.created)}
-                            </Typography>
-                        </Stack>
+                        {
+                            props.isMe && (
+                                <Tooltip title={'Edit'}>
+                                    <IconButton onClick={() => setEditing(!editing)}>
+                                        <ModeEditOutlineOutlinedIcon/>
+                                    </IconButton>
+                                </Tooltip>
+                            )
+                        }
+                        {
+                            props.isAdmin && (
+                                <Tooltip title={'Delete'}>
+                                    <IconButton color={'error'} onClick={handleDelete}>
+                                        <DeleteOutlineOutlinedIcon/>
+                                    </IconButton>
+                                </Tooltip>
+                            )
+                        }
                     </Stack>
-                    <Typography variant={'subtitle1'}>
-                        {`${props.comment.text}`}
-                    </Typography>
+                    <Stack spacing={4}>
+                        <Stack
+                            direction={'row'}
+                            justifyContent={'flex-start'}
+                            alignItems={'center'}
+                            spacing={4}
+                        >
+                            <Avatar sx={{bgcolor: `${stringToColor(props.comment.user.username)}`}}>
+                                {props.comment.user.username?.[0]}
+                            </Avatar>
+                            <Stack>
+                                <Typography>
+                                    {props.comment.user.username}
+                                </Typography>
+                                <Typography variant={'body2'} color={theme.palette.text.secondary}>
+                                    {formatDate(props.comment.created)}
+                                </Typography>
+                            </Stack>
+                        </Stack>
+                        {
+                            editing
+                                ? (<Stack spacing={2}>
+                                    <TextField
+                                        value={newText}
+                                        onChange={(event) => setNewText(event.target.value)}
+                                    />
+                                    <Button onClick={handleEdit} sx={{alignSelf: 'flex-end'}}>
+                                        Submit
+                                    </Button>
+                                </Stack>)
+                                : (<Typography variant={'subtitle1'}>
+                                    {`${props.comment.text}`}
+                                </Typography>)
+                        }
+                    </Stack>
+                    {
+                        props.comment.lastUpdated && (
+                            <Stack alignSelf={'flex-end'}>
+                                <Typography variant={'body2'} color={theme.palette.text.secondary}>
+                                    updated <TimeAgo date={props.comment.lastUpdated}/>
+                                </Typography>
+                            </Stack>
+                        )
+                    }
                 </Stack>
             </Paper>
         </>
