@@ -1,15 +1,13 @@
 import {useNavigate, useParams} from 'react-router-dom';
 import Section from '../../components/Wrappers/Section';
-import {Button, Chip, Collapse, Divider, Stack, Typography, useTheme} from '@mui/material';
+import {Alert, Button, Chip, Collapse, Divider, Snackbar, Stack, Typography, useTheme} from '@mui/material';
 import Page from '../../components/Wrappers/Page';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import PictureBox from '../../components/PictureBox';
-import {hexToRgb} from '../../utils/utils';
-import {useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import CommentForm from '../../components/Pages/Product/CommentForm';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import useProduct from '../../hooks/products/useProduct';
-import {capitalize, round} from 'lodash-es';
+import {capitalize} from 'lodash-es';
 import {getProductImageURL} from '../../api/urbaninfusion/public/products';
 import Counter from '../../components/Counter';
 import {cartSlice} from '../../state/slices/cart';
@@ -18,6 +16,9 @@ import {RootState} from '../../state/store';
 import Comment from '../../components/Pages/Product/Comment';
 import useMe from '../../hooks/users/useMe';
 import {UserRole} from '../../api/urbaninfusion/dto/user-dto';
+import {useAddComment} from '../../hooks/comments/useAddComment';
+import {useUpdateComment} from '../../hooks/comments/useUpdateComment';
+import {useDeleteComment} from '../../hooks/comments/useDeleteComment';
 
 const mapStateToProps = (state: RootState) => {
     return {
@@ -40,11 +41,28 @@ function Product(props: Props) {
 
     const [count, setCount] = useState<number>(0);
     const [showForm, setShowForm] = useState<boolean>(false);
+    const [error, setError] = useState<boolean>(false);
+    const [errorMessage, setErrorMessage] = useState<string>('');
+
+    const addCommentMutation = useAddComment();
+    const updateCommentMutation = useUpdateComment();
+    const deleteCommentMutation = useDeleteComment();
+    const mutations = [addCommentMutation, updateCommentMutation, deleteCommentMutation];
+    const isMutationError = mutations.filter(m => m.isError).length > 0;
 
     const {isLoading: isLoadingProduct, isError, data: product} = useProduct(id);
     const {isLoading: isLoadingMe, data: me} = useMe();
-
     const isLoading = isLoadingProduct || isLoadingMe;
+
+    useEffect(() => {
+            if (isMutationError) {
+                const err: any = mutations.find((m: any) => m.error)?.error;
+                const msg = err?.response?.data || 'Unknown error occured, please try again...';
+                setErrorMessage(msg);
+                setError(true);
+            }
+        }, [isMutationError]
+    );
 
     useEffect(() => {
         if (isError) {
@@ -71,6 +89,14 @@ function Product(props: Props) {
 
     return (
         <>
+            <Snackbar
+                open={error}
+                autoHideDuration={5000}
+                onClose={() => setError(false)}
+                anchorOrigin={{vertical: 'top', horizontal: 'center'}}
+            >
+                <Alert severity={'error'}>{errorMessage}</Alert>
+            </Snackbar>
             <Page isLoading={isLoading}>
                 <Section>
                     {
@@ -154,8 +180,10 @@ function Product(props: Props) {
                                                                 comment={comment}
                                                                 isAdmin={me?.role === UserRole.ADMIN}
                                                                 isMe={me?.id === comment.user.id}
-                                                                onEdit={() => {}}
-                                                                onDelete={() => {}}
+                                                                onEdit={() => {
+                                                                }}
+                                                                onDelete={() => {
+                                                                }}
                                                             />
                                                         ))
                                                     }
