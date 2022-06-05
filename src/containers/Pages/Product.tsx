@@ -108,9 +108,9 @@ function Product(props: Props) {
     const sortedComments = useMemo(() => {
         return product?.comments.sort((a, b) => {
             if (b.lastUpdated === null) {
-                return 1;
-            } else if (a.lastUpdated === null) {
                 return -1;
+            } else if (a.lastUpdated === null) {
+                return 1;
             } else {
                 return b.lastUpdated.localeCompare(a.lastUpdated);
             }
