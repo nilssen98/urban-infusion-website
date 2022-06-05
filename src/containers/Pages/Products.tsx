@@ -1,4 +1,4 @@
-import {Alert, Divider, Grid, Snackbar, Stack, Typography, useTheme} from '@mui/material';
+import {Alert, Divider, Grid, InputAdornment, Snackbar, Stack, TextField, Typography, useTheme} from '@mui/material';
 import {useParams} from 'react-router-dom';
 import Page from '../../components/Wrappers/Page';
 import useProducts from '../../hooks/products/useProducts';
@@ -10,6 +10,7 @@ import {ProductDto} from '../../api/urbaninfusion/dto/product-dto';
 import {RootState} from '../../state/store';
 import {cartSlice} from '../../state/slices/cart';
 import {connect} from 'react-redux';
+import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 
 export enum OrderOption {
     ASCENDING = 'ascending',
@@ -47,6 +48,7 @@ function Products(props: Props) {
     const [sort, setSort] = useState<SortOption>(SortOption.NAME);
     const [success, setSuccess] = useState<boolean>(false);
     const [successMessage, setSuccessMessage] = useState<string>('Success!');
+    const [search, setSearch] = useState<string>('');
 
     const filtered = useMemo(() => {
         let temp = [...(products || [])];
@@ -66,8 +68,8 @@ function Products(props: Props) {
             temp = temp.reverse();
         }
 
-        return temp;
-    }, [products, id, sort, order]);
+        return temp.filter(e => e.title.toLowerCase().indexOf(search.toLowerCase()) !== -1);
+    }, [products, id, sort, order, search]);
 
     const handleSort = (newValue: SortOption) => {
         setSort(newValue);
@@ -99,7 +101,19 @@ function Products(props: Props) {
                         maxWidth={theme.breakpoints.values.lg}
                         width={'100%'}
                         py={4}
+                        spacing={4}
+                        direction={'row'}
                     >
+                        <TextField
+                            value={search}
+                            onChange={(event) => setSearch(event.target.value)}
+                            InputProps={{
+                                startAdornment: <InputAdornment position={'start'}><SearchOutlinedIcon/></InputAdornment>,
+                            }}
+                            placeholder={'Type here...'}
+                            size={'small'}
+                            label={'Search'}
+                        />
                         <ProductsFilter
                             sort={sort}
                             order={order}
