@@ -4,7 +4,6 @@ import {Button, Chip, Collapse, Divider, Stack, Typography, useTheme} from '@mui
 import Page from '../../components/Wrappers/Page';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import PictureBox from '../../components/PictureBox';
-import Comments from '../../components/Pages/Product/Comments';
 import {hexToRgb} from '../../utils/utils';
 import {useEffect, useState} from 'react';
 import CommentForm from '../../components/Pages/Product/CommentForm';
@@ -16,6 +15,7 @@ import Counter from '../../components/Counter';
 import {cartSlice} from '../../state/slices/cart';
 import {connect} from 'react-redux';
 import {RootState} from '../../state/store';
+import Comment from '../../components/Pages/Product/Comment';
 
 const mapStateToProps = (state: RootState) => {
     return {
@@ -135,7 +135,33 @@ function Product(props: Props) {
                                             </Stack>
                                         )
                                     }
-                                    <Comments comments={product.comments}/>
+                                    <Stack spacing={2}>
+                                        {
+                                            product.comments.length > 0 ? (
+                                                <>
+                                                    <Typography variant={'body1'}>
+                                                        {`${product.comments.length} comment${product.comments.length !== 1 ? 's' : ''}`}
+                                                    </Typography>
+                                                    {
+                                                        product.comments.map(comment => (
+                                                            <Comment
+                                                                key={comment.id}
+                                                                comment={comment}
+                                                                isAdmin={true}
+                                                                isMe={true}
+                                                                onEdit={() => {}}
+                                                                onDelete={() => {}}
+                                                            />
+                                                        ))
+                                                    }
+                                                </>
+                                            ) : (
+                                                <Stack direction={'row'}>
+                                                    <Typography>No comments yet</Typography>
+                                                </Stack>
+                                            )
+                                        }
+                                    </Stack>
                                 </Stack>
                             </Stack>
                         )

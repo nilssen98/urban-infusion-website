@@ -6,6 +6,7 @@ export default function CommentForm() {
         <>
             <Stack spacing={4} component={'form'} alignItems={'start'} onClick={(e: any) => e.preventDefault()}>
                 <TextField
+                    sx={{width: 400}}
                     required
                     multiline
                     variant={'outlined'}

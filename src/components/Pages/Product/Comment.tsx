@@ -1,45 +1,104 @@
-import {Avatar, Button, Divider, Stack, Tooltip, Typography} from '@mui/material';
-import {formatDate} from '../../../utils/dateParser';
+import {Avatar, IconButton, Paper, Stack, Tooltip, Typography, useTheme} from '@mui/material';
 import {stringToColor} from '../../../utils/utils';
+import {CommentDto} from '../../../api/urbaninfusion/dto/comment-dto';
+import {formatDate} from '../../../utils/dateParser';
+import TimeAgo from 'react-timeago';
+import {useEffect} from 'react';
+import ModeEditOutlineOutlinedIcon from '@mui/icons-material/ModeEditOutlineOutlined';
+import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 
 interface Props {
-    id?: number;
-    username?: string;
-    text?: string;
-    lastUpdated?: string;
-    created?: string;
+    comment: CommentDto;
+    onEdit: () => void;
+    onDelete: (id: number) => void;
+    isAdmin: boolean;
+    isMe: boolean;
 }
 
 export default function Comment(props: Props) {
+    const theme = useTheme();
+
+    useEffect(() => {
+        console.log(props.comment.lastUpdated);
+    });
+
+    const handleDelete = () => {
+        props.onDelete(props.comment.id);
+    };
+
+    const handleEdit = () => {
+    };
 
     return (
         <>
-            <Stack direction={'column'} minHeight={200} width={'100%'} gap={3}>
-                <Stack direction={'row'} justifyContent={'flex-start'} alignItems={'center'} gap={2} margin={3} marginBottom={1}>
-                    <Tooltip arrow title={props.username as string}>
-                        <Avatar
-                            sx={{bgcolor: `${stringToColor(props.username)}`}}
-                        >
-                            {props.username?.[0]}
+            <Paper sx={{p: 4, position: 'relative'}} variant={'outlined'}>
+                <Stack
+                    sx={{
+                        position: 'absolute',
+                        right: 10,
+                        bottom: 10,
+                    }}
+                >
+                    {
+                        props.comment.lastUpdated && (
+                            <Typography variant={'body2'} color={theme.palette.text.secondary}>
+                                updated <TimeAgo date={props.comment.lastUpdated}/>
+                            </Typography>
+                        )
+                    }
+                </Stack>
+                <Stack
+                    direction={'row'}
+                    spacing={2}
+                    sx={{
+                        position: 'absolute',
+                        right: 10,
+                        top: 10,
+                    }}
+                >
+                    {
+                        props.isMe && (
+                            <Tooltip title={'Edit'}>
+                                <IconButton onClick={handleEdit}>
+                                    <ModeEditOutlineOutlinedIcon/>
+                                </IconButton>
+                            </Tooltip>
+                        )
+                    }
+                    {
+                        props.isAdmin && (
+                            <Tooltip title={'Delete'}>
+                                <IconButton color={'error'} onClick={handleDelete}>
+                                    <DeleteOutlineOutlinedIcon/>
+                                </IconButton>
+                            </Tooltip>
+                        )
+                    }
+                </Stack>
+                <Stack spacing={4}>
+                    <Stack
+                        direction={'row'}
+                        justifyContent={'flex-start'}
+                        alignItems={'center'}
+                        spacing={4}
+                    >
+                        <Avatar sx={{bgcolor: `${stringToColor(props.comment.user.username)}`}}>
+                            {props.comment.user.username?.[0]}
                         </Avatar>
-                    </Tooltip>
-                    <Stack direction={'column'}>
-                        <Typography variant={'body1'}>
-                            {`${props.username} on ${formatDate(props.created as string)}`}
-                        </Typography>
-                        <Typography variant={'body2'}>
-                            {`Last updated: ${props.lastUpdated ? formatDate(props.lastUpdated) : 'Never'}`}
-                        </Typography>
+                        <Stack>
+                            <Typography>
+                                {props.comment.user.username}
+                            </Typography>
+                            <Typography variant={'body2'} color={theme.palette.text.secondary}>
+                                {formatDate(props.comment.created)}
+                            </Typography>
+                        </Stack>
                     </Stack>
+                    <Typography variant={'subtitle1'}>
+                        {`${props.comment.text}`}
+                    </Typography>
                 </Stack>
-                <Divider variant={'middle'}/>
-                <Typography variant={'body2'} ml={3} mr={3} mb={1} flexGrow={2} sx={{fontStyle: 'italic'}}>
-                    {`'${props.text}'`}
-                </Typography>
-                <Stack direction={'row'} justifyContent={'flex-end'} alignItems={'center'}>
-                    <Button variant={'outlined'}>Edit comment</Button>
-                </Stack>
-            </Stack>
+            </Paper>
         </>
     );
 }
