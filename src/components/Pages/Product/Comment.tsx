@@ -1,15 +1,15 @@
 import {Avatar, IconButton, Paper, Stack, Tooltip, Typography, useTheme} from '@mui/material';
 import {stringToColor} from '../../../utils/utils';
-import {CommentDto} from '../../../api/urbaninfusion/dto/comment-dto';
+import {CommentDto, UpdateCommentDto} from '../../../api/urbaninfusion/dto/comment-dto';
 import {formatDate} from '../../../utils/dateParser';
 import TimeAgo from 'react-timeago';
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import ModeEditOutlineOutlinedIcon from '@mui/icons-material/ModeEditOutlineOutlined';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 
 interface Props {
     comment: CommentDto;
-    onEdit: () => void;
+    onEdit: (data: UpdateCommentDto) => void;
     onDelete: (id: number) => void;
     isAdmin: boolean;
     isMe: boolean;
@@ -17,6 +17,8 @@ interface Props {
 
 export default function Comment(props: Props) {
     const theme = useTheme();
+
+    const [newText, setNewText] = useState<string>('');
 
     useEffect(() => {
         console.log(props.comment.lastUpdated);
@@ -27,6 +29,12 @@ export default function Comment(props: Props) {
     };
 
     const handleEdit = () => {
+        if (newText.length > 0) {
+            props.onEdit({
+                id: props.comment.id,
+                text: newText,
+            });
+        }
     };
 
     return (

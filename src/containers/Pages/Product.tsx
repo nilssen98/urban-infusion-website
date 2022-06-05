@@ -19,6 +19,7 @@ import {UserRole} from '../../api/urbaninfusion/dto/user-dto';
 import {useAddComment} from '../../hooks/comments/useAddComment';
 import {useUpdateComment} from '../../hooks/comments/useUpdateComment';
 import {useDeleteComment} from '../../hooks/comments/useDeleteComment';
+import {AddCommentDto, UpdateCommentDto} from '../../api/urbaninfusion/dto/comment-dto';
 
 const mapStateToProps = (state: RootState) => {
     return {
@@ -85,6 +86,18 @@ function Product(props: Props) {
         if (count > 0) {
             setCount(count - 1);
         }
+    };
+
+    const handleDeleteComment = (commentId: number) => {
+        deleteCommentMutation.mutate(commentId);
+    };
+
+    const handleUpdateComment = (data: UpdateCommentDto) => {
+        updateCommentMutation.mutate(data);
+    };
+
+    const handleAddComment = (data: AddCommentDto) => {
+        addCommentMutation.mutate(data);
     };
 
     return (
@@ -180,10 +193,8 @@ function Product(props: Props) {
                                                                 comment={comment}
                                                                 isAdmin={me?.role === UserRole.ADMIN}
                                                                 isMe={me?.id === comment.user.id}
-                                                                onEdit={() => {
-                                                                }}
-                                                                onDelete={() => {
-                                                                }}
+                                                                onEdit={handleUpdateComment}
+                                                                onDelete={handleDeleteComment}
                                                             />
                                                         ))
                                                     }
