@@ -1,5 +1,5 @@
 import Section from '../../Wrappers/Section';
-import {Stack, useTheme} from '@mui/material';
+import {Grid, useTheme} from '@mui/material';
 import {ProductDto} from '../../../api/urbaninfusion/dto/product-dto';
 import ProductCard from '../../Cards/product-card/ProductCard';
 import {range, sampleSize} from 'lodash-es';
@@ -21,24 +21,20 @@ export default function FeaturedProductsSection(props: Props) {
     return (
         <>
             <Section bgColor={theme.palette.primary.light} sx={{my: 16}} label={'Featured'}>
-                <Stack
-                    direction={{md: 'row', xs: 'column'}}
-                    alignItems={'center'}
-                    justifyContent={'space-between'}
-                    width={'100%'}
-                    flexWrap={'wrap'}
-                    gap={4}
-                >
+                <Grid container spacing={4}>
                     {
                         getFeaturedProducts(4)?.map(product => (
-                            <ProductCard
-                                key={product.id}
-                                data={product}
-                                img={getProductImageURL(product.imageId)}
-                            />
+                            <Grid item md={3} xs={6}>
+                                <ProductCard
+                                    sx={{height: '100%'}}
+                                    key={product.id}
+                                    data={product}
+                                    img={getProductImageURL(product.imageId)}
+                                />
+                            </Grid>
                         ))
                     }
-                </Stack>
+                </Grid>
             </Section>
         </>
     );
