@@ -68,7 +68,6 @@ export default function EditableProductCard(props: Props) {
             <Paper
                 variant={'outlined'}
                 {...paperProps}
-                sx={{width: 387.5}}
             >
                 <Stack
                     textAlign={'center'}
@@ -93,8 +92,8 @@ export default function EditableProductCard(props: Props) {
                         <Stack
                             style={{
                                 position: 'absolute',
-                                top: '80%',
-                                left: '90%',
+                                bottom: 10,
+                                right: 10,
                             }}
                         >
                             <Stack alignItems={'center'} justifyContent={'center'}>
@@ -136,6 +135,7 @@ export default function EditableProductCard(props: Props) {
                         <Input
                             editing={editing}
                             multiline
+                            rows={6}
                             value={description}
                             onChange={(e) =>
                                 setDescription(e.target.value)

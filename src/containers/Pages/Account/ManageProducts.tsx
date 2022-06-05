@@ -4,7 +4,7 @@ import useProducts from '../../../hooks/products/useProducts';
 import {useDeleteProduct} from '../../../hooks/products/useDeleteProduct';
 import {useUpdateProduct} from '../../../hooks/products/useUpdateProduct';
 import {useUpdateProductPicture} from '../../../hooks/products/useUpdateProductPicture';
-import {Alert, Dialog, DialogTitle, Fab, Snackbar, Stack, Tooltip} from '@mui/material';
+import {Alert, Dialog, DialogTitle, Fab, Grid, Snackbar, Tooltip} from '@mui/material';
 import EditableProductCard from '../../../components/Cards/product-card/EditableProductCard';
 import {AddProductDto, ProductDto, UpdateProductPictureDto} from '../../../api/urbaninfusion/dto/product-dto';
 import {useAddProduct} from '../../../hooks/products/useAddProduct';
@@ -134,24 +134,24 @@ export default function ManageProducts() {
                         categories={categories}
                     />
                 </Dialog>
-                <Stack
-                    flexWrap={'wrap'}
-                    direction={'row'}
-                    gap={4}
-                    alignItems={'start'}
-                >
+                <Grid container spacing={4}>
                     {
-                        products?.map(product => (<EditableProductCard
-                            data={product}
-                            isLoading={isMutating}
-                            onDeleteProduct={handleDeleteProduct}
-                            onUpdateProduct={handleUpdateProduct}
-                            onUpdateProductPicture={handleUpdateProductPicture}
-                            key={product.id}
-                            img={`${getProductImageURL(product.imageId)}#${Math.random()}`}
-                        />))
+                        products?.map(product => (
+                            <Grid item md={3} xs={12}>
+                                <EditableProductCard
+                                    sx={{height: '100%'}}
+                                    data={product}
+                                    isLoading={isMutating}
+                                    onDeleteProduct={handleDeleteProduct}
+                                    onUpdateProduct={handleUpdateProduct}
+                                    onUpdateProductPicture={handleUpdateProductPicture}
+                                    key={product.id}
+                                    img={`${getProductImageURL(product.imageId)}#${Math.random()}`}
+                                />
+                            </Grid>
+                        ))
                     }
-                </Stack>
+                </Grid>
             </Page>
         </>
     );

@@ -6,6 +6,7 @@ type Props = {
     label?: string;
     adornment?: string;
     editing?: boolean;
+    rows?: number;
     value?: any;
 } & InputBaseProps;
 
@@ -42,7 +43,16 @@ export default function Input(props: Props) {
                                 fullWidth
                                 {...inputBaseProps}
                             />)
-                            : (<Typography textAlign={'left'}>{props.value}</Typography>)
+                            : (<Typography
+                                sx={{
+                                    height: (props.multiline && props.rows)
+                                        ? 23 * props.rows
+                                        : 'inherit',
+                                }}
+                                textAlign={'left'}
+                            >
+                                {props.value}
+                            </Typography>)
                     }
                 </Stack>
             </Stack>
