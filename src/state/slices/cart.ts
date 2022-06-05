@@ -1,13 +1,5 @@
-import {
-    createDraftSafeSelector,
-    createEntityAdapter,
-    createSlice,
-    Draft,
-    EntityState,
-    PayloadAction
-} from '@reduxjs/toolkit';
+import {createSlice, Draft, PayloadAction} from '@reduxjs/toolkit';
 import {ProductDto} from '../../api/urbaninfusion/dto/product-dto';
-import {findLastIndex, remove} from 'lodash-es';
 
 export type CartItem = ProductDto;
 
@@ -29,6 +21,9 @@ export const cartSlice = createSlice({
         },
         addOne: (state: Draft<Cart>, action: PayloadAction<CartItem>) => {
             state.items.push(action.payload);
+        },
+        addMany: (state: Draft<Cart>, action: PayloadAction<CartItem[]>) => {
+            state.items = state.items.concat(action.payload);
         },
         removeOne: (state: Draft<Cart>, action: PayloadAction<CartItem>) => {
             const index = state.items.findIndex(e => e.id === action.payload.id);
