@@ -29,7 +29,7 @@ export default function Comment(props: Props) {
         if (newText.length > 0) {
             props.onEdit({
                 id: props.comment.id,
-                text: '',
+                text: newText,
             });
             setEditing(false);
         }
@@ -106,7 +106,7 @@ export default function Comment(props: Props) {
                         props.comment.lastUpdated && (
                             <Stack alignSelf={'flex-end'}>
                                 <Typography variant={'body2'} color={theme.palette.text.secondary}>
-                                    updated <TimeAgo date={props.comment.lastUpdated}/>
+                                    updated <TimeAgo date={Date.parse(props.comment.lastUpdated)}/>
                                 </Typography>
                             </Stack>
                         )
