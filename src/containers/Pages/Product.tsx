@@ -52,7 +52,7 @@ function Product(props: Props) {
     const isMutationError = mutations.filter(m => m.isError).length > 0;
 
     const {isLoading: isLoadingProduct, isError, data: product} = useProduct(id);
-    const {isLoading: isLoadingMe, data: me} = useMe();
+    const {isLoading: isLoadingMe, data: me} = useMe(props.isAuthenticated);
     const isLoading = isLoadingProduct || isLoadingMe;
 
     const discountedPrice = product ? round(product.price - (product.price * product.discount), 2) : 0;
@@ -134,7 +134,7 @@ function Product(props: Props) {
             <Page isLoading={isLoading}>
                 <Section>
                     {
-                        product && me && (
+                        product && (
                             <Stack width={'100%'} spacing={16}>
                                 <Stack direction={{md: 'row', xs: 'column'}} spacing={8}>
                                     <Stack flex={1} alignItems={'center'} justifyContent={'center'} position={'relative'}>
