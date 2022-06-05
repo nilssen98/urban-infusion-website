@@ -67,7 +67,7 @@ export default function ProductCard(props: Props) {
                             </>
                         )
                     }
-                    <Stack width={'100%'} flex={1} px={2} py={4} alignItems={'center'} justifyContent={'center'}>
+                    <Stack width={'100%'} flex={1} px={8} py={4} alignItems={'center'} justifyContent={'center'}>
                         <Typography variant={'h6'}>{props.data.title}</Typography>
                         <Stack direction={'row'} alignItems={'center'} spacing={1}>
                             {
