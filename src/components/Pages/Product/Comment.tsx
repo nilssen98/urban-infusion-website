@@ -20,10 +20,6 @@ export default function Comment(props: Props) {
 
     const [newText, setNewText] = useState<string>('');
 
-    useEffect(() => {
-        console.log(props.comment.lastUpdated);
-    });
-
     const handleDelete = () => {
         props.onDelete(props.comment.id);
     };

@@ -37,7 +37,6 @@ export async function addProduct(data: AddProductDto): Promise<any> {
 
 export async function updateProductPicture(data: UpdateProductPictureDto): Promise<any> {
     const jwt = store.getState().user.jwt || '';
-    console.log(data.file);
     const formData = new FormData();
     formData.append('data', data.file);
     return (await axios.post(`${baseUrl}/product-images/${data.id}`,
