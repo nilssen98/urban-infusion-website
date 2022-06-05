@@ -10,20 +10,26 @@ import {useEffect, useState} from 'react';
 import CommentForm from '../../components/Pages/Product/CommentForm';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import useProduct from '../../hooks/products/useProduct';
-import {capitalize, range, round} from 'lodash-es';
+import {capitalize, round} from 'lodash-es';
 import {getProductImageURL} from '../../api/urbaninfusion/public/products';
 import Counter from '../../components/Counter';
-import {RootState} from '../../state/store';
 import {cartSlice} from '../../state/slices/cart';
 import {connect} from 'react-redux';
+import {RootState} from '../../state/store';
+
+const mapStateToProps = (state: RootState) => {
+    return {
+        isAuthenticated: state.user.jwt !== undefined,
+    };
+};
 
 const mapDispatchToProps = {
     addMany: cartSlice.actions.addMany
 };
 
-type Props = typeof mapDispatchToProps & {};
+type Props = ReturnType<typeof mapStateToProps> & typeof mapDispatchToProps & {};
 
-export default connect(undefined, mapDispatchToProps)(Product);
+export default connect(mapStateToProps, mapDispatchToProps)(Product);
 
 function Product(props: Props) {
     const {id} = useParams();
@@ -31,6 +37,7 @@ function Product(props: Props) {
     const theme = useTheme();
 
     const [count, setCount] = useState<number>(0);
+    const [showForm, setShowForm] = useState<boolean>(false);
 
     const {isLoading, isError, data: product} = useProduct(id);
 
@@ -42,7 +49,7 @@ function Product(props: Props) {
 
     const handleAddToCart = () => {
         if (product) {
-            props.addMany(range(count).map(e => product));
+            props.addMany(Array(count).fill(product));
             setCount(0);
         }
     };
@@ -63,7 +70,7 @@ function Product(props: Props) {
                 <Section>
                     {
                         product && (
-                            <Stack width={'100%'} spacing={8}>
+                            <Stack width={'100%'} spacing={16}>
                                 <Stack direction={{md: 'row', xs: 'column'}} spacing={8}>
                                     <Stack flex={1} alignItems={'center'} justifyContent={'center'}>
                                         <img
@@ -104,8 +111,31 @@ function Product(props: Props) {
                                     </Stack>
                                 </Stack>
                                 <Divider/>
-                                <Stack>
-
+                                <Stack spacing={8}>
+                                    <Typography variant={'h5'}>Comments</Typography>
+                                    {
+                                        props.isAuthenticated && (
+                                            <Stack width={'100%'} spacing={4} alignItems={'start'}>
+                                                <Button
+                                                    variant={'contained'}
+                                                    endIcon={
+                                                        <ExpandMoreIcon
+                                                            sx={{
+                                                                transform: `rotate(${showForm ? 180 : 0}deg)`,
+                                                                transition: 'all 0.2s ease-in-out'
+                                                            }}
+                                                        />}
+                                                    onClick={() => setShowForm(!showForm)}
+                                                >
+                                                    Add a comment
+                                                </Button>
+                                                <Collapse orientation={'vertical'} in={showForm}>
+                                                    <CommentForm/>
+                                                </Collapse>
+                                            </Stack>
+                                        )
+                                    }
+                                    <Comments comments={product.comments}/>
                                 </Stack>
                             </Stack>
                         )
