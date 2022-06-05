@@ -3,7 +3,7 @@ import Section from '../../components/Wrappers/Section';
 import {Alert, Button, Chip, Collapse, Divider, Snackbar, Stack, Typography, useTheme} from '@mui/material';
 import Page from '../../components/Wrappers/Page';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import CommentForm from '../../components/Pages/Product/CommentForm';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import useProduct from '../../hooks/products/useProduct';
@@ -19,7 +19,7 @@ import {UserRole} from '../../api/urbaninfusion/dto/user-dto';
 import {useAddComment} from '../../hooks/comments/useAddComment';
 import {useUpdateComment} from '../../hooks/comments/useUpdateComment';
 import {useDeleteComment} from '../../hooks/comments/useDeleteComment';
-import {AddCommentDto, UpdateCommentDto} from '../../api/urbaninfusion/dto/comment-dto';
+import {UpdateCommentDto} from '../../api/urbaninfusion/dto/comment-dto';
 
 const mapStateToProps = (state: RootState) => {
     return {
@@ -96,9 +96,26 @@ function Product(props: Props) {
         updateCommentMutation.mutate(data);
     };
 
-    const handleAddComment = (data: AddCommentDto) => {
-        addCommentMutation.mutate(data);
+    const handleAddComment = (text: string) => {
+        if (product) {
+            addCommentMutation.mutate({
+                id: product.id,
+                text
+            });
+        }
     };
+
+    const sortedComments = useMemo(() => {
+        return product?.comments.sort((a, b) => {
+            if (b.lastUpdated === null) {
+                return 1;
+            } else if (a.lastUpdated === null) {
+                return -1;
+            } else {
+                return b.lastUpdated.localeCompare(a.lastUpdated);
+            }
+        });
+    }, [product?.comments]);
 
     return (
         <>
@@ -174,7 +191,9 @@ function Product(props: Props) {
                                                     Add a comment
                                                 </Button>
                                                 <Collapse orientation={'vertical'} in={showForm}>
-                                                    <CommentForm/>
+                                                    <CommentForm
+                                                        onAdd={handleAddComment}
+                                                    />
                                                 </Collapse>
                                             </Stack>
                                         )
@@ -187,7 +206,7 @@ function Product(props: Props) {
                                                         {`${product.comments.length} comment${product.comments.length !== 1 ? 's' : ''}`}
                                                     </Typography>
                                                     {
-                                                        product.comments.map(comment => (
+                                                        sortedComments.map(comment => (
                                                             <Comment
                                                                 key={comment.id}
                                                                 comment={comment}

@@ -1,16 +1,35 @@
 import {Button, Stack, TextField} from '@mui/material';
 import PublishIcon from '@mui/icons-material/Publish';
+import {useState} from 'react';
 
-export default function CommentForm() {
+interface Props {
+    onAdd: (text: string) => void;
+}
+
+export default function CommentForm(props: Props) {
+    const [text, setText] = useState<string>('');
+
+    const handleSubmit = () => {
+        if (text.length > 0) {
+            props.onAdd(text);
+            setText('');
+        }
+    };
+
     return (
         <>
-            <Stack spacing={4} component={'form'} alignItems={'start'} onSubmit={(e: any) => e.preventDefault()}>
+            <Stack
+                spacing={4}
+                alignItems={'start'}
+            >
                 <TextField
                     sx={{width: 400}}
                     required
                     multiline
                     variant={'outlined'}
                     rows={4}
+                    value={text}
+                    onChange={(event) => setText(event.target.value)}
                     label={'Comment'}
                     placeholder={'Write your comment here'}
                     inputProps={{maxLength: 1000}}
@@ -19,6 +38,7 @@ export default function CommentForm() {
                     startIcon={<PublishIcon/>}
                     variant={'contained'}
                     type={'submit'}
+                    onClick={handleSubmit}
                 >
                     Submit
                 </Button>
