@@ -85,8 +85,7 @@ export default function EditableProductCard(props: Props) {
                         <img
                             loading={'lazy'}
                             src={props.img}
-                            style={{width: 175, height: 175}}
-                            draggable={false}
+                            style={{width: 'auto', height: 175, padding: 8}}
                             alt={''}
                         />
                         <Stack

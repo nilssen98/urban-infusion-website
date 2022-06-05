@@ -1,10 +1,21 @@
 import Page from '../../../components/Wrappers/Page';
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import useProducts from '../../../hooks/products/useProducts';
 import {useDeleteProduct} from '../../../hooks/products/useDeleteProduct';
 import {useUpdateProduct} from '../../../hooks/products/useUpdateProduct';
 import {useUpdateProductPicture} from '../../../hooks/products/useUpdateProductPicture';
-import {Alert, Dialog, DialogTitle, Fab, Grid, Snackbar, Tooltip} from '@mui/material';
+import {
+    Alert,
+    Dialog,
+    DialogTitle,
+    Fab,
+    Grid,
+    InputAdornment,
+    Snackbar,
+    Stack,
+    TextField,
+    Tooltip
+} from '@mui/material';
 import EditableProductCard from '../../../components/Cards/product-card/EditableProductCard';
 import {AddProductDto, ProductDto, UpdateProductPictureDto} from '../../../api/urbaninfusion/dto/product-dto';
 import {useAddProduct} from '../../../hooks/products/useAddProduct';
@@ -12,6 +23,7 @@ import AddIcon from '@mui/icons-material/Add';
 import CreatableProductCard from '../../../components/Cards/product-card/CreatableProductCard';
 import useCategories from '../../../hooks/categories/useCategories';
 import {getProductImageURL} from '../../../api/urbaninfusion/public/products';
+import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 
 export default function ManageProducts() {
     const [successMessage, setSuccessMessage] = useState<string>('');
@@ -19,6 +31,7 @@ export default function ManageProducts() {
     const [errorMessage, setErrorMessage] = useState<string>('');
     const [error, setError] = useState<boolean>(false);
     const [addingProduct, setAddingProduct] = useState<boolean>(false);
+    const [search, setSearch] = useState<string>('');
 
     const {isLoading: isLoadingProducts, data: products} = useProducts();
     const {isLoading: isLoadingCategories, data: categories} = useCategories();
@@ -40,6 +53,13 @@ export default function ManageProducts() {
     const isError = mutations.filter(m => m.isError).length > 0;
     const isSuccess = mutations.filter(m => m.isSuccess).length > 0;
     const isMutating = mutations.filter(m => m.isLoading).length > 0;
+
+    const filteredProducts = useMemo(() => {
+        if (products) {
+            return products.filter(e => e.title.toLowerCase().indexOf(search.toLowerCase()) !== -1);
+        }
+        return [];
+    }, [search, products]);
 
     useEffect(() => {
             if (isError) {
@@ -113,30 +133,42 @@ export default function ManageProducts() {
             >
                 <Alert severity={'error'}>{errorMessage}</Alert>
             </Snackbar>
+            <Dialog open={addingProduct} onClose={handleCloseAddProduct}>
+                <DialogTitle>Add a product</DialogTitle>
+                <CreatableProductCard
+                    onCancel={handleCloseAddProduct}
+                    onAdd={handleAddProduct}
+                    categories={categories}
+                />
+            </Dialog>
+            <Tooltip title={'Add product'} placement={'left'}>
+                <Fab
+                    color={'secondary'}
+                    sx={{
+                        position: 'fixed',
+                        bottom: 25, right: 25,
+                    }}
+                    onClick={handleOpenAddProduct}
+                >
+                    <AddIcon/>
+                </Fab>
+            </Tooltip>
             <Page isLoading={isLoading}>
-                <Tooltip title={'Add product'} placement={'left'}>
-                    <Fab
-                        color={'secondary'}
-                        sx={{
-                            position: 'fixed',
-                            bottom: 25, right: 25,
+                <Stack py={2}>
+                    <TextField
+                        value={search}
+                        onChange={(event) => setSearch(event.target.value)}
+                        InputProps={{
+                            startAdornment: <InputAdornment position={'start'}><SearchOutlinedIcon/></InputAdornment>,
                         }}
-                        onClick={handleOpenAddProduct}
-                    >
-                        <AddIcon/>
-                    </Fab>
-                </Tooltip>
-                <Dialog open={addingProduct} onClose={handleCloseAddProduct}>
-                    <DialogTitle>Add a product</DialogTitle>
-                    <CreatableProductCard
-                        onCancel={handleCloseAddProduct}
-                        onAdd={handleAddProduct}
-                        categories={categories}
+                        placeholder={'Type here...'}
+                        size={'small'}
+                        label={'Search'}
                     />
-                </Dialog>
+                </Stack>
                 <Grid container spacing={4}>
                     {
-                        products?.map(product => (
+                        filteredProducts.map(product => (
                             <Grid item md={3} xs={12} key={product.id}>
                                 <EditableProductCard
                                     sx={{height: '100%'}}
