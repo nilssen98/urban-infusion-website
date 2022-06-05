@@ -36,7 +36,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(Login);
 type Props = ReturnType<typeof mapStateToProps> & typeof mapDispatchToProps;
 
 function Login(props: Props) {
-    // const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<boolean>(false);
     const [errorMessage, setErrorMessage] = useState<string>('');
     const [username, setUsername] = useState<string>('');
