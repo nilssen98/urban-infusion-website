@@ -9,6 +9,7 @@ import DoneOutlineOutlinedIcon from '@mui/icons-material/DoneOutlineOutlined';
 import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
 import {enumValues} from '../../../utils/utils';
 import UnstyledLink from '../../UnstyledLink';
+import {getProductImageURL} from '../../../api/urbaninfusion/public/products';
 
 interface Props {
     order: OrderDto;
@@ -52,7 +53,7 @@ export default function Order(props: Props) {
                     <Typography flex={1} fontWeight={600}>
                         {props.order.date}
                     </Typography>
-                    <Typography flex={1} textAlign={{md: 'right', xs: 'center'}} fontWeight={600}>
+                    <Typography flex={1} textAlign={'center'} fontWeight={600}>
                         Order ID
                     </Typography>
                     {
@@ -103,7 +104,7 @@ export default function Order(props: Props) {
                             )
                     }
                     <Stack flex={1} spacing={2}>
-                        <Typography textAlign={{md: 'right', xs: 'center'}}>
+                        <Typography textAlign={'center'}>
                             {props.order.orderId}
                         </Typography>
                     </Stack>
@@ -119,8 +120,14 @@ export default function Order(props: Props) {
                     <Stack flex={1} spacing={2}>
                         {
                             props.order.products.map(({product, quantity}) => (
-                                <Stack alignItems={'center'} direction={'row'} alignSelf={{md: 'end', xs: 'center'}} spacing={1}
-                                       key={product.id}>
+                                <Stack
+                                    alignItems={'center'}
+                                    direction={'row'}
+                                    alignSelf={{md: 'end', xs: 'center'}}
+                                    spacing={1}
+                                    key={product.id}
+                                >
+                                    <img src={getProductImageURL(product.id)} alt={''} style={{width: 32, height: 32}}/>
                                     <Typography>
                                         <UnstyledLink to={`/product/${product.id}`}>{product.title}</UnstyledLink>
                                         <span> {quantity > 1 ? `x${quantity}` : null}</span>
@@ -137,7 +144,8 @@ export default function Order(props: Props) {
                             props.order.products.map(({product, quantity}) => (
                                 product.discount > 0 && !props.onChangeStatus
                                     ? (
-                                        <Stack key={product.id} alignSelf={'end'} direction={'row'} alignItems={'center'} spacing={1}>
+                                        <Stack key={product.id} alignSelf={'end'} direction={'row'} alignItems={'center'}
+                                               spacing={1}>
                                             <Typography variant={'subtitle2'} sx={{textDecorationLine: 'line-through'}}>
                                                 ${getTotalPrice(product.price, quantity)}
                                             </Typography>
