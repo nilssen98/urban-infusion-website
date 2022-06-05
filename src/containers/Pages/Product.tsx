@@ -55,7 +55,7 @@ function Product(props: Props) {
     const {isLoading: isLoadingMe, data: me} = useMe();
     const isLoading = isLoadingProduct || isLoadingMe;
 
-    const discountedPrice = round(product?.price - (product?.price * product?.discount), 2);
+    const discountedPrice = product ? round(product.price - (product.price * product.discount), 2) : 0;
 
     useEffect(() => {
             if (isMutationError) {
