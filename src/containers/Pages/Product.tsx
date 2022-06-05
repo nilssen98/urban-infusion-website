@@ -16,6 +16,8 @@ import {cartSlice} from '../../state/slices/cart';
 import {connect} from 'react-redux';
 import {RootState} from '../../state/store';
 import Comment from '../../components/Pages/Product/Comment';
+import useMe from '../../hooks/users/useMe';
+import {UserRole} from '../../api/urbaninfusion/dto/user-dto';
 
 const mapStateToProps = (state: RootState) => {
     return {
@@ -39,7 +41,10 @@ function Product(props: Props) {
     const [count, setCount] = useState<number>(0);
     const [showForm, setShowForm] = useState<boolean>(false);
 
-    const {isLoading, isError, data: product} = useProduct(id);
+    const {isLoading: isLoadingProduct, isError, data: product} = useProduct(id);
+    const {isLoading: isLoadingMe, data: me} = useMe();
+
+    const isLoading = isLoadingProduct || isLoadingMe;
 
     useEffect(() => {
         if (isError) {
@@ -69,7 +74,7 @@ function Product(props: Props) {
             <Page isLoading={isLoading}>
                 <Section>
                     {
-                        product && (
+                        product && me && (
                             <Stack width={'100%'} spacing={16}>
                                 <Stack direction={{md: 'row', xs: 'column'}} spacing={8}>
                                     <Stack flex={1} alignItems={'center'} justifyContent={'center'}>
@@ -147,8 +152,8 @@ function Product(props: Props) {
                                                             <Comment
                                                                 key={comment.id}
                                                                 comment={comment}
-                                                                isAdmin={true}
-                                                                isMe={true}
+                                                                isAdmin={me?.role === UserRole.ADMIN}
+                                                                isMe={me?.id === comment.user.id}
                                                                 onEdit={() => {}}
                                                                 onDelete={() => {}}
                                                             />
