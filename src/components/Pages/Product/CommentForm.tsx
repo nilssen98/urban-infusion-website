@@ -4,7 +4,7 @@ import PublishIcon from '@mui/icons-material/Publish';
 export default function CommentForm() {
     return (
         <>
-            <Stack spacing={4} component={'form'} alignItems={'start'} onClick={(e: any) => e.preventDefault()}>
+            <Stack spacing={4} component={'form'} alignItems={'start'} onSubmit={(e: any) => e.preventDefault()}>
                 <TextField
                     sx={{width: 400}}
                     required
