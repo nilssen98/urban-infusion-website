@@ -132,13 +132,12 @@ function Products(props: Props) {
                                 <Grid container spacing={4}>
                                     {
                                         filtered.map(product => (
-                                            <Grid item md={3} xs={6}>
+                                            <Grid item md={3} xs={6} key={product.id}>
                                                 <ProductCard
                                                     sx={{height: '100%'}}
                                                     addable
                                                     onAddToCart={handleAddToCart}
                                                     data={product}
-                                                    key={product.id}
                                                     img={getProductImageURL(product.imageId)}
                                                 />
                                             </Grid>
