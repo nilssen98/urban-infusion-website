@@ -103,13 +103,23 @@ function Products(props: Props) {
                         py={4}
                         spacing={4}
                         direction={'row'}
+                        sx={{
+                            overflowY: 'auto',
+                            '-webkit-scrollbar': {
+                                display: 'none',
+                            },
+                            '-ms-overflow-style': 'none',
+                            scrollbarWidth: 0,
+                        }}
                     >
                         <TextField
                             value={search}
                             onChange={(event) => setSearch(event.target.value)}
                             InputProps={{
-                                startAdornment: <InputAdornment position={'start'}><SearchOutlinedIcon/></InputAdornment>,
+                                startAdornment: <InputAdornment
+                                    position={'start'}><SearchOutlinedIcon/></InputAdornment>,
                             }}
+                            sx={{minWidth: 150}}
                             placeholder={'Type here...'}
                             size={'small'}
                             label={'Search'}
