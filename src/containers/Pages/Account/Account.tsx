@@ -1,5 +1,4 @@
 import {
-    Avatar,
     Divider,
     IconButton,
     List,
@@ -25,12 +24,10 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import {userSlice} from '../../../state/slices/user';
 import {UserRole} from '../../../api/urbaninfusion/dto/user-dto';
 import {last} from 'lodash-es';
-import {stringToColor} from '../../../utils/utils';
 import AddPhotoAlternateOutlinedIcon from '@mui/icons-material/AddPhotoAlternateOutlined';
 import {useUpdateUserPicture} from '../../../hooks/users/useUpdateUserPicture';
 import {getUserImageURL} from '../../../api/urbaninfusion/public/users';
 import {UserAvatar} from '../../../components/UserAvatar';
-import useUserPicture from '../../../hooks/users/useUserPicture';
 
 const navigation = [
     'profile',
