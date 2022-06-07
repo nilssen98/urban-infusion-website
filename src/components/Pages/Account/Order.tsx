@@ -49,7 +49,7 @@ export default function Order(props: Props) {
     return (
         <>
             <Paper variant={'outlined'}>
-                <Stack p={4} direction={'row'} bgcolor={theme.palette.primary.light}>
+                <Stack p={4} spacing={8} direction={'row'} bgcolor={theme.palette.primary.light} sx={{overflowY: 'auto'}}>
                     <Typography flex={1} fontWeight={600}>
                         {props.order.date}
                     </Typography>
@@ -71,7 +71,7 @@ export default function Order(props: Props) {
                     </Typography>
                 </Stack>
                 <Divider/>
-                <Stack p={4} direction={'row'} alignItems={'center'}>
+                <Stack p={4} spacing={8} sx={{overflowY: 'auto'}} direction={'row'} alignItems={'center'}>
                     {
                         props.admin && props.onChangeStatus
                             ? (
