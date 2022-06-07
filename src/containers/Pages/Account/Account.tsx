@@ -30,6 +30,7 @@ import AddPhotoAlternateOutlinedIcon from '@mui/icons-material/AddPhotoAlternate
 import {useUpdateUserPicture} from '../../../hooks/users/useUpdateUserPicture';
 import {getUserImageURL} from '../../../api/urbaninfusion/public/users';
 import {UserAvatar} from '../../../components/UserAvatar';
+import useUserPicture from '../../../hooks/users/useUserPicture';
 
 const navigation = [
     'profile',
@@ -117,9 +118,7 @@ function Account(props: Props) {
                                     name={user?.username}
                                     src={`${getUserImageURL(user?.id)}#${Math.random()}`}
                                     sx={{height: 64, width: 64}}
-                                >
-                                    <Typography variant={'h4'}>{user?.username[0]}</Typography>
-                                </UserAvatar>
+                                />
                                 <Stack
                                     alignItems={'center'}
                                     justifyContent={'center'}
@@ -129,9 +128,7 @@ function Account(props: Props) {
                                     <label>
                                         <input
                                             hidden
-                                            style={{
-                                                position: 'absolute',
-                                            }}
+                                            style={{position: 'absolute',}}
                                             type={'file'}
                                             multiple={false}
                                             accept={acceptedFormats}

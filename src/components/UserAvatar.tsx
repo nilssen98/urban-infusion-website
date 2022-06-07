@@ -1,6 +1,7 @@
 import {Avatar, AvatarProps, useTheme} from '@mui/material';
-import {stringToColor} from '../utils/utils';
 import {omit} from 'lodash-es';
+import {useEffect, useState} from 'react';
+import {doesImageExist, stringToColor} from '../utils/utils';
 
 type Props = {
     name?: string;
@@ -8,20 +9,28 @@ type Props = {
 
 export function UserAvatar(props: Props) {
     const avatarProps = omit(props, 'name');
-    const theme = useTheme()
+    const [hasImage, setHasImage] = useState<boolean>(false);
+
+    useEffect(() => {
+        void (async () => {
+            if (props.src) {
+                const imageExists = await doesImageExist(props.src);
+                setHasImage(imageExists);
+            }
+        })();
+    }, [props.src]);
+
     return (
         <>
             <Avatar
-                sx={{
-                    border: '1px solid',
-                    borderColor: theme.palette.divider,
-                    background: props.src !== undefined
+                style={{
+                    backgroundColor: hasImage
                         ? 'transparent'
                         : stringToColor(props.name || '')
                 }}
                 {...avatarProps}
             >
-                {props.children}
+                {props.name?.[0]}
             </Avatar>
         </>
     );

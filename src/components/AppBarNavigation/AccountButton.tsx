@@ -4,8 +4,8 @@ import {stringToColor} from '../../utils/utils';
 import {UserAvatar} from '../UserAvatar';
 
 interface Props {
-    img: string;
-    name: string;
+    img?: string;
+    name?: string;
 }
 
 export default function AccountButton(props: Props) {
@@ -18,9 +18,7 @@ export default function AccountButton(props: Props) {
                         name={props.name}
                         src={props.img}
                         sx={{width: 32, height: 32}}
-                    >
-                        {props.name[0]}
-                    </UserAvatar>
+                    />
                 </IconButton>
             </Tooltip>
         </>

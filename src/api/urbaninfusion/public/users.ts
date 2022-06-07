@@ -45,7 +45,5 @@ export async function updateUserPicture(data: UpdateUserPictureDto): Promise<any
 }
 
 export function getUserImageURL(id?: number): string | undefined {
-    return id
-        ? `${baseUrl}/user-images/${id}`
-        : undefined;
+    return id ? `${baseUrl}/user-images/${id}` : undefined;
 }

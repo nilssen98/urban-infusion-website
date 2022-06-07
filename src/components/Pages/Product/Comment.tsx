@@ -78,9 +78,7 @@ export default function Comment(props: Props) {
                             <UserAvatar
                                 name={props.comment.user.username}
                                 src={`${getUserImageURL(props.comment.user.id)}#${Math.random()}`}
-                            >
-                                {props.comment.user.username?.[0]}
-                            </UserAvatar>
+                            />
                             <Stack>
                                 <Typography>
                                     {props.comment.user.username}
