@@ -24,7 +24,7 @@ export default function FeaturedProductsSection(props: Props) {
                 <Grid container spacing={4}>
                     {
                         getFeaturedProducts(4)?.map(product => (
-                            <Grid item md={3} xs={6} key={product.id}>
+                            <Grid item md={3} sm={6} xs={12} key={product.id}>
                                 <ProductCard
                                     sx={{height: '100%'}}
                                     data={product}
