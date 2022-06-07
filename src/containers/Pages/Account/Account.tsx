@@ -128,7 +128,7 @@ function Account(props: Props) {
                                     <label>
                                         <input
                                             hidden
-                                            style={{position: 'absolute',}}
+                                            style={{position: 'absolute'}}
                                             type={'file'}
                                             multiple={false}
                                             accept={acceptedFormats}
