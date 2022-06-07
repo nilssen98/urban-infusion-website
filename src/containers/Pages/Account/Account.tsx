@@ -26,6 +26,9 @@ import {userSlice} from '../../../state/slices/user';
 import {UserRole} from '../../../api/urbaninfusion/dto/user-dto';
 import {last} from 'lodash-es';
 import {stringToColor} from '../../../utils/utils';
+import AddPhotoAlternateOutlinedIcon from '@mui/icons-material/AddPhotoAlternateOutlined';
+import {useUpdateUserPicture} from '../../../hooks/users/useUpdateUserPicture';
+import {getUserImageURL} from '../../../api/urbaninfusion/public/users';
 
 const navigation = [
     'profile',
@@ -33,6 +36,8 @@ const navigation = [
     'manage orders',
     'manage products'
 ];
+
+const acceptedFormats = ['image/jpg', 'image/png', 'image/jpeg', 'image/webp'].toString();
 
 const mapStateToProps = (state: RootState) => {
     return {
@@ -63,6 +68,8 @@ function Account(props: Props) {
     const isLoading = isLoadingMe;
     const accountActionsOpen = Boolean(anchorEl);
 
+    const updateUserPictureMutation = useUpdateUserPicture();
+
     useEffect(() => {
         if (isError || !props.isAuthenticated) {
             navigate('/login');
@@ -91,15 +98,63 @@ function Account(props: Props) {
         navigate(`/account/${navigation[newValue].replace(' ', '-')}`);
     };
 
+    const handleUpdateUserPicture = (event: any) => {
+        updateUserPictureMutation.mutate({
+            id: user?.id || -1,
+            file: event.target.files[0]
+        });
+    };
+
     return (
         <>
             <Page isLoading={isLoading}>
                 <Stack alignItems={'center'} px={4} py={8}>
                     <Stack width={'100%'} maxWidth={'lg'}>
                         <Stack direction={'row'} alignItems={'center'} spacing={4}>
-                            <Avatar sx={{height: 64, width: 64, background: stringToColor(user?.username)}}>
-                                <Typography variant={'h4'}>{user?.username[0]}</Typography>
-                            </Avatar>
+                            <Stack position={'relative'}>
+                                <Avatar
+                                    src={`${getUserImageURL(user?.id)}#${Math.random()}`}
+                                    sx={{
+                                        height: 64,
+                                        width: 64,
+                                        background: getUserImageURL(user?.id)
+                                            ? 'transparent'
+                                            : stringToColor(user?.username)
+                                    }}
+                                >
+                                    <Typography variant={'h4'}>{user?.username[0]}</Typography>
+                                </Avatar>
+                                <Stack
+                                    alignItems={'center'}
+                                    justifyContent={'center'}
+                                    position={'absolute'}
+                                    bottom={-10} right={-10}
+                                >
+                                    <label>
+                                        <input
+                                            hidden
+                                            style={{
+                                                position: 'absolute',
+                                            }}
+                                            type={'file'}
+                                            multiple={false}
+                                            accept={acceptedFormats}
+                                            onChange={handleUpdateUserPicture}
+                                        />
+                                        <AddPhotoAlternateOutlinedIcon
+                                            style={{
+                                                background: theme.palette.primary.light,
+                                                borderRadius: '50%',
+                                                padding: 4,
+                                                height: 30,
+                                                width: 30,
+                                                cursor: 'pointer',
+                                                color: theme.palette.primary.main
+                                            }}
+                                        />
+                                    </label>
+                                </Stack>
+                            </Stack>
                             <Stack flex={1}>
                                 <Typography variant={'h5'}>{user?.username}</Typography>
                                 <Typography color={theme.palette.text.secondary}>{user?.email}</Typography>
