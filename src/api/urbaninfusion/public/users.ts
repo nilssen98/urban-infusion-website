@@ -3,8 +3,6 @@ import axios from 'axios';
 import {baseUrl} from './public';
 import {login} from './login';
 import {store} from '../../../state/store';
-import {UpdateProductPictureDto} from '../dto/product-dto';
-import placeholderImage from '../../../assets/images/no-image.svg';
 
 export async function getMe(): Promise<UserDto> {
     const jwt = store.getState().user.jwt || '';
