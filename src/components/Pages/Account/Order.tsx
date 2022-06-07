@@ -87,7 +87,7 @@ export default function Order(props: Props) {
                                         onChange={handleChangeOrderStatus}
                                     >
                                         {
-                                            enumValues(OrderStatus).map(option => (
+                                            enumValues(OrderStatus).map((option) => (
                                                 <MenuItem key={option} value={option}>
                                                     <Stack direction={'row'} spacing={2}>
                                                         {getStatusIcon(option as OrderStatus)}
@@ -167,7 +167,7 @@ export default function Order(props: Props) {
                                         </Stack>
                                     )
                                     : (
-                                        <Stack>
+                                        <Stack key={product.id}>
                                             <Typography textAlign={'right'} key={product.id}>
                                                 ${getTotalPrice(product.price, quantity)}
                                             </Typography>
