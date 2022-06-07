@@ -36,7 +36,6 @@ const navigation = [
 
 const mapStateToProps = (state: RootState) => {
     return {
-        jwt: state.user.jwt,
         isAuthenticated: state.user.jwt !== undefined,
     };
 };
@@ -65,10 +64,10 @@ function Account(props: Props) {
     const accountActionsOpen = Boolean(anchorEl);
 
     useEffect(() => {
-        if (isError || !props.jwt) {
+        if (isError || !props.isAuthenticated) {
             navigate('/login');
         }
-    }, [isError, props.jwt]);
+    }, [isError, props.isAuthenticated]);
 
     useEffect(() => {
         const path = last(pathname.split('/'))?.replace('-', ' ');
