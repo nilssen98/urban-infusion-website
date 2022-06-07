@@ -135,7 +135,7 @@ function Product(props: Props) {
                 <Section>
                     {
                         product && (
-                            <Stack spacing={16}>
+                            <Stack spacing={16} width={'100%'}>
                                 <Stack direction={{md: 'row', xs: 'column'}} spacing={8}>
                                     <Stack flex={1} alignItems={'center'} justifyContent={'center'} position={'relative'}>
                                         {
