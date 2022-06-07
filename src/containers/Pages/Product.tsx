@@ -206,8 +206,9 @@ function Product(props: Props) {
                                     <Typography variant={'h5'}>Comments</Typography>
                                     {
                                         props.isAuthenticated && (
-                                            <Stack width={'100%'} spacing={4} alignItems={'start'}>
+                                            <Stack width={'100%'} spacing={4}>
                                                 <Button
+                                                    sx={{alignSelf: 'start'}}
                                                     variant={'contained'}
                                                     endIcon={
                                                         <ExpandMoreIcon
