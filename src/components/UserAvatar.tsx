@@ -1,4 +1,4 @@
-import {Avatar, AvatarProps, useTheme} from '@mui/material';
+import {Avatar, AvatarProps} from '@mui/material';
 import {omit} from 'lodash-es';
 import {useEffect, useState} from 'react';
 import {doesImageExist, stringToColor} from '../utils/utils';

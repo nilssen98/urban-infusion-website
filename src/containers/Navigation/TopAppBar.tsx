@@ -46,9 +46,9 @@ function TopAppBar(props: Props) {
                         alignItems={'center'}
                     >
                         <Stack px={4} width={'100%'} direction={'row'} alignItems={'center'}>
-                            <Stack>
-                                <Logo clickable onClick={() => navigate('/')}/>
-                            </Stack>
+                            <UnstyledLink to={'/'}>
+                                <Logo clickable/>
+                            </UnstyledLink>
                             <Stack
                                 direction={'row'}
                                 spacing={2}
