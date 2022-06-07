@@ -20,9 +20,10 @@ export default function CommentForm(props: Props) {
             <Stack
                 spacing={4}
                 alignItems={'start'}
+                width={'100%'}
             >
                 <TextField
-                    sx={{width: 400}}
+                    sx={{width: {sm: 450, xs: 250}}}
                     required
                     multiline
                     variant={'outlined'}

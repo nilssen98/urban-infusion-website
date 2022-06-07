@@ -135,7 +135,7 @@ function Product(props: Props) {
                 <Section>
                     {
                         product && (
-                            <Stack width={'100%'} spacing={16}>
+                            <Stack spacing={16}>
                                 <Stack direction={{md: 'row', xs: 'column'}} spacing={8}>
                                     <Stack flex={1} alignItems={'center'} justifyContent={'center'} position={'relative'}>
                                         {
@@ -148,7 +148,7 @@ function Product(props: Props) {
                                             )
                                         }
                                         <img
-                                            style={{height: 320, width: 320}}
+                                            style={{height: 'auto', width: 320}}
                                             src={getProductImageURL(product.id)}
                                             alt={''}
                                         />
