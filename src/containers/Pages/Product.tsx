@@ -240,8 +240,8 @@ function Product(props: Props) {
                                                             <Comment
                                                                 key={comment.id}
                                                                 comment={comment}
-                                                                isAdmin={me?.role === UserRole.ADMIN}
-                                                                isMe={me?.id === comment.user.id}
+                                                                isAdmin={me?.role === UserRole.ADMIN && props.isAuthenticated}
+                                                                isMe={me?.id === comment.user.id && props.isAuthenticated}
                                                                 onEdit={handleUpdateComment}
                                                                 onDelete={handleDeleteComment}
                                                             />
