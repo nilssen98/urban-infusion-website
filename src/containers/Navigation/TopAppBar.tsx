@@ -64,7 +64,7 @@ function TopAppBar(props: Props) {
                                     props.isAuthenticated
                                         ? <AccountButton
                                             img={`${getUserImageURL(user?.id)}#${Math.random()}`}
-                                            name={user?.username}
+                                            name={user?.username || ''}
                                         />
                                         : (<UnstyledLink to={'/login'}>
                                             <Button variant={'contained'}>
