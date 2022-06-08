@@ -6,7 +6,7 @@ import {useInView} from 'react-intersection-observer';
 import BlackTea from '../../../assets/images/tea/black-tea.png';
 import DarkTea from '../../../assets/images/tea/dark-tea.png';
 import GreenTea from '../../../assets/images/tea/green-tea.png';
-import WhiteTea from '../../../assets/images/tea/white-tea.jpg';
+import WhiteTea from '../../../assets/images/tea/white-tea.png';
 import SpaOutlinedIcon from '@mui/icons-material/SpaOutlined';
 import SelfImprovementOutlinedIcon from '@mui/icons-material/SelfImprovementOutlined';
 import FactCheckOutlinedIcon from '@mui/icons-material/FactCheckOutlined';
