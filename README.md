@@ -3,7 +3,8 @@
 This repository contains the frontend made for the Urban Infusion project from NTNU's Web Technologies (IDATA2301) subject.
 The project counts towards 60% of the final grade in the subject.
 
-The back-end part can be found here: [https://github.com/Marko19907/urban-infusion-server](https://github.com/Marko19907/urban-infusion-server)
+The back-end part can be found here: [https://github.com/nilssen98/urban-infusion-server](https://github.com/nilssen98/urban-infusion-server)
+
 
 [![Yarn build](https://github.com/Marko19907/urban-infusion-website/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/Marko19907/urban-infusion-website/actions/workflows/main.yml)
 
